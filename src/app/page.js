@@ -252,6 +252,29 @@ const plans = [
   },
 ];
 
+const faqItems = [
+  {
+    question: 'Q1：訂閱方案後，需要綁定特定的外匯券商（Broker）才能使用EA策略嗎？',
+    answer:
+      'A1：不需要綁定，完全支援全球任何提供 MT5 帳戶的外匯券商。況且，我們提供法人級商用 MT5 EA 源代碼策略完全獨立自主(無須許可與無版權限制)，可自由使用並得再編程、優化、編譯或重構為自己個人品牌所有之數位產品，甚至出售EA利潤百分之百全歸自己。',
+  },
+  {
+    question: 'Q2：我是零基礎的交易新手小白，適合 MQL5 原始碼課程嗎？',
+    answer:
+      'A2：完全可以！我們的課程專為零基礎設計，從最基本的AI LLM大模型基於MQL5語法有系統地建構MT5 EA源代碼，到編譯執行檔落地使用；並提供法人級商業EA模組化的源代碼範本，讓您用正確提示詞.md 標準模板複製貼上與積木組合嵌套的方式，任何新手老手都能輕鬆上手。',
+  },
+  {
+    question: 'Q3：標準會員與加盟會員的 EA 策略有什麼不同？',
+    answer:
+      'A3：標準會員可下載並體驗精選的編譯版 EA 策略與詳細回測報告；加盟會員則能進階解鎖全站 MQL5 核心源代碼，您可以自由修改邏輯、優化參數，甚至發展成您自己的商業策略或成為個人品牌作商業用途。',
+  },
+  {
+    question: 'Q4：這些 EA 策略過去的回測表現如何？有包含風控機制嗎？',
+    answer:
+      'A4：所有上架策略均遵循業界法人級商業EA標準以 5 年以上的歷史數據回測（包含 Walk-Forward 前瞻分析與壓力測試），且每套策略皆內建嚴格的 ATR 動態止損與每筆交易風險上限控制，拒絕馬丁與扛單。',
+  },
+];
+
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
 
@@ -297,11 +320,25 @@ export default function Home() {
         >
           <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400 ring-1 ring-cyan-500/20">
-                MT5
+              <div className="animate-badge-glow relative flex h-10 w-10 flex-none items-center justify-center overflow-hidden rounded-[1.25rem] border border-white/35 bg-gradient-to-br from-white via-cyan-100 to-cyan-400 px-2 py-1 text-[0.72rem] font-black leading-none tracking-[0.14em] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.22),0_0_22px_rgba(34,211,238,0.92),0_0_14px_rgba(59,130,246,0.52),inset_0_1px_0_rgba(255,255,255,0.95)] ring-2 ring-cyan-300/28">
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.55),transparent_38%),linear-gradient(135deg,rgba(255,255,255,0.2),transparent_48%),linear-gradient(180deg,rgba(255,255,255,0.08),transparent_60%)]"
+                />
+                <span
+                  className="relative z-10 normal-case drop-shadow-[0_0_8px_rgba(255,255,255,0.65)]"
+                  style={{
+                    fontFamily: 'Georgia, "Times New Roman", serif',
+                    fontStyle: 'italic',
+                    letterSpacing: '0.06em',
+                    color: '#0f172a',
+                  }}
+                >
+                  mq5
+                </span>
               </div>
               <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-xl font-black tracking-wide text-transparent">
-                MT5 QUANT LAB
+                AI-Quant Lab
               </span>
             </div>
 
@@ -331,24 +368,23 @@ export default function Home() {
           <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-two" />
           <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-three" />
           <div className="relative z-10 space-y-5">
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300">
-              2026 全新升級的 MT5 量化探索與訂閱旅程
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-1.5 text-sm font-semibold tracking-[0.22em] text-white shadow-[0_0_14px_rgba(34,211,238,0.2),0_0_32px_rgba(34,211,238,0.08)] backdrop-blur-md drop-shadow-[0_0_8px_rgba(255,255,255,0.28)] animate-pulse sm:text-base">
+              法人級商用發佈
             </div>
-            <h1 className={`mx-auto max-w-4xl text-balance text-5xl font-black leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl ${glowText}`}>
-              探幽訪勝
-              <span className="block bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-transparent">
-                走進 MT5 量化世界
+            <h1 className={`mx-auto max-w-4xl text-balance text-5xl font-black leading-[0.98] tracking-tight sm:text-6xl lg:text-7xl ${glowText}`}>
+              <span className="block bg-gradient-to-r from-cyan-300 via-teal-200 to-blue-500 bg-clip-text text-transparent">
+                用 AI 革命量化交易：解鎖法人級 MT5 EA 商業源代碼
               </span>
             </h1>
             <p className={`mx-auto max-w-3xl text-base leading-relaxed text-slate-400 sm:text-lg lg:text-xl ${glowText}`}>
-              以光為引、以路為線，把複雜的量化內容化成一段可探索、可驗證、可前進的故事旅程。
+              零基礎也能用 AI LLM 提示詞模板高效重構核心策略。無版權限制、無須許可，打造專屬您的個人交易品牌與數位資產，利潤 100% 全歸自己。
             </p>
             <div className="flex w-full flex-col items-center justify-center gap-3 pt-3 sm:flex-row">
               <a
                 href="#pricing"
                 className="btn-pulse w-full rounded-xl bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-xl shadow-cyan-400/20 transition hover:bg-cyan-300 sm:w-auto"
               >
-                立即啟程
+                立即加入，開創量化事業
               </a>
               <a
                 href="#features"
@@ -608,6 +644,42 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+        <section id="faq" className="relative py-10 pb-24">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
+          <div className="animate-reveal-up mx-auto max-w-3xl text-center">
+            <div className="inline-flex items-center rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.3em] text-cyan-300">
+              FAQ / 常見問題
+            </div>
+            <h2 className={`mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl ${glowText}`}>
+              先把疑問解開，故事就能更順地往下走
+            </h2>
+            <p className={`mt-4 text-sm leading-7 text-slate-400 sm:text-base ${glowText}`}>
+              這些問題多半是準備訂閱、學習 MQL5 或評估策略時最常遇到的關鍵點。先看懂，再決定下一步，會更清楚也更安心。
+            </p>
+          </div>
+
+          <div className="cards-cluster mx-auto mt-12 grid max-w-6xl gap-6 md:grid-cols-2">
+            {faqItems.map((item, index) => (
+              <article
+                key={item.question}
+                className="interactive-card group animate-card-in relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/50 p-7 transition-all duration-300 hover:border-cyan-400/45 hover:bg-slate-900/75"
+                style={{ animationDelay: `${index * 140}ms` }}
+              >
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_55%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 ring-cyan-300/0 transition-all duration-300 group-hover:ring-1 group-hover:ring-cyan-300/25" />
+                <div className="relative z-10">
+                  <h3 className={`text-lg font-bold leading-8 text-white transition-colors duration-300 group-hover:text-cyan-300 ${glowText}`}>
+                    {item.question}
+                  </h3>
+                  <p className={`mt-4 text-sm leading-8 text-slate-400 transition-colors duration-300 group-hover:text-slate-300 ${glowText}`}>
+                    {item.answer}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
       </main>
       </div>
       </div>
@@ -620,11 +692,25 @@ export default function Home() {
           <div className="grid gap-10 md:grid-cols-[1.4fr_0.8fr_0.8fr]">
             <div className="space-y-5">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-300 ring-1 ring-cyan-400/20">
-                  MT5
+              <div className="animate-badge-glow relative flex h-10 w-10 flex-none items-center justify-center overflow-hidden rounded-[1.25rem] border border-white/30 bg-gradient-to-br from-white via-cyan-100 to-cyan-400 text-white shadow-[0_0_0_1px_rgba(255,255,255,0.2),0_0_22px_rgba(34,211,238,0.88),0_0_14px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.95)] ring-2 ring-cyan-300/22">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.48),transparent_38%),linear-gradient(135deg,rgba(255,255,255,0.16),transparent_48%),linear-gradient(180deg,rgba(255,255,255,0.08),transparent_60%)]"
+                  />
+                  <span
+                    className="relative z-10 text-[0.72rem] font-black leading-none normal-case drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]"
+                    style={{
+                      fontFamily: 'Georgia, "Times New Roman", serif',
+                      fontStyle: 'italic',
+                      letterSpacing: '0.06em',
+                      color: '#0f172a',
+                  }}
+                >
+                    mq5
+                  </span>
                 </div>
                 <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-lg font-black tracking-wide text-transparent">
-                  MT5 QUANT LAB
+                  AI-Quant Lab
                 </span>
               </div>
               <p className="max-w-md text-sm leading-7 text-slate-400">
@@ -664,7 +750,7 @@ export default function Home() {
           </div>
 
           <div className="mt-10 flex flex-col gap-3 border-t border-slate-800/80 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-            <span>&copy; 2026 MT5 Quant Lab. All rights reserved.</span>
+            <span>&copy; 2026 AI-Quant Lab. All rights reserved.</span>
             <span>Designed as a guided journey, not a one-page brochure.</span>
           </div>
         </div>
