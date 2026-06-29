@@ -324,7 +324,10 @@ export default function Home() {
 
             <nav className="hidden items-center gap-8 text-sm font-medium text-slate-400 md:flex">
               <a href="#features" className="transition hover:text-cyan-400">
-                特色
+                源代碼庫
+              </a>
+              <a href="#modular" className="transition hover:text-cyan-400">
+                模組化積木
               </a>
               <a href="#pricing" className="transition hover:text-cyan-400">
                 訂閱方案
@@ -415,7 +418,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="mt-12 space-y-10">
+        <section id="modular" className="mt-12 space-y-10">
           <div className="animate-reveal-up mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/20 bg-fuchsia-500/10 px-4 py-1.5 text-xs font-medium text-fuchsia-200">
               旅程 / Journey
@@ -458,7 +461,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="mt-8 space-y-8">
+        <section id="modular" className="mt-8 space-y-8">
           <div className="animate-reveal-up mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300">
               導覽 / Guide
@@ -632,7 +635,7 @@ export default function Home() {
               FAQ / 常見問題
             </div>
             <h2 className={`mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl ${glowText}`}>
-              先把疑問解開，故事就能更順地往下走
+              先把疑問解開，才有信心啟程-源代碼事業之旅
             </h2>
             <p className={`mt-4 text-sm leading-7 text-slate-400 sm:text-base ${glowText}`}>
               這些問題多半是準備訂閱、學習 MQL5 或評估策略時最常遇到的關鍵點。先看懂，再決定下一步，會更清楚也更安心。
