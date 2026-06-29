@@ -354,26 +354,20 @@ export default function Home() {
       <main
         className="relative z-10 mx-auto max-w-7xl px-4 pb-10 pt-28 sm:px-6 lg:px-8 lg:pt-32"
       >
-        <section className="hero-aurora animate-reveal-up relative z-10 mx-auto flex min-h-[78vh] max-w-5xl flex-col items-center justify-center gap-7 py-14 text-center sm:min-h-[74vh] sm:py-16 lg:gap-8">
+        <section className="hero-aurora animate-reveal-up relative z-10 mx-auto flex min-h-[76vh] max-w-5xl flex-col items-center justify-center gap-6 py-12 text-center sm:min-h-[72vh] sm:py-14 lg:gap-7">
           <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-one" />
           <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-two" />
           <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-three" />
-          <div className="relative z-10 space-y-7">
-            <div aria-hidden="true" className="hero-spotlight hero-spotlight-one" />
-            <div aria-hidden="true" className="hero-spotlight hero-spotlight-two" />
-            <div aria-hidden="true" className="hero-spotlight hero-spotlight-three" />
-            <div className="hero-badge hero-copy mb-7 inline-flex items-center gap-2 rounded-full border border-cyan-300/45 bg-cyan-500/12 px-4 py-1.5 text-sm font-semibold tracking-[0.24em] text-white shadow-[0_0_18px_rgba(34,211,238,0.24),0_0_38px_rgba(34,211,238,0.1)] backdrop-blur-md animate-pulse sm:text-base">
+          <div className="relative z-10 space-y-6">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-1.5 text-sm font-semibold tracking-[0.22em] text-white shadow-[0_0_14px_rgba(34,211,238,0.2),0_0_32px_rgba(34,211,238,0.08)] backdrop-blur-md drop-shadow-[0_0_8px_rgba(255,255,255,0.28)] animate-pulse sm:text-base">
               法人級商用發佈
             </div>
-            <h1 className="mx-auto max-w-6xl text-balance text-5xl font-black leading-[0.92] tracking-tight text-white sm:text-6xl lg:text-[5rem]">
-              <span className="hero-bright block text-white">
-                AI 革命量化交易：
-              </span>
-              <span className="hero-sharp mt-2 block bg-gradient-to-r from-cyan-300 via-teal-300 to-blue-500 bg-clip-text text-transparent">
-                解鎖法人級 MT5 EA 商業源代碼
+            <h1 className={`mx-auto max-w-4xl text-balance text-5xl font-black leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.35rem] ${glowText}`}>
+              <span className="block bg-gradient-to-r from-cyan-300 via-teal-200 to-blue-500 bg-clip-text text-transparent">
+                AI 革命量化交易：解鎖法人級 MT5 EA 商業源代碼
               </span>
             </h1>
-            <p className="hero-copy mx-auto max-w-3xl text-base leading-relaxed text-slate-100/95 sm:text-lg lg:text-xl">
+            <p className={`mx-auto max-w-3xl text-base leading-relaxed text-slate-400 sm:text-lg lg:text-xl ${glowText}`}>
               零基礎也能用 AI LLM 提示詞模板高效重構核心策略。無版權限制、無須許可，打造專屬您的個人交易品牌與數位資產，利潤 100% 全歸自己。
             </p>
             <div className="flex w-full flex-col items-center justify-center gap-3 pt-4 sm:flex-row">
@@ -656,7 +650,6 @@ export default function Home() {
               FAQ / 常見問題
             </div>
             <h2 className={`mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl ${glowText}`}>
-              先把疑問解開，才有信心開啟源代碼量化事業之旅
             </h2>
             <p className={`mt-4 text-sm leading-7 text-slate-400 sm:text-base ${glowText}`}>
               這些問題多半是準備訂閱、學習 MQL5 或評估策略時最常遇到的關鍵點。先看懂，再決定下一步，會更清楚也更安心。
