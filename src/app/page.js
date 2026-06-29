@@ -3,44 +3,9 @@
 
 import { useEffect, useState } from 'react';
 
-const features = [
-  {
-    title: '量化交易實戰',
-    description: '從策略設計、回測驗證到上線部署，建立完整的 MT5 交易流程。',
-    icon: 'chart',
-  },
-  {
-    title: 'MQL5 原始碼教學',
-    description: '直接看懂 EA 結構與程式邏輯，適合想自己改策略的使用者。',
-    icon: 'code',
-  },
-  {
-    title: '社群與 VIP 支援',
-    description: '提供策略交流、版本更新與實作建議，縮短學習與試錯時間。',
-    icon: 'users',
-  },
-  {
-    kicker: '04 / 實戰回饋',
-    title: '看懂策略只是開始，能不能持續優化才是關鍵',
-    description:
-      '真正有價值的內容，不只讓你看過，而是讓你能拿去驗證、修正、再進一步。這也是我們把教學、範例與回測脈絡一起放進首頁的原因。',
-  },
-  {
-    kicker: '05 / 內容延伸',
-    title: '當你往下看，會發現每個區塊都在接下一步',
-    description:
-      '首頁不是把資訊一次倒完，而是用節奏帶你理解：先建立信任，再看到內容，最後才對應到方案。這種路徑，比單純丟價格更能促成停留。',
-  },
-  {
-    kicker: '06 / 行動入口',
-    title: '讓有興趣的人，能快速找到下一個動作',
-    description:
-      '當頁面把價值說清楚，方案區就不只是價格，而是清楚的下一步。你會更容易知道自己該看哪一層、該從哪裡開始。',
-  },
-];
-
 const glowText = 'drop-shadow-[0_0_10px_rgba(34,211,238,0.22)]';
 
+// Hero / ambient motion
 const particles = [
   { className: 'left-[6%] top-[16%] h-2.5 w-2.5', delay: '0s', duration: '3.2s' },
   { className: 'left-[10%] top-[70%] h-1.5 w-1.5', delay: '0.2s', duration: '3.4s' },
@@ -64,6 +29,7 @@ const particles = [
   { className: 'left-[84%] top-[82%] h-1.5 w-1.5', delay: '3.8s', duration: '3.3s' },
 ];
 
+// Three reasons / scroll cards
 const scrollCards = [
   {
     kicker: '01 / 先看懂系統',
@@ -85,6 +51,7 @@ const scrollCards = [
   },
 ];
 
+// Journey / narrative blocks
 const narrativeBlocks = [
   {
     tag: '探索 / Explore',
@@ -103,21 +70,7 @@ const narrativeBlocks = [
   },
 ];
 
-const signalBlocks = [
-  {
-    title: '被看見',
-    copy: '用光感和節奏先抓住注意，再用層次把人留住。',
-  },
-  {
-    title: '被理解',
-    copy: '讓內容一層接一層展開，訪客自然會想知道下一段。',
-  },
-  {
-    title: '被行動',
-    copy: '當價值被說明白，點擊就不再只是瀏覽，而是開始。',
-  },
-];
-
+// Guide / route steps
 const routeSteps = [
   {
     step: 'A1',
@@ -138,6 +91,22 @@ const routeSteps = [
     step: 'A4',
     title: '啟程',
     text: '當故事走到這裡，方案頁就是順勢接續的下一站，而不是硬生生推銷。',
+  },
+];
+
+// Signal / proof strip
+const signalBlocks = [
+  {
+    title: '被看見',
+    copy: '用光感和節奏先抓住注意，再用層次把人留住。',
+  },
+  {
+    title: '被理解',
+    copy: '讓內容一層接一層展開，訪客自然會想知道下一段。',
+  },
+  {
+    title: '被行動',
+    copy: '當價值被說明白，點擊就不再只是瀏覽，而是開始。',
   },
 ];
 
@@ -201,6 +170,44 @@ function FeatureIcon({ type }) {
   return null;
 }
 
+// Source code library / features
+const features = [
+  {
+    title: '源碼轉編譯',
+    description: '從轉碼編譯、策略設計、回測驗證到上線部署，建立完整的 MT5 交易流程。',
+    icon: 'chart',
+  },
+  {
+    title: 'MQL5 原始碼教學',
+    description: '直接看懂 EA 結構與程式邏輯，適合想自己改策略的使用者。',
+    icon: 'code',
+  },
+  {
+    title: '社群與VIP支援',
+    description: '提供策略交流、版本更新與實作建議，縮短學習與試錯時間。',
+    icon: 'users',
+  },
+  {
+    kicker: '04 / 實戰回饋',
+    title: '看懂策略只是開始，能不能持續優化才是關鍵',
+    description:
+      '真正有價值的內容，不只讓你看過，而是讓你能拿去驗證、修正、再進一步。這也是我們把教學、範例與回測脈絡一起放進首頁的原因。',
+  },
+  {
+    kicker: '05 / 內容延伸',
+    title: '當你往下看，會發現每個區塊都在接下一步',
+    description:
+      '首頁不是把資訊一次倒完，而是用節奏帶你理解：先建立信任，再看到內容，最後才對應到方案。這種路徑，比單純丟價格更能促成停留。',
+  },
+  {
+    kicker: '06 / 行動入口',
+    title: '讓有興趣的人，能快速找到下一個動作',
+    description:
+      '當頁面把價值說清楚，方案區就不只是價格，而是清楚的下一步。你會更容易知道自己該看哪一層、該從哪裡開始。',
+  },
+];
+
+// Pricing / plans
 const plans = [
   {
     name: '標準會員',
@@ -232,6 +239,7 @@ const plans = [
   },
 ];
 
+// FAQ / common questions
 const faqItems = [
   {
     question: 'Q1：訂閱方案後，需要綁定特定的外匯券商（Broker）才能使用EA策略嗎？',
@@ -344,17 +352,17 @@ export default function Home() {
         </header>
 
       <main
-        className="relative z-10 mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 lg:px-8"
+        className="relative z-10 mx-auto max-w-7xl px-4 pb-10 pt-28 sm:px-6 lg:px-8 lg:pt-32"
       >
-        <section className="hero-aurora animate-reveal-up relative z-10 mx-auto flex min-h-[72vh] max-w-5xl flex-col items-center justify-center gap-5 py-10 text-center sm:min-h-[68vh] sm:py-12">
+        <section className="hero-aurora animate-reveal-up relative z-10 mx-auto flex min-h-[76vh] max-w-5xl flex-col items-center justify-center gap-6 py-12 text-center sm:min-h-[72vh] sm:py-14 lg:gap-7">
           <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-one" />
           <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-two" />
           <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-three" />
-          <div className="relative z-10 space-y-5">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-1.5 text-sm font-semibold tracking-[0.22em] text-white shadow-[0_0_14px_rgba(34,211,238,0.2),0_0_32px_rgba(34,211,238,0.08)] backdrop-blur-md drop-shadow-[0_0_8px_rgba(255,255,255,0.28)] animate-pulse sm:text-base">
+          <div className="relative z-10 space-y-6">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-1.5 text-sm font-semibold tracking-[0.22em] text-white shadow-[0_0_14px_rgba(34,211,238,0.2),0_0_32px_rgba(34,211,238,0.08)] backdrop-blur-md drop-shadow-[0_0_8px_rgba(255,255,255,0.28)] animate-pulse sm:text-base">
               法人級商用發佈
             </div>
-            <h1 className={`mx-auto max-w-4xl text-balance text-5xl font-black leading-[0.98] tracking-tight sm:text-6xl lg:text-7xl ${glowText}`}>
+            <h1 className={`mx-auto max-w-4xl text-balance text-5xl font-black leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.35rem] ${glowText}`}>
               <span className="block bg-gradient-to-r from-cyan-300 via-teal-200 to-blue-500 bg-clip-text text-transparent">
                 AI 革命量化交易：解鎖法人級 MT5 EA 商業源代碼
               </span>
@@ -362,7 +370,7 @@ export default function Home() {
             <p className={`mx-auto max-w-3xl text-base leading-relaxed text-slate-400 sm:text-lg lg:text-xl ${glowText}`}>
               零基礎也能用 AI LLM 提示詞模板高效重構核心策略。無版權限制、無須許可，打造專屬您的個人交易品牌與數位資產，利潤 100% 全歸自己。
             </p>
-            <div className="flex w-full flex-col items-center justify-center gap-3 pt-3 sm:flex-row">
+            <div className="flex w-full flex-col items-center justify-center gap-3 pt-4 sm:flex-row">
               <a
                 href="#pricing"
                 className="btn-pulse w-full rounded-xl bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-xl shadow-cyan-400/20 transition hover:bg-cyan-300 sm:w-auto"
@@ -379,6 +387,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Three reasons */}
         <section className="mt-20 space-y-8">
           <div className="animate-reveal-up mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300">
@@ -418,7 +427,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="modular" className="mt-12 space-y-10">
+        {/* Journey */}
+        <section id="journey" className="mt-12 space-y-10">
           <div className="animate-reveal-up mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/20 bg-fuchsia-500/10 px-4 py-1.5 text-xs font-medium text-fuchsia-200">
               旅程 / Journey
@@ -461,6 +471,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Guide */}
         <section id="modular" className="mt-8 space-y-8">
           <div className="animate-reveal-up mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300">
@@ -480,7 +491,7 @@ export default function Home() {
               {routeSteps.map((step, index) => (
                 <article
                   key={step.step}
-                className={`interactive-card group animate-card-in relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/50 p-7 transition-all duration-300 hover:border-cyan-400/40 hover:bg-slate-900/70 ${
+                  className={`interactive-card group animate-card-in relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/50 p-7 transition-all duration-300 hover:border-cyan-400/40 hover:bg-slate-900/70 ${
                     index % 2 === 0 ? 'md:translate-y-0' : 'md:translate-y-8'
                   }`}
                   style={{ animationDelay: `${index * 150}ms` }}
@@ -504,6 +515,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Signal strip */}
         <section className="mt-16">
           <div className="cards-cluster mx-auto grid max-w-5xl gap-4 md:grid-cols-3">
             {signalBlocks.map((signal, index) => (
@@ -529,6 +541,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Source code library */}
         <section id="features" className="mt-12 space-y-12">
           <div className="animate-reveal-up mx-auto max-w-2xl text-center">
             <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>源代碼庫</h2>
@@ -558,11 +571,12 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Pricing */}
         <section id="pricing" className="mt-12 pb-20">
           <div className="animate-reveal-up mx-auto max-w-2xl text-center">
-            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>模組化積木</h2>
+            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>前往下一站</h2>
             <p className={`mt-4 text-slate-400 ${glowText}`}>
-              當你把源代碼庫看懂了，這裡就是拼接、組裝與延伸的自然入口。
+              當你把前面的路看懂了，這裡就是自然接續的行動入口。
             </p>
           </div>
 
@@ -628,6 +642,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* FAQ */}
         <section id="faq" className="relative py-10 pb-24">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
           <div className="animate-reveal-up mx-auto max-w-3xl text-center">
@@ -666,6 +681,7 @@ export default function Home() {
       </main>
       </div>
       </div>
+      {/* Footer */}
       <footer className="relative z-10 mt-12 overflow-hidden border-t border-slate-900 bg-slate-950/95 backdrop-blur-sm">
         <div
           aria-hidden="true"
@@ -675,7 +691,7 @@ export default function Home() {
           <div className="grid gap-10 md:grid-cols-[1.4fr_0.8fr_0.8fr]">
             <div className="space-y-5">
               <div className="flex items-center gap-3">
-              <div className="animate-badge-glow relative flex h-10 w-10 flex-none items-center justify-center overflow-hidden rounded-[1.25rem] border border-white/30 bg-gradient-to-br from-white via-cyan-100 to-cyan-400 text-white shadow-[0_0_0_1px_rgba(255,255,255,0.2),0_0_22px_rgba(34,211,238,0.88),0_0_14px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.95)] ring-2 ring-cyan-300/22">
+                <div className="animate-badge-glow relative flex h-10 w-10 flex-none items-center justify-center overflow-hidden rounded-[1.25rem] border border-white/30 bg-gradient-to-br from-white via-cyan-100 to-cyan-400 text-white shadow-[0_0_0_1px_rgba(255,255,255,0.2),0_0_22px_rgba(34,211,238,0.88),0_0_14px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.95)] ring-2 ring-cyan-300/22">
                   <span
                     aria-hidden="true"
                     className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.48),transparent_38%),linear-gradient(135deg,rgba(255,255,255,0.16),transparent_48%),linear-gradient(180deg,rgba(255,255,255,0.08),transparent_60%)]"
@@ -687,8 +703,8 @@ export default function Home() {
                       fontStyle: 'italic',
                       letterSpacing: '0.06em',
                       color: '#0f172a',
-                  }}
-                >
+                    }}
+                  >
                     mq5
                   </span>
                 </div>
@@ -697,7 +713,7 @@ export default function Home() {
                 </span>
               </div>
               <p className="max-w-md text-sm leading-7 text-slate-400">
-                以量化交易、MQL5 原始碼與實戰回測脈絡，打造一條可以理解、可以驗證、也可以持續前進的內容路徑。
+                以量化交易、MQL5 原始碼與實戰回測脈絡，打造一條可以優化、可以驗證、持續更新的源代碼事業。
               </p>
               <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300">
                 探幽訪勝，走進 MT5 量化世界
@@ -712,7 +728,7 @@ export default function Home() {
                 <a href="#features" className="transition hover:text-cyan-300">
                   源代碼庫
                 </a>
-                <a href="#pricing" className="transition hover:text-cyan-300">
+                <a href="#modular" className="transition hover:text-cyan-300">
                   模組化積木
                 </a>
                 <a href="#pricing" className="transition hover:text-cyan-300">
@@ -726,8 +742,8 @@ export default function Home() {
                 Journey
               </h3>
               <div className="space-y-3 text-sm leading-6 text-slate-500">
-                <p>先看懂源代碼，再開始模組化組裝，最後才接到訂閱方案。</p>
-                <p>這裡不是終點，而是下一段量化積木旅程的起點。</p>
+                <p>先看懂內容，再看見方法，最後才接到行動入口。</p>
+                <p>這裡不是終點，而是下一段量化旅程的起點。</p>
               </div>
             </div>
           </div>
