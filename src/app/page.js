@@ -650,7 +650,7 @@ export default function Home() {
               FAQ / 常見問題
             </div>
             <h2 className={`mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl ${glowText}`}>
-              先把疑問解開，才有信心啟程-源代碼事業之旅
+              先把疑問解開，才有信心開啟源代碼量化事業之旅
             </h2>
             <p className={`mt-4 text-sm leading-7 text-slate-400 sm:text-base ${glowText}`}>
               這些問題多半是準備訂閱、學習 MQL5 或評估策略時最常遇到的關鍵點。先看懂，再決定下一步，會更清楚也更安心。
