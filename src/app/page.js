@@ -173,7 +173,7 @@ function FeatureIcon({ type }) {
 // Source code library / features
 const features = [
   {
-    title: '源碼轉編譯',
+    title: 'mq4/mq5源碼轉換噐',
     description: '從轉碼編譯、策略設計、回測驗證到上線部署，建立完整的 MT5 交易流程。',
     icon: 'chart',
   },
