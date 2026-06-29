@@ -531,9 +531,9 @@ export default function Home() {
 
         <section id="features" className="mt-12 space-y-12">
           <div className="animate-reveal-up mx-auto max-w-2xl text-center">
-            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>內容路標</h2>
+            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>源代碼庫</h2>
             <p className={`mt-4 text-slate-400 ${glowText}`}>
-              這一站先讓你看懂方法、理解內容，再慢慢走向真正能採取行動的入口。
+              這一站先讓你看懂核心源代碼，再慢慢走進模組化積木的組合與延伸。
             </p>
           </div>
 
@@ -560,9 +560,9 @@ export default function Home() {
 
         <section id="pricing" className="mt-12 pb-20">
           <div className="animate-reveal-up mx-auto max-w-2xl text-center">
-            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>前往下一站</h2>
+            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>模組化積木</h2>
             <p className={`mt-4 text-slate-400 ${glowText}`}>
-              當你把前面的路看懂了，這裡就是自然接續的行動入口。
+              當你把源代碼庫看懂了，這裡就是拼接、組裝與延伸的自然入口。
             </p>
           </div>
 
@@ -710,10 +710,10 @@ export default function Home() {
               </h3>
               <div className="flex flex-col gap-3 text-sm text-slate-500">
                 <a href="#features" className="transition hover:text-cyan-300">
-                  內容路標
+                  源代碼庫
                 </a>
                 <a href="#pricing" className="transition hover:text-cyan-300">
-                  前往下一站
+                  模組化積木
                 </a>
                 <a href="#pricing" className="transition hover:text-cyan-300">
                   訂閱方案
@@ -726,8 +726,8 @@ export default function Home() {
                 Journey
               </h3>
               <div className="space-y-3 text-sm leading-6 text-slate-500">
-                <p>先看懂內容，再看見方法，最後才接到行動入口。</p>
-                <p>這裡不是終點，而是下一段量化旅程的起點。</p>
+                <p>先看懂源代碼，再開始模組化組裝，最後才接到訂閱方案。</p>
+                <p>這裡不是終點，而是下一段量化積木旅程的起點。</p>
               </div>
             </div>
           </div>
