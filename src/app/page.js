@@ -353,7 +353,7 @@ export default function Home() {
             </div>
             <h1 className={`mx-auto max-w-4xl text-balance text-5xl font-black leading-[0.98] tracking-tight sm:text-6xl lg:text-7xl ${glowText}`}>
               <span className="block bg-gradient-to-r from-cyan-300 via-teal-200 to-blue-500 bg-clip-text text-transparent">
-                用 AI 革命量化交易：解鎖法人級 MT5 EA 商業源代碼
+                AI 革命量化交易：解鎖法人級 MT5 EA 商業源代碼
               </span>
             </h1>
             <p className={`mx-auto max-w-3xl text-base leading-relaxed text-slate-400 sm:text-lg lg:text-xl ${glowText}`}>
