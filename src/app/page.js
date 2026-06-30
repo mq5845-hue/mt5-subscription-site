@@ -1,6 +1,7 @@
 ﻿'use client';
 
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const glowText = 'drop-shadow-[0_0_10px_rgba(34,211,238,0.22)]';
@@ -349,6 +350,9 @@ export default function Home() {
               <a href="#modular" className="transition hover:text-cyan-400">
                 模組化積木
               </a>
+              <Link href="/line-kb" className="transition hover:text-cyan-400">
+                LINE 知識庫
+              </Link>
               <a href="#pricing" className="transition hover:text-cyan-400">
                 訂閱方案
               </a>
@@ -400,10 +404,10 @@ export default function Home() {
                 立即加入，開創量化事業
               </a>
               <a
-                href="#features"
+                href="/line-kb"
                 className="btn-pulse w-full rounded-xl border border-slate-800 bg-slate-900 px-8 py-3 text-center text-base font-medium text-slate-300 transition hover:bg-slate-800 sm:w-auto"
               >
-                先看探索路線
+                先看知識庫架構
               </a>
             </div>
           </div>
@@ -755,6 +759,9 @@ export default function Home() {
                 <a href="#modular" className="transition hover:text-cyan-300">
                   模組化積木
                 </a>
+                <Link href="/line-kb" className="transition hover:text-cyan-300">
+                  LINE 知識庫
+                </Link>
                 <a href="#pricing" className="transition hover:text-cyan-300">
                   訂閱方案
                 </a>

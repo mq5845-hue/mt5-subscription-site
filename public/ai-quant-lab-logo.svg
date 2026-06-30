@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="160" y1="120" x2="1440" y2="780" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#050B18"/>
+      <stop offset="0.52" stop-color="#071A32"/>
+      <stop offset="1" stop-color="#02050D"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(720 420) rotate(90) scale(360 420)">
+      <stop stop-color="#22D3EE" stop-opacity="0.62"/>
+      <stop offset="0.45" stop-color="#3B82F6" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#3B82F6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="text" x1="510" y1="300" x2="1220" y2="300" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="0.45" stop-color="#6FE8FF"/>
+      <stop offset="1" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="badge" x1="224" y1="188" x2="364" y2="368" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3FEFF"/>
+      <stop offset="0.45" stop-color="#CFFBFF"/>
+      <stop offset="1" stop-color="#7EDFFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" rx="84" fill="url(#bg)"/>
+  <rect width="1600" height="900" rx="84" fill="url(#glow)"/>
+  <g opacity="0.24">
+    <circle cx="292" cy="160" r="4" fill="#22D3EE"/>
+    <circle cx="1280" cy="168" r="5" fill="#60A5FA"/>
+    <circle cx="1328" cy="710" r="4" fill="#22D3EE"/>
+    <circle cx="264" cy="736" r="5" fill="#60A5FA"/>
+  </g>
+  <rect x="92" y="92" width="1416" height="716" rx="54" fill="white" fill-opacity="0.02" stroke="white" stroke-opacity="0.08"/>
+
+  <g transform="translate(196 220)">
+    <circle cx="150" cy="150" r="130" fill="url(#badge)"/>
+    <circle cx="150" cy="150" r="130" fill="none" stroke="#67E8F9" stroke-opacity="0.55" stroke-width="6"/>
+    <circle cx="150" cy="150" r="108" fill="none" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="2"/>
+    <circle cx="150" cy="150" r="150" fill="#22D3EE" fill-opacity="0.07"/>
+    <text x="150" y="168" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="86" font-style="italic" font-weight="700" letter-spacing="0.04em" fill="#0F172A">mq5</text>
+  </g>
+
+  <g transform="translate(510 292)">
+    <text x="0" y="0" font-family="Inter, Arial, sans-serif" font-size="112" font-weight="900" letter-spacing="-0.04em" fill="url(#text)">AI-Quant Lab</text>
+    <text x="4" y="104" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="700" fill="#E6F4FF" fill-opacity="0.9">AI MT5源代碼事業</text>
+    <text x="4" y="164" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="600" fill="#C6D4E5" fill-opacity="0.88">會員訂閱與教學網站</text>
+  </g>
+
+  <g transform="translate(512 612)">
+    <rect width="280" height="60" rx="30" fill="#22D3EE" fill-opacity="0.16" stroke="#67E8F9" stroke-opacity="0.38"/>
+    <text x="140" y="40" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#EAFDFF">MT5 · AI · 源代碼</text>
+  </g>
+</svg>
