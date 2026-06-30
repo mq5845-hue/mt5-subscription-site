@@ -691,3 +691,91 @@ html {
 .animate-card-in {
   animation: cardIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both, glowDrift 3.2s ease-in-out infinite;
 }
+
+html.is-android body::before,
+html.is-android body::after,
+html.is-android .content-stage::before,
+html.is-android .content-stage::after,
+html.is-android .hero-aurora::before,
+html.is-android .hero-aurora::after,
+html.is-android .hero-aurora-layer,
+html.is-android .hero-spotlight,
+html.is-android .animate-float-slow,
+html.is-android .animate-float-slower,
+html.is-android .animate-pulse-glow,
+html.is-android .animate-scanline,
+html.is-android .particle-dot,
+html.is-android .journey-rail {
+  animation: none !important;
+  filter: none !important;
+}
+
+html.is-android body::before {
+  opacity: 0.35;
+}
+
+html.is-android body::after {
+  display: none;
+}
+
+html.is-android .tech-grid {
+  animation: none !important;
+  opacity: 0.22;
+}
+
+html.is-android header {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(3, 5, 14, 0.92) !important;
+}
+
+html.is-android .animate-reveal-up,
+html.is-android .animate-card-in,
+html.is-android .btn-pulse,
+html.is-android .animate-pulse {
+  animation: none !important;
+}
+
+html.is-android .interactive-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: none !important;
+  will-change: auto;
+  transition:
+    opacity 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+html.is-android .interactive-card::after {
+  display: none !important;
+}
+
+html.is-android .interactive-card:hover {
+  transform: none !important;
+  filter: none !important;
+  box-shadow:
+    0 0 0 1px rgba(34, 211, 238, 0.22),
+    0 18px 40px rgba(8, 145, 178, 0.16);
+}
+
+html.is-android .cards-cluster:has(.interactive-card:hover) .interactive-card:not(:hover) {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+html.is-android .cards-cluster:has(.interactive-card:hover) .interactive-card:not(:hover) .pointer-events-none.absolute.inset-0.rounded-3xl,
+html.is-android .cards-cluster:has(.interactive-card:hover) .interactive-card:not(:hover) .pointer-events-none.absolute.inset-0.rounded-2xl {
+  opacity: 1;
+  box-shadow: none;
+}
+
+html.is-android .hero-copy,
+html.is-android .hero-bright,
+html.is-android .hero-sharp,
+html.is-android .hero-badge {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}

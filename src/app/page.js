@@ -277,6 +277,18 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const isAndroid = /Android/i.test(navigator.userAgent);
+
+    if (isAndroid) {
+      document.documentElement.classList.add('is-android');
+    }
+
+    return () => {
+      document.documentElement.classList.remove('is-android');
+    };
+  }, []);
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-slate-950">
       <div className="content-stage relative mx-auto max-w-7xl overflow-hidden">
