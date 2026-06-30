@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+﻿import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "MT5 Quant Lab",
-  description: "MT5 量化交易訂閱與教學網站",
+  title: "AI-Quant Lab",
+  description: "AI MT5源代碼事業_會員訂閱與教學網站",
 };
 
 export default function RootLayout({ children }) {
@@ -26,3 +26,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+

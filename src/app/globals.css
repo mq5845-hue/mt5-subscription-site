@@ -779,3 +779,85 @@ html.is-android .hero-badge {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after,
+  .content-stage::before,
+  .content-stage::after,
+  .hero-aurora::before,
+  .hero-aurora::after,
+  .hero-aurora-layer,
+  .hero-spotlight,
+  .animate-float-slow,
+  .animate-float-slower,
+  .animate-pulse-glow,
+  .animate-scanline,
+  .particle-dot,
+  .journey-rail {
+    animation: none !important;
+    filter: none !important;
+  }
+
+  body::before {
+    opacity: 0.34;
+  }
+
+  body::after {
+    display: none;
+  }
+
+  .tech-grid {
+    animation: none !important;
+    opacity: 0.22;
+  }
+
+  header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(3, 5, 14, 0.92) !important;
+  }
+
+  .animate-reveal-up,
+  .animate-card-in,
+  .btn-pulse,
+  .animate-pulse {
+    animation: none !important;
+  }
+
+  .interactive-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    transform: none !important;
+    will-change: auto;
+    transition:
+      opacity 220ms ease,
+      border-color 220ms ease,
+      background-color 220ms ease,
+      box-shadow 220ms ease;
+  }
+
+  .interactive-card::after {
+    display: none !important;
+  }
+
+  .interactive-card:hover {
+    transform: none !important;
+    filter: none !important;
+    box-shadow:
+      0 0 0 1px rgba(34, 211, 238, 0.22),
+      0 18px 40px rgba(8, 145, 178, 0.16);
+  }
+
+  .cards-cluster:has(.interactive-card:hover) .interactive-card:not(:hover) {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+
+  .cards-cluster:has(.interactive-card:hover) .interactive-card:not(:hover) .pointer-events-none.absolute.inset-0.rounded-3xl,
+  .cards-cluster:has(.interactive-card:hover) .interactive-card:not(:hover) .pointer-events-none.absolute.inset-0.rounded-2xl {
+    opacity: 1;
+    box-shadow: none;
+  }
+}
