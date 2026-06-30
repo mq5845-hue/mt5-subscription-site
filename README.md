@@ -23,6 +23,8 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 - `npm run check` runs the full local quality gate: ESLint first, then production build.
 - `npm run ship "your message"` stages changes, creates a commit, and pushes to GitHub when `origin` is set.
 - GitHub Actions runs the same check on every `push` and `pull_request`.
+- GitHub Actions also deploys to Vercel automatically on every `push` to `master` once these repository secrets are added: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`.
+- The Vercel workflow uses the production build output, so every successful push can publish a fresh live version.
 
 If `origin` is not configured yet, `npm run ship` will still create the local commit and tell you how to add your GitHub repository URL.
 

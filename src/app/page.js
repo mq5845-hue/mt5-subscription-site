@@ -343,7 +343,9 @@ export default function Home() {
             </nav>
 
             <a
-              href="#pricing"
+              href="https://lin.ee/stqhWhj"
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-pulse rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500"
             >
               立即加入
@@ -378,7 +380,9 @@ export default function Home() {
             </p>
             <div className="flex w-full flex-col items-center justify-center gap-3 pt-4 sm:flex-row">
               <a
-                href="#pricing"
+                href="https://lin.ee/stqhWhj"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-pulse w-full rounded-xl bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-xl shadow-cyan-400/20 transition hover:bg-cyan-300 sm:w-auto"
               >
                 立即加入，開創量化事業
@@ -634,7 +638,9 @@ export default function Home() {
                 </div>
 
                 <a
-                  href="#"
+                  href="https://lin.ee/stqhWhj"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`btn-pulse relative z-10 mt-8 w-full rounded-xl px-4 py-3 text-center text-sm font-bold transition-all duration-300 ${
                     plan.featured
                       ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 shadow-lg shadow-cyan-500/20 hover:from-cyan-400 hover:to-blue-500'
