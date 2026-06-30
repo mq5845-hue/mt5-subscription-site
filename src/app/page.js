@@ -552,7 +552,7 @@ export default function Home() {
           <div className="animate-reveal-up mx-auto max-w-2xl text-center">
             <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>源代碼庫</h2>
             <p className={`mt-4 text-slate-400 ${glowText}`}>
-              這一站先讓你看懂核心源代碼，再慢慢走進模組化積木的組合與延伸。
+              這一站先讓你看懂核心源代碼(原始碼Source Code)，再慢慢走進模組化積木的組合與延伸。
             </p>
           </div>
 
@@ -722,7 +722,7 @@ export default function Home() {
                 以量化交易、MQL5 原始碼與實戰回測脈絡，打造一條可以優化、可以驗證、持續更新的源代碼事業。
               </p>
               <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300">
-                探幽訪勝，走進 MT5 量化世界
+                探幽訪勝，走進 MT5 源代碼(原始碼Source Code) 量化世界
               </div>
             </div>
 
