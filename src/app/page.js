@@ -374,9 +374,9 @@ export default function Home() {
               <a href="#features" className="transition hover:text-cyan-400">
                 源代碼庫
               </a>
-              <a href="#modular" className="transition hover:text-cyan-400">
+              <Link href="/modular" className="transition hover:text-cyan-400">
                 模組化積木
-              </a>
+              </Link>
               <Link href="/line-kb" className="transition hover:text-cyan-400">
                 LINE 知識庫
               </Link>
@@ -932,9 +932,9 @@ export default function Home() {
                 <a href="#features" className="transition hover:text-cyan-300">
                   源代碼庫
                 </a>
-                <a href="#modular" className="transition hover:text-cyan-300">
+                <Link href="/modular" className="transition hover:text-cyan-300">
                   模組化積木
-                </a>
+                </Link>
                 <Link href="/line-kb" className="transition hover:text-cyan-300">
                   LINE 知識庫
                 </Link>
