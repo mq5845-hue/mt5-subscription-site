@@ -209,6 +209,12 @@ const features = [
 ];
 
 // Pricing / plans
+const planHighlights = [
+  '100% 原始碼交付',
+  'AI LLM 提示詞賦能',
+  '1-on-1 技術對接',
+];
+
 const plans = [
   {
     name: '標準會員',
@@ -220,6 +226,7 @@ const plans = [
       '每月精選策略與工具',
       '社群討論區瀏覽權限',
     ],
+    highlights: planHighlights,
     featured: false,
     cta: '立即訂閱',
   },
@@ -235,6 +242,7 @@ const plans = [
       '一對一回測與部署建議',
       'VIP 核心功能優先更新',
     ],
+    highlights: planHighlights,
     featured: true,
     cta: '立即加入',
   },
@@ -264,8 +272,27 @@ const faqItems = [
   },
 ];
 
+const accordionFaqItems = [
+  {
+    question: 'Q：使用 AI-Quant Lab 的系統需要具備深厚的 Python 或 MQL5 程式底子嗎？',
+    answer:
+      'A：不需要。我們將複雜的外匯 EA 邏輯拆解為「模組化積木」，並提供專屬的 AI 提示詞模板。您只需透過與 AI 對話，即可輕鬆進行核心策略的調教與重構。',
+  },
+  {
+    question: 'Q：你們有提供代操資金、保證獲利或特定投顧建議嗎？',
+    answer:
+      'A：絕對沒有。AI-Quant Lab 是一家純粹的軟體工程與 AI 技術教學實驗室。我們僅提供源代碼與量化工具，不經手任何客戶資金，所有交易決策與風險均由用戶自主控管。',
+  },
+  {
+    question: 'Q：訂閱方案後，我該如何開始使用？',
+    answer:
+      'A：點擊網頁上的 CTA 按鈕將自動引導您加入我們的 LINE 官方帳號。加入後，請提供您的訂閱序號，我們的技術對接小組將立即為您開通源碼庫並提供技術引導。',
+  },
+];
+
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
+  const [openAccordionIndex, setOpenAccordionIndex] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -630,6 +657,17 @@ export default function Home() {
                     {plan.name}
                   </h3>
 
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {plan.highlights.map((highlight) => (
+                      <span
+                        key={highlight}
+                        className="inline-flex items-center rounded-full border border-cyan-400/18 bg-cyan-500/10 px-3 py-1 text-[11px] font-semibold tracking-[0.16em] text-cyan-100 shadow-[0_0_0_1px_rgba(34,211,238,0.08)]"
+                      >
+                        {highlight}
+                      </span>
+                    ))}
+                  </div>
+
                   <div className="mt-4 flex items-baseline gap-1">
                     <span className="text-4xl font-extrabold text-white">{plan.price}</span>
                     <span className="text-sm text-slate-500">{plan.period}</span>
@@ -638,6 +676,26 @@ export default function Home() {
                   <p className={`mt-4 text-sm leading-relaxed text-slate-400 transition-colors duration-300 group-hover:text-slate-300 ${glowText}`}>
                     {plan.description}
                   </p>
+
+                  <div className="mt-5 rounded-2xl border border-slate-700/70 bg-slate-950/55 p-4">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-cyan-200">
+                      核心優勢
+                    </p>
+                    <ul className={`mt-3 space-y-2 text-sm leading-6 text-slate-300 ${glowText}`}>
+                      <li className="flex gap-2">
+                        <span className="mt-1 text-cyan-300">◆</span>
+                        <span>100% 原始碼交付，無鎖帳號、無硬體綁定、無任何跟單版權限制。</span>
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="mt-1 text-cyan-300">◆</span>
+                        <span>AI LLM 提示詞賦能，透過模組化積木與模板快速重構策略。</span>
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="mt-1 text-cyan-300">◆</span>
+                        <span>1-on-1 技術對接，直接透過 LINE 官方帳號啟動專屬授權。</span>
+                      </li>
+                    </ul>
+                  </div>
 
                   <hr className="my-6 border-slate-800" />
 
@@ -746,6 +804,82 @@ export default function Home() {
                 </div>
               </article>
             ))}
+          </div>
+
+          <div className="mx-auto mt-12 max-w-5xl" id="faq-accordion">
+            <div className="animate-reveal-up rounded-[1.75rem] border border-cyan-400/18 bg-[linear-gradient(180deg,rgba(2,6,23,0.96),rgba(3,7,18,0.88))] p-6 shadow-[0_28px_90px_rgba(8,145,178,0.16)] ring-1 ring-white/5 sm:p-8 lg:p-10">
+              <div className="mb-8 flex flex-col gap-4 border-b border-slate-800/80 pb-6 sm:flex-row sm:items-end sm:justify-between">
+                <div className="max-w-2xl space-y-3">
+                  <div className="inline-flex items-center rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.28em] text-cyan-300">
+                    FAQ / Accordion
+                  </div>
+                  <h3 className={`text-2xl font-black tracking-tight text-white sm:text-3xl ${glowText}`}>
+                    防禦性與訂閱說明
+                  </h3>
+                  <p className={`text-sm leading-7 text-slate-400 sm:text-base ${glowText}`}>
+                    這一組是補充性的技術問答，專門針對使用門檻、風險邊界與訂閱流程做更清楚的說明。
+                  </p>
+                </div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-slate-950/60 px-4 py-2 text-xs font-semibold tracking-[0.18em] text-cyan-100">
+                  <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.7)]" />
+                  3 個補充問答
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                {accordionFaqItems.map((item, index) => {
+                  const isOpen = openAccordionIndex === index;
+
+                  return (
+                    <article
+                      key={item.question}
+                      className="overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/55 shadow-[0_12px_40px_rgba(2,6,23,0.4)] transition-all duration-300"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setOpenAccordionIndex(isOpen ? -1 : index)}
+                        aria-expanded={isOpen}
+                        aria-controls={`accordion-panel-${index}`}
+                        id={`accordion-trigger-${index}`}
+                        className="group flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-6"
+                      >
+                        <span className={`text-base font-bold leading-7 text-white transition-colors duration-300 group-hover:text-cyan-300 sm:text-lg ${glowText}`}>
+                          {item.question}
+                        </span>
+                        <span
+                          className={`flex h-10 w-10 flex-none items-center justify-center rounded-full border border-cyan-400/20 bg-cyan-500/10 text-cyan-300 transition-all duration-300 ${
+                            isOpen ? 'rotate-45 shadow-[0_0_24px_rgba(34,211,238,0.18)]' : ''
+                          }`}
+                          aria-hidden="true"
+                        >
+                          +
+                        </span>
+                      </button>
+
+                      <div
+                        id={`accordion-panel-${index}`}
+                        role="region"
+                        aria-labelledby={`accordion-trigger-${index}`}
+                        className={`grid overflow-hidden px-5 transition-[grid-template-rows,opacity] duration-300 ease-out sm:px-6 ${
+                          isOpen ? 'grid-rows-[1fr] pb-5 opacity-100' : 'grid-rows-[0fr] pb-0 opacity-0'
+                        }`}
+                      >
+                        <div className="min-h-0">
+                          <div className="rounded-2xl border border-cyan-400/12 bg-slate-950/65 p-4 sm:p-5">
+                            <div className="mb-3 inline-flex items-center rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-200">
+                              Technical Answer
+                            </div>
+                            <p className={`text-sm leading-8 text-slate-300 sm:text-[0.96rem] ${glowText}`}>
+                              {item.answer}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </section>
       </main>
