@@ -217,6 +217,21 @@ const releaseCandidateEntries = [
 ];
 
 const entryAliasMap = new Map([
+  ['module-00-base-config', ['Step_1_Master_Prompt', 'Master_Prompt_Enterprise_v1.0']],
+  ['module-02-money-management', ['Step_2_Prompt_Module2_MoneyManagement_Module3_OrderManager']],
+  ['module-03-order-manager', ['Step_2_Prompt_Module2_MoneyManagement_Module3_OrderManager']],
+  ['module-04-break-even', ['Step_3_Prompt_Module4_BreakEven_Module5_TrailingStop']],
+  ['module-05-trailing-stop', ['Step_3_Prompt_Module4_BreakEven_Module5_TrailingStop']],
+  ['module-06-signal-engine', ['Step_4_Prompt_Module6_SignalEngine_Module7_SessionFilter']],
+  ['module-07-session-filter', ['Step_4_Prompt_Module6_SignalEngine_Module7_SessionFilter']],
+  ['module-08-risk-controller', ['Step_5_Prompt_Module8_RiskController_Module9_Logger']],
+  ['module-09-logger', ['Step_5_Prompt_Module8_RiskController_Module9_Logger']],
+  ['module-10-dashboard', ['Step_6_Prompt_Module10_Dashboard']],
+  ['module-11-strategy-framework', ['Step_7_Prompt_Module11_StrategyFramework']],
+  ['module-12-backtest-optimization-framework', ['Step_8_Prompt_Module12_Backtest_Optimization_Framework']],
+  ['module-13-mql5-market-packaging-framework', ['Step_9_Prompt_Module13_MQL5_Market_Packaging_Framework']],
+  ['module-14-product-manual-release-kit', ['Step_10_Prompt_Module14_Product_Manual_Release_Kit']],
+  ['module-15-qa-validation-final-pre-release-framework', ['Step_11_Prompt_Module15_PreRelease_Validation_Framework']],
   ['module-16-livesafety-deployment-guard', ['Step_12_Prompt_Module16_LiveSafety_DeploymentGuard']],
   ['module-17-strategy-activation-controlled-trading', ['Step_13_Prompt_Module17_StrategyActivation_ControlledTrading']],
   ['module-18-strategy-performance-analytics', ['Step_14_Prompt_Module18_StrategyPerformanceAnalytics']],
