@@ -668,6 +668,48 @@ export default function Home() {
               </article>
             ))}
           </div>
+
+          <div className="mx-auto mt-10 max-w-5xl">
+            <section
+              aria-labelledby="legal-disclaimer-title"
+              role="note"
+              className="relative overflow-hidden rounded-[1.75rem] border border-cyan-400/18 bg-[linear-gradient(180deg,rgba(3,7,18,0.96),rgba(2,6,23,0.86))] p-6 shadow-[0_24px_90px_rgba(8,145,178,0.14)] ring-1 ring-white/5 backdrop-blur-xl sm:p-8 lg:p-10"
+            >
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.16),transparent_30%),radial-gradient(circle_at_100%_0%,rgba(59,130,246,0.12),transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.04),transparent_42%,rgba(34,211,238,0.04))]"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent"
+              />
+              <div className="relative z-10 grid gap-6 lg:grid-cols-[0.95fr_1.6fr] lg:items-start">
+                <div className="space-y-4">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-500/10 px-4 py-1.5 text-[11px] font-semibold tracking-[0.28em] text-cyan-200 uppercase">
+                    Legal / Technical Note
+                  </div>
+                  <div className="space-y-3">
+                    <h3
+                      id="legal-disclaimer-title"
+                      className="text-xl font-black tracking-tight text-white sm:text-2xl"
+                    >
+                      免責與技術定調聲明
+                    </h3>
+                    <p className={`max-w-xl text-sm leading-7 text-slate-400 sm:text-[0.95rem] ${glowText}`}>
+                      為了清楚界定本站內容屬性、降低誤解風險，以下聲明請於閱覽前一併確認。
+                    </p>
+                  </div>
+                </div>
+
+                <div className="relative rounded-[1.4rem] border border-slate-700/70 bg-slate-950/75 p-5 shadow-inner shadow-cyan-500/5 sm:p-6">
+                  <div className="absolute inset-0 rounded-[1.4rem] bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_46%)] opacity-80" />
+                  <p className={`relative z-10 text-sm leading-8 text-slate-200 sm:text-[0.98rem] ${glowText}`}>
+                    💡 法律免責與技術定調聲明：AI-Quant Lab 致力於 MQL5 原始碼研發與 AI 模組化提示詞軟體工程教學。本站及相關社群所提供之內容僅供學術研究與程式碼技術交流，絕不提供任何形式的跟單代操、不保證獲利、亦不經手或代管客戶投資資金。用戶應自行承擔交易風險，本站不承擔任何投資損失責任。
+                  </p>
+                </div>
+              </div>
+            </section>
+          </div>
         </section>
 
         {/* FAQ */}
