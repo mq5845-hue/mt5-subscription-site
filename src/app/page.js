@@ -917,7 +917,7 @@ export default function Home() {
                 </span>
               </div>
               <p className="max-w-md text-sm leading-7 text-slate-400">
-                以量化交易、MQL5 原始碼與實戰回測脈絡，打造一條可以優化、可以驗證、持續更新的源代碼事業。
+                AI-Quant Lab 源代碼量化工廠實驗室，專注於 MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。
               </p>
               <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300">
                 探幽訪勝，走進 MT5 源代碼(原始碼Source Code) 量化世界
@@ -957,7 +957,7 @@ export default function Home() {
 
           <div className="mt-10 flex flex-col gap-3 border-t border-slate-800/80 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
             <span>&copy; 2026 AI-Quant Lab. All rights reserved.</span>
-            <span>Designed as a guided journey, not a one-page brochure.</span>
+            <span>AI-Quant Lab 源代碼量化工廠實驗室｜MQL5 × AI 模組化量化教學</span>
           </div>
         </div>
       </footer>
