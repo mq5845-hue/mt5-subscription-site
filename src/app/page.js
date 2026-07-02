@@ -379,7 +379,7 @@ export default function Home() {
               </span>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-4 sm:gap-5">
               <nav className="hidden items-center gap-8 text-sm font-medium text-slate-400 md:flex">
                 <a href="#features" className="transition hover:text-cyan-400">
                   源代碼庫
@@ -399,14 +399,14 @@ export default function Home() {
                 href="https://lin.ee/stqhWhj"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`btn-pulse rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500 ${tapClass}`}
+                className={`btn-pulse shrink-0 whitespace-nowrap rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-3 py-1.5 text-[12px] font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500 ${tapClass}`}
               >
                 立即加入
               </a>
 
               <button
                 type="button"
-                className={`btn-pulse inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 text-slate-100 transition hover:border-cyan-400/40 hover:text-cyan-300 md:hidden ${tapClass}`}
+                className={`btn-pulse shrink-0 ml-1 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 text-slate-100 transition hover:border-cyan-400/40 hover:text-cyan-300 md:hidden ${tapClass}`}
                 aria-label={mobileNavOpen ? '關閉導覽選單' : '開啟導覽選單'}
                 aria-expanded={mobileNavOpen}
                 aria-controls="mobile-nav-menu"
