@@ -75,40 +75,47 @@ const narrativeBlocks = [
 const routeSteps = [
   {
     step: 'A1',
-    title: '亮相',
-    text: '先讓畫面抓住目光，接著才開始讀故事。這是流量能不能留下來的起點。',
+    title: '先抓住目光',
+    text: '先用一個夠清楚的主張，讓人停下來，願意往下看第二眼。',
   },
   {
     step: 'A2',
-    title: '辨路',
-    text: '把策略、教學與資料收整成清楚的層次，讓脈絡一眼可見。',
+    title: '把路線說明白',
+    text: '把策略、教學、模組與知識庫拆成好懂的層次，讓人一眼看懂每一區在回答什麼。',
   },
   {
     step: 'A3',
-    title: '驗證',
-    text: '用回測、原始碼與實戰脈絡建立可信度，讓內容不只是漂亮，而是真的有根據。',
+    title: '把證據攤開',
+    text: '原始碼、回測、驗證與 FAQ 一起上場，讓主張不是口號，而是有憑有據。',
   },
   {
     step: 'A4',
-    title: '啟程',
-    text: '當故事走到這裡，方案頁就是順勢接續的下一站，而不是硬生生推銷。',
+    title: '順勢接到下一步',
+    text: '當價值、邊界與行動入口都講清楚，方案與 CTA 就會自然出現，不必硬推。',
   },
 ];
 
 // Signal / proof strip
 const signalBlocks = [
   {
-    title: '被看見',
-    copy: '用光感和節奏先抓住注意，再用層次把人留住。',
+    title: '先被注意',
+    copy: '用高對比標題、光感與留白，先讓頁面有被停下來看的理由。',
   },
   {
-    title: '被理解',
-    copy: '讓內容一層接一層展開，訪客自然會想知道下一段。',
+    title: '再被信任',
+    copy: '用分層內容與明確標示，讓人知道自己正在讀哪一層，也知道為什麼可信。',
   },
   {
-    title: '被行動',
-    copy: '當價值被說明白，點擊就不再只是瀏覽，而是開始。',
+    title: '最後轉換',
+    copy: '當價值、證據與下一步都清楚，點擊就不再是衝動，而是順勢。',
   },
+];
+
+const mobileNavItems = [
+  { href: '#features', label: '源代碼庫' },
+  { href: '/modular', label: '模組化積木' },
+  { href: '/line-kb', label: 'LINE 知識庫' },
+  { href: '#pricing', label: '訂閱方案' },
 ];
 
 function FeatureIcon({ type }) {
@@ -293,6 +300,7 @@ const accordionFaqItems = [
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [openAccordionIndex, setOpenAccordionIndex] = useState(0);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -370,29 +378,99 @@ export default function Home() {
               </span>
             </div>
 
-            <nav className="hidden items-center gap-8 text-sm font-medium text-slate-400 md:flex">
-              <a href="#features" className="transition hover:text-cyan-400">
-                源代碼庫
-              </a>
-              <Link href="/modular" className="transition hover:text-cyan-400">
-                模組化積木
-              </Link>
-              <Link href="/line-kb" className="transition hover:text-cyan-400">
-                LINE 知識庫
-              </Link>
-              <a href="#pricing" className="transition hover:text-cyan-400">
-                訂閱方案
-              </a>
-            </nav>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <nav className="hidden items-center gap-8 text-sm font-medium text-slate-400 md:flex">
+                <a href="#features" className="transition hover:text-cyan-400">
+                  源代碼庫
+                </a>
+                <Link href="/modular" className="transition hover:text-cyan-400">
+                  模組化積木
+                </Link>
+                <Link href="/line-kb" className="transition hover:text-cyan-400">
+                  LINE 知識庫
+                </Link>
+                <a href="#pricing" className="transition hover:text-cyan-400">
+                  訂閱方案
+                </a>
+              </nav>
 
-            <a
-              href="https://lin.ee/stqhWhj"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-pulse rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500"
-            >
-              立即加入
-            </a>
+              <a
+                href="https://lin.ee/stqhWhj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-pulse rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500"
+              >
+                立即加入
+              </a>
+
+              <button
+                type="button"
+                className="btn-pulse inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 text-slate-100 transition hover:border-cyan-400/40 hover:text-cyan-300 md:hidden"
+                aria-label={mobileNavOpen ? '關閉導覽選單' : '開啟導覽選單'}
+                aria-expanded={mobileNavOpen}
+                aria-controls="mobile-nav-menu"
+                onClick={() => setMobileNavOpen((open) => !open)}
+              >
+                <span className="sr-only">{mobileNavOpen ? '關閉導覽選單' : '開啟導覽選單'}</span>
+                <span className="flex flex-col gap-1.5">
+                  <span className="h-0.5 w-5 rounded-full bg-current" />
+                  <span className="h-0.5 w-5 rounded-full bg-current" />
+                  <span className="h-0.5 w-5 rounded-full bg-current" />
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <div
+            id="mobile-nav-menu"
+            className={`md:hidden overflow-hidden border-t border-slate-800/40 bg-slate-950/95 px-4 transition-all duration-300 ${
+              mobileNavOpen ? 'max-h-72 py-4 opacity-100' : 'max-h-0 py-0 opacity-0'
+            }`}
+          >
+            <div className="grid gap-2 text-sm font-medium text-slate-300">
+              {mobileNavItems.map((item) => {
+                const isInternal = item.href.startsWith('#') || item.href.startsWith('/');
+
+                if (item.href.startsWith('http')) {
+                  return (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 transition hover:border-cyan-400/30 hover:text-cyan-300"
+                      onClick={() => setMobileNavOpen(false)}
+                    >
+                      {item.label}
+                    </a>
+                  );
+                }
+
+                if (isInternal && item.href.startsWith('#')) {
+                  return (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      className="rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 transition hover:border-cyan-400/30 hover:text-cyan-300"
+                      onClick={() => setMobileNavOpen(false)}
+                    >
+                      {item.label}
+                    </a>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className="rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 transition hover:border-cyan-400/30 hover:text-cyan-300"
+                    onClick={() => setMobileNavOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </header>
 
@@ -531,10 +609,10 @@ export default function Home() {
               導覽 / Guide
             </div>
             <h2 className={`mt-5 text-3xl font-black tracking-tight sm:text-4xl ${glowText}`}>
-              跟著光走，內容才會一步一步打開
+              先看懂路線，再順著內容一層一層被說服
             </h2>
             <p className={`mt-4 text-sm leading-relaxed text-slate-400 sm:text-base ${glowText}`}>
-              這一段像導遊路線，先把入口帶出來，再慢慢把價值打開，最後自然走到方案與行動。
+              這不是抽象的氛圍文案，而是一條有節奏的導覽：先抓住注意，再講清結構，最後把人自然帶到方案與行動。
             </p>
           </div>
 

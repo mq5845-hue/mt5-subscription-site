@@ -54,7 +54,7 @@ function GlassPanel({ title, content, glass = false }) {
     <section
       className={`relative overflow-hidden rounded-[1.5rem] border border-cyan-400/15 ${
         glass
-          ? 'bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(15,23,42,0.78))] backdrop-blur-xl'
+          ? 'bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(15,23,42,0.42))] backdrop-blur-xl'
           : 'bg-[linear-gradient(180deg,rgba(2,6,23,0.96),rgba(3,7,18,0.84))]'
       } p-6 shadow-[0_18px_60px_rgba(8,145,178,0.12)] ring-1 ring-white/5 sm:p-8`}
     >
@@ -64,13 +64,28 @@ function GlassPanel({ title, content, glass = false }) {
       />
       <div className="relative z-10 space-y-4">
         <h2 className="text-lg font-black tracking-tight text-white sm:text-xl">{title}</h2>
-        <pre
-          className={`whitespace-pre-wrap break-words text-sm leading-7 text-slate-200 ${
-            glass ? 'opacity-70' : ''
-          }`}
-        >
-          {content}
-        </pre>
+        {glass ? (
+          <div className="relative overflow-hidden rounded-2xl border border-cyan-300/10 bg-slate-950/36">
+            <pre className="relative whitespace-pre-wrap break-words p-4 text-sm leading-7 text-slate-200 blur-[2.2px] saturate-65 select-none">
+              {content}
+            </pre>
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 opacity-90"
+              style={{
+                backgroundImage:
+                  'repeating-linear-gradient(0deg, rgba(15,23,42,0.50) 0 10px, rgba(15,23,42,0.18) 10px 20px), repeating-linear-gradient(90deg, rgba(15,23,42,0.46) 0 10px, rgba(15,23,42,0.14) 10px 20px), radial-gradient(circle at 20% 20%, rgba(255,255,255,0.14), transparent 20%), radial-gradient(circle at 70% 35%, rgba(34,211,238,0.12), transparent 20%), radial-gradient(circle at 40% 75%, rgba(59,130,246,0.10), transparent 20%)',
+                backgroundSize: '16px 16px',
+                mixBlendMode: 'screen',
+                backdropFilter: 'blur(1.2px)',
+              }}
+            />
+          </div>
+        ) : (
+          <pre className="whitespace-pre-wrap break-words text-sm leading-7 text-slate-200">
+            {content}
+          </pre>
+        )}
       </div>
     </section>
   );

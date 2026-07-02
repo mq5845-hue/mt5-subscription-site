@@ -4,165 +4,177 @@ const knowledgeEntries = [
   {
     id: 'faq-01',
     question: 'AI-Quant Lab 是什麼？',
-    keywords: ['ai-quant lab', '你是誰', '你們是誰', '這是什麼', '品牌介紹', '功能說明', '歡迎', '開始'],
+    aliases: ['ai-quant lab', '你們是誰', '品牌介紹', '是什麼', '介紹一下', 'about'],
+    priority: 100,
     newbie:
-      'AI-Quant Lab 是一個以 MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學為核心的品牌。你可以把它先理解成一座「軟體技術工廠」，重點是把複雜內容說清楚。',
+      'AI-Quant Lab 是一個聚焦 MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學的品牌。我們把複雜內容整理成能讀、能學、能延伸的知識系統。',
     technical:
-      '我們將交易策略、原始碼結構、回測驗證、交付方式與內容更新，整理成一套可維護的技術系統。目的不是賣單點答案，而是建立可持續運作的知識架構。',
+      '從系統角度看，AI-Quant Lab 不是單一產品，而是一套「模組化知識庫 + 原始碼教學 + 回覆系統」的整合架構，方便持續擴充與維護。',
     vision:
-      '我們希望把量化技術做成可學、可用、可擴充的工程底座，讓使用者不只看見答案，也看見方法、脈絡與下一步。',
-    cta: '如果你想先入門，可以回覆「功能說明」或「新手導覽」。',
+      '我們希望把量化與 AI 教學做成一個有秩序、可持續成長的品牌系統，讓使用者不只是看答案，而是看懂方法與路徑。',
+    cta: `想先看全貌，可以直接到官網：${siteUrl}，或輸入「功能說明」讓我帶你看下一層。`,
   },
   {
     id: 'faq-02',
-    question: '零基礎真的可以開始嗎？',
-    keywords: ['零基礎', '不會寫程式', '新手', '初學者', '入門', '怎麼開始', '可以學嗎'],
+    question: '需要 Python 或 MQL5 基礎嗎？',
+    aliases: ['python', 'mql5', '零基礎', '不會寫程式', '需要基礎', '程式底子'],
+    priority: 95,
     newbie:
-      '可以。你不需要先具備深厚的 Python 或 MQL5 背景，也能先從白話說明開始。先理解用途，再逐步理解結構，會更容易上手。',
+      '不需要先有很深的程式底子。我們會把複雜邏輯拆成白話說明，讓你先看懂流程，再慢慢進到實作。',
     technical:
-      '我們會用提示詞模板與模組化拆解，把需求分成目標、限制、風控與流程，再逐步對應到策略邏輯與程式骨架。這樣可以降低學習門檻。',
+      '學習路徑會先從模組關聯、參數意義與回測觀念開始，再逐步碰到 MQL5 實作與 AI 提示詞調整。',
     vision:
-      '我們相信，技術不該只屬於少數人。讓更多人能用更低的門檻進入量化與 AI 工程，是這個品牌很重要的起點。',
-    cta: '如果你願意，我可以直接幫你整理成「新手版入門路線」。',
+      '我們想降低門檻，讓更多人可以用更少的時間進入量化與自動化的世界。',
+    cta: '如果你是新手，可以直接輸入「新手導覽」。',
   },
   {
     id: 'faq-03',
-    question: '什麼是 25 組模組化積木架構？',
-    keywords: ['模組', '積木', 'module', '25組', '25 組', '架構', '怎麼開發', 'M0', 'M24'],
+    question: '25 組模組化積木架構是什麼？',
+    aliases: ['25組', '25 組', 'module', '模組', '積木', '架構'],
+    priority: 90,
     newbie:
-      '你可以把它想成一套樂高積木。每個模組都負責一個功能，組在一起，就能慢慢搭出完整的 EA 系統。',
+      '你可以把它想成一套樂高積木：每個模組負責一個功能，拼起來就能完成完整的量化 EA。',
     technical:
-      'Module 0 到 Module 24 涵蓋基礎配置、風控、訊號、交易管理、新聞過濾、維運與商業發佈等完整生命週期。重點在於可拆、可換、可擴充。',
+      '這套架構涵蓋基礎設定、風控、下單、止損、訊號、回測、部署與商業化包裝，讓系統可以分段維護。',
     vision:
-      '這種架構的價值，不只是方便開發，更是讓系統可以持續演化，最後變成能夠被閱讀、被複製、被延伸的工程資產。',
-    cta: '如果你要，我可以再幫你整理成「模組地圖版 FAQ」。',
+      '我們要做的是可擴展的知識結構，而不是一次只能看懂一小段的單篇文章。',
+    cta: '想看完整對照表，可以打開「正式圖解樹」。',
   },
   {
     id: 'faq-04',
-    question: '「商業源代碼」與「無版權限制」是什麼意思？',
-    keywords: ['源代碼', '原始碼', '無版權', '買斷', '轉售', '改名', '授權', '商業版'],
+    question: '商業源代碼與無版權限制是什麼意思？',
+    aliases: ['源代碼', '無版權', '買斷', '轉售', '改名', '原始碼'],
+    priority: 92,
     newbie:
-      '意思是你拿到的是完整原始碼，而不是只能看不能改的封閉軟體。你可以更清楚地理解內容，也更容易知道自己到底在使用什麼。',
+      '意思是你拿到的是可讀、可改、可延伸的完整源代碼，不是黑盒子。',
     technical:
-      '我們交付的是可編譯、可閱讀、可維護的源碼資產，並可依授權條款進行品牌化應用。重點不是只有「能跑」，而是能持續維護與延伸。',
+      '商業交付重點在於可維護性與可再利用性，讓使用者能依自身需求調整、重構與包裝。',
     vision:
-      '當原始碼從一次性產品，變成可沉澱、可再利用的技術資產時，它就有機會進一步發展成教育內容、工具系統或自有品牌服務。',
-    cta: '如果你想確認交付邊界，我可以再補一版更白話的說明。',
+      '我們希望把技術成果變成可長期經營的數位資產，而不是只能一次性使用的工具。',
+    cta: '如果你想看交付規格，可以輸入「工程師規格書」。',
   },
   {
     id: 'faq-05',
-    question: 'AI-Quant Lab 與傳統代操、投顧有何不同？',
-    keywords: ['代操', '投顧', '跟單', '差別', '不同', '主控權', '飆股', '安全嗎'],
+    question: 'AI-Quant Lab 和代操、投顧有什麼差別？',
+    aliases: ['代操', '投顧', '跟單', '差別', '有什麼不同', '不是代操'],
+    priority: 93,
     newbie:
-      '差別很簡單：我們不是代操，也不替你做投資決策。你看到的是技術與教學，不是把資金交給別人處理。',
+      '差別很大：我們提供的是技術、源碼與教學，不是幫你拿錢操作。',
     technical:
-      'AI-Quant Lab 交付的是方法、原始碼與流程，資金與交易主控權始終在使用者手上。透明、可讀、可驗證，是我們的基本原則。',
+      '主控權、券商帳戶、交易決策與風險承擔都在使用者手上，這是純軟體與知識交付。',
     vision:
-      '我們想把「黑箱跟隨」改成「透明學習」，讓使用者真正理解系統如何運作，而不是只看到最後的結果。',
-    cta: '如果你想比較兩者差異，我可以整理成「對比版 FAQ」。',
+      '我們要建立的是透明、可驗證、可學習的技術品牌，而不是黑盒式的投資服務。',
+    cta: '如果你在意安全邊界，可以輸入「安全嗎」。',
   },
   {
     id: 'faq-06',
-    question: '你們有提供代操、保證獲利或跟單嗎？',
-    keywords: ['詐騙', '代操', '保證獲利', '跟單', '安全嗎', '入金', '投顧', '合法嗎'],
+    question: '如何開始使用？',
+    aliases: ['怎麼開始', '如何開始', '入門', '新手導覽', '開始使用'],
+    priority: 88,
     newbie:
-      '沒有。凡是要求你代操、入金、保證獲利或私下轉帳的內容，都不屬於 AI-Quant Lab 的服務範圍。',
+      '先從官網和知識庫入口開始看，再依你的程度選擇圖解樹、模板或規格書。',
     technical:
-      '我們不經手客戶資金，也不提供投顧式的結果保證。所有內容都以軟體工程、原始碼與技術教學為主，邊界清楚、責任清楚。',
+      '建議順序是：先看架構，再看 FAQ，再看模板，最後再處理實作與部署。',
     vision:
-      '我們認為，真正可長久的品牌，不是靠模糊承諾，而是靠清楚邊界與穩定價值。這也是我們持續強調合規與透明的原因。',
-    cta: '如果你想看安全邊界，我可以直接幫你整理成合規說明版。',
+      '我們希望你不是只得到一個答案，而是得到一條可以持續前進的學習路線。',
+    cta: `先看官網：${siteUrl}，或輸入「功能說明」讓我幫你導航。`,
   },
   {
     id: 'faq-07',
-    question: '訂閱方案後，如何開始使用？',
-    keywords: ['訂閱', '收費', '怎麼買', '預約', '正式版', '下載', '付款', 'Lemon Squeezy'],
+    question: '如何訂閱或取得內容？',
+    aliases: ['怎麼買', '收費', '訂閱', '下載', '購買', '預約'],
+    priority: 87,
     newbie:
-      '目前採人工索取與預約制。你可以先留下需求，等正式流程開通後，再依通知進行下一步。',
+      '目前採預約或導流制，讓你先看懂內容，再決定是否進一步訂閱。',
     technical:
-      '當會員驗證、下載流程與付款串接完全完成後，整體使用體驗會更自動化，從預約、開通到交付都會有清楚流程。',
+      '這樣做的好處是可以先確認需求是否匹配，降低誤買與溝通成本。',
     vision:
-      '我們先把真正有興趣的人穩定接住，再逐步升級成完整的數位交付系統。這樣做，能讓服務更穩，也更容易長期經營。',
-    cta: '如果你想預約，請回覆「我想預約正式版」。',
+      '我們希望把有興趣的人先接住，再用完整內容建立長期信任。',
+    cta: '如果你想先保留名額，可以輸入「我想預約正式版」。',
   },
   {
     id: 'faq-08',
-    question: '如何獲取技術引導與客服支援？',
-    keywords: ['客服', '支援', '技術引導', '功能說明', '怎麼問', '找誰', '聯絡', '協助'],
+    question: '目前是正式版還是測試版？',
+    aliases: ['beta', '測試版', '正式版', '目前狀態', '還在測試嗎'],
+    priority: 86,
     newbie:
-      '你可以直接在 LINE 內提問，或先輸入關鍵字，讓系統帶你到對應主題。這樣比較快，也比較不容易迷路。',
+      '目前仍有部分內容在持續優化中，屬於迭代更新的階段。',
     technical:
-      '我們會依問題類型，將內容分流到功能說明、模組架構、訂閱流程、回報機制或安全邊界，讓回答更聚焦，也更好維護。',
+      '這代表我們會持續調整 FAQ 命中、回覆結構與頁面內容，讓系統更穩定。',
     vision:
-      '我們希望客服不只是回覆，而是成為學習路徑的導覽員，讓每一個人都能順著自己的理解速度往前走。',
-    cta: '如果你不知道從哪裡開始，可以回覆「功能說明」。',
+      '我們寧願慢一點，也要把內容做得更完整、更有秩序。',
+    cta: '如果你想看最新功能，可以直接回「功能說明」。',
   },
   {
     id: 'faq-09',
-    question: '提示詞真的可以協助重構策略嗎？',
-    keywords: ['提示詞', 'prompt', '程式碼', '重構', '修改策略', 'ai', '策略', '模板'],
+    question: '什麼是提示詞 Prompt？',
+    aliases: ['prompt', '提示詞', 'ai prompt', '怎麼下指令', '提示'],
+    priority: 84,
     newbie:
-      '可以。先把你想要的功能用白話講出來，AI 就能先幫你整理成較清楚的結構，而不是一開始就要求你寫完整程式。',
+      '你可以把提示詞想成跟 AI 說話的方式，寫得越清楚，AI 越容易幫你做對事情。',
     technical:
-      'AI 會根據你的需求，協助整理出條件、流程、風控與模組，再回到 MQL5 程式骨架與回測驗證。這能有效縮短試錯時間。',
+      '在這個系統裡，提示詞會用來重構模組、整理回答層次與優化回覆語氣。',
     vision:
-      '這種做法的價值，在於讓不熟程式的人，也能更快參與策略設計與迭代。它不是取代人，而是放大人的理解與組織能力。',
-    cta: '如果你要，我可以直接示範一版「提示詞模板」。',
+      '我們希望把提示詞從一次性指令，變成可長期管理的工程方法。',
+    cta: '想看提示詞的結構，可以輸入「技術版」。',
   },
   {
     id: 'faq-10',
-    question: '如何回報問題與提供意見？',
-    keywords: ['bug', '回報', '問題', '測試', '錯誤', '建議', '回饋', '編譯'],
+    question: '遇到問題或 Bug 要怎麼回報？',
+    aliases: ['bug', '回報', '錯誤', '問題', '無法使用', '異常'],
+    priority: 83,
     newbie:
-      '如果你發現錯誤，可以直接把你看到的狀況告訴我們。越清楚的描述，越能幫助我們快速理解問題。',
+      '直接把你看到的狀況、截圖和關鍵字傳給我們，我們會優先確認。',
     technical:
-      '若可以，請附上截圖、操作步驟或發生時的情境。這些資訊能幫助我們定位是顯示問題、流程問題，還是內容需要再補強。',
+      '回報時如果能附上操作步驟、頁面名稱與出錯訊息，會更快定位問題。',
     vision:
-      '我們把測試期看成共同打磨系統的階段。每一個回報，都是在幫知識工廠補上更好的結構與路徑。',
-    cta: '謝謝你幫我們一起把系統打磨得更完整。',
+      '我們把回報當成改進系統的一部分，而不是麻煩。',
+    cta: '回報時可直接輸入「問題回報」。',
   },
   {
     id: 'faq-11',
-    question: '這套系統會持續更新與擴充嗎？',
-    keywords: ['更新', '擴充', '1000', '知識庫', '持續', '演進', '新增', 'FAQ'],
+    question: 'FAQ 之後還會繼續擴充嗎？',
+    aliases: ['1000', '擴充', '更多faq', '主題樹', '會增加嗎', '延伸'],
+    priority: 82,
     newbie:
-      '會。這不是固定不變的答案集，而是一套會慢慢補強的知識庫，內容會隨著使用者問題持續增加。',
+      '會，而且會慢慢分層擴充，讓不同問題都能找到對應答案。',
     technical:
-      '我們會用主題樹與分層結構持續擴充，讓相近問題能被歸類、合併、再展開，維持可讀性與維護性。',
+      '我們的方向是從 12 則 FAQ 逐步擴成主題樹，再把內容拆成更細的節點。',
     vision:
-      '目標不是只做 12 則，而是往 100、1000 甚至更多延伸，最後形成一個真正能自我生長的知識系統。',
-    cta: '如果你想看擴充路線，可以回覆「擴充規劃」。',
+      '知識庫不是固定完成品，而是會跟著品牌一起成長的內容系統。',
+    cta: '如果你想看擴充方向，可以輸入「主題樹」。',
   },
   {
     id: 'faq-12',
     question: '為什麼要做 AI-Quant Lab？',
-    keywords: ['為什麼', '願景', '故事', '品牌', '未來', '希望工程', '征途', '工廠'],
+    aliases: ['為什麼', '理念', '願景', '品牌故事', '初衷'],
+    priority: 81,
     newbie:
-      '因為我們相信，技術應該更容易被看懂，也更容易被使用。不是每個人都要從零摸索，才有資格參與。',
+      '因為我們想把量化、原始碼與 AI 教學整理成一般人也看得懂的內容。',
     technical:
-      '我們想把量化、原始碼與 AI 教學整合成一套能複製、能擴充、能交付的工程系統，讓方法比單點結果更值得被保留。',
+      '從產品設計來看，這是一個結合知識庫、回覆系統與內容工程的品牌專案。',
     vision:
-      '在 AI 狂潮之下，我們希望建立一座能給人方法、也能給人希望的源碼工坊。這不是一個回答系統而已，而是一個品牌長跑。',
-    cta: '如果你想看完整故事線，可以回覆「品牌故事」。',
+      '我們希望建立的是一個能長久累積、可擴張、能被信任的技術品牌。',
+    cta: '如果你想看品牌全貌，回「功能說明」就可以。',
   },
 ];
 
 const fallbackReply = {
-  question: '我還沒完全辨識你的問題',
+  question: '我還在學習你的問題',
   newbie:
-    '沒關係，你可以先用更白話的方式描述，例如「我想知道怎麼開始」、「我想看模組圖」或「我想了解安全性」。',
+    '我目前會先從最接近的 FAQ 開始找答案。如果你想讓我更準，可以直接輸入「功能說明」、「新手導覽」、「技術版」或你最關心的關鍵字。',
   technical:
-    '系統會優先比對關鍵字並找出最接近的 FAQ。如果目前沒有完全對應，我會先帶你回到主線主題，避免回答過度發散。',
+    '這個版本的回覆引擎會根據關鍵字與問題相似度配對。若你希望結果更精準，請盡量用簡短、明確、單一意圖的問法。',
   vision:
-    '我們希望這套知識系統能越來越像一個有秩序的品牌入口，而不是只會丟固定句子的客服機器人。',
-  cta: `先看官網：${siteUrl}，或直接輸入「功能說明」。`,
+    '我們會持續把知識庫擴大，讓機器人的回答越來越像一個有秩序、能引導的品牌入口。',
+  cta: `先看官網：${siteUrl}，或直接回「功能說明」。`,
 };
 
 function normalizeText(text) {
   return String(text || '')
-    .trim()
+    .normalize('NFKC')
     .toLowerCase()
-    .replace(/\s+/g, '');
+    .replace(/[\s\p{P}\p{S}]+/gu, '');
 }
 
 function countKeywordHits(text, keywords) {
@@ -170,41 +182,90 @@ function countKeywordHits(text, keywords) {
 
   return keywords.reduce((count, keyword) => {
     const normalizedKeyword = normalizeText(keyword);
-    return count + (normalizedKeyword && normalized.includes(normalizedKeyword) ? 1 : 0);
+    if (!normalizedKeyword) return count;
+    return count + (normalized.includes(normalizedKeyword) ? 2 : 0);
   }, 0);
 }
 
-function formatFormalReply(entry) {
+function detectTone(userText) {
+  const normalized = normalizeText(userText);
+
+  if (/(技術|原始碼|架構|模組|mql5|prompt|程式|程式碼)/i.test(normalized)) {
+    return 'technical';
+  }
+
+  if (/(願景|品牌|故事|理念|初衷|未來)/i.test(normalized)) {
+    return 'vision';
+  }
+
+  if (/(新手|入門|怎麼開始|如何開始|功能說明|預約|下載|訂閱)/i.test(normalized)) {
+    return 'newbie';
+  }
+
+  return 'newbie';
+}
+
+function pickReplyMode(entry, userText) {
+  const normalized = normalizeText(userText);
+
+  if (/(技術版|技術|原始碼|架構|模組|prompt|程式|程式碼)/i.test(normalized)) {
+    return 'technical';
+  }
+
+  if (/(願景版|願景|品牌|故事|理念|初衷|未來)/i.test(normalized)) {
+    return 'vision';
+  }
+
+  if (/(新手版|新手|入門|如何開始|怎麼開始|功能說明|預約|下載|訂閱)/i.test(normalized)) {
+    return 'newbie';
+  }
+
+  return detectTone(entry.question);
+}
+
+function formatFormalReply(entry, userText) {
+  const mode = pickReplyMode(entry, userText);
+  const answers = {
+    newbie: entry.newbie,
+    technical: entry.technical,
+    vision: entry.vision,
+  };
+
   return [
     `Q：${entry.question}`,
     '',
-    'A：',
+    `A：${answers[mode]}`,
     '',
-    `【新手版】${entry.newbie}`,
-    '',
-    `【技術版】${entry.technical}`,
-    '',
-    `【願景版】${entry.vision}`,
-    '',
-    `【下一步】${entry.cta}`,
+    `${entry.cta}`,
   ].join('\n');
 }
 
 export function buildLineReply(userText) {
   const scored = knowledgeEntries
-    .map((entry) => ({
-      ...entry,
-      score: countKeywordHits(userText, entry.keywords),
-    }))
+    .map((entry) => {
+      const aliasHits = countKeywordHits(userText, entry.aliases || []);
+      const directHits = countKeywordHits(userText, [entry.question, ...(entry.aliases || [])]);
+      const priority = entry.priority || 0;
+
+      return {
+        ...entry,
+        score: aliasHits + directHits + priority,
+      };
+    })
     .filter((entry) => entry.score > 0)
     .sort((a, b) => b.score - a.score);
 
   const matched = scored[0] || fallbackReply;
-  return formatFormalReply(matched);
+  return formatFormalReply(matched, userText);
 }
 
 export function getKnowledgeEntries() {
-  return knowledgeEntries.map(({ id, question, keywords }) => ({ id, question, keywords }));
+  return knowledgeEntries.map(({ id, question, aliases, priority }) => ({
+    id,
+    question,
+    aliases,
+    priority,
+  }));
 }
 
 export function getKnowledgeTitles() {
