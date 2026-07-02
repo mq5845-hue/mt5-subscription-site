@@ -1,4 +1,19 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# mt5-subscription-site
+
+This project includes a working reservation flow wired to Supabase, Google Form, and LINE.
+
+## Quick Links
+
+- Final summary: [`docs/final-version-summary.md`](/D:/Users/july%20ane/Desktop/web/mt5-subscription-site/docs/final-version-summary.md)
+- Go-live checklist: [`docs/go-live-checklist.md`](/D:/Users/july%20ane/Desktop/web/mt5-subscription-site/docs/go-live-checklist.md)
+- Vercel env paste list: [`docs/vercel-env-paste-list.md`](/D:/Users/july%20ane/Desktop/web/mt5-subscription-site/docs/vercel-env-paste-list.md)
+- Supabase schema: [`docs/supabase-reservation-schema.sql`](/D:/Users/july%20ane/Desktop/web/mt5-subscription-site/docs/supabase-reservation-schema.sql)
+
+## Core routes
+
+- Reservation page: `/line-kb/reservation`
+- Reservation API: `/api/reservation`
+- LINE webhook: `/api/line`
 
 ## Getting Started
 
