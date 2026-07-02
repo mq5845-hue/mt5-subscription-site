@@ -2,10 +2,11 @@
 
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const glowText = 'drop-shadow-[0_0_10px_rgba(34,211,238,0.22)]';
-const tapClass = 'touch-manipulation active:scale-[0.99] transition-transform duration-150';
+const tapClass =
+  'touch-manipulation select-none active:scale-[0.98] active:translate-y-px transition-transform duration-150';
 
 // Hero / ambient motion
 const particles = [
@@ -302,6 +303,20 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [openAccordionIndex, setOpenAccordionIndex] = useState(0);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const tapLockRef = useRef(false);
+
+  const withTapLock = (callback) => {
+    if (tapLockRef.current) {
+      return;
+    }
+
+    tapLockRef.current = true;
+    window.setTimeout(() => {
+      tapLockRef.current = false;
+    }, 240);
+
+    callback();
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -325,6 +340,26 @@ export default function Home() {
       document.documentElement.classList.remove('is-android');
     };
   }, []);
+
+  useEffect(() => {
+    if (!mobileNavOpen) return undefined;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setMobileNavOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mobileNavOpen]);
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-slate-950">
@@ -379,7 +414,7 @@ export default function Home() {
               </span>
             </div>
 
-            <div className="flex items-center gap-4 sm:gap-5">
+            <div className="flex items-center gap-3 sm:gap-5">
               <nav className="hidden items-center gap-8 text-sm font-medium text-slate-400 md:flex">
                 <a href="#features" className="transition hover:text-cyan-400">
                   源代碼庫
@@ -399,18 +434,19 @@ export default function Home() {
                 href="https://lin.ee/stqhWhj"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`btn-pulse shrink-0 whitespace-nowrap rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-3 py-1.5 text-[12px] font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500 ${tapClass}`}
+                className={`btn-pulse shrink-0 whitespace-nowrap rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-3.5 py-2 text-[12px] font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500 min-h-11 ${tapClass}`}
+                onClick={() => withTapLock(() => {})}
               >
                 立即加入
               </a>
 
               <button
                 type="button"
-                className={`btn-pulse shrink-0 ml-1 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 text-slate-100 transition hover:border-cyan-400/40 hover:text-cyan-300 md:hidden ${tapClass}`}
+                className={`btn-pulse shrink-0 ml-1 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 text-slate-100 transition hover:border-cyan-400/40 hover:text-cyan-300 md:hidden ${tapClass}`}
                 aria-label={mobileNavOpen ? '關閉導覽選單' : '開啟導覽選單'}
                 aria-expanded={mobileNavOpen}
                 aria-controls="mobile-nav-menu"
-                onClick={() => setMobileNavOpen((open) => !open)}
+                onClick={() => withTapLock(() => setMobileNavOpen((open) => !open))}
               >
                 <span className="sr-only">{mobileNavOpen ? '關閉導覽選單' : '開啟導覽選單'}</span>
                 <span className="flex flex-col gap-1.5">
@@ -424,8 +460,10 @@ export default function Home() {
 
           <div
             id="mobile-nav-menu"
-            className={`md:hidden overflow-hidden border-t border-slate-800/40 bg-slate-950/95 px-4 transition-all duration-300 ${
-              mobileNavOpen ? 'max-h-72 py-4 opacity-100' : 'max-h-0 py-0 opacity-0'
+            className={`md:hidden overflow-hidden border-t border-slate-800/40 bg-slate-950/95 px-4 transition-[max-height,opacity,transform] duration-200 ease-out ${
+              mobileNavOpen
+                ? 'max-h-[min(24rem,calc(100vh-5.5rem))] translate-y-0 py-4 opacity-100'
+                : 'max-h-0 -translate-y-1 py-0 opacity-0'
             }`}
           >
             <div className="grid gap-2 text-sm font-medium text-slate-300">
@@ -440,7 +478,7 @@ export default function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 min-h-12 transition hover:border-cyan-400/30 hover:text-cyan-300 ${tapClass}`}
-                      onClick={() => setMobileNavOpen(false)}
+                      onClick={() => withTapLock(() => setMobileNavOpen(false))}
                     >
                       {item.label}
                     </a>
@@ -453,7 +491,7 @@ export default function Home() {
                       key={item.label}
                       href={item.href}
                       className={`rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 min-h-12 transition hover:border-cyan-400/30 hover:text-cyan-300 ${tapClass}`}
-                      onClick={() => setMobileNavOpen(false)}
+                      onClick={() => withTapLock(() => setMobileNavOpen(false))}
                     >
                       {item.label}
                     </a>
@@ -464,8 +502,8 @@ export default function Home() {
                   <Link
                     key={item.label}
                     href={item.href}
-                      className={`rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 min-h-12 transition hover:border-cyan-400/30 hover:text-cyan-300 ${tapClass}`}
-                      onClick={() => setMobileNavOpen(false)}
+                    className={`rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 min-h-12 transition hover:border-cyan-400/30 hover:text-cyan-300 ${tapClass}`}
+                    onClick={() => withTapLock(() => setMobileNavOpen(false))}
                     >
                     {item.label}
                   </Link>
@@ -506,12 +544,14 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`btn-pulse w-full rounded-xl bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-xl shadow-cyan-400/20 transition hover:bg-cyan-300 sm:w-auto ${tapClass}`}
+                onClick={() => withTapLock(() => {})}
               >
                 立即加入，開創量化事業
               </a>
               <a
                 href="/line-kb"
                 className={`btn-pulse w-full rounded-xl border border-slate-800 bg-slate-900 px-8 py-3 text-center text-base font-medium text-slate-300 transition hover:bg-slate-800 sm:w-auto ${tapClass}`}
+                onClick={() => withTapLock(() => {})}
               >
                 先看知識庫架構
               </a>

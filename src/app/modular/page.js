@@ -69,7 +69,7 @@ export default function ModularIndexPage() {
               這裡整理 AI-Quant Lab 的核心模組。每張卡片都對應一個獨立頁面，方便直接閱讀原始 Markdown 內容。
               <span className="ml-2 inline-flex items-center gap-2 rounded-full border border-cyan-200/40 bg-[linear-gradient(135deg,rgba(34,211,238,0.22),rgba(14,165,233,0.12))] px-4 py-1.5 text-[0.78rem] font-bold tracking-wide text-cyan-50 shadow-[0_0_28px_rgba(34,211,238,0.38)] backdrop-blur-md">
                 <span aria-hidden="true" className="h-2 w-2 rounded-full bg-cyan-200 shadow-[0_0_12px_rgba(165,243,252,0.95)]" />
-                .md 檔案內容，不定期更新
+                .md 檔案版本，不定期更新
               </span>
             </p>
           </div>

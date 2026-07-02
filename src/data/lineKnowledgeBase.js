@@ -353,7 +353,7 @@ export const lineKnowledgeBase = {
           id: 'p09',
           question: '這些內容會更新嗎？',
           answer:
-            '會，知識庫本身就是活的，會隨著常見問題、模組升級與版本迭代持續演進。',
+            '會，知識庫本身就是活的，會隨著常見問題、模組升級與版本更新持續演進。',
         },
         {
           id: 'p10',
@@ -607,7 +607,7 @@ export const lineKnowledgeBase = {
       {
         id: 'L6',
         name: '回流層',
-        description: '將常見問題、未解問題與新知識回寫到資料庫，形成持續迭代。',
+        description: '將常見問題、未解問題與新知識回寫到資料庫，形成持續優化。',
       },
     ],
   },
@@ -667,7 +667,7 @@ export const lineKnowledgeBase = {
       text: '追蹤自動回覆命中率與人工轉接率。',
     },
     {
-      title: '回流迭代',
+      title: '回流更新',
       text: '將未覆蓋問題補進 FAQ 家族與知識庫。',
     },
   ],

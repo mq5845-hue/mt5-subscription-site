@@ -98,7 +98,7 @@ const knowledgeEntries = [
     aliases: ['beta', '測試版', '正式版', '目前狀態', '還在測試嗎'],
     priority: 86,
     newbie:
-      '目前仍有部分內容在持續優化中，屬於迭代更新的階段。',
+      '目前仍有部分內容在持續優化中，屬於更新中的階段。',
     technical:
       '這代表我們會持續調整 FAQ 命中、回覆結構與頁面內容，讓系統更穩定。',
     vision:
