@@ -145,6 +145,10 @@ export default function LineKbPage() {
                   <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">
                     這裡是 LINE 知識庫的總入口。先看懂結構，再打開模板，最後進規格書。
                     三個獨立頁面會把同一套內容拆成不同閱讀角度，方便你快速找到要補強的那一段。
+                    <span className="ml-2 inline-flex items-center gap-2 rounded-full border border-cyan-200/40 bg-[linear-gradient(135deg,rgba(34,211,238,0.22),rgba(14,165,233,0.12))] px-4 py-1.5 text-[0.78rem] font-bold tracking-wide text-cyan-50 shadow-[0_0_28px_rgba(34,211,238,0.38)] backdrop-blur-md">
+                      <span aria-hidden="true" className="h-2 w-2 rounded-full bg-cyan-200 shadow-[0_0_12px_rgba(165,243,252,0.95)]" />
+                      AI-Quant Lab知識庫內容，不定期更新
+                    </span>
                   </p>
                 </div>
               </div>

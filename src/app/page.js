@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const glowText = 'drop-shadow-[0_0_10px_rgba(34,211,238,0.22)]';
+const tapClass = 'touch-manipulation active:scale-[0.99] transition-transform duration-150';
 
 // Hero / ambient motion
 const particles = [
@@ -331,16 +332,16 @@ export default function Home() {
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <div className="tech-grid absolute inset-0 opacity-30" />
           <div className="content-fade absolute inset-0" />
-          <div className="animate-float-slow absolute -top-24 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl" />
-          <div className="animate-float-slower absolute right-[-6rem] top-32 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
-          <div className="animate-pulse-glow absolute left-[-5rem] bottom-24 h-80 w-80 rounded-full bg-teal-400/10 blur-3xl" />
+          <div className="animate-float-slow absolute -top-24 left-1/2 hidden h-96 w-96 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl sm:block" />
+          <div className="animate-float-slower absolute right-[-6rem] top-32 hidden h-72 w-72 rounded-full bg-blue-500/10 blur-3xl sm:block" />
+          <div className="animate-pulse-glow absolute left-[-5rem] bottom-24 hidden h-80 w-80 rounded-full bg-teal-400/10 blur-3xl sm:block" />
           <div className="animate-scanline absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent opacity-70" />
           <div className="animate-scanline absolute inset-x-0 top-1/3 h-px bg-gradient-to-r from-transparent via-cyan-200/30 to-transparent opacity-35 [animation-delay:-3s]" />
           <div className="animate-scanline absolute inset-x-0 top-2/3 h-px bg-gradient-to-r from-transparent via-blue-300/25 to-transparent opacity-30 [animation-delay:-6s]" />
           {particles.map((particle) => (
             <span
               key={`${particle.className}-${particle.delay}`}
-              className={`particle-dot absolute h-1.5 w-1.5 rounded-full bg-cyan-300/90 shadow-[0_0_18px_rgba(34,211,238,0.65)] ${particle.className}`}
+              className={`particle-dot absolute hidden h-1.5 w-1.5 rounded-full bg-cyan-300/90 shadow-[0_0_18px_rgba(34,211,238,0.65)] sm:block ${particle.className}`}
               style={{ animationDelay: particle.delay, animationDuration: particle.duration }}
             />
           ))}
@@ -348,7 +349,7 @@ export default function Home() {
 
         <div className="relative z-10">
         <header
-          className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 supports-[backdrop-filter]:transition-all ${
+          className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 supports-[backdrop-filter]:transition-all max-sm:bg-slate-950/92 max-sm:backdrop-blur-md ${
             scrolled
               ? 'border-slate-700/10 bg-slate-950/05 backdrop-blur-[22px] supports-[backdrop-filter]:bg-slate-950/[0.03]'
               : 'border-slate-800/14 bg-slate-950/10 backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/06'
@@ -398,14 +399,14 @@ export default function Home() {
                 href="https://lin.ee/stqhWhj"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-pulse rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500"
+                className={`btn-pulse rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500 ${tapClass}`}
               >
                 立即加入
               </a>
 
               <button
                 type="button"
-                className="btn-pulse inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 text-slate-100 transition hover:border-cyan-400/40 hover:text-cyan-300 md:hidden"
+                className={`btn-pulse inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 text-slate-100 transition hover:border-cyan-400/40 hover:text-cyan-300 md:hidden ${tapClass}`}
                 aria-label={mobileNavOpen ? '關閉導覽選單' : '開啟導覽選單'}
                 aria-expanded={mobileNavOpen}
                 aria-controls="mobile-nav-menu"
@@ -438,7 +439,7 @@ export default function Home() {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 transition hover:border-cyan-400/30 hover:text-cyan-300"
+                      className={`rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 min-h-12 transition hover:border-cyan-400/30 hover:text-cyan-300 ${tapClass}`}
                       onClick={() => setMobileNavOpen(false)}
                     >
                       {item.label}
@@ -451,7 +452,7 @@ export default function Home() {
                     <a
                       key={item.label}
                       href={item.href}
-                      className="rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 transition hover:border-cyan-400/30 hover:text-cyan-300"
+                      className={`rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 min-h-12 transition hover:border-cyan-400/30 hover:text-cyan-300 ${tapClass}`}
                       onClick={() => setMobileNavOpen(false)}
                     >
                       {item.label}
@@ -463,9 +464,9 @@ export default function Home() {
                   <Link
                     key={item.label}
                     href={item.href}
-                    className="rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 transition hover:border-cyan-400/30 hover:text-cyan-300"
-                    onClick={() => setMobileNavOpen(false)}
-                  >
+                      className={`rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 min-h-12 transition hover:border-cyan-400/30 hover:text-cyan-300 ${tapClass}`}
+                      onClick={() => setMobileNavOpen(false)}
+                    >
                     {item.label}
                   </Link>
                 );
@@ -477,18 +478,18 @@ export default function Home() {
       <main
         className="relative z-10 mx-auto max-w-7xl px-4 pb-10 pt-28 sm:px-6 lg:px-8 lg:pt-32"
       >
-        <section className="hero-aurora animate-reveal-up relative z-10 mx-auto flex min-h-[78vh] max-w-5xl flex-col items-center justify-center gap-7 py-14 text-center sm:min-h-[74vh] sm:py-16 lg:gap-8">
-          <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-one" />
-          <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-two" />
-          <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-three" />
+        <section className="hero-aurora animate-reveal-up relative z-10 mx-auto flex min-h-[74vh] max-w-5xl flex-col items-center justify-center gap-6 py-12 text-center sm:min-h-[74vh] sm:gap-7 sm:py-16 lg:gap-8">
+          <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-one hidden sm:block" />
+          <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-two hidden sm:block" />
+          <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-three hidden sm:block" />
           <div className="relative z-10 space-y-7">
-            <div aria-hidden="true" className="hero-spotlight hero-spotlight-one" />
-            <div aria-hidden="true" className="hero-spotlight hero-spotlight-two" />
-            <div aria-hidden="true" className="hero-spotlight hero-spotlight-three" />
+            <div aria-hidden="true" className="hero-spotlight hero-spotlight-one hidden sm:block" />
+            <div aria-hidden="true" className="hero-spotlight hero-spotlight-two hidden sm:block" />
+            <div aria-hidden="true" className="hero-spotlight hero-spotlight-three hidden sm:block" />
             <div className="hero-badge hero-copy mb-7 inline-flex items-center gap-2 rounded-full border border-cyan-300/45 bg-cyan-500/12 px-4 py-1.5 text-sm font-semibold tracking-[0.24em] text-white shadow-[0_0_18px_rgba(34,211,238,0.24),0_0_38px_rgba(34,211,238,0.1)] backdrop-blur-md animate-pulse sm:text-base">
               法人級商用發佈
             </div>
-            <h1 className="mx-auto max-w-6xl text-balance text-5xl font-black leading-[0.92] tracking-tight text-white sm:text-6xl lg:text-[5rem]">
+            <h1 className="mx-auto max-w-6xl text-balance text-4xl font-black leading-[0.96] tracking-tight text-white sm:text-6xl lg:text-[5rem]">
               <span className="hero-bright block text-white">
                 AI 革命量化交易：
               </span>
@@ -504,13 +505,13 @@ export default function Home() {
                 href="https://lin.ee/stqhWhj"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-pulse w-full rounded-xl bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-xl shadow-cyan-400/20 transition hover:bg-cyan-300 sm:w-auto"
+                className={`btn-pulse w-full rounded-xl bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-xl shadow-cyan-400/20 transition hover:bg-cyan-300 sm:w-auto ${tapClass}`}
               >
                 立即加入，開創量化事業
               </a>
               <a
                 href="/line-kb"
-                className="btn-pulse w-full rounded-xl border border-slate-800 bg-slate-900 px-8 py-3 text-center text-base font-medium text-slate-300 transition hover:bg-slate-800 sm:w-auto"
+                className={`btn-pulse w-full rounded-xl border border-slate-800 bg-slate-900 px-8 py-3 text-center text-base font-medium text-slate-300 transition hover:bg-slate-800 sm:w-auto ${tapClass}`}
               >
                 先看知識庫架構
               </a>
@@ -739,7 +740,7 @@ export default function Home() {
                     {plan.highlights.map((highlight) => (
                       <span
                         key={highlight}
-                        className="inline-flex items-center rounded-full border border-cyan-400/18 bg-cyan-500/10 px-3 py-1 text-[11px] font-semibold tracking-[0.16em] text-cyan-100 shadow-[0_0_0_1px_rgba(34,211,238,0.08)]"
+                        className="inline-flex items-center gap-2 rounded-full border border-cyan-200/40 bg-[linear-gradient(135deg,rgba(34,211,238,0.22),rgba(14,165,233,0.12))] px-4 py-1.5 text-[11px] font-bold tracking-[0.16em] text-cyan-50 shadow-[0_0_28px_rgba(34,211,238,0.38)] backdrop-blur-md"
                       >
                         {highlight}
                       </span>
