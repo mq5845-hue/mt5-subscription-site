@@ -113,6 +113,30 @@ const signalBlocks = [
   },
 ];
 
+const lineConversationPreview = {
+  badge: 'LINE 對話框示意區',
+  title: '先用點選式問題開場，再自然接到官網與預約名單',
+  description:
+    '這一段不是要人手打長文，而是直接給訪客可點選的下一步。先看懂、先點選、先接住，再慢慢往官網與預約名單導流。',
+  messages: [
+    {
+      type: 'incoming',
+      title: '你們是工程師、程式設計師嗎？',
+      text: '我想先了解你們是做什麼的。',
+    },
+    {
+      type: 'outgoing',
+      title: 'AI-Quant Lab 是什麼？',
+      text: '我們聚焦 MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。若你想先看全貌，可以直接點選下一步。',
+    },
+  ],
+  quickReplies: [
+    { label: '先看功能說明', href: '/line-kb' },
+    { label: '先看品牌故事', href: '/line-kb/expansion' },
+    { label: '加入預約名單', href: 'https://lin.ee/stqhWhj', external: true },
+  ],
+};
+
 const mobileNavItems = [
   { href: '#features', label: '源代碼庫' },
   { href: '/modular', label: '模組化積木' },
@@ -713,6 +737,119 @@ export default function Home() {
           </div>
         </section>
 
+        {/* LINE conversation preview */}
+        <section className="mt-16">
+          <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+            <div className="animate-reveal-up space-y-4 text-center lg:text-left">
+              <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-300 lg:mx-0">
+                {lineConversationPreview.badge}
+              </div>
+              <h2 className={`text-3xl font-black tracking-tight sm:text-4xl ${glowText}`}>
+                {lineConversationPreview.title}
+              </h2>
+              <p className={`mx-auto max-w-2xl text-sm leading-relaxed text-slate-400 sm:text-base lg:mx-0 ${glowText}`}>
+                {lineConversationPreview.description}
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+                {lineConversationPreview.quickReplies.map((item) =>
+                  item.external ? (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`rounded-full border border-emerald-400/20 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-200 transition hover:border-emerald-300/40 hover:bg-emerald-400/15 hover:text-white ${tapClass}`}
+                      onClick={() => withTapLock(() => {})}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      className={`rounded-full border border-emerald-400/20 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-200 transition hover:border-emerald-300/40 hover:bg-emerald-400/15 hover:text-white ${tapClass}`}
+                      onClick={() => withTapLock(() => {})}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                )}
+              </div>
+            </div>
+
+            <div className="animate-reveal-up relative mx-auto w-full max-w-[460px] rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(9,14,28,0.95),rgba(15,23,42,0.9))] p-4 shadow-[0_18px_70px_rgba(8,145,178,0.18)] ring-1 ring-cyan-300/10">
+              <div className="overflow-hidden rounded-[1.7rem] border border-slate-800/80 bg-[#f2f6fa] text-slate-900 shadow-[0_0_0_1px_rgba(255,255,255,0.08)]">
+                <div className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-lime-400 text-xs font-black text-white shadow-[0_0_18px_rgba(16,185,129,0.35)]">
+                      AL
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-slate-900">AI-Quant Lab</p>
+                      <p className="text-xs text-emerald-600">由負責人員回覆訊息</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px] text-slate-500">
+                    <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                    線上
+                  </div>
+                </div>
+
+                <div className="space-y-4 px-4 py-5">
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1 h-9 w-9 rounded-full bg-emerald-100 ring-1 ring-emerald-200" />
+                    <div className="max-w-[82%] rounded-3xl rounded-tl-md bg-white px-4 py-3 shadow-sm">
+                      <p className="text-[11px] font-semibold tracking-[0.16em] text-emerald-600">訪客提問</p>
+                      <p className="mt-1 text-sm leading-6 text-slate-800">
+                        你們是工程師、程式設計師嗎？
+                      </p>
+                    </div>
+                  </div>
+
+                  {lineConversationPreview.messages.slice(1).map((message) => (
+                    <div key={message.title} className="flex items-start justify-end gap-3">
+                      <div className="max-w-[84%] rounded-3xl rounded-tr-md bg-gradient-to-br from-emerald-300 to-cyan-300 px-4 py-3 shadow-sm">
+                        <p className="text-[11px] font-semibold tracking-[0.16em] text-emerald-900">{message.title}</p>
+                        <p className="mt-1 text-sm leading-6 text-slate-950">{message.text}</p>
+                      </div>
+                      <div className="mt-1 h-9 w-9 rounded-full bg-slate-900 ring-1 ring-cyan-300/30" />
+                    </div>
+                  ))}
+
+                  <div className="rounded-[1.35rem] border border-slate-200 bg-white px-3 py-3 shadow-sm">
+                    <p className="text-[11px] font-semibold tracking-[0.16em] text-slate-500">
+                      點選下一步，不用打長文
+                    </p>
+                    <div className="mt-3 grid gap-2">
+                      {lineConversationPreview.quickReplies.map((item) =>
+                        item.external ? (
+                          <a
+                            key={item.label}
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-2 text-left text-sm font-semibold text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100 ${tapClass}`}
+                          >
+                            {item.label}
+                          </a>
+                        ) : (
+                          <Link
+                            key={item.label}
+                            href={item.href}
+                            className={`rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-2 text-left text-sm font-semibold text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100 ${tapClass}`}
+                          >
+                            {item.label}
+                          </Link>
+                        )
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Source code library */}
         <section id="features" className="mt-12 space-y-12">
           <div className="animate-reveal-up mx-auto max-w-2xl text-center">
@@ -1036,10 +1173,10 @@ export default function Home() {
                 </span>
               </div>
               <p className="max-w-md text-sm leading-7 text-slate-400">
-                AI-Quant Lab 源代碼量化工廠實驗室，專注於 MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。
+                AI-Quant Lab 源代碼量化(工廠)實驗室，專注於 MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。
               </p>
               <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300">
-                探幽訪勝，走進 MT5 源代碼(原始碼Source Code) 量化世界
+                探幽訪勝_走進MT5源代碼(原始碼Source Code)量化世界
               </div>
             </div>
 

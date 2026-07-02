@@ -19,11 +19,11 @@ export const metadata = {
     template: "%s | AI-Quant Lab",
   },
   description:
-    "AI-Quant Lab 源代碼量化工廠實驗室｜MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。",
+    "AI-Quant Lab 源代碼量化(工廠)實驗室｜MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。",
   openGraph: {
     title: "AI-Quant Lab",
     description:
-      "AI-Quant Lab 源代碼量化工廠實驗室｜MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。",
+      "AI-Quant Lab 源代碼量化(工廠)實驗室｜MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。",
     url: "https://ai-quant-lab.vercel.app",
     siteName: "AI-Quant Lab",
     type: "website",
@@ -40,7 +40,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "AI-Quant Lab",
     description:
-      "AI-Quant Lab 源代碼量化工廠實驗室｜MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。",
+      "AI-Quant Lab 源代碼量化(工廠)實驗室｜MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。",
     images: ["/og-image.svg"],
   },
 };

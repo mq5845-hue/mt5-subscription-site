@@ -10,6 +10,7 @@ const quickLinks = [
   { href: '/line-kb/formal-tree', label: '正式圖解樹' },
   { href: '/line-kb/flex-template', label: 'Flex 模板' },
   { href: '/line-kb/spec', label: '工程師規格書' },
+  { href: '/line-kb/expansion', label: 'FAQ 擴充藍圖' },
 ];
 
 const specRows = [

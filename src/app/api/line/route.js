@@ -21,12 +21,22 @@ function verifyLineSignature(rawBody, signature, channelSecret) {
   return crypto.timingSafeEqual(expectedBuffer, signatureBuffer);
 }
 
-async function replyToLine(replyToken, text) {
+async function replyToLine(replyToken, reply) {
   const accessToken = process.env.LINE_CHANNEL_ACCESS_TOKEN;
 
   if (!accessToken) {
     throw new Error('Missing LINE_CHANNEL_ACCESS_TOKEN');
   }
+
+  const messages = Array.isArray(reply?.messages)
+    ? reply.messages
+    : [
+        {
+          type: 'text',
+          text: typeof reply === 'string' ? reply : reply?.text || '',
+          ...(reply?.quickReply ? { quickReply: reply.quickReply } : {}),
+        },
+      ];
 
   const response = await fetch('https://api.line.me/v2/bot/message/reply', {
     method: 'POST',
@@ -36,7 +46,7 @@ async function replyToLine(replyToken, text) {
     },
     body: JSON.stringify({
       replyToken,
-      messages: [{ type: 'text', text }],
+      messages,
     }),
   });
 
@@ -75,10 +85,10 @@ export async function POST(request) {
 
         const replyToken = event.replyToken;
         const userText = event.message.text;
-        const replyText = buildLineReply(userText);
+        const replyMessage = buildLineReply(userText);
 
         if (replyToken) {
-          await replyToLine(replyToken, replyText);
+          await replyToLine(replyToken, replyMessage);
         }
       }),
     );

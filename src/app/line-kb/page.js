@@ -26,6 +26,21 @@ const quickLinks = [
     label: '工程師規格書',
     note: '理解回覆邏輯、導流規則與後台維護標準。',
   },
+  {
+    href: '/line-kb/expansion',
+    label: 'FAQ 擴充藍圖',
+    note: '查看 1000+ FAQ 架構、三段式模板與導流閉環文案。',
+  },
+  {
+    href: '/line-kb/backend-export',
+    label: '後台匯出',
+    note: '取得可複製、可下載的 Markdown / JSON 題庫匯出檔。',
+  },
+  {
+    href: '/line-kb/reservation',
+    label: '預約表單',
+    note: '先卡位、先留名，正式 Google 表單上線後可直接接續。',
+  },
 ];
 
 const highlightCards = [
@@ -46,6 +61,18 @@ const highlightCards = [
     title: '看懂框架、拿到模板、最後理解規格',
     description:
       '閱讀順序建議從正式圖解樹開始，再看 Flex 模板，最後補工程師規格書。這樣最容易把內容轉成 LINE 後台可維護的實際操作。',
+  },
+  {
+    kicker: '擴充 / Expansion',
+    title: '再往前一步，補上 1000+ FAQ 與閉環導流',
+    description:
+      '如果你想看知識庫怎麼持續長大，可以直接進 FAQ 擴充藍圖。那裡會把主題樹、分層回覆與官網導流串成完整的成長路線。',
+  },
+  {
+    kicker: '匯出 / Export',
+    title: '把題庫直接帶去 LINE 後台',
+    description:
+      '如果你要真正落地，可以直接打開後台匯出頁，把 Markdown 或 JSON 複製貼上，省掉人工整理的時間。',
   },
 ];
 
@@ -149,6 +176,12 @@ export default function LineKbPage() {
                       <span aria-hidden="true" className="h-2 w-2 rounded-full bg-cyan-200 shadow-[0_0_12px_rgba(165,243,252,0.95)]" />
                       AI-Quant Lab知識庫版本，不定期更新
                     </span>
+                    <span className="mt-3 inline-flex rounded-2xl border border-amber-300/25 bg-amber-300/10 px-4 py-2 text-sm leading-7 text-amber-50 shadow-[0_0_28px_rgba(251,191,36,0.12)]">
+                      目前網站仍在測試與試錯、排錯、優化階段，歡迎先加入預約名單，等候正式開放。
+                    </span>
+                    <span className="mt-3 inline-flex rounded-2xl border border-cyan-300/25 bg-cyan-300/10 px-4 py-2 text-sm leading-7 text-cyan-50 shadow-[0_0_28px_rgba(34,211,238,0.12)]">
+                      後台匯出頁已可直接複製 Markdown / JSON 題庫，適合備份與貼入 LINE 自動回應。
+                    </span>
                   </p>
                 </div>
               </div>
@@ -159,7 +192,7 @@ export default function LineKbPage() {
             </div>
           </header>
 
-          <section className="mt-8 grid gap-4 md:grid-cols-3">
+          <section className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {highlightCards.map((card) => (
               <article
                 key={card.title}

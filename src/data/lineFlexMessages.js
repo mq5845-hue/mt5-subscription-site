@@ -93,8 +93,8 @@ const heroBubble = {
     layout: 'vertical',
     spacing: 'sm',
     contents: [
-      buttonNode('查看規格書', 'http://localhost:3000/line-kb/spec', 'primary'),
-      buttonNode('查看知識庫', 'http://localhost:3000/line-kb', 'secondary'),
+      buttonNode('查看規格書', 'https://ai-quant-lab.vercel.app/line-kb/spec', 'primary'),
+      buttonNode('查看知識庫', 'https://ai-quant-lab.vercel.app/line-kb', 'secondary'),
     ],
   },
 };
@@ -264,7 +264,7 @@ const handoffBubble = {
   footer: {
     type: 'box',
     layout: 'vertical',
-    contents: [buttonNode('轉人工流程', 'http://localhost:3000/line-kb/spec')],
+    contents: [buttonNode('轉人工流程', 'https://ai-quant-lab.vercel.app/line-kb/spec')],
   },
 };
 
