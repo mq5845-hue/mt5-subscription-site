@@ -66,7 +66,7 @@ export default function ModularIndexPage() {
               模組化積木
             </h1>
             <p className="max-w-3xl text-sm leading-7 text-slate-400 sm:text-base">
-              這裡整理 AI-Quant Lab 的核心模組。每張卡片都對應一個獨立頁面，方便直接閱讀原始 Markdown 內容。
+              這裡整理 AI-Quant Lab 的核心模組。每張卡片都對應一個獨立頁面，方便直接閱讀原始 Markdown 內容。(.md 檔案內容，不定期更新)
             </p>
           </div>
 
