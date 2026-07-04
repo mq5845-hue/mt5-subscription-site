@@ -134,13 +134,15 @@ const lineConversationPreview = {
     { label: '先看功能說明', href: '/line-kb' },
     { label: '先看品牌故事', href: '/line-kb/expansion' },
     { label: '加入預約名單', href: 'https://lin.ee/stqhWhj', external: true },
+    { label: '標準會員', href: '/membership' },
   ],
 };
 
 const mobileNavItems = [
-  { href: '#features', label: '源代碼庫' },
+  { href: '#features', label: 'AI重構引擎' },
   { href: '/modular', label: '模組化積木' },
   { href: '/line-kb', label: 'LINE 知識庫' },
+  { href: '/membership', label: '標準會員' },
   { href: '#pricing', label: '訂閱方案' },
 ];
 
@@ -261,7 +263,7 @@ const plans = [
     ],
     highlights: planHighlights,
     featured: false,
-    cta: '立即訂閱',
+    cta: '前往會員頁',
   },
   {
     name: '加盟會員',
@@ -296,7 +298,7 @@ const faqItems = [
   {
     question: 'Q3：標準會員與加盟會員的 EA 策略有什麼不同？',
     answer:
-      'A3：標準會員可下載並體驗精選的編譯版 EA 策略與詳細回測報告；加盟會員則能進階解鎖全站 MQL5 核心源代碼，您可以自由修改邏輯、優化參數，甚至發展成您自己的商業策略或成為個人品牌作商業用途。',
+      'A3：標準會員會先經過 Clerk 登入，再透過 Lemon Squeezy 完成訂閱；付款成功後，Supabase 會自動回寫會員狀態並開通權限。加盟會員則保留原本的進階導流流程，後續再補完整串接。',
   },
   {
     question: 'Q4：這些 EA 策略過去的回測表現如何？有包含風控機制嗎？',
@@ -319,7 +321,7 @@ const accordionFaqItems = [
   {
     question: 'Q：訂閱方案後，我該如何開始使用？',
     answer:
-      'A：點擊網頁上的 CTA 按鈕將自動引導您加入我們的 LINE 官方帳號。加入後，請提供您的訂閱序號，我們的技術對接小組將立即為您開通源碼庫並提供技術引導。',
+      'A：標準會員請先建立帳號並完成訂閱付款，系統會在 webhook 回寫後自動開通權限。若你目前只是看說明，可以直接從會員頁進入登入、註冊與付款流程。',
   },
 ];
 
@@ -440,14 +442,17 @@ export default function Home() {
 
             <div className="flex items-center gap-3 sm:gap-5">
               <nav className="hidden items-center gap-8 text-sm font-medium text-slate-400 md:flex">
-                <a href="#features" className="transition hover:text-cyan-400">
-                  源代碼庫
-                </a>
+                <Link href="/converter" className="transition hover:text-cyan-400">
+                  AI重構引擎
+                </Link>
                 <Link href="/modular" className="transition hover:text-cyan-400">
                   模組化積木
                 </Link>
                 <Link href="/line-kb" className="transition hover:text-cyan-400">
                   LINE 知識庫
+                </Link>
+                <Link href="/membership" className="transition hover:text-cyan-400">
+                  標準會員
                 </Link>
                 <a href="#pricing" className="transition hover:text-cyan-400">
                   訂閱方案
@@ -455,13 +460,11 @@ export default function Home() {
               </nav>
 
               <a
-                href="https://lin.ee/stqhWhj"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/membership"
                 className={`btn-pulse shrink-0 whitespace-nowrap rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-3.5 py-2 text-[12px] font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500 min-h-11 ${tapClass}`}
                 onClick={() => withTapLock(() => {})}
               >
-                立即加入
+                標準會員
               </a>
 
               <button
@@ -564,13 +567,11 @@ export default function Home() {
             </p>
             <div className="flex w-full flex-col items-center justify-center gap-3 pt-4 sm:flex-row">
               <a
-                href="https://lin.ee/stqhWhj"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/membership"
                 className={`btn-pulse w-full rounded-xl bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-xl shadow-cyan-400/20 transition hover:bg-cyan-300 sm:w-auto ${tapClass}`}
                 onClick={() => withTapLock(() => {})}
               >
-                立即加入，開創量化事業
+                前往標準會員
               </a>
               <a
                 href="/line-kb"
@@ -968,9 +969,9 @@ export default function Home() {
                 </div>
 
                 <a
-                  href="https://lin.ee/stqhWhj"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={plan.featured ? 'https://lin.ee/stqhWhj' : '/membership'}
+                  target={plan.featured ? '_blank' : undefined}
+                  rel={plan.featured ? 'noopener noreferrer' : undefined}
                   className={`btn-pulse relative z-10 mt-8 w-full rounded-xl px-4 py-3 text-center text-sm font-bold transition-all duration-300 ${
                     plan.featured
                       ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 shadow-lg shadow-cyan-500/20 hover:from-cyan-400 hover:to-blue-500'

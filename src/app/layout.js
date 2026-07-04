@@ -1,47 +1,49 @@
-﻿import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
-import "./globals.css";
+import { ClerkProvider } from '@clerk/nextjs';
+import { Geist, Geist_Mono } from 'next/font/google';
+import Script from 'next/script';
+import './globals.css';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ai-quant-lab.vercel.app';
+const siteDescription =
+  'AI-Quant Lab 專注於 MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。';
+
 export const metadata = {
-  metadataBase: new URL("https://ai-quant-lab.vercel.app"),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "AI-Quant Lab",
-    template: "%s | AI-Quant Lab",
+    default: 'AI-Quant Lab',
+    template: '%s | AI-Quant Lab',
   },
-  description:
-    "AI-Quant Lab 源代碼量化(工廠)實驗室｜MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。",
+  description: siteDescription,
   openGraph: {
-    title: "AI-Quant Lab",
-    description:
-      "AI-Quant Lab 源代碼量化(工廠)實驗室｜MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。",
-    url: "https://ai-quant-lab.vercel.app",
-    siteName: "AI-Quant Lab",
-    type: "website",
+    title: 'AI-Quant Lab',
+    description: siteDescription,
+    url: siteUrl,
+    siteName: 'AI-Quant Lab',
+    type: 'website',
     images: [
       {
-        url: "/og-image.svg",
+        url: '/og-image.svg',
         width: 1200,
         height: 630,
-        alt: "AI-Quant Lab",
+        alt: 'AI-Quant Lab',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "AI-Quant Lab",
-    description:
-      "AI-Quant Lab 源代碼量化(工廠)實驗室｜MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。",
-    images: ["/og-image.svg"],
+    card: 'summary_large_image',
+    title: 'AI-Quant Lab',
+    description: siteDescription,
+    images: ['/og-image.svg'],
   },
 };
 
@@ -52,14 +54,16 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Script
-          id="detect-android"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{if(/Android/i.test(navigator.userAgent)){document.documentElement.classList.add('is-android');}}catch(e){}})();`,
-          }}
-        />
-        {children}
+        <ClerkProvider>
+          <Script
+            id="detect-android"
+            strategy="beforeInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `(function(){try{if(/Android/i.test(navigator.userAgent)){document.documentElement.classList.add('is-android');}}catch(e){}})();`,
+            }}
+          />
+          {children}
+        </ClerkProvider>
       </body>
     </html>
   );
