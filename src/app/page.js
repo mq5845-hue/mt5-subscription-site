@@ -1,8 +1,10 @@
-﻿'use client';
+'use client';
 // env fix v1
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import { getLocaleFromPath, localizePath } from '@/lib/locale';
 
 const glowText = 'drop-shadow-[0_0_10px_rgba(34,211,238,0.22)]';
 const tapClass =
@@ -138,13 +140,277 @@ const lineConversationPreview = {
   ],
 };
 
-const mobileNavItems = [
-  { href: '#features', label: 'AI重構引擎' },
-  { href: '/modular', label: '模組化積木' },
-  { href: '/line-kb', label: 'LINE 知識庫' },
-  { href: '/membership', label: '標準會員' },
-  { href: '#pricing', label: '訂閱方案' },
+const navItems = [
+  {
+    label: 'AI\u91cd\u69cb\u5f15\u64ce',
+    matches: ['/membership', '/converter'],
+    children: [
+      { href: '/membership', label: '\u6a19\u6e96\u6703\u54e1\u7248' },
+      { label: '\u52a0\u76df\u6703\u54e1\u7248', disabled: true },
+      { href: '/converter', label: '\u5c0a\u69ae\u5546\u7528\u7248' },
+      { label: 'Docker MCP\u4f3a\u670d\u5668\u7248', disabled: true },
+    ],
+  },
+  { href: '/modular', label: '\u6a21\u7d44\u5316\u7a4d\u6728', matches: ['/modular'] },
+  { href: '/line-kb', label: 'LINE \u77e5\u8b58\u5eab', matches: ['/line-kb'] },
+  {
+    label: '\u8a02\u95b1\u65b9\u6848',
+    matches: ['/membership'],
+    children: [
+      { href: '/membership', label: '\u6a19\u6e96\u6703\u54e1' },
+      { label: '\u52a0\u76df\u6703\u54e1', disabled: true },
+      { label: '\u4f01\u696dVIP\u6703\u54e1', disabled: true },
+    ],
+  },
 ];
+
+const languageTabs = [
+  { href: '/en', label: 'EN', match: '/en' },
+  { href: '/zh-Hant', label: '繁中', match: '/zh-Hant' },
+  { href: '/zh-Hans', label: '简中', match: '/zh-Hans' },
+];
+
+
+const navTranslations = {
+  'zh-Hant': {
+    groups: ['AI重構引擎', '模組化積木', 'LINE 知識庫', '訂閱方案'],
+    children: [['標準會員版', '加盟會員版', '尊榮商用版', 'Docker MCP伺服器版'], null, null, ['標準會員', '加盟會員', '企業VIP會員']],
+    login: '登錄',
+  },
+  'zh-Hans': {
+    groups: ['AI重构引擎', '模块化积木', 'LINE 知识库', '订阅方案'],
+    children: [['标准会员版', '加盟会员版', '尊荣商用版', 'Docker MCP服务器版'], null, null, ['标准会员', '加盟会员', '企业VIP会员']],
+    login: '登录',
+  },
+  en: {
+    groups: ['AI Refactoring', 'Modular Blocks', 'LINE Knowledge Base', 'Subscription Plans'],
+    children: [['Standard Membership', 'Affiliate Membership', 'Premium Commercial', 'Docker MCP Server'], null, null, ['Standard Membership', 'Affiliate Membership', 'Enterprise VIP']],
+    login: 'LOGIN',
+  },
+};
+
+function getLocalizedNavItems(locale) {
+  const translation = navTranslations[locale] || navTranslations['zh-Hant'];
+  return navItems.map((item, index) => ({
+    ...item,
+    label: translation.groups[index],
+    children: item.children
+      ? item.children.map((child, childIndex) => ({
+          ...child,
+          label: translation.children[index][childIndex],
+        }))
+      : undefined,
+  }));
+}
+
+function getLoginLabel(locale) {
+  return (navTranslations[locale] || navTranslations['zh-Hant']).login;
+}
+const homeCopy = {
+  'zh-Hant': {
+    topLogin: '\u767b\u9304',
+    heroBadge: '\u6cd5\u4eba\u7d1a\u5546\u7528\u767c\u4f48',
+    heroTitleTop: 'AI \u9769\u547d\u91cf\u5316\u4ea4\u6613\uff1a',
+    heroTitleBottom: '\u89e3\u9396\u6cd5\u4eba\u7d1a MT5 EA \u5546\u696d\u6e90\u4ee3\u78bc',
+    heroBody: '\u96f6\u57fa\u790e\u4e5f\u80fd\u7528 AI LLM \u63d0\u793a\u8a5e\u6a21\u677f\u9ad8\u6548\u91cd\u69cb\u6838\u5fc3\u7b56\u7565\u3002\u7121\u7248\u6b0a\u9650\u5236\u3001\u7121\u9808\u8a31\u53ef\uff0c\u6253\u9020\u5c08\u5c6c\u60a8\u7684\u500b\u4eba\u4ea4\u6613\u54c1\u724c\u8207\u6578\u4f4d\u8cc7\u7522\uff0c\u5229\u6f64 100% \u5168\u6b78\u81ea\u5df1\u3002',
+    membershipCta: '\u524d\u5f80\u6a19\u6e96\u6703\u54e1',
+    knowledgeCta: '\u5148\u770b\u77e5\u8b58\u5eab\u67b6\u69cb',
+    reasonsBadge: '\u5148\u770b\u898b\u7bc0\u594f\uff0c\u518d\u770b\u898b\u50f9\u503c',
+    reasonsTitle: '\u4e09\u500b\u8b93\u4eba\u9858\u610f\u5f80\u4e0b\u770b\u7684\u7406\u7531',
+    reasonsBody: '\u5982\u679c\u4f60\u60f3\u77e5\u9053\u9019\u500b\u9996\u9801\u5230\u5e95\u5728\u8ce3\u4ec0\u9ebc\u3001\u5f37\u5728\u54ea\u88e1\u3001\u9069\u4e0d\u9069\u5408\u4f60\uff0c\u5148\u770b\u5b8c\u9019\u4e09\u500b\u5340\u584a\uff0c\u518d\u5f80\u4e0b\u770b\u65b9\u6848\u6703\u66f4\u6709\u611f\u3002'
+  },
+  'zh-Hans': {
+    topLogin: '\u767b\u5f55',
+    heroBadge: '\u6cd5\u4eba\u7ea7\u5546\u7528\u53d1\u5e03',
+    heroTitleTop: 'AI \u9769\u547d\u91cf\u5316\u4ea4\u6613\uff1a',
+    heroTitleBottom: '\u89e3\u9501\u6cd5\u4eba\u7ea7 MT5 EA \u5546\u4e1a\u6e90\u4ee3\u7801',
+    heroBody: '\u96f6\u57fa\u7840\u4e5f\u80fd\u7528 AI LLM \u63d0\u793a\u8bcd\u6a21\u677f\u9ad8\u6548\u91cd\u6784\u6838\u5fc3\u7b56\u7565\u3002\u65e0\u7248\u6743\u9650\u5236\u3001\u65e0\u987b\u8bb8\u53ef\uff0c\u6253\u9020\u4e13\u5c5e\u4e8e\u60a8\u7684\u4e2a\u4eba\u4ea4\u6613\u54c1\u724c\u4e0e\u6570\u5b57\u8d44\u4ea7\uff0c\u5229\u6da6 100% \u5168\u5f52\u81ea\u5df1\u3002',
+    membershipCta: '\u524d\u5f80\u6807\u51c6\u4f1a\u5458',
+    knowledgeCta: '\u5148\u770b\u77e5\u8bc6\u5e93\u67b6\u6784',
+    reasonsBadge: '\u5148\u770b\u89c1\u8282\u594f\uff0c\u518d\u770b\u89c1\u4ef7\u503c',
+    reasonsTitle: '\u4e09\u4e2a\u8ba9\u4eba\u613f\u610f\u5f80\u4e0b\u770b\u7684\u7406\u7531',
+    reasonsBody: '\u5982\u679c\u4f60\u60f3\u77e5\u9053\u8fd9\u4e2a\u9996\u9875\u5230\u5e95\u5728\u5356\u4ec0\u4e48\u3001\u5f3a\u5728\u54ea\u91cc\u3001\u9002\u4e0d\u9002\u5408\u4f60\uff0c\u5148\u770b\u5b8c\u8fd9\u4e09\u4e2a\u533a\u5757\uff0c\u518d\u5f80\u4e0b\u770b\u65b9\u6848\u4f1a\u66f4\u6709\u611f\u3002'
+  },
+  en: {
+    topLogin: 'LOGIN',
+    heroBadge: 'COMMERCIAL RELEASE',
+    heroTitleTop: 'AI Quant Trading Revolution:',
+    heroTitleBottom: 'Unlock Institutional MT5 EA Source Code',
+    heroBody: 'Even from zero, you can use AI LLM prompt templates to rebuild core strategies efficiently. No copyright lock-in, no permission required. Build your own trading brand and digital assets, and keep 100% of the upside.',
+    membershipCta: 'Go to Standard Membership',
+    knowledgeCta: 'View Knowledge Base',
+    reasonsBadge: 'See the rhythm, then the value',
+    reasonsTitle: 'Three reasons to keep scrolling',
+    reasonsBody: 'If you want to know what this homepage is offering, where it stands out, and whether it fits you, start with these three sections before comparing the plans below.'
+  },
+};
+
+function isNavItemActive(item, pathname = '') {
+  return item.matches?.some((prefix) => pathname.startsWith(prefix)) || false;
+}
+
+
+function MenuDots() {
+  return (
+    <span aria-hidden="true" className="inline-flex flex-col items-center gap-px">
+      <span className="h-0.5 w-0.5 rounded-full bg-cyan-200/90 shadow-[0_0_7px_rgba(165,243,252,0.85)]" />
+      <span className="h-0.5 w-0.5 rounded-full bg-cyan-200/75 shadow-[0_0_7px_rgba(165,243,252,0.7)]" />
+      <span className="h-0.5 w-0.5 rounded-full bg-cyan-200/60 shadow-[0_0_7px_rgba(165,243,252,0.55)]" />
+    </span>
+  );
+}
+function LanguageMenu({ pathname, mobile = false }) {
+  const [open, setOpen] = useState(false);
+  const activeTab = languageTabs.find((tab) => pathname.startsWith(tab.match)) || languageTabs[0];
+
+  return (
+    <div
+      className={'group relative ' + (mobile ? 'w-full' : '')}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        onClick={() => setOpen((value) => (mobile ? !value : true))}
+        className={'flex cursor-pointer list-none items-center justify-center gap-1.5 rounded-full border border-cyan-300/20 bg-slate-950/55 px-2.5 py-2 text-xs font-bold tracking-[0.1em] text-slate-200 shadow-[0_0_22px_rgba(34,211,238,0.14)] backdrop-blur-xl transition hover:border-cyan-300/45 hover:text-cyan-100 ' + (mobile ? 'w-full min-h-11' : 'min-w-[5.6rem]')}
+      >
+        <span className="h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(34,211,238,0.7)]" />
+        <span>{activeTab.label}</span>
+        <MenuDots />
+      </button>
+      <div
+        className={'absolute right-0 top-full z-[60] pt-2 transition-all duration-150 ' + (mobile ? 'left-0' : '') + ' ' + (open ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-1 opacity-0') + ' md:group-hover:pointer-events-auto md:group-hover:translate-y-0 md:group-hover:opacity-100'}
+      >
+        <div className={'overflow-hidden rounded-2xl border border-cyan-300/20 bg-slate-950/95 p-1.5 shadow-[0_0_28px_rgba(34,211,238,0.22)] backdrop-blur-xl ' + (mobile ? 'w-full' : 'w-20')}>
+          {languageTabs.map((tab) => {
+            const isActive = tab.label === activeTab.label;
+            return (
+              <Link
+                key={tab.label}
+                href={localizePath(pathname || '/', tab.match.slice(1))}
+                onClick={() => setOpen(false)}
+                className={'flex items-center justify-between rounded-xl px-2 py-2.5 text-xs font-bold tracking-[0.08em] transition ' + (isActive ? 'bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 shadow-[0_0_16px_rgba(34,211,238,0.35)]' : 'text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-100')}
+              >
+                <span className="flex items-center gap-1.5"><span className={'h-1.5 w-1.5 rounded-full ' + (isActive ? 'bg-white' : 'bg-cyan-300/70')} />{tab.label}</span>
+                {isActive ? <span aria-hidden="true" className="text-[10px]">✓</span> : null}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+function HomeDesktopNavItem({ item, pathname, locale }) {
+  const isActive = isNavItemActive(item, pathname);
+  const baseClasses = isActive
+    ? 'bg-cyan-500/12 text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.18)]'
+    : 'text-slate-400 hover:text-cyan-400';
+  const dotClasses = isActive
+    ? 'bg-cyan-200 shadow-[0_0_12px_rgba(165,243,252,0.95)]'
+    : 'bg-cyan-400/65 group-hover:bg-cyan-200 group-hover:shadow-[0_0_10px_rgba(34,211,238,0.65)]';
+
+  if (!item.children) {
+    return (
+      <Link href={localizePath(item.href, locale)} className={`group relative rounded-full px-4 py-2 transition-all duration-300 ${baseClasses}`}>
+        <span className="relative z-10 flex items-center gap-2">
+          <span className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${dotClasses}`} />
+          <span className={isActive ? 'drop-shadow-[0_0_12px_rgba(34,211,238,0.36)]' : ''}>{item.label}</span>
+        </span>
+      </Link>
+    );
+  }
+
+  return (
+    <div className="group relative">
+      <button
+        type="button"
+        className={`group relative flex items-center gap-1.5 rounded-full px-2.5 py-2 transition-all duration-300 ${baseClasses}`}
+      >
+        <span className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${dotClasses}`} />
+        <span className={isActive ? 'drop-shadow-[0_0_12px_rgba(34,211,238,0.36)]' : ''}>{item.label}</span>
+        <MenuDots />
+      </button>
+      <div className={'pointer-events-none invisible absolute left-1/2 top-full z-50 -translate-x-1/2 translate-y-1 pt-3 opacity-0 transition-[opacity,transform,visibility] duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 ' + (item.label.includes('訂閱方案') || item.label.includes('订阅方案') || item.label === 'Subscription Plans' ? 'w-28' : (item.label.includes('AI重構引擎') || item.label.includes('AI重构引擎') || item.label === 'AI Refactoring' ? 'w-32' : 'w-56'))}>
+        <div className="overflow-hidden rounded-2xl border border-cyan-300/18 bg-slate-950/92 p-2 shadow-[0_0_28px_rgba(34,211,238,0.16)] backdrop-blur-xl">
+          {item.children.map((child) =>
+            child.disabled ? (
+              <span key={child.label} className="flex items-center rounded-xl px-4 py-3 text-sm font-medium text-slate-500">
+                {child.label}
+              </span>
+            ) : (
+              <Link
+                key={child.label}
+                href={localizePath(child.href, locale)}
+                className="flex items-center rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-cyan-500/10 hover:text-cyan-200"
+              >
+                {child.label}
+              </Link>
+            ),
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function HomeMobileNavItem({ item, pathname, locale, tapClass, onNavigate }) {
+  const isActive = isNavItemActive(item, pathname);
+
+  if (!item.children) {
+    return (
+      <Link
+        href={localizePath(item.href, locale)}
+        className={`rounded-xl border px-4 py-3 min-h-12 transition ${tapClass} ${
+          isActive
+            ? 'border-cyan-400/40 bg-cyan-500/10 text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.12)]'
+            : 'border-slate-800 bg-slate-900/70 hover:border-cyan-400/30 hover:text-cyan-300'
+        }`}
+        onClick={onNavigate}
+      >
+        {item.label}
+      </Link>
+    );
+  }
+
+  return (
+    <div
+      className={`rounded-2xl border px-4 py-3 transition ${
+        isActive
+          ? 'border-cyan-400/35 bg-cyan-500/10 shadow-[0_0_18px_rgba(34,211,238,0.12)]'
+          : 'border-slate-800 bg-slate-900/70'
+      }`}
+    >
+      <div className="mb-3 flex items-center justify-between text-sm font-semibold text-slate-200">
+        <span>{item.label}</span>
+        <MenuDots />
+      </div>
+      <div className="grid gap-2 pl-2">
+        {item.children.map((child) =>
+          child.disabled ? (
+            <span
+              key={child.label}
+              className="rounded-xl border border-slate-800/60 bg-slate-950/65 px-3 py-2.5 text-sm text-slate-500"
+            >
+              {child.label}
+            </span>
+          ) : (
+            <Link
+              key={child.label}
+              href={localizePath(child.href, locale)}
+              className={`rounded-xl border border-slate-800 bg-slate-950/75 px-3 py-2.5 text-sm text-slate-300 transition hover:border-cyan-400/30 hover:text-cyan-200 ${tapClass}`}
+              onClick={onNavigate}
+            >
+              {child.label}
+            </Link>
+          ),
+        )}
+      </div>
+    </div>
+  );
+}
 
 function FeatureIcon({ type }) {
   if (type === 'chart') {
@@ -325,11 +591,280 @@ const accordionFaqItems = [
   },
 ];
 
-export default function Home() {
+const englishScrollCards = [
+  {
+    kicker: '01 / Understand the system',
+    title: 'Turn complex trading into a readable roadmap',
+    description: 'We do not fill the page with noise. We organize strategy, validation, and upgrades into a path you can follow, so every layer has a clear purpose.',
+  },
+  {
+    kicker: '02 / See the difference',
+    title: 'A faster route to source code and practical resources',
+    description: 'Backtests, strategy logic, source code, and community support connect in one flow, turning learning into progress you can keep building on.',
+  },
+  {
+    kicker: '03 / Find your next move',
+    title: 'When you are ready to begin, clear guidance matters',
+    description: 'Keep scrolling to find the plan and next action that fit you best. The clearer the choice, the easier it is to move forward.',
+  },
+];
+
+const englishNarrativeBlocks = [
+  {
+    tag: 'Explore',
+    title: 'Let the first impression earn a second look',
+    note: 'We place the most useful context up front. The goal is not more words, but a clear reason to keep exploring.',
+  },
+  {
+    tag: 'Verify',
+    title: 'See the method and the evidence behind it',
+    note: 'Backtests, strategy design, source code, and community support form the structure that makes every claim easier to evaluate.',
+  },
+  {
+    tag: 'Move',
+    title: 'Turn interest into a clear next step',
+    note: 'When value, boundaries, and actions are clear, a plan becomes more than a price. It becomes an understandable entry point.',
+  },
+];
+
+const englishRouteSteps = [
+  {
+    step: 'A1',
+    title: 'Capture attention',
+    text: 'Start with a clear promise that gives visitors a reason to pause and take a closer look.',
+  },
+  {
+    step: 'A2',
+    title: 'Explain the route',
+    text: 'Break strategy, teaching, modules, and knowledge into clear layers so every area answers a specific question.',
+  },
+  {
+    step: 'A3',
+    title: 'Show the evidence',
+    text: 'Put source code, backtests, validation, and FAQs together so the promise is supported by substance.',
+  },
+  {
+    step: 'A4',
+    title: 'Lead to the next action',
+    text: 'Once value, boundaries, and entry points are clear, the plan and CTA can appear naturally.',
+  },
+];
+
+const englishSignalBlocks = [
+  {
+    title: 'Be noticed',
+    copy: 'High contrast, light, and breathing room give the page a reason to earn attention.',
+  },
+  {
+    title: 'Build trust',
+    copy: 'Clear layers and labels help visitors understand what they are reading and why it matters.',
+  },
+  {
+    title: 'Convert naturally',
+    copy: 'When value, evidence, and the next action are clear, a click becomes a confident decision.',
+  },
+];
+
+const englishLineConversationPreview = {
+  badge: 'LINE Conversation Preview',
+  title: 'Start with guided questions, then connect naturally to your site and reservation flow',
+  description: 'Visitors do not need to write a long message. They can choose the next step, understand the offer, and move from conversation to the right page.',
+  messages: [
+    {
+      type: 'incoming',
+      title: 'Are you engineers or software developers?',
+      text: 'I would like to understand what you do first.',
+    },
+    {
+      type: 'outgoing',
+      title: 'What is AI-Quant Lab?',
+      text: 'We focus on MQL5 source-code development, AI modular prompt engineering, and quantitative trading education. Choose a next step to see the full picture.',
+    },
+  ],
+  quickReplies: [
+    { label: 'View feature guide', href: '/line-kb' },
+    { label: 'Read the brand story', href: '/line-kb/expansion' },
+    { label: 'Join the reservation list', href: 'https://lin.ee/stqhWhj', external: true },
+    { label: 'Standard membership', href: '/membership' },
+  ],
+};
+
+const englishFeatures = [
+  {
+    title: 'mq4/mq5 Code Conversion',
+    description: 'From code conversion and compilation to strategy design, backtesting, and deployment, build a complete MT5 workflow.',
+    icon: 'chart',
+  },
+  {
+    title: 'MQL5 Source-Code Training',
+    description: 'Understand EA structure and programming logic directly, ideal for anyone who wants to customize their own strategies.',
+    icon: 'code',
+  },
+  {
+    title: 'Community and VIP Support',
+    description: 'Get strategy discussion, version updates, and implementation guidance to shorten the learning and testing cycle.',
+    icon: 'users',
+  },
+  {
+    kicker: '04 / Real-world feedback',
+    title: 'From testing to practical decisions',
+    description: 'Use structured feedback, testing notes, and clear checkpoints to turn ideas into repeatable implementation.',
+  },
+  {
+    kicker: '05 / Content extension',
+    title: 'Keep expanding the learning path',
+    description: 'Connect source code, modular blocks, and knowledge-base content into a path that grows with your skill level.',
+  },
+  {
+    kicker: '06 / Action entry',
+    title: 'Move from understanding to action',
+    description: 'Choose the right membership, start the workflow, and keep your next quantitative step visible.',
+  },
+];
+
+const englishPlanHighlights = [
+  '100% source-code delivery',
+  'AI LLM prompt enablement',
+  '1-on-1 technical guidance',
+];
+
+const englishPlans = [
+  {
+    name: 'Standard Membership',
+    price: 'USD$ 9.00',
+    period: '/ month',
+    description: 'A practical starting point for exploring the content and building a foundation in quantitative trading.',
+    points: [
+      'Selected MT5 EA strategies and backtest reports',
+      'Monthly strategy and tool selections',
+      'Community discussion access',
+    ],
+    highlights: englishPlanHighlights,
+    featured: false,
+    cta: 'Open membership',
+  },
+  {
+    name: 'Affiliate Membership',
+    badge: 'Popular choice',
+    price: 'USD$ 39.00',
+    period: '/ month',
+    description: 'For users who want to implement strategies faster and access more hands-on resources.',
+    points: [
+      'Full MQL5 source-code training and core strategy library',
+      'Exclusive EA strategies and templates',
+      'One-on-one backtest and deployment guidance',
+      'Priority updates for VIP core features',
+    ],
+    highlights: englishPlanHighlights,
+    featured: true,
+    cta: 'Join now',
+  },
+];
+
+const englishFaqItems = [
+  {
+    question: 'Q1: Do I need a specific forex broker to use the EA strategies after subscribing?',
+    answer: 'A1: No. The strategies support any forex broker that provides an MT5 account. Our institutional-grade MT5 EA source code is independent, reusable, and can be reprogrammed, optimized, compiled, or rebuilt into your own digital products.',
+  },
+  {
+    question: 'Q2: Is the MQL5 source-code training suitable for complete beginners?',
+    answer: 'A2: Yes. The learning path starts from the fundamentals of using AI LLMs with MQL5 syntax, then moves through EA source-code construction, compilation, and practical use. Templates and modular examples make it approachable for both new and experienced users.',
+  },
+  {
+    question: 'Q3: How are Standard and Affiliate Membership strategies different?',
+    answer: 'A3: Standard Membership uses the Clerk sign-in and Lemon Squeezy subscription flow. After payment, Supabase updates the membership status and access automatically. Affiliate Membership keeps the advanced referral flow and will be expanded with a complete integration later.',
+  },
+  {
+    question: 'Q4: How have the EA strategies performed in backtests, and do they include risk controls?',
+    answer: 'A4: Published strategies follow an institutional-grade testing process using five or more years of historical data, including walk-forward analysis and stress testing. Each strategy includes dynamic ATR stops and a per-trade risk cap, with no martingale or averaging-down design.',
+  },
+];
+
+const englishAccordionFaqItems = [
+  {
+    question: 'Q: Do I need deep Python or MQL5 experience to use AI-Quant Lab?',
+    answer: 'A: No. Complex EA logic is broken into modular blocks and paired with dedicated AI prompt templates. You can use guided conversations with AI to tune and rebuild core strategies.',
+  },
+  {
+    question: 'Q: Do you provide managed funds, guaranteed profits, or investment advice?',
+    answer: 'A: No. AI-Quant Lab is a software engineering and AI education lab. We provide source code and quantitative tools, never handle customer funds, and leave all trading decisions and risk management to the user.',
+  },
+  {
+    question: 'Q: How do I start after subscribing?',
+    answer: 'A: Standard members create an account and complete subscription payment first. Access is enabled automatically after the webhook updates the membership record. If you are only exploring, start with the membership page for sign-in, registration, and payment.',
+  },
+];
+
+const englishCoreAdvantages = [
+  '100% source-code delivery with no account lock, hardware binding, or copy-trading copyright restrictions.',
+  'AI LLM prompt enablement with modular blocks and templates for rapid strategy rebuilding.',
+  '1-on-1 technical guidance through the official LINE account for dedicated support.',
+];
+
+const englishUi = {
+  journeyBadge: 'Journey',
+  journeyTitle: 'This is more than a landing page. It is a guided path into the system.',
+  journeyBody: 'When content has rhythm and structure, visitors find the next answer at every stage. The further they explore, the clearer your value becomes.',
+  guideBadge: 'Guide',
+  guideTitle: 'Understand the route, then let each layer build confidence',
+  guideBody: 'This is not abstract brand copy. It is a guided sequence: capture attention, explain the structure, then lead naturally to plans and action.',
+  featuresTitle: 'Source Code Library',
+  featuresBody: 'Start by understanding the core source code, then move into modular blocks and their practical extensions.',
+  pricingTitle: 'Your Next Step',
+  pricingBody: 'Once the route above is clear, this is the natural entry point for taking action.',
+  coreLabel: 'Core advantages',
+  legalTitle: 'Risk and technical positioning',
+  legalIntro: 'To clarify the nature of this content and reduce misunderstanding, please read the following statement before continuing.',
+  legalBody: 'AI-Quant Lab focuses on MQL5 source-code development and AI modular prompt engineering education. All content is provided for academic research and technical exchange only. We do not provide copy trading or managed trading, guarantee profits, or handle customer investment funds. Users are responsible for their own trading decisions and risks.',
+  faqTitle: 'Clear answers make the next step easier',
+  faqBody: 'These are common questions when evaluating a subscription, learning MQL5, or reviewing a strategy. Understand the boundaries first, then decide with confidence.',
+  accordionTitle: 'Defensive and subscription guidance',
+  accordionBody: 'These additional answers explain usage requirements, risk boundaries, and the subscription flow in more detail.',
+  accordionCount: '3 additional answers',
+  faqBadge: 'FAQ / Common Questions',   chatVisitorLabel: 'Visitor question',
+  chatAgent: 'Replied by the AI-Quant Lab team',
+  chatOnline: 'Online',
+  chatVisitor: 'Visitor question',
+  chatNext: 'Choose a next step, no long message needed',
+  footerAbout: 'AI-Quant Lab is a source-code quantitative trading lab focused on MQL5 development, AI modular prompt engineering, and practical quantitative education.',
+  footerPill: 'Explore the MT5 source-code quantitative world',
+  footerSource: 'Source Code Library',
+  footerModular: 'Modular Blocks',
+  footerLine: 'LINE Knowledge Base',
+  footerPlans: 'Subscription Plans',
+  footerJourneyOne: 'Understand the content, see the method, then take action.',
+  footerJourneyTwo: 'This is not the destination. It is the start of your next quantitative journey.',
+  footerTag: 'AI-Quant Lab Source-Code Quantitative Lab | MQL5 x AI Modular Education',
+};
+export default function Home({ locale = 'zh-Hant' }) {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [openAccordionIndex, setOpenAccordionIndex] = useState(0);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const tapLockRef = useRef(false);
+
+  const currentLocalePath = pathname || `/${locale || 'zh-Hant'}`;
+  const pageLocale = getLocaleFromPath(currentLocalePath);
+  const currentLocale = homeCopy[pageLocale] ? pageLocale : 'zh-Hant';
+  const copy = homeCopy[currentLocale];
+  const isEnglish = currentLocale === 'en';
+  const localizedScrollCards = isEnglish ? englishScrollCards : scrollCards;
+  const localizedNarrativeBlocks = isEnglish ? englishNarrativeBlocks : narrativeBlocks;
+  const localizedRouteSteps = isEnglish ? englishRouteSteps : routeSteps;
+  const localizedSignalBlocks = isEnglish ? englishSignalBlocks : signalBlocks;
+  const localizedLineConversationPreview = isEnglish ? englishLineConversationPreview : lineConversationPreview;
+  const localizedFeatures = isEnglish ? englishFeatures : features;
+  const localizedPlans = isEnglish ? englishPlans : plans;
+  const localizedFaqItems = isEnglish ? englishFaqItems : faqItems;
+  const localizedAccordionFaqItems = isEnglish ? englishAccordionFaqItems : accordionFaqItems;
+  const localizedCoreAdvantages = isEnglish
+    ? englishCoreAdvantages
+    : [
+        '100% 原始碼交付，無鎖帳號、無硬體綁定、無任何跟單版權限制。',
+        'AI LLM 提示詞賦能，透過模組化積木與模板快速重構策略。',
+        '1-on-1 技術對接，直接透過 LINE 官方帳號啟動專屬授權。',
+      ];
+  const ui = isEnglish ? englishUi : null;
 
   const withTapLock = (callback) => {
     if (tapLockRef.current) {
@@ -441,31 +976,21 @@ export default function Home() {
             </div>
 
             <div className="flex items-center gap-3 sm:gap-5">
-              <nav className="hidden items-center gap-8 text-sm font-medium text-slate-400 md:flex">
-                <Link href="/converter" className="transition hover:text-cyan-400">
-                  AI重構引擎
-                </Link>
-                <Link href="/modular" className="transition hover:text-cyan-400">
-                  模組化積木
-                </Link>
-                <Link href="/line-kb" className="transition hover:text-cyan-400">
-                  LINE 知識庫
-                </Link>
-                <Link href="/membership" className="transition hover:text-cyan-400">
-                  標準會員
-                </Link>
-                <a href="#pricing" className="transition hover:text-cyan-400">
-                  訂閱方案
-                </a>
+              <nav className="hidden items-center gap-2 text-sm font-medium md:flex">
+                {getLocalizedNavItems(pageLocale).map((item) => (
+                  <HomeDesktopNavItem key={item.label} item={item} pathname={pathname || ''} locale={pageLocale} />
+                ))}
               </nav>
 
-              <a
-                href="/membership"
+              <LanguageMenu pathname={pathname || '/'} />
+
+              <Link
+                href={localizePath('/sign-in', pageLocale)}
                 className={`btn-pulse shrink-0 whitespace-nowrap rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-3.5 py-2 text-[12px] font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500 min-h-11 ${tapClass}`}
                 onClick={() => withTapLock(() => {})}
               >
-                標準會員
-              </a>
+                {copy.topLogin}
+              </Link>
 
               <button
                 type="button"
@@ -493,49 +1018,20 @@ export default function Home() {
                 : 'max-h-0 -translate-y-1 py-0 opacity-0'
             }`}
           >
+
+            <div className="mb-3"><LanguageMenu pathname={pathname || '/'} mobile /></div>
+
             <div className="grid gap-2 text-sm font-medium text-slate-300">
-              {mobileNavItems.map((item) => {
-                const isInternal = item.href.startsWith('#') || item.href.startsWith('/');
-
-                if (item.href.startsWith('http')) {
-                  return (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 min-h-12 transition hover:border-cyan-400/30 hover:text-cyan-300 ${tapClass}`}
-                      onClick={() => withTapLock(() => setMobileNavOpen(false))}
-                    >
-                      {item.label}
-                    </a>
-                  );
-                }
-
-                if (isInternal && item.href.startsWith('#')) {
-                  return (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      className={`rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 min-h-12 transition hover:border-cyan-400/30 hover:text-cyan-300 ${tapClass}`}
-                      onClick={() => withTapLock(() => setMobileNavOpen(false))}
-                    >
-                      {item.label}
-                    </a>
-                  );
-                }
-
-                return (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className={`rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 min-h-12 transition hover:border-cyan-400/30 hover:text-cyan-300 ${tapClass}`}
-                    onClick={() => withTapLock(() => setMobileNavOpen(false))}
-                    >
-                    {item.label}
-                  </Link>
-                );
-              })}
+              {getLocalizedNavItems(pageLocale).map((item) => (
+                <HomeMobileNavItem
+                  key={item.label}
+                  item={item}
+                  pathname={pathname || ''}
+                  locale={pageLocale}
+                  tapClass={tapClass}
+                  onNavigate={() => withTapLock(() => setMobileNavOpen(false))}
+                />
+              ))}
             </div>
           </div>
         </header>
@@ -552,34 +1048,34 @@ export default function Home() {
             <div aria-hidden="true" className="hero-spotlight hero-spotlight-two hidden sm:block" />
             <div aria-hidden="true" className="hero-spotlight hero-spotlight-three hidden sm:block" />
             <div className="hero-badge hero-copy mb-7 inline-flex items-center gap-2 rounded-full border border-cyan-300/45 bg-cyan-500/12 px-4 py-1.5 text-sm font-semibold tracking-[0.24em] text-white shadow-[0_0_18px_rgba(34,211,238,0.24),0_0_38px_rgba(34,211,238,0.1)] backdrop-blur-md animate-pulse sm:text-base">
-              法人級商用發佈
+              {copy.heroBadge}
             </div>
             <h1 className="mx-auto max-w-6xl text-balance text-4xl font-black leading-[0.96] tracking-tight text-white sm:text-6xl lg:text-[5rem]">
               <span className="hero-bright block text-white">
-                AI 革命量化交易：
+                {copy.heroTitleTop}
               </span>
               <span className="hero-sharp mt-2 block bg-gradient-to-r from-cyan-300 via-teal-300 to-blue-500 bg-clip-text text-transparent">
-                解鎖法人級 MT5 EA 商業源代碼
+                {copy.heroTitleBottom}
               </span>
             </h1>
             <p className="hero-copy mx-auto max-w-3xl text-base leading-relaxed text-slate-100/95 sm:text-lg lg:text-xl">
-              零基礎也能用 AI LLM 提示詞模板高效重構核心策略。無版權限制、無須許可，打造專屬您的個人交易品牌與數位資產，利潤 100% 全歸自己。
+              {copy.heroBody}
             </p>
             <div className="flex w-full flex-col items-center justify-center gap-3 pt-4 sm:flex-row">
-              <a
-                href="/membership"
+              <Link
+                href={localizePath('/membership', pageLocale)}
                 className={`btn-pulse w-full rounded-xl bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-xl shadow-cyan-400/20 transition hover:bg-cyan-300 sm:w-auto ${tapClass}`}
                 onClick={() => withTapLock(() => {})}
               >
-                前往標準會員
-              </a>
-              <a
-                href="/line-kb"
+                {copy.membershipCta}
+              </Link>
+              <Link
+                href={localizePath('/line-kb', pageLocale)}
                 className={`btn-pulse w-full rounded-xl border border-slate-800 bg-slate-900 px-8 py-3 text-center text-base font-medium text-slate-300 transition hover:bg-slate-800 sm:w-auto ${tapClass}`}
                 onClick={() => withTapLock(() => {})}
               >
-                先看知識庫架構
-              </a>
+                {copy.knowledgeCta}
+              </Link>
             </div>
           </div>
         </section>
@@ -588,18 +1084,18 @@ export default function Home() {
         <section className="mt-20 space-y-8">
           <div className="animate-reveal-up mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300">
-              先看見節奏，再看見價值
+              {copy.reasonsBadge}
             </div>
             <h2 className={`mt-5 text-3xl font-black tracking-tight sm:text-4xl ${glowText}`}>
-              三個讓人願意往下看的理由
+              {copy.reasonsTitle}
             </h2>
             <p className={`mt-4 text-sm leading-relaxed text-slate-400 sm:text-base ${glowText}`}>
-              如果你想知道這個首頁到底在賣什麼、強在哪裡、適不適合你，先看完這三個區塊，再往下看方案會更有感。
+              {copy.reasonsBody}
             </p>
           </div>
 
           <div className="cards-cluster grid gap-5 lg:grid-cols-3">
-            {scrollCards.map((card, index) => (
+            {localizedScrollCards.map((card, index) => (
               <article
                 key={card.kicker}
                 className="interactive-card group animate-card-in relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/50 p-7 transition-all duration-300 hover:border-cyan-400/40 hover:bg-slate-900/70"
@@ -628,13 +1124,13 @@ export default function Home() {
         <section id="journey" className="mt-12 space-y-10">
           <div className="animate-reveal-up mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/20 bg-fuchsia-500/10 px-4 py-1.5 text-xs font-medium text-fuchsia-200">
-              旅程 / Journey
+              {ui?.journeyBadge || '旅程 / Journey'}
             </div>
             <h2 className={`mt-5 text-3xl font-black tracking-tight sm:text-4xl ${glowText}`}>
-              這不是單頁介紹，而是一條逐步深入的導覽路徑
+              {ui?.journeyTitle || '這不是單頁介紹，而是一條逐步深入的導覽路徑'}
             </h2>
             <p className={`mt-4 text-sm leading-relaxed text-slate-400 sm:text-base ${glowText}`}>
-              當內容有節奏、有層次，訪客就會在每一段找到下一個想知道的答案。越往下看，越能看懂你的價值。
+              {ui?.journeyBody || '當內容有節奏、有層次，訪客就會在每一段找到下一個想知道的答案。越往下看，越能看懂你的價值。'}
             </p>
           </div>
 
@@ -644,7 +1140,7 @@ export default function Home() {
           </div>
 
           <div className="cards-cluster grid gap-5 lg:grid-cols-3">
-            {narrativeBlocks.map((block, index) => (
+            {localizedNarrativeBlocks.map((block, index) => (
               <article
                 key={block.tag}
                 className="interactive-card group animate-card-in relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/50 p-7 transition-all duration-300 hover:border-fuchsia-400/40 hover:bg-slate-900/75"
@@ -672,20 +1168,20 @@ export default function Home() {
         <section id="modular" className="mt-8 space-y-8">
           <div className="animate-reveal-up mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300">
-              導覽 / Guide
+              {ui?.guideBadge || '導覽 / Guide'}
             </div>
             <h2 className={`mt-5 text-3xl font-black tracking-tight sm:text-4xl ${glowText}`}>
-              先看懂路線，再順著內容一層一層被說服
+              {ui?.guideTitle || '先看懂路線，再順著內容一層一層被說服'}
             </h2>
             <p className={`mt-4 text-sm leading-relaxed text-slate-400 sm:text-base ${glowText}`}>
-              這不是抽象的氛圍文案，而是一條有節奏的導覽：先抓住注意，再講清結構，最後把人自然帶到方案與行動。
+              {ui?.guideBody || '這不是抽象的氛圍文案，而是一條有節奏的導覽：先抓住注意，再講清結構，最後把人自然帶到方案與行動。'}
             </p>
           </div>
 
           <div className="relative mx-auto max-w-5xl">
             <div className="absolute left-1/2 top-8 hidden h-[calc(100%-4rem)] w-px -translate-x-1/2 bg-gradient-to-b from-cyan-400/80 via-fuchsia-400/60 to-transparent md:block" />
             <div className="cards-cluster grid gap-5 md:grid-cols-2">
-              {routeSteps.map((step, index) => (
+              {localizedRouteSteps.map((step, index) => (
                 <article
                   key={step.step}
                   className={`interactive-card group animate-card-in relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/50 p-7 transition-all duration-300 hover:border-cyan-400/40 hover:bg-slate-900/70 ${
@@ -715,7 +1211,7 @@ export default function Home() {
         {/* Signal strip */}
         <section className="mt-16">
           <div className="cards-cluster mx-auto grid max-w-5xl gap-4 md:grid-cols-3">
-            {signalBlocks.map((signal, index) => (
+            {localizedSignalBlocks.map((signal, index) => (
               <article
                 key={signal.title}
                 className="interactive-card group animate-card-in relative overflow-hidden rounded-2xl border border-cyan-500/20 bg-slate-900/40 p-6 transition-all duration-300 hover:border-cyan-300/50 hover:bg-slate-900/70"
@@ -743,31 +1239,31 @@ export default function Home() {
           <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div className="animate-reveal-up space-y-4 text-center lg:text-left">
               <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-300 lg:mx-0">
-                {lineConversationPreview.badge}
+                {localizedLineConversationPreview.badge}
               </div>
               <h2 className={`text-3xl font-black tracking-tight sm:text-4xl ${glowText}`}>
-                {lineConversationPreview.title}
+                {localizedLineConversationPreview.title}
               </h2>
               <p className={`mx-auto max-w-2xl text-sm leading-relaxed text-slate-400 sm:text-base lg:mx-0 ${glowText}`}>
-                {lineConversationPreview.description}
+                {localizedLineConversationPreview.description}
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-start">
-                {lineConversationPreview.quickReplies.map((item) =>
+                {localizedLineConversationPreview.quickReplies.map((item) =>
                   item.external ? (
-                    <a
+                    <Link
                       key={item.label}
-                      href={item.href}
+                      href={localizePath(item.href, pageLocale)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`rounded-full border border-emerald-400/20 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-200 transition hover:border-emerald-300/40 hover:bg-emerald-400/15 hover:text-white ${tapClass}`}
                       onClick={() => withTapLock(() => {})}
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   ) : (
                     <Link
                       key={item.label}
-                      href={item.href}
+                      href={localizePath(item.href, pageLocale)}
                       className={`rounded-full border border-emerald-400/20 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-200 transition hover:border-emerald-300/40 hover:bg-emerald-400/15 hover:text-white ${tapClass}`}
                       onClick={() => withTapLock(() => {})}
                     >
@@ -787,12 +1283,12 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="text-sm font-bold text-slate-900">AI-Quant Lab</p>
-                      <p className="text-xs text-emerald-600">由負責人員回覆訊息</p>
+                      <p className="text-xs text-emerald-600">{ui?.chatAgent || '由負責人員回覆訊息'}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-1.5 text-[11px] text-slate-500">
                     <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                    線上
+                    {ui?.chatOnline || '線上'}
                   </div>
                 </div>
 
@@ -800,14 +1296,14 @@ export default function Home() {
                   <div className="flex items-start gap-3">
                     <div className="mt-1 h-9 w-9 rounded-full bg-emerald-100 ring-1 ring-emerald-200" />
                     <div className="max-w-[82%] rounded-3xl rounded-tl-md bg-white px-4 py-3 shadow-sm">
-                      <p className="text-[11px] font-semibold tracking-[0.16em] text-emerald-600">訪客提問</p>
+                      <p className="text-[11px] font-semibold tracking-[0.16em] text-emerald-600">{ui?.chatVisitorLabel || '訪客提問'}</p>
                       <p className="mt-1 text-sm leading-6 text-slate-800">
-                        你們是工程師、程式設計師嗎？
+                        {ui?.chatVisitor || '你們是工程師、程式設計師嗎？'}
                       </p>
                     </div>
                   </div>
 
-                  {lineConversationPreview.messages.slice(1).map((message) => (
+                  {localizedLineConversationPreview.messages.slice(1).map((message) => (
                     <div key={message.title} className="flex items-start justify-end gap-3">
                       <div className="max-w-[84%] rounded-3xl rounded-tr-md bg-gradient-to-br from-emerald-300 to-cyan-300 px-4 py-3 shadow-sm">
                         <p className="text-[11px] font-semibold tracking-[0.16em] text-emerald-900">{message.title}</p>
@@ -819,24 +1315,24 @@ export default function Home() {
 
                   <div className="rounded-[1.35rem] border border-slate-200 bg-white px-3 py-3 shadow-sm">
                     <p className="text-[11px] font-semibold tracking-[0.16em] text-slate-500">
-                      點選下一步，不用打長文
+                      {ui?.chatNext || '點選下一步，不用打長文'}
                     </p>
                     <div className="mt-3 grid gap-2">
-                      {lineConversationPreview.quickReplies.map((item) =>
+                      {localizedLineConversationPreview.quickReplies.map((item) =>
                         item.external ? (
-                          <a
+                          <Link
                             key={item.label}
-                            href={item.href}
+                            href={localizePath(item.href, pageLocale)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className={`rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-2 text-left text-sm font-semibold text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100 ${tapClass}`}
                           >
                             {item.label}
-                          </a>
+                          </Link>
                         ) : (
                           <Link
                             key={item.label}
-                            href={item.href}
+                            href={localizePath(item.href, pageLocale)}
                             className={`rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-2 text-left text-sm font-semibold text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100 ${tapClass}`}
                           >
                             {item.label}
@@ -854,14 +1350,14 @@ export default function Home() {
         {/* Source code library */}
         <section id="features" className="mt-12 space-y-12">
           <div className="animate-reveal-up mx-auto max-w-2xl text-center">
-            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>源代碼庫</h2>
+            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>{ui?.featuresTitle || '源代碼庫'}</h2>
             <p className={`mt-4 text-slate-400 ${glowText}`}>
-              這一站先讓你看懂核心源代碼(原始碼Source Code)，再慢慢走進模組化積木的組合與延伸。
+              {ui?.featuresBody || '這一站先讓你看懂核心源代碼(原始碼Source Code)，再慢慢走進模組化積木的組合與延伸。'}
             </p>
           </div>
 
           <div className="cards-cluster grid gap-6 md:grid-cols-3">
-            {features.map((feature, index) => (
+            {localizedFeatures.map((feature, index) => (
               <article
                 key={feature.title}
                 className="interactive-card group animate-card-in relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/50 p-8 transition-all duration-300 hover:border-cyan-400/40 hover:bg-slate-900/70"
@@ -884,14 +1380,14 @@ export default function Home() {
         {/* Pricing */}
         <section id="pricing" className="mt-12 pb-20">
           <div className="animate-reveal-up mx-auto max-w-2xl text-center">
-            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>前往下一站</h2>
+            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>{ui?.pricingTitle || '前往下一站'}</h2>
             <p className={`mt-4 text-slate-400 ${glowText}`}>
-              當你把前面的路看懂了，這裡就是自然接續的行動入口。
+              {ui?.pricingBody || '當你把前面的路看懂了，這裡就是自然接續的行動入口。'}
             </p>
           </div>
 
           <div className="cards-cluster mx-auto mt-12 grid max-w-5xl gap-8 md:grid-cols-2">
-            {plans.map((plan, index) => (
+            {localizedPlans.map((plan, index) => (
               <article
                 key={plan.name}
                 className={`interactive-card group animate-card-in relative flex flex-col justify-between overflow-hidden rounded-2xl p-8 transition-all duration-300 ${
@@ -936,21 +1432,15 @@ export default function Home() {
 
                   <div className="mt-5 rounded-2xl border border-slate-700/70 bg-slate-950/55 p-4">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-cyan-200">
-                      核心優勢
+                      {ui?.coreLabel || '核心優勢'}
                     </p>
                     <ul className={`mt-3 space-y-2 text-sm leading-6 text-slate-300 ${glowText}`}>
-                      <li className="flex gap-2">
-                        <span className="mt-1 text-cyan-300">◆</span>
-                        <span>100% 原始碼交付，無鎖帳號、無硬體綁定、無任何跟單版權限制。</span>
-                      </li>
-                      <li className="flex gap-2">
-                        <span className="mt-1 text-cyan-300">◆</span>
-                        <span>AI LLM 提示詞賦能，透過模組化積木與模板快速重構策略。</span>
-                      </li>
-                      <li className="flex gap-2">
-                        <span className="mt-1 text-cyan-300">◆</span>
-                        <span>1-on-1 技術對接，直接透過 LINE 官方帳號啟動專屬授權。</span>
-                      </li>
+                      {localizedCoreAdvantages.map((advantage) => (
+                        <li key={advantage} className="flex gap-2">
+                          <span className="mt-1 text-cyan-300">◆</span>
+                          <span>{advantage}</span>
+                        </li>
+                      ))}
                     </ul>
                   </div>
 
@@ -968,8 +1458,8 @@ export default function Home() {
                   </ul>
                 </div>
 
-                <a
-                  href={plan.featured ? 'https://lin.ee/stqhWhj' : '/membership'}
+                <Link
+                  href={plan.featured ? 'https://lin.ee/stqhWhj' : localizePath('/membership', pageLocale)}
                   target={plan.featured ? '_blank' : undefined}
                   rel={plan.featured ? 'noopener noreferrer' : undefined}
                   className={`btn-pulse relative z-10 mt-8 w-full rounded-xl px-4 py-3 text-center text-sm font-bold transition-all duration-300 ${
@@ -979,7 +1469,7 @@ export default function Home() {
                   }`}
                 >
                   {plan.cta}
-                </a>
+                </Link>
               </article>
             ))}
           </div>
@@ -1008,10 +1498,10 @@ export default function Home() {
                       id="legal-disclaimer-title"
                       className="text-xl font-black tracking-tight text-white sm:text-2xl"
                     >
-                      免責與技術定調聲明
+                      {ui?.legalTitle || '免責與技術定調聲明'}
                     </h3>
                     <p className={`max-w-xl text-sm leading-7 text-slate-400 sm:text-[0.95rem] ${glowText}`}>
-                      為了清楚界定本站內容屬性、降低誤解風險，以下聲明請於閱覽前一併確認。
+                      {ui?.legalIntro || '為了清楚界定本站內容屬性、降低誤解風險，以下聲明請於閱覽前一併確認。'}
                     </p>
                   </div>
                 </div>
@@ -1019,7 +1509,7 @@ export default function Home() {
                 <div className="relative rounded-[1.4rem] border border-slate-700/70 bg-slate-950/75 p-5 shadow-inner shadow-cyan-500/5 sm:p-6">
                   <div className="absolute inset-0 rounded-[1.4rem] bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_46%)] opacity-80" />
                   <p className={`relative z-10 text-sm leading-8 text-slate-200 sm:text-[0.98rem] ${glowText}`}>
-                    💡 法律免責與技術定調聲明：AI-Quant Lab 致力於 MQL5 原始碼研發與 AI 模組化提示詞軟體工程教學。本站及相關社群所提供之內容僅供學術研究與程式碼技術交流，絕不提供任何形式的跟單代操、不保證獲利、亦不經手或代管客戶投資資金。用戶應自行承擔交易風險，本站不承擔任何投資損失責任。
+                    {ui?.legalBody || '💡 法律免責與技術定調聲明：AI-Quant Lab 致力於 MQL5 原始碼研發與 AI 模組化提示詞軟體工程教學。本站及相關社群所提供之內容僅供學術研究與程式碼技術交流，絕不提供任何形式的跟單代操、不保證獲利、亦不經手或代管客戶投資資金。用戶應自行承擔交易風險，本站不承擔任何投資損失責任。'}
                   </p>
                 </div>
               </div>
@@ -1032,18 +1522,18 @@ export default function Home() {
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
           <div className="animate-reveal-up mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.3em] text-cyan-300">
-              FAQ / 常見問題
+              {ui?.faqBadge || 'FAQ / 常見問題'}
             </div>
             <h2 className={`mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl ${glowText}`}>
-              把疑問解開，才有信心開啟源代碼量化事業之旅
+              {ui?.faqTitle || '把疑問解開，才有信心開啟源代碼量化事業之旅'}
             </h2>
             <p className={`mt-4 text-sm leading-7 text-slate-400 sm:text-base ${glowText}`}>
-              這些問題多半是準備訂閱、學習 MQL5 或評估策略時最常遇到的關鍵點。先看懂，再決定下一步，會更清楚也更安心。
+              {ui?.faqBody || '這些問題多半是準備訂閱、學習 MQL5 或評估策略時最常遇到的關鍵點。先看懂，再決定下一步，會更清楚也更安心。'}
             </p>
           </div>
 
           <div className="cards-cluster mx-auto mt-12 grid max-w-6xl gap-6 md:grid-cols-2">
-            {faqItems.map((item, index) => (
+            {localizedFaqItems.map((item, index) => (
               <article
                 key={item.question}
                 className="interactive-card group animate-card-in relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/50 p-7 transition-all duration-300 hover:border-cyan-400/45 hover:bg-slate-900/75"
@@ -1071,20 +1561,20 @@ export default function Home() {
                     FAQ / Accordion
                   </div>
                   <h3 className={`text-2xl font-black tracking-tight text-white sm:text-3xl ${glowText}`}>
-                    防禦性與訂閱說明
+                    {ui?.accordionTitle || '防禦性與訂閱說明'}
                   </h3>
                   <p className={`text-sm leading-7 text-slate-400 sm:text-base ${glowText}`}>
-                    這一組是補充性的技術問答，專門針對使用門檻、風險邊界與訂閱流程做更清楚的說明。
+                    {ui?.accordionBody || '這一組是補充性的技術問答，專門針對使用門檻、風險邊界與訂閱流程做更清楚的說明。'}
                   </p>
                 </div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-slate-950/60 px-4 py-2 text-xs font-semibold tracking-[0.18em] text-cyan-100">
                   <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.7)]" />
-                  3 個補充問答
+                  {ui?.accordionCount || '3 個補充問答'}
                 </div>
               </div>
 
               <div className="space-y-4">
-                {accordionFaqItems.map((item, index) => {
+                {localizedAccordionFaqItems.map((item, index) => {
                   const isOpen = openAccordionIndex === index;
 
                   return (
@@ -1174,10 +1664,10 @@ export default function Home() {
                 </span>
               </div>
               <p className="max-w-md text-sm leading-7 text-slate-400">
-                AI-Quant Lab 源代碼量化(工廠)實驗室，專注於 MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。
+                {ui?.footerAbout || 'AI-Quant Lab 源代碼量化(工廠)實驗室，專注於 MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。'}
               </p>
               <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300">
-                探幽訪勝_走進MT5源代碼(原始碼Source Code)量化世界
+                {ui?.footerPill || '探幽訪勝_走進MT5源代碼(原始碼Source Code)量化世界'}
               </div>
             </div>
 
@@ -1186,18 +1676,18 @@ export default function Home() {
                 Explore
               </h3>
               <div className="flex flex-col gap-3 text-sm text-slate-500">
-                <a href="#features" className="transition hover:text-cyan-300">
-                  源代碼庫
-                </a>
-                <Link href="/modular" className="transition hover:text-cyan-300">
-                  模組化積木
+                <Link href="#features" className="transition hover:text-cyan-300">
+            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>{ui?.featuresTitle || '源代碼庫'}</h2>
+                </Link>
+                <Link href={localizePath('/modular', pageLocale)} className="transition hover:text-cyan-300">
+                  {ui?.footerModular || '模組化積木'}
                 </Link>
                 <Link href="/line-kb" className="transition hover:text-cyan-300">
-                  LINE 知識庫
+                  {ui?.footerLine || 'LINE 知識庫'}
                 </Link>
-                <a href="#pricing" className="transition hover:text-cyan-300">
-                  訂閱方案
-                </a>
+                <Link href="#pricing" className="transition hover:text-cyan-300">
+                  {ui?.footerPlans || '訂閱方案'}
+                </Link>
               </div>
             </div>
 
@@ -1206,15 +1696,15 @@ export default function Home() {
                 Journey
               </h3>
               <div className="space-y-3 text-sm leading-6 text-slate-500">
-                <p>先看懂內容，再看見方法，最後才接到行動入口。</p>
-                <p>這裡不是終點，而是下一段量化旅程的起點。</p>
+                <p>{ui?.footerJourneyOne || '先看懂內容，再看見方法，最後才接到行動入口。'}</p>
+                <p>{ui?.footerJourneyTwo || '這裡不是終點，而是下一段量化旅程的起點。'}</p>
               </div>
             </div>
           </div>
 
           <div className="mt-10 flex flex-col gap-3 border-t border-slate-800/80 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
             <span>&copy; 2026 AI-Quant Lab. All rights reserved.</span>
-            <span>AI-Quant Lab 源代碼量化工廠實驗室｜MQL5 × AI 模組化量化教學</span>
+                <span>{ui?.footerTag || 'AI-Quant Lab 源代碼量化工廠實驗室｜MQL5 × AI 模組化量化教學'}</span>
           </div>
         </div>
       </footer>
