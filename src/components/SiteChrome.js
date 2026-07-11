@@ -263,27 +263,6 @@ function MobileNavItem({ item, pathname, locale, onNavigate }) {
         <span>{item.label}</span>
         <MenuDots />
       </div>
-      <div className="grid gap-2 pl-2">
-        {item.children.map((child) =>
-          child.disabled ? (
-            <span
-              key={child.label}
-              className="rounded-xl border border-slate-800/60 bg-slate-950/65 px-3 py-2.5 text-sm text-slate-500"
-            >
-              {child.label}
-            </span>
-          ) : (
-            <Link
-              key={child.label}
-              href={localizePath(child.href, locale)}
-              className="rounded-xl border border-slate-800 bg-slate-950/75 px-3 py-2.5 text-sm text-slate-300 transition hover:border-cyan-400/30 hover:text-cyan-200"
-              onClick={onNavigate}
-            >
-              {child.label}
-            </Link>
-          ),
-        )}
-      </div>
     </div>
   );
 }
@@ -378,7 +357,6 @@ useEffect(() => {
               : 'max-h-0 -translate-y-1 py-0 opacity-0'
           }`}
         >
-          <div className="mb-3"><LanguageMenu pathname={pathname} mobile /></div>
 
           <div className="grid gap-2 text-sm font-medium text-slate-300">
             {localizedNavItems.map((item) => (
