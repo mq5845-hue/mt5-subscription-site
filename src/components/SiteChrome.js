@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -80,6 +80,50 @@ const navTranslations = {
   },
 };
 
+const footerTranslations = {
+  'zh-Hant': {
+    description: 'AI-Quant Lab 專注於把 MQL5 量化策略、AI 工作流與知識入口整合成一套好看、好讀、好行動的品牌體驗。',
+    badge: '商業級 MT5 原始碼 (Source Code) 入口',
+    tagline: 'AI-Quant Lab｜量化交易、MQL5 與 AI 工作流',
+  },
+  'zh-Hans': {
+    description: 'AI-Quant Lab 专注于把 MQL5 量化策略、AI 工作流与知识入口整合成一套好看、好读、好行动的品牌体验。',
+    badge: '商业级 MT5 原始码 (Source Code) 入口',
+    tagline: 'AI-Quant Lab｜量化交易、MQL5 与 AI 工作流',
+  },
+  en: {
+    description: 'AI-Quant Lab brings MQL5 quantitative strategies, AI workflows, and knowledge resources together in a clear, polished, action-oriented brand experience.',
+    badge: 'Institutional MT5 Source Code',
+    tagline: 'AI-Quant Lab | Quantitative Trading, MQL5, and AI Workflows',
+  },
+};
+
+const footerLabels = {
+  'zh-Hant': [
+    ['探索', '首頁', 'AI 重構引擎', '模組化積木'],
+    ['旅程', 'LINE 知識庫', '標準會員', '會員中心'],
+  ],
+  'zh-Hans': [
+    ['探索', '首页', 'AI 重构引擎', '模块化积木'],
+    ['旅程', 'LINE 知识库', '标准会员', '会员中心'],
+  ],
+  en: [
+    ['Explore', 'Home', 'AI Refactoring Engine', 'Modular Blocks'],
+    ['Journey', 'LINE Knowledge Base', 'Standard Membership', 'Member Center'],
+  ],
+};
+
+function getFooterLinks(locale) {
+  const labels = footerLabels[locale] || footerLabels['zh-Hant'];
+  return footerLinks.map((group, groupIndex) => ({
+    ...group,
+    title: labels[groupIndex][0],
+    links: group.links.map((link, linkIndex) => ({
+      ...link,
+      label: labels[groupIndex][linkIndex + 1],
+    })),
+  }));
+}
 function getLocalizedNavItems(locale) {
   const translation = navTranslations[locale] || navTranslations['zh-Hant'];
   return navItems.map((item, index) => ({
@@ -99,7 +143,7 @@ function getLoginLabel(locale) {
 }
 function LogoMark() {
   return (
-    <div className="animate-badge-glow relative flex h-10 w-10 flex-none items-center justify-center overflow-hidden rounded-[1.25rem] border border-white/35 bg-gradient-to-br from-white via-cyan-100 to-cyan-400 px-2 py-1 text-[0.72rem] font-black leading-none tracking-[0.14em] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.22),0_0_22px_rgba(34,211,238,0.92),0_0_14px_rgba(59,130,246,0.52),inset_0_1px_0_rgba(255,255,255,0.95)] ring-2 ring-cyan-300/28">
+    <div className="animate-badge-glow relative flex h-9 w-9 flex-none sm:h-10 sm:w-10 items-center justify-center overflow-hidden rounded-[1.25rem] border border-white/35 bg-gradient-to-br from-white via-cyan-100 to-cyan-400 px-2 py-1 text-[0.72rem] font-black leading-none tracking-[0.14em] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.22),0_0_22px_rgba(34,211,238,0.92),0_0_14px_rgba(59,130,246,0.52),inset_0_1px_0_rgba(255,255,255,0.95)] ring-2 ring-cyan-300/28">
       <span
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.55),transparent_38%),linear-gradient(135deg,rgba(255,255,255,0.2),transparent_48%),linear-gradient(180deg,rgba(255,255,255,0.08),transparent_60%)]"
@@ -143,7 +187,7 @@ function LanguageMenu({ pathname, mobile = false }) {
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((value) => (mobile ? !value : true))}
-        className={'flex cursor-pointer list-none items-center justify-center gap-1.5 rounded-full border border-cyan-300/20 bg-slate-950/55 px-2.5 py-2 text-xs font-bold tracking-[0.1em] text-slate-200 shadow-[0_0_22px_rgba(34,211,238,0.14)] backdrop-blur-xl transition hover:border-cyan-300/45 hover:text-cyan-100 ' + (mobile ? 'w-full min-h-11' : 'min-w-[5.6rem]')}
+        className={'flex cursor-pointer list-none items-center justify-center gap-1.5 rounded-full border border-cyan-300/20 bg-slate-950/55 px-2.5 py-2 text-xs font-bold tracking-[0.1em] text-slate-200 shadow-[0_0_22px_rgba(34,211,238,0.14)] backdrop-blur-xl transition hover:border-cyan-300/45 hover:text-cyan-100 ' + (mobile ? 'w-full min-h-11' : 'min-w-[5.6rem] max-sm:min-w-[4.5rem] max-sm:gap-1 max-sm:px-2 max-sm:py-1.5 max-sm:text-[11px]')}
       >
         <span className="h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(34,211,238,0.7)]" />
         <span>{activeTab.label}</span>
@@ -234,16 +278,18 @@ function DesktopNavItem({ item, pathname, locale }) {
 
 function MobileNavItem({ item, pathname, locale, onNavigate }) {
   const isActive = isNavItemActive(item, pathname);
+  const [expanded, setExpanded] = useState(false);
+
 
   if (!item.children) {
     return (
       <Link
         href={localizePath(item.href, locale)}
-        className={`rounded-xl border px-4 py-3 transition ${
+        className={"rounded-xl border px-4 py-3 transition " + (
           isActive
-            ? 'border-cyan-400/40 bg-cyan-500/10 text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.12)]'
-            : 'border-slate-800 bg-slate-900/70 hover:border-cyan-400/30 hover:text-cyan-300'
-        }`}
+            ? "border-cyan-400/40 bg-cyan-500/10 text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.12)]"
+            : "border-slate-800 bg-slate-900/70 hover:border-cyan-400/30 hover:text-cyan-300"
+        )}
         onClick={onNavigate}
       >
         {item.label}
@@ -251,17 +297,54 @@ function MobileNavItem({ item, pathname, locale, onNavigate }) {
     );
   }
 
+  const submenuId = 'site-mobile-submenu-' + item.label.replace(/\s+/g, '-');
+
   return (
     <div
-      className={`rounded-2xl border px-4 py-3 transition ${
+      className={"rounded-2xl border px-4 py-3 transition " + (
         isActive
-          ? 'border-cyan-400/35 bg-cyan-500/10 shadow-[0_0_18px_rgba(34,211,238,0.12)]'
-          : 'border-slate-800 bg-slate-900/70'
-      }`}
+          ? "border-cyan-400/35 bg-cyan-500/10 shadow-[0_0_18px_rgba(34,211,238,0.12)]"
+          : "border-slate-800 bg-slate-900/70"
+      )}
     >
-      <div className="mb-3 flex items-center justify-between text-sm font-semibold text-slate-200">
+      <button
+        type="button"
+        aria-expanded={expanded}
+        aria-controls={submenuId}
+        className="flex min-h-12 w-full items-center justify-between text-left text-sm font-semibold text-slate-200"
+        onClick={() => setExpanded((open) => !open)}
+      >
         <span>{item.label}</span>
         <MenuDots />
+      </button>
+      <div
+        id={submenuId}
+        className={"grid overflow-hidden pl-2 transition-[max-height,opacity] duration-200 " + (
+          expanded ? "mt-2 max-h-96 gap-2 opacity-100" : "max-h-0 gap-0 opacity-0"
+        )}
+      >
+        {item.children.map((child) =>
+          child.disabled ? (
+            <span
+              key={child.label}
+              className="rounded-xl border border-slate-800/60 bg-slate-950/65 px-3 py-2.5 text-sm text-slate-500"
+            >
+              {child.label}
+            </span>
+          ) : (
+            <Link
+              key={child.label}
+              href={localizePath(child.href, locale)}
+              className="rounded-xl border border-slate-800 bg-slate-950/75 px-3 py-2.5 text-sm text-slate-300 transition hover:border-cyan-400/30 hover:text-cyan-200"
+              onClick={() => {
+                setExpanded(false);
+                onNavigate();
+              }}
+            >
+              {child.label}
+            </Link>
+          ),
+        )}
       </div>
     </div>
   );
@@ -270,6 +353,7 @@ function MobileNavItem({ item, pathname, locale, onNavigate }) {
 export default function SiteChrome({ children }) {
   const pathname = usePathname() || '/';
   const locale = getLocaleFromPath(pathname);
+  const footerText = footerTranslations[locale] || footerTranslations['zh-Hant'];
   const localizedNavItems = getLocalizedNavItems(locale);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -302,22 +386,22 @@ useEffect(() => {
 
   return (
     <div className="relative flex min-h-screen flex-col text-slate-100">
-      <header
-        className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 max-sm:bg-slate-950/92 max-sm:backdrop-blur-md ${
+      <header data-site-header
+        className={`fixed inset-x-0 top-0 z-[1000] isolate border-b transition-all duration-300 max-sm:!bg-transparent max-sm:!backdrop-blur-0 ${
           scrolled
-            ? 'border-slate-700/10 bg-slate-950/05 backdrop-blur-[22px] supports-[backdrop-filter]:bg-slate-950/[0.03]'
-            : 'border-slate-800/14 bg-slate-950/10 backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/06'
+            ? 'border-slate-700/10 bg-slate-950/05 sm:backdrop-blur-[22px] supports-[backdrop-filter]:bg-slate-950/[0.03]'
+            : 'border-slate-800/14 bg-slate-950/10 sm:backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/06'
         }`}
       >
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link href={localizePath('/', locale)} className="flex items-center gap-3">
+        <div className="mx-auto flex h-14 min-w-0 max-w-7xl items-center justify-between bg-slate-950/80 px-2 backdrop-blur-md sm:h-16 sm:bg-transparent sm:px-6 sm:backdrop-blur-0 lg:px-8">
+          <Link href={localizePath('/', locale)} className="flex min-w-0 shrink items-center gap-2 sm:gap-3">
             <LogoMark />
-            <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-xl font-black tracking-wide text-transparent drop-shadow-[0_0_16px_rgba(34,211,238,0.34)]">
+            <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-[clamp(0.8rem,4.3vw,1.25rem)] font-black leading-none whitespace-nowrap tracking-wide text-transparent sm:text-xl drop-shadow-[0_0_16px_rgba(34,211,238,0.34)]">
               AI-Quant Lab
             </span>
           </Link>
 
-          <div className="flex items-center gap-3 sm:gap-5">
+          <div className="flex min-w-0 shrink-0 items-center gap-1.5 sm:gap-3 lg:gap-5">
             <nav className="hidden items-center gap-2 text-sm font-medium md:flex">
               {localizedNavItems.map((item) => (
                 <DesktopNavItem key={item.label} item={item} pathname={pathname} locale={locale} />
@@ -328,12 +412,12 @@ useEffect(() => {
 
             <Link
               href={localizePath('/sign-in', locale)}
-              className="btn-pulse shrink-0 whitespace-nowrap rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-3.5 py-2 text-[12px] font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500"
+              className="btn-pulse shrink-0 whitespace-nowrap rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-2.5 py-2 text-[11px] font-bold text-slate-950 sm:px-3.5 sm:text-[12px] shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500"
 >{getLoginLabel(locale)}</Link>
 
             <button
               type="button"
-              className="btn-pulse ml-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 text-slate-100 transition hover:border-cyan-400/40 hover:text-cyan-300 md:hidden"
+              className="btn-pulse ml-1 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg sm:h-10 sm:w-10 border border-slate-700 bg-slate-900 text-slate-100 transition hover:border-cyan-400/40 hover:text-cyan-300 md:hidden"
               aria-label={mobileNavOpen ? '\u95dc\u9589\u9078\u55ae' : '\u958b\u555f\u9078\u55ae'}
               aria-expanded={mobileNavOpen}
               aria-controls="site-mobile-nav"
@@ -351,7 +435,7 @@ useEffect(() => {
 
         <div
           id="site-mobile-nav"
-          className={`overflow-hidden border-t border-slate-800/40 bg-slate-950/95 px-4 transition-[max-height,opacity,transform] duration-200 ease-out md:hidden ${
+          className={`relative z-[1100] ml-auto w-1/2 max-w-[22rem] overflow-hidden rounded-b-2xl border-b border-l border-t border-slate-800/40 bg-slate-950/98 px-3 transition-[max-height,opacity,transform] duration-200 ease-out md:hidden ${
             mobileNavOpen
               ? 'max-h-[min(34rem,calc(100vh-5.5rem))] translate-y-0 py-4 opacity-100'
               : 'max-h-0 -translate-y-1 py-0 opacity-0'
@@ -361,7 +445,7 @@ useEffect(() => {
           <div className="grid gap-2 text-sm font-medium text-slate-300">
             {localizedNavItems.map((item) => (
               <MobileNavItem
-                key={item.label}
+                key={item.label + "-" + (mobileNavOpen ? "open" : "closed")}
                 item={item}
                 pathname={pathname}
                 locale={locale}
@@ -389,14 +473,14 @@ useEffect(() => {
                 </span>
               </div>
               <p className="max-w-md text-sm leading-7 text-slate-400">
-                {'AI-Quant Lab \u5c08\u6ce8\u65bc\u628a MQL5 \u91cf\u5316\u7b56\u7565\u3001AI \u5de5\u4f5c\u6d41\u8207\u77e5\u8b58\u5165\u53e3\u6574\u5408\u6210\u4e00\u5957\u597d\u770b\u3001\u597d\u8b80\u3001\u597d\u884c\u52d5\u7684\u54c1\u724c\u9ad4\u9a57\u3002'}
+                {footerText.description}
               </p>
               <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300">
-                {'\u5546\u696d\u7d1a MT5 \u539f\u59cb\u78bc (Source Code) \u5165\u53e3'}
+                {footerText.badge}
               </div>
             </div>
 
-            {footerLinks.map((group) => (
+            {getFooterLinks(locale).map((group) => (
               <div key={group.title} className="space-y-4">
                 <h3 className="text-sm font-semibold uppercase tracking-[0.22em] text-cyan-200">{group.title}</h3>
                 <ul className="space-y-3 text-sm text-slate-400">
@@ -414,7 +498,7 @@ useEffect(() => {
 
           <div className="mt-10 flex flex-col gap-3 border-t border-slate-800/80 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
             <span>&copy; 2026 AI-Quant Lab. All rights reserved.</span>
-            <span>{'AI-Quant Lab \uff5c\u91cf\u5316\u4ea4\u6613\u3001MQL5 \u8207 AI \u5de5\u4f5c\u6d41'}</span>
+            <span>{footerText.tagline}</span>
           </div>
         </div>
       </footer>

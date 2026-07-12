@@ -1,12 +1,12 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { clerkMiddleware } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import { detectLocaleFromHeaders } from '@/lib/locale';
 
-const isMemberRoute = createRouteMatcher(['/member', '/member/(.*)']);
+export default clerkMiddleware(async (auth, request) => {
+  const isMemberRoute = /^\/(?:(?:en|zh-Hant|zh-Hans)\/)?member(?:\/.*)?$/.test(request.nextUrl.pathname);
 
-export default clerkMiddleware((auth, request) => {
-  if (isMemberRoute(request)) {
-    auth.protect();
+  if (isMemberRoute) {
+    await auth.protect();
   }
 
   const localeMatch = request.nextUrl.pathname.match(/^\/(zh-Hant|zh-Hans|en)(\/.*)?$/);

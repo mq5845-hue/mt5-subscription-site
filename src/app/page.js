@@ -274,7 +274,7 @@ function LanguageMenu({ pathname, mobile = false }) {
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((value) => (mobile ? !value : true))}
-        className={'flex cursor-pointer list-none items-center justify-center gap-1.5 rounded-full border border-cyan-300/20 bg-slate-950/55 px-2.5 py-2 text-xs font-bold tracking-[0.1em] text-slate-200 shadow-[0_0_22px_rgba(34,211,238,0.14)] backdrop-blur-xl transition hover:border-cyan-300/45 hover:text-cyan-100 ' + (mobile ? 'w-full min-h-11' : 'min-w-[5.6rem]')}
+        className={'flex cursor-pointer list-none items-center justify-center gap-1.5 rounded-full border border-cyan-300/20 bg-slate-950/55 px-2.5 py-2 text-xs font-bold tracking-[0.1em] text-slate-200 shadow-[0_0_22px_rgba(34,211,238,0.14)] backdrop-blur-xl transition hover:border-cyan-300/45 hover:text-cyan-100 ' + (mobile ? 'w-full min-h-11' : 'min-w-[5.6rem] max-sm:min-w-[4.5rem] max-sm:gap-1 max-sm:px-2 max-sm:py-1.5 max-sm:text-[11px]')}
       >
         <span className="h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(34,211,238,0.7)]" />
         <span>{activeTab.label}</span>
@@ -358,16 +358,18 @@ function HomeDesktopNavItem({ item, pathname, locale }) {
 
 function HomeMobileNavItem({ item, pathname, locale, tapClass, onNavigate }) {
   const isActive = isNavItemActive(item, pathname);
+  const [expanded, setExpanded] = useState(false);
+
 
   if (!item.children) {
     return (
       <Link
         href={localizePath(item.href, locale)}
-        className={`rounded-xl border px-4 py-3 min-h-12 transition ${tapClass} ${
+        className={"rounded-xl border px-4 py-3 min-h-12 transition " + tapClass + " " + (
           isActive
-            ? 'border-cyan-400/40 bg-cyan-500/10 text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.12)]'
-            : 'border-slate-800 bg-slate-900/70 hover:border-cyan-400/30 hover:text-cyan-300'
-        }`}
+            ? "border-cyan-400/40 bg-cyan-500/10 text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.12)]"
+            : "border-slate-800 bg-slate-900/70 hover:border-cyan-400/30 hover:text-cyan-300"
+        )}
         onClick={onNavigate}
       >
         {item.label}
@@ -375,17 +377,54 @@ function HomeMobileNavItem({ item, pathname, locale, tapClass, onNavigate }) {
     );
   }
 
+  const submenuId = 'home-mobile-submenu-' + item.label.replace(/\s+/g, '-');
+
   return (
     <div
-      className={`rounded-2xl border px-4 py-3 transition ${
+      className={"rounded-2xl border px-4 py-3 transition " + (
         isActive
-          ? 'border-cyan-400/35 bg-cyan-500/10 shadow-[0_0_18px_rgba(34,211,238,0.12)]'
-          : 'border-slate-800 bg-slate-900/70'
-      }`}
+          ? "border-cyan-400/35 bg-cyan-500/10 shadow-[0_0_18px_rgba(34,211,238,0.12)]"
+          : "border-slate-800 bg-slate-900/70"
+      )}
     >
-      <div className="mb-3 flex items-center justify-between text-sm font-semibold text-slate-200">
+      <button
+        type="button"
+        aria-expanded={expanded}
+        aria-controls={submenuId}
+        className="flex min-h-12 w-full items-center justify-between text-left text-sm font-semibold text-slate-200"
+        onClick={() => setExpanded((open) => !open)}
+      >
         <span>{item.label}</span>
         <MenuDots />
+      </button>
+      <div
+        id={submenuId}
+        className={"grid overflow-hidden pl-2 transition-[max-height,opacity] duration-200 " + (
+          expanded ? "mt-2 max-h-96 gap-2 opacity-100" : "max-h-0 gap-0 opacity-0"
+        )}
+      >
+        {item.children.map((child) =>
+          child.disabled ? (
+            <span
+              key={child.label}
+              className="rounded-xl border border-slate-800/60 bg-slate-950/65 px-3 py-2.5 text-sm text-slate-500"
+            >
+              {child.label}
+            </span>
+          ) : (
+            <Link
+              key={child.label}
+              href={localizePath(child.href, locale)}
+              className={"rounded-xl border border-slate-800 bg-slate-950/75 px-3 py-2.5 text-sm text-slate-300 transition hover:border-cyan-400/30 hover:text-cyan-200 " + tapClass}
+              onClick={() => {
+                setExpanded(false);
+                onNavigate();
+              }}
+            >
+              {child.label}
+            </Link>
+          ),
+        )}
       </div>
     </div>
   );
@@ -923,16 +962,16 @@ export default function Home({ locale = 'zh-Hant' }) {
         </div>
 
         <div className="relative z-10">
-        <header
-          className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 supports-[backdrop-filter]:transition-all max-sm:bg-slate-950/92 max-sm:backdrop-blur-md ${
+        <header data-site-header
+          className={`fixed inset-x-0 top-0 z-[1000] isolate border-b transition-all duration-300 supports-[backdrop-filter]:transition-all max-sm:!bg-transparent max-sm:!backdrop-blur-0 ${
             scrolled
-              ? 'border-slate-700/10 bg-slate-950/05 backdrop-blur-[22px] supports-[backdrop-filter]:bg-slate-950/[0.03]'
-              : 'border-slate-800/14 bg-slate-950/10 backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/06'
+              ? 'border-slate-700/10 bg-slate-950/05 sm:backdrop-blur-[22px] supports-[backdrop-filter]:bg-slate-950/[0.03]'
+              : 'border-slate-800/14 bg-slate-950/10 sm:backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/06'
           }`}
         >
-          <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-3">
-              <div className="animate-badge-glow relative flex h-10 w-10 flex-none items-center justify-center overflow-hidden rounded-[1.25rem] border border-white/35 bg-gradient-to-br from-white via-cyan-100 to-cyan-400 px-2 py-1 text-[0.72rem] font-black leading-none tracking-[0.14em] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.22),0_0_22px_rgba(34,211,238,0.92),0_0_14px_rgba(59,130,246,0.52),inset_0_1px_0_rgba(255,255,255,0.95)] ring-2 ring-cyan-300/28">
+          <div className="mx-auto flex h-14 min-w-0 max-w-7xl items-center justify-between bg-slate-950/80 px-2 backdrop-blur-md sm:h-16 sm:bg-transparent sm:px-6 sm:backdrop-blur-0 lg:px-8">
+            <div className="flex min-w-0 shrink items-center gap-2 sm:gap-3">
+              <div className="animate-badge-glow relative flex h-9 w-9 flex-none sm:h-10 sm:w-10 items-center justify-center overflow-hidden rounded-[1.25rem] border border-white/35 bg-gradient-to-br from-white via-cyan-100 to-cyan-400 px-2 py-1 text-[0.72rem] font-black leading-none tracking-[0.14em] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.22),0_0_22px_rgba(34,211,238,0.92),0_0_14px_rgba(59,130,246,0.52),inset_0_1px_0_rgba(255,255,255,0.95)] ring-2 ring-cyan-300/28">
                 <span
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.55),transparent_38%),linear-gradient(135deg,rgba(255,255,255,0.2),transparent_48%),linear-gradient(180deg,rgba(255,255,255,0.08),transparent_60%)]"
@@ -949,12 +988,12 @@ export default function Home({ locale = 'zh-Hant' }) {
                   mq5
                 </span>
               </div>
-              <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-xl font-black tracking-wide text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-[clamp(0.8rem,4.3vw,1.25rem)] font-black leading-none whitespace-nowrap tracking-wide text-transparent sm:text-xl">
                 AI-Quant Lab
               </span>
             </div>
 
-            <div className="flex items-center gap-3 sm:gap-5">
+            <div className="flex min-w-0 shrink-0 items-center gap-1.5 sm:gap-3 lg:gap-5">
               <nav className="hidden items-center gap-2 text-sm font-medium md:flex">
                 {getLocalizedNavItems(pageLocale).map((item) => (
                   <HomeDesktopNavItem key={item.label} item={item} pathname={pathname || ''} locale={pageLocale} />
@@ -965,7 +1004,7 @@ export default function Home({ locale = 'zh-Hant' }) {
 
               <Link
                 href={localizePath('/sign-in', pageLocale)}
-                className={`btn-pulse shrink-0 whitespace-nowrap rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-3.5 py-2 text-[12px] font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500 min-h-11 ${tapClass}`}
+                className={`btn-pulse shrink-0 whitespace-nowrap rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-2.5 py-2 text-[11px] font-bold text-slate-950 sm:px-3.5 sm:text-[12px] shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500 min-h-11 ${tapClass}`}
                 onClick={() => withTapLock(() => {})}
               >
                 {copy.topLogin}
@@ -973,7 +1012,7 @@ export default function Home({ locale = 'zh-Hant' }) {
 
               <button
                 type="button"
-                className={`btn-pulse shrink-0 ml-1 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 text-slate-100 transition hover:border-cyan-400/40 hover:text-cyan-300 md:hidden ${tapClass}`}
+                className={`btn-pulse shrink-0 ml-1 inline-flex h-9 w-9 items-center justify-center rounded-lg sm:h-10 sm:w-10 border border-slate-700 bg-slate-900 text-slate-100 transition hover:border-cyan-400/40 hover:text-cyan-300 md:hidden ${tapClass}`}
                 aria-label={mobileNavOpen ? '關閉導覽選單' : '開啟導覽選單'}
                 aria-expanded={mobileNavOpen}
                 aria-controls="mobile-nav-menu"
@@ -991,9 +1030,9 @@ export default function Home({ locale = 'zh-Hant' }) {
 
           <div
             id="mobile-nav-menu"
-            className={`md:hidden overflow-hidden border-t border-slate-800/40 bg-slate-950/95 px-4 transition-[max-height,opacity,transform] duration-200 ease-out ${
+            className={`md:hidden relative z-[1100] ml-auto w-1/2 max-w-[22rem] overflow-hidden rounded-b-2xl border-b border-l border-t border-slate-800/40 bg-slate-950/98 px-3 transition-[max-height,opacity,transform] duration-200 ease-out ${
               mobileNavOpen
-                ? 'max-h-[min(24rem,calc(100vh-5.5rem))] translate-y-0 py-4 opacity-100'
+                ? 'max-h-[min(34rem,calc(100vh-5.5rem))] translate-y-0 py-4 opacity-100'
                 : 'max-h-0 -translate-y-1 py-0 opacity-0'
             }`}
           >
@@ -1002,7 +1041,7 @@ export default function Home({ locale = 'zh-Hant' }) {
             <div className="grid gap-2 text-sm font-medium text-slate-300">
               {getLocalizedNavItems(pageLocale).map((item) => (
                 <HomeMobileNavItem
-                  key={item.label}
+                  key={item.label + "-" + (mobileNavOpen ? "open" : "closed")}
                   item={item}
                   pathname={pathname || ''}
                   locale={pageLocale}
@@ -1620,7 +1659,7 @@ export default function Home({ locale = 'zh-Hant' }) {
           <div className="grid gap-10 md:grid-cols-[1.4fr_0.8fr_0.8fr]">
             <div className="space-y-5">
               <div className="flex items-center gap-3">
-                <div className="animate-badge-glow relative flex h-10 w-10 flex-none items-center justify-center overflow-hidden rounded-[1.25rem] border border-white/30 bg-gradient-to-br from-white via-cyan-100 to-cyan-400 text-white shadow-[0_0_0_1px_rgba(255,255,255,0.2),0_0_22px_rgba(34,211,238,0.88),0_0_14px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.95)] ring-2 ring-cyan-300/22">
+                <div className="animate-badge-glow relative flex h-9 w-9 flex-none sm:h-10 sm:w-10 items-center justify-center overflow-hidden rounded-[1.25rem] border border-white/30 bg-gradient-to-br from-white via-cyan-100 to-cyan-400 text-white shadow-[0_0_0_1px_rgba(255,255,255,0.2),0_0_22px_rgba(34,211,238,0.88),0_0_14px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.95)] ring-2 ring-cyan-300/22">
                   <span
                     aria-hidden="true"
                     className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.48),transparent_38%),linear-gradient(135deg,rgba(255,255,255,0.16),transparent_48%),linear-gradient(180deg,rgba(255,255,255,0.08),transparent_60%)]"
@@ -1660,7 +1699,7 @@ export default function Home({ locale = 'zh-Hant' }) {
                 <Link href={localizePath('/modular', pageLocale)} className="transition hover:text-cyan-300">
                   {ui?.footerModular || '模組化積木'}
                 </Link>
-                <Link href="/line-kb" className="transition hover:text-cyan-300">
+                <Link href={localizePath('/line-kb', pageLocale)} className="transition hover:text-cyan-300">
                   {ui?.footerLine || 'LINE 知識庫'}
                 </Link>
                 <Link href="#pricing" className="transition hover:text-cyan-300">

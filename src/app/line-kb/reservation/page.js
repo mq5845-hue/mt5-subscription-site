@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import { headers } from 'next/headers';
 import ReservationForm from '@/components/ReservationForm';
+import { localizePath } from '@/lib/locale';
 import { getReservationPageUrl } from '@/lib/reservation-integrations';
 
 export const metadata = {
@@ -49,7 +51,9 @@ create table if not exists line_inbound_events (
   raw_event jsonb not null default '{}'::jsonb
 );`;
 
-export default function ReservationPage() {
+export default async function ReservationPage() {
+  const requestHeaders = await headers();
+  const locale = requestHeaders.get('x-site-locale') || 'zh-Hant';
   const reservationUrl = getReservationPageUrl();
 
   return (
@@ -79,7 +83,7 @@ export default function ReservationPage() {
 
             <div className="flex flex-wrap gap-2 lg:pt-2">
               <Link
-                href="/line-kb"
+                href={localizePath('/line-kb', locale)}
                 className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-xs font-semibold tracking-[0.18em] text-cyan-100 transition hover:border-cyan-200/35 hover:bg-cyan-300/15 hover:text-white"
               >
                 Back to LINE KB

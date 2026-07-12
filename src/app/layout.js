@@ -1,4 +1,4 @@
-import { ClerkProvider } from '@clerk/nextjs';
+﻿import { ClerkProvider } from '@clerk/nextjs';
 import { headers } from 'next/headers';
 import { defaultLocale } from '@/lib/locale';
 import { Geist, Geist_Mono } from 'next/font/google';
@@ -17,8 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ai-quant-lab.vercel.app';
-const siteDescription =
-  'AI-Quant Lab 源代碼量化工廠實驗室，專注於 MQL5 原始碼研發、AI 模組化提示詞工程與量化技術教學。';
+const siteDescription = 'AI-Quant Lab brings MQL5 quantitative strategies, AI workflows, and practical knowledge resources together in one clear member experience.';
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
