@@ -1,13 +1,17 @@
 ﻿import { headers } from 'next/headers';
 import Link from 'next/link';
 import { localizePath } from '@/lib/locale';
+import EmojiAvatar from '@/components/EmojiAvatar';
+
+const resourceEmojis = { '/': '🏠', '/line-kb/formal-tree': '🌳', '/line-kb/flex-template': '💬', '/line-kb/spec': '📐', '/line-kb/expansion': '🌱', '/line-kb/backend-export': '📦', '/line-kb/reservation': '📅' };
+const knowledgeEmojis = { highlights: ['👋', '🧭', '💡', '🌱', '📤'], story: ['✨', '🤝', '🎯'], expansion: ['🧱', '🎨', '🔄'], process: ['📥', '💬', '📈'] };
 
 const localeCopy = {
   en: {
-    metadataTitle: 'LINE Knowledge Base | AI-Quant Lab',
+    metadataTitle: 'Knowledge Base | AI-Quant Lab',
     metadataDescription: 'A practical LINE knowledge base for AI-Quant Lab product guidance, reservations, and response workflows.',
-    eyebrow: 'LINE KNOWLEDGE BASE',
-    title: 'AI-Quant Lab LINE Knowledge Base',
+    eyebrow: 'KNOWLEDGE BASE',
+    title: 'AI-Quant Lab Knowledge Base',
     lead: 'A structured response system for brand guidance, reservations, product education, and fast customer navigation.',
     badges: ['Public entry', 'FAQ ready', 'Exportable'],
     quickLinks: [
@@ -54,10 +58,10 @@ const localeCopy = {
     resource: 'Resource',
   },
   'zh-Hant': {
-    metadataTitle: 'LINE 知識庫 | AI-Quant Lab',
+    metadataTitle: '知識庫 | AI-Quant Lab',
     metadataDescription: 'AI-Quant Lab 的 LINE 知識庫，整理品牌導覽、預約、產品教育與回應流程。',
-    eyebrow: 'LINE 知識庫',
-    title: 'AI-Quant Lab LINE 知識庫',
+    eyebrow: '知識庫',
+    title: 'AI-Quant Lab 知識庫',
     lead: '把品牌導覽、預約、產品教育與客戶回應，整理成清楚、可持續維護的入口。',
     badges: ['公開入口', 'FAQ 就緒', '可匯出'],
     quickLinks: [
@@ -104,10 +108,10 @@ const localeCopy = {
     resource: '資源',
   },
   'zh-Hans': {
-    metadataTitle: 'LINE 知识库 | AI-Quant Lab',
+    metadataTitle: '知识库 | AI-Quant Lab',
     metadataDescription: 'AI-Quant Lab 的 LINE 知识库，整理品牌导览、预约、产品教育与回应流程。',
-    eyebrow: 'LINE 知识库',
-    title: 'AI-Quant Lab LINE 知识库',
+    eyebrow: '知识库',
+    title: 'AI-Quant Lab 知识库',
     lead: '把品牌导览、预约、产品教育与客户回应，整理成清楚、可持续维护的入口。',
     badges: ['公开入口', 'FAQ 就绪', '可汇出'],
     quickLinks: [
@@ -159,7 +163,7 @@ export async function generateMetadata({ searchParams }) {
   const requestHeaders = await headers();
   const params = await searchParams;
   const queryLocale = Array.isArray(params?.__locale) ? params.__locale[0] : params?.__locale;
-  const locale = queryLocale || requestHeaders.get('x-site-locale') || 'zh-Hant';
+  const locale = queryLocale || requestHeaders.get('x-site-locale') || 'en';
   const text = localeCopy[locale] || localeCopy['zh-Hant'];
   return { title: text.metadataTitle, description: text.metadataDescription };
 }
@@ -188,7 +192,7 @@ function ResourceCard({ item, locale, text }) {
     >
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-semibold tracking-[0.2em] text-cyan-300">{text.resource}</p>
+          <p className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] text-cyan-300"><EmojiAvatar emoji={resourceEmojis[item.href] || '📚'} />{text.resource}</p>
           <h3 className="mt-3 text-xl font-bold text-white transition group-hover:text-cyan-200">{item.label}</h3>
         </div>
         <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-[11px] font-semibold tracking-[0.16em] text-cyan-200">
@@ -204,7 +208,7 @@ export default async function LineKbPage({ searchParams }) {
   const requestHeaders = await headers();
   const params = await searchParams;
   const queryLocale = Array.isArray(params?.__locale) ? params.__locale[0] : params?.__locale;
-  const locale = queryLocale || requestHeaders.get('x-site-locale') || 'zh-Hant';
+  const locale = queryLocale || requestHeaders.get('x-site-locale') || 'en';
   const text = localeCopy[locale] || localeCopy['zh-Hant'];
 
   return (
@@ -239,9 +243,9 @@ export default async function LineKbPage({ searchParams }) {
           </header>
 
           <section className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-            {text.highlights.map((card) => (
+            {text.highlights.map((card, index) => (
               <article key={card.title} className="rounded-[1.5rem] border border-cyan-400/14 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(8,15,31,0.95))] p-5 shadow-[0_16px_50px_rgba(2,132,199,0.08)] ring-1 ring-white/5">
-                <p className="text-xs font-semibold tracking-[0.16em] text-cyan-300">{card.kicker}</p>
+                <p className="flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-cyan-300"><EmojiAvatar emoji={knowledgeEmojis.highlights[index % knowledgeEmojis.highlights.length]} />{card.kicker}</p>
                 <h2 className="mt-3 text-lg font-bold text-white">{card.title}</h2>
                 <p className="mt-3 text-sm leading-7 text-slate-300">{card.description}</p>
               </article>
@@ -262,9 +266,9 @@ export default async function LineKbPage({ searchParams }) {
           </section>
 
           <section className="mt-8 grid gap-4 lg:grid-cols-3">
-            {text.story.map((block) => (
+            {text.story.map((block, index) => (
               <article key={block.title} className="rounded-[1.5rem] border border-cyan-400/14 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(8,15,31,0.95))] p-5 shadow-[0_16px_50px_rgba(2,132,199,0.08)] ring-1 ring-white/5">
-                <p className="text-xs font-semibold tracking-[0.2em] text-cyan-300">{text.storyEyebrow}</p>
+                <p className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] text-cyan-300"><EmojiAvatar emoji={knowledgeEmojis.story[index % knowledgeEmojis.story.length]} tone="violet" />{text.storyEyebrow}</p>
                 <h2 className="mt-3 text-2xl font-bold text-white">{block.title}</h2>
                 <p className="mt-3 text-sm leading-7 text-slate-300">{block.text}</p>
               </article>
@@ -282,9 +286,9 @@ export default async function LineKbPage({ searchParams }) {
           </section>
 
           <section className="mt-8 grid gap-4 lg:grid-cols-3">
-            {text.expansion.map((card) => (
+            {text.expansion.map((card, index) => (
               <article key={card.title} className="rounded-[1.5rem] border border-cyan-400/14 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(8,15,31,0.95))] p-5 shadow-[0_16px_50px_rgba(2,132,199,0.08)] ring-1 ring-white/5">
-                <p className="text-xs font-semibold tracking-[0.2em] text-cyan-300">{text.expansionEyebrow}</p>
+                <p className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] text-cyan-300"><EmojiAvatar emoji={knowledgeEmojis.expansion[index % knowledgeEmojis.expansion.length]} tone="emerald" />{text.expansionEyebrow}</p>
                 <h2 className="mt-3 text-2xl font-bold text-white">{card.title}</h2>
                 <p className="mt-3 text-sm leading-7 text-slate-300">{card.text}</p>
               </article>
@@ -293,9 +297,9 @@ export default async function LineKbPage({ searchParams }) {
 
           <section className="mt-8 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 sm:p-7">
             <div className="grid gap-4 md:grid-cols-3">
-              {text.process.map((item) => (
+              {text.process.map((item, index) => (
                 <article key={item.step} className="rounded-[1.25rem] border border-cyan-400/14 bg-slate-950/60 p-5">
-                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/10 text-sm font-black text-cyan-200">{item.step}</div>
+                  <div className="inline-flex items-center gap-2 rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-2.5 py-2 font-mono text-sm font-black text-cyan-200"><EmojiAvatar emoji={knowledgeEmojis.process[index % knowledgeEmojis.process.length]} tone="emerald" /><span>{item.step}</span></div>
                   <h3 className="mt-4 text-xl font-bold text-white">{item.title}</h3>
                   <p className="mt-3 text-sm leading-7 text-slate-300">{item.text}</p>
                 </article>

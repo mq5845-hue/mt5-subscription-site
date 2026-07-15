@@ -5,10 +5,18 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { getLocaleFromPath, localizePath } from '@/lib/locale';
+import EmojiAvatar from '@/components/EmojiAvatar';
 
 const glowText = 'drop-shadow-[0_0_10px_rgba(34,211,238,0.22)]';
 const tapClass =
   'touch-manipulation select-none active:scale-[0.98] active:translate-y-px transition-transform duration-150';
+
+const homeCardEmojis = {
+  reasons: ['🧠', '🛠️', '🚀'],
+  journey: ['🌱', '🧭', '✨'],
+  route: ['👀', '🧩', '🧪', '🎯'],
+  signal: ['✅', '🛡️', '⚡'],
+};
 
 // Hero / ambient motion
 const particles = [
@@ -143,12 +151,13 @@ const lineConversationPreview = {
 const navItems = [
   {
     label: 'AI\u91cd\u69cb\u5f15\u64ce',
-    matches: ['/membership', '/converter'],
+    matches: ['/membership', '/converter', '/multi-agent'],
     children: [
       { href: '/membership', label: '\u6a19\u6e96\u6703\u54e1\u7248' },
       { label: '\u52a0\u76df\u6703\u54e1\u7248', disabled: true },
       { href: '/converter', label: '\u5c0a\u69ae\u5546\u7528\u7248' },
-      { label: 'Docker MCP\u4f3a\u670d\u5668\u7248', disabled: true },
+      { href: '/multi-agent/engine', label: '\u591a\u667a\u80fd\u9ad4MQL\u5168\u81ea\u52d5\u9032\u5316\u5f15\u64ce', newTab: true },
+      { label: 'Docker MCP\u4f3a\u670d\u5650\u7248(\u4f01\u696d\u79c1\u6709\u96f2)', disabled: true },
     ],
   },
   { href: '/modular', label: '\u6a21\u7d44\u5316\u7a4d\u6728', matches: ['/modular'] },
@@ -173,24 +182,24 @@ const languageTabs = [
 
 const navTranslations = {
   'zh-Hant': {
-    groups: ['AI重構引擎', '模組化積木', 'LINE 知識庫', '訂閱方案'],
-    children: [['標準會員版', '加盟會員版', '尊榮商用版', 'Docker MCP伺服器版'], null, null, ['標準會員', '加盟會員', '企業VIP會員']],
+    groups: ['AI重構引擎', '模組化積木', 'Lab 知識庫', '訂閱方案'],
+    children: [['標準會員版', '加盟會員版', '尊榮商用版', '\u591a\u667a\u80fd\u9ad4MQL\u5168\u81ea\u52d5\u9032\u5316\u5f15\u64ce', 'Docker MCP伺服噐版(企業私有雲)'], null, null, ['標準會員', '加盟會員', '企業VIP會員']],
     login: '登錄',
   },
   'zh-Hans': {
-    groups: ['AI重构引擎', '模块化积木', 'LINE 知识库', '订阅方案'],
-    children: [['标准会员版', '加盟会员版', '尊荣商用版', 'Docker MCP服务器版'], null, null, ['标准会员', '加盟会员', '企业VIP会员']],
+    groups: ['AI重构引擎', '模块化积木', 'Lab 知识库', '订阅方案'],
+    children: [['标准会员版', '加盟会员版', '尊荣商用版', '\u591a\u667a\u80fd\u4f53MQL\u5168\u81ea\u52a8\u8fdb\u5316\u5f15\u64ce', 'Docker MCP服务器版(企业私有云)'], null, null, ['标准会员', '加盟会员', '企业VIP会员']],
     login: '登录',
   },
   en: {
-    groups: ['AI Refactoring', 'Modular Blocks', 'LINE Knowledge Base', 'Subscription Plans'],
-    children: [['Standard Membership', 'Affiliate Membership', 'Premium Commercial', 'Docker MCP Server'], null, null, ['Standard Membership', 'Affiliate Membership', 'Enterprise VIP']],
+    groups: ['AI Refactoring', 'Modular Blocks', 'Lab Knowledge Base', 'Subscription Plans'],
+    children: [['Standard Membership', 'Affiliate Membership', 'Premium Commercial', 'Multi-Agent MQL Evolution Engine', 'Docker MCP Server (Enterprise Private Cloud)'], null, null, ['Standard Membership', 'Affiliate Membership', 'Enterprise VIP']],
     login: 'LOGIN',
   },
 };
 
 function getLocalizedNavItems(locale) {
-  const translation = navTranslations[locale] || navTranslations['zh-Hant'];
+  const translation = navTranslations[locale] || navTranslations.en;
   return navItems.map((item, index) => ({
     ...item,
     label: translation.groups[index],
@@ -204,7 +213,7 @@ function getLocalizedNavItems(locale) {
 }
 
 function getLoginLabel(locale) {
-  return (navTranslations[locale] || navTranslations['zh-Hant']).login;
+  return (navTranslations[locale] || navTranslations.en).login;
 }
 const homeCopy = {
   'zh-Hant': {
@@ -305,6 +314,7 @@ function LanguageMenu({ pathname, mobile = false }) {
 }
 function HomeDesktopNavItem({ item, pathname, locale }) {
   const isActive = isNavItemActive(item, pathname);
+  const isAiMenu = item.children?.some((child) => child.href === '/multi-agent/engine');
   const baseClasses = isActive
     ? 'bg-cyan-500/12 text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.18)]'
     : 'text-slate-400 hover:text-cyan-400';
@@ -333,18 +343,20 @@ function HomeDesktopNavItem({ item, pathname, locale }) {
         <span className={isActive ? 'drop-shadow-[0_0_12px_rgba(34,211,238,0.36)]' : ''}>{item.label}</span>
         <MenuDots />
       </button>
-      <div className={'pointer-events-none invisible absolute left-1/2 top-full z-50 -translate-x-1/2 translate-y-1 pt-3 opacity-0 transition-[opacity,transform,visibility] duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 ' + (item.label.includes('訂閱方案') || item.label.includes('订阅方案') || item.label === 'Subscription Plans' ? 'w-28' : (item.label.includes('AI重構引擎') || item.label.includes('AI重构引擎') || item.label === 'AI Refactoring' ? 'w-32' : 'w-56'))}>
+      <div className={'pointer-events-none invisible absolute left-1/2 top-full z-50 -translate-x-1/2 translate-y-1 pt-3 opacity-0 transition-[opacity,transform,visibility] duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 ' + (item.label.includes('訂閱方案') || item.label.includes('订阅方案') || item.label === 'Subscription Plans' ? 'w-28' : (item.label.includes('AI重構引擎') || item.label.includes('AI重构引擎') || item.label === 'AI Refactoring' ? 'w-36' : 'w-56'))}>
         <div className="overflow-hidden rounded-2xl border border-cyan-300/18 bg-slate-950/92 p-2 shadow-[0_0_28px_rgba(34,211,238,0.16)] backdrop-blur-xl">
           {item.children.map((child) =>
             child.disabled ? (
-              <span key={child.label} className="flex items-center rounded-xl px-4 py-3 text-sm font-medium text-slate-500">
+              <span key={child.label} className={'flex items-center rounded-xl py-3 font-medium text-slate-500 ' + (isAiMenu ? 'px-3 text-[12px] leading-4 whitespace-normal break-words' : 'px-4 text-sm')}>
                 {child.label}
               </span>
             ) : (
               <Link
                 key={child.label}
                 href={localizePath(child.href, locale)}
-                className="flex items-center rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-cyan-500/10 hover:text-cyan-200"
+                target={child.newTab ? '_blank' : undefined}
+                rel={child.newTab ? 'noopener noreferrer' : undefined}
+                className={'flex items-center rounded-xl py-3 font-medium text-slate-300 transition hover:bg-cyan-500/10 hover:text-cyan-200 ' + (isAiMenu ? 'px-3 text-[12px] leading-4 whitespace-normal break-words' : 'px-4 text-sm')}
               >
                 {child.label}
               </Link>
@@ -415,6 +427,8 @@ function HomeMobileNavItem({ item, pathname, locale, tapClass, onNavigate }) {
             <Link
               key={child.label}
               href={localizePath(child.href, locale)}
+                target={child.newTab ? '_blank' : undefined}
+                rel={child.newTab ? 'noopener noreferrer' : undefined}
               className={"rounded-xl border border-slate-800 bg-slate-950/75 px-3 py-2.5 text-sm text-slate-300 transition hover:border-cyan-400/30 hover:text-cyan-200 " + tapClass}
               onClick={() => {
                 setExpanded(false);
@@ -854,16 +868,16 @@ const englishUi = {
   footerJourneyTwo: 'This is not the destination. It is the start of your next quantitative journey.',
   footerTag: 'AI-Quant Lab Source-Code Quantitative Lab | MQL5 x AI Modular Education',
 };
-export default function Home({ locale = 'zh-Hant' }) {
+export default function Home({ locale = 'en' }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [openAccordionIndex, setOpenAccordionIndex] = useState(0);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const tapLockRef = useRef(false);
 
-  const currentLocalePath = pathname || `/${locale || 'zh-Hant'}`;
+  const currentLocalePath = pathname || `/${locale || 'en'}`;
   const pageLocale = getLocaleFromPath(currentLocalePath);
-  const currentLocale = homeCopy[pageLocale] ? pageLocale : 'zh-Hant';
+  const currentLocale = homeCopy[pageLocale] ? pageLocale : 'en';
   const copy = homeCopy[currentLocale];
   const isEnglish = currentLocale === 'en';
   const localizedScrollCards = isEnglish ? englishScrollCards : scrollCards;
@@ -1122,7 +1136,8 @@ export default function Home({ locale = 'zh-Hant' }) {
                 <div className="pointer-events-none absolute inset-0 rounded-3xl ring-0 ring-cyan-300/0 transition-all duration-300 group-hover:ring-1 group-hover:ring-cyan-300/25" />
 
                 <div className="relative z-10">
-                  <div className="mb-5 inline-flex items-center rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs font-semibold tracking-wider text-cyan-300">
+                  <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-2.5 py-1 text-xs font-semibold tracking-wider text-cyan-300">
+                    <EmojiAvatar emoji={homeCardEmojis.reasons[index % homeCardEmojis.reasons.length]} />
                     {card.kicker}
                   </div>
                   <h3 className={`text-xl font-bold leading-snug text-white transition-colors duration-300 group-hover:text-cyan-300 ${glowText}`}>
@@ -1166,7 +1181,8 @@ export default function Home({ locale = 'zh-Hant' }) {
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(232,121,249,0.14),transparent_58%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="pointer-events-none absolute inset-0 rounded-3xl ring-0 ring-fuchsia-300/0 transition-all duration-300 group-hover:ring-1 group-hover:ring-fuchsia-300/25" />
                 <div className="relative z-10">
-                  <div className="mb-5 inline-flex items-center rounded-full border border-fuchsia-400/20 bg-fuchsia-500/10 px-3 py-1 text-xs font-semibold tracking-wider text-fuchsia-200">
+                  <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-fuchsia-400/20 bg-fuchsia-500/10 px-2.5 py-1 text-xs font-semibold tracking-wider text-fuchsia-200">
+                    <EmojiAvatar emoji={homeCardEmojis.journey[index % homeCardEmojis.journey.length]} tone="violet" />
                     {block.tag}
                   </div>
                   <h3 className={`text-xl font-bold leading-snug text-white transition-colors duration-300 group-hover:text-fuchsia-200 ${glowText}`}>
@@ -1209,7 +1225,8 @@ export default function Home({ locale = 'zh-Hant' }) {
                   <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.14),transparent_58%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <div className="pointer-events-none absolute inset-0 rounded-3xl ring-0 ring-cyan-300/0 transition-all duration-300 group-hover:ring-1 group-hover:ring-cyan-300/25" />
                   <div className="relative z-10">
-                    <div className="mb-5 inline-flex items-center rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs font-semibold tracking-wider text-cyan-300">
+                    <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-2.5 py-1 text-xs font-semibold tracking-wider text-cyan-300">
+                      <EmojiAvatar emoji={homeCardEmojis.route[index % homeCardEmojis.route.length]} />
                       {step.step}
                     </div>
                     <h3 className={`text-xl font-bold leading-snug text-white transition-colors duration-300 group-hover:text-cyan-300 ${glowText}`}>
@@ -1236,8 +1253,9 @@ export default function Home({ locale = 'zh-Hant' }) {
               >
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.16),transparent_55%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="relative z-10">
-                  <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-300 ring-1 ring-cyan-400/20">
-                    0{index + 1}
+                  <div className="mb-3 inline-flex items-center gap-2 rounded-xl bg-cyan-500/10 px-2.5 py-2 font-mono text-xs text-cyan-300 ring-1 ring-cyan-400/20">
+                    <EmojiAvatar emoji={homeCardEmojis.signal[index % homeCardEmojis.signal.length]} tone="emerald" />
+                    <span>0{index + 1}</span>
                   </div>
                   <h3 className={`text-lg font-bold text-white transition-colors duration-300 group-hover:text-cyan-300 ${glowText}`}>
                     {signal.title}

@@ -1,0 +1,70 @@
+const shared = {
+  products: { ea: 'EA', indicator: 'Indicator', script: 'Script', library: 'Library', tools: 'Tools' },
+};
+
+export const mqlEngineCopy = {
+  'zh-Hant': {
+    ...shared,
+    products: { ea: 'EA', indicator: '技術指標', script: '腳本', library: '函式庫', tools: 'Tools 工具' },
+    agents: [
+      ['Parser', '代碼剖析', '語意、依賴、風險'], ['Architect', '架構設計', '對映、契約、藍圖'],
+      ['Refactor', 'MQL5 編程', '重構、模組、效能'], ['Compiler', '編譯除錯', 'MetaEditor、日誌、修正'],
+      ['Optimizer', '回測調優', 'MT5、穩健性、風險'],
+    ],
+    stages: ['安全接收', '建立基準', '架構重構', '真實編譯', '回測驗證', '版本交付'],
+    deliverables: ['MQL5 原始碼與產品包', '0 errors／0 個未裁決 warnings', 'MQL4 → MQL5 對映與差異清單', '編譯、回測、樣本外與風險證據', '資料指紋、參數、版本與回滾點'],
+    risks: { conservative: '穩健', balanced: '平衡', aggressive: '進取' },
+    metaTitle: '多智能體MQL全自動進化引擎｜AI-Quant Lab',
+    hero1: '多智能體 MQL', hero2: '全自動進化引擎', hero: '把代碼轉換升級成一座有治理、有證據、可回滾的 AI 軟件工廠。Master Agent 統籌五位專家，Python 工具層實際連接 MetaEditor 與 MT5。',
+    pasteAlert: '請先貼上任何 MQL4 或 MQL5 原始碼。', processing: '智能識別中…', preflight: '啟動 AI 任務預檢',
+    placeholder: '// 貼上任何 MQL4／MQL5：EA、指標、腳本、函式庫或工具程式…\n// 系統將自動識別版本、產品類型、依賴與入口函式。',
+    analyzing: '智能識別與任務圖運算中', checks: ['版本語法', '產品結構', '依賴入口'], riskMode: '風險模式',
+    specNote: '任務規格已建立。正式結果必須等待 Python 工具層、MetaEditor 與 MT5 回傳證據；本介面不會偽造編譯通過、回測績效或正報酬。',
+    waiting: '等待神經任務啟動', waitingBody: '貼入原始碼、選擇產品與風險模式，建立一份可由六智能體與真實工具執行的任務規格。',
+    pipeline: '可稽核的自動迭代，不是無限制自我改寫', blueprint: '閱讀完整技術藍圖 →',
+    robust: ['0 errors', '0 未裁決 warnings', '樣本外驗證', 'walk-forward / sensitivity', '版本回滾', 'diff / regression corpus'],
+    truth: '交易型產品可要求樣本外正期望與風險達標，但不能保證未來持續獲利；非交易工具以功能、效能、穩定性與安全性驗收。',
+    vault: { title: '連接您信任的 AI LLM', body: '密鑰預設遮罩，只保留在目前分頁的暫時記憶體；重新整理或關閉分頁即會清除。此介面目前不會傳送或驗證您的 API key。', unset: '尚未設定', review: '格式待確認', loaded: '已載入分頁記憶體', placeholder: '貼上 API key（預設隱密遮罩）', show: '顯示 API key', hide: '隱藏 API key', clear: '立即清除', custom: '自架／OpenAI 相容端點', chooseCompany: '選擇 AI LLM 公司', hover: '移動滑鼠即可瀏覽', chooseModel: '選擇 AI 模型', filter: '依公司自動篩選', modelNote: '實際可用模型依帳戶權限、地區與供應商 API 回傳為準；正式串接應優先使用其 models.list 端點。', privacy: [['不持久化', '不寫入 Cookie、LocalStorage、SessionStorage'], ['不外洩', '不放入網址、分析事件、錯誤日誌'], ['正式串接', '須經 HTTPS 傳至可信後端並採用金鑰保管服務']], safetyTitle: '安全說明：', safety: '密碼遮罩只防止旁人從螢幕看到，不等於資料加密。正式功能應在傳輸時使用 TLS，伺服器端採用 KMS／Vault 信封加密、最小權限、密鑰輪替與可稽核刪除；瀏覽器不得直接把您的 key 傳給未授權第三方。', modelDetail: '模型選項' },
+  },
+  'zh-Hans': {
+    ...shared,
+    products: { ea: 'EA', indicator: '技术指标', script: '脚本', library: '函数库', tools: 'Tools 工具' },
+    agents: [['Parser', '代码剖析', '语义、依赖、风险'], ['Architect', '架构设计', '映射、契约、蓝图'], ['Refactor', 'MQL5 编程', '重构、模块、性能'], ['Compiler', '编译调试', 'MetaEditor、日志、修正'], ['Optimizer', '回测调优', 'MT5、稳健性、风险']],
+    stages: ['安全接收', '建立基准', '架构重构', '真实编译', '回测验证', '版本交付'],
+    deliverables: ['MQL5 源代码与产品包', '0 errors／0 个未裁决 warnings', 'MQL4 → MQL5 映射与差异清单', '编译、回测、样本外与风险证据', '数据指纹、参数、版本与回滚点'],
+    risks: { conservative: '稳健', balanced: '平衡', aggressive: '进取' },
+    metaTitle: '多智能体MQL全自动进化引擎｜AI-Quant Lab',
+    hero1: '多智能体 MQL', hero2: '全自动进化引擎', hero: '把代码转换升级为一座有治理、有证据、可回滚的 AI 软件工厂。Master Agent 统筹五位专家，Python 工具层实际连接 MetaEditor 与 MT5。',
+    pasteAlert: '请先粘贴任何 MQL4 或 MQL5 源代码。', processing: '智能识别中…', preflight: '启动 AI 任务预检',
+    placeholder: '// 粘贴任何 MQL4／MQL5：EA、指标、脚本、函数库或工具程序…\n// 系统将自动识别版本、产品类型、依赖与入口函数。',
+    analyzing: '智能识别与任务图运算中', checks: ['版本语法', '产品结构', '依赖入口'], riskMode: '风险模式',
+    specNote: '任务规格已建立。正式结果必须等待 Python 工具层、MetaEditor 与 MT5 返回证据；本界面不会伪造编译通过、回测绩效或正收益。',
+    waiting: '等待神经任务启动', waitingBody: '粘贴源代码、选择产品与风险模式，建立一份可由六智能体与真实工具执行的任务规格。',
+    pipeline: '可审计的自动迭代，而非无限制自我改写', blueprint: '阅读完整技术蓝图 →',
+    robust: ['0 errors', '0 未裁决 warnings', '样本外验证', 'walk-forward / sensitivity', '版本回滚', 'diff / regression corpus'],
+    truth: '交易型产品可要求样本外正期望与风险达标，但不能保证未来持续盈利；非交易工具以功能、性能、稳定性与安全性验收。',
+    vault: { title: '连接您信任的 AI LLM', body: '密钥默认遮罩，仅保留在当前页面的临时内存中；刷新或关闭页面即会清除。本界面目前不会发送或验证您的 API key。', unset: '尚未设置', review: '格式待确认', loaded: '已载入页面内存', placeholder: '粘贴 API key（默认隐私遮罩）', show: '显示 API key', hide: '隐藏 API key', clear: '立即清除', custom: '自建／OpenAI 兼容端点', chooseCompany: '选择 AI LLM 公司', hover: '移动鼠标即可浏览', chooseModel: '选择 AI 模型', filter: '按公司自动筛选', modelNote: '实际可用模型以账户权限、地区与供应商 API 返回为准；正式接入应优先使用其 models.list 端点。', privacy: [['不持久化', '不写入 Cookie、LocalStorage、SessionStorage'], ['不泄露', '不放入网址、分析事件、错误日志'], ['正式接入', '须经 HTTPS 传至可信后端并采用密钥保管服务']], safetyTitle: '安全说明：', safety: '密码遮罩只防止旁人从屏幕看到，不等于数据加密。正式功能应在传输时使用 TLS，服务端采用 KMS／Vault 信封加密、最小权限、密钥轮换与可审计删除；浏览器不得直接把您的 key 传给未授权第三方。', modelDetail: '模型选项' },
+  },
+  en: {
+    ...shared,
+    agents: [['Parser', 'Code Analysis', 'Semantics, dependencies, risk'], ['Architect', 'Architecture', 'Mapping, contracts, blueprint'], ['Refactor', 'MQL5 Development', 'Refactor, modules, performance'], ['Compiler', 'Compile & Debug', 'MetaEditor, logs, fixes'], ['Optimizer', 'Backtest & Tune', 'MT5, robustness, risk']],
+    stages: ['Secure Intake', 'Baseline', 'Refactor', 'Compile', 'Backtest', 'Release'],
+    deliverables: ['MQL5 source and product package', '0 errors / 0 unresolved warnings', 'MQL4 → MQL5 mapping and change list', 'Compile, backtest, out-of-sample and risk evidence', 'Data fingerprint, parameters, version and rollback point'],
+    risks: { conservative: 'Conservative', balanced: 'Balanced', aggressive: 'Aggressive' },
+    metaTitle: 'Multi-Agent MQL Evolution Engine | AI-Quant Lab',
+    hero1: 'Multi-Agent MQL', hero2: 'Autonomous Evolution Engine', hero: 'Upgrade code conversion into a governed, evidence-driven and reversible AI software factory. One Master Agent coordinates five specialists while Python connects to MetaEditor and MT5.',
+    pasteAlert: 'Paste MQL4 or MQL5 source code first.', processing: 'Analyzing…', preflight: 'Start AI Preflight',
+    placeholder: '// Paste any MQL4/MQL5 EA, indicator, script, library or tool…\n// The system will identify its version, product type, dependencies and entry points.',
+    analyzing: 'Analyzing source and building the mission graph', checks: ['Version syntax', 'Product structure', 'Dependencies'], riskMode: 'Risk mode',
+    specNote: 'Mission specification created. Final results require evidence returned by Python, MetaEditor and MT5. This interface never fabricates compilation, backtest performance or positive returns.',
+    waiting: 'Waiting for a neural mission', waitingBody: 'Paste source code, select a product and risk mode, then create an executable specification for six agents and real tools.',
+    pipeline: 'Auditable automatic iteration, not unrestricted self-rewriting', blueprint: 'Read the technical blueprint →',
+    robust: ['0 errors', '0 unresolved warnings', 'Out-of-sample validation', 'walk-forward / sensitivity', 'Version rollback', 'diff / regression corpus'],
+    truth: 'Trading products may require positive out-of-sample expectancy and risk limits, but future profits cannot be guaranteed. Non-trading tools are accepted on function, performance, stability and security.',
+    vault: { title: 'Connect an AI LLM you trust', body: 'Keys are masked and kept only in temporary memory for this tab. Refreshing or closing the tab clears them. This interface does not currently send or validate your API key.', unset: 'Not configured', review: 'Check key format', loaded: 'Loaded in tab memory', placeholder: 'Paste API key (masked by default)', show: 'Show API key', hide: 'Hide API key', clear: 'Clear now', custom: 'Self-hosted / OpenAI-compatible', chooseCompany: 'Choose an AI LLM provider', hover: 'Hover to explore', chooseModel: 'Choose an AI model', filter: 'Filtered by provider', modelNote: 'Available models depend on account access, region and the provider API. Production integrations should prefer the models.list endpoint.', privacy: [['No persistence', 'Never written to cookies or browser storage'], ['No leakage', 'Never placed in URLs, analytics or error logs'], ['Production connection', 'Send over HTTPS to a trusted backend and key vault']], safetyTitle: 'Security note:', safety: 'Screen masking prevents shoulder-surfing; it is not encryption. Production systems need TLS, KMS/Vault envelope encryption, least privilege, rotation and auditable deletion. The browser must never send your key to an unauthorized third party.', modelDetail: 'Model option' },
+  },
+};
+
+export function getMqlEngineCopy(locale) {
+  return mqlEngineCopy[locale] || mqlEngineCopy.en;
+}

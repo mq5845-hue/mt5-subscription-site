@@ -64,7 +64,7 @@ export default async function RootLayout({ children }) {
             id="detect-locale"
             strategy="beforeInteractive"
             dangerouslySetInnerHTML={{
-              __html: `(function(){try{var p=window.location.pathname;var m=p.match(/^\/(en|zh-Hant|zh-Hans)(?=\/|$)/);var l=m?m[1]:(/^(zh-TW|zh-HK|zh-MO)/i.test(navigator.language)?'zh-Hant':(/^zh/i.test(navigator.language)?'zh-Hans':(/^en/i.test(navigator.language)?'en':'zh-Hant')));document.documentElement.lang=l;}catch(e){}})();`,
+              __html: `(function(){try{var p=window.location.pathname;var m=p.match(/^\/(en|zh-Hant|zh-Hans)(?=\/|$)/);var l=m?m[1]:'en';document.documentElement.lang=l;}catch(e){}})();`,
             }}
           />          <Script
             id="detect-android"

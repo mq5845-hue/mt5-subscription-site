@@ -2,6 +2,9 @@ import Link from 'next/link';
 import { headers } from 'next/headers';
 import { getMembershipSetupStatus } from '@/lib/membership-setup';
 import { defaultLocale, localizePath } from '@/lib/locale';
+import EmojiAvatar from '@/components/EmojiAvatar';
+
+const membershipEmojis = { stack: ['🔐', '💳', '🗄️', '👤'], setup: ['🔑', '💰', '🧾', '🛡️'], flow: ['👋', '🪪', '💳', '✅'] };
 
 const copy = {
   'zh-Hant': {
@@ -177,12 +180,12 @@ export default async function MembershipPage({ searchParams }) {
               {setup.clerkReady && setup.lemonCheckoutUrlReady ? <Link href="/api/billing/checkout" className="inline-flex min-h-12 items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-400/10 px-6 py-3 text-sm font-semibold text-emerald-200 transition hover:bg-emerald-400/15">{text.checkout}</Link> : <span className="inline-flex min-h-12 items-center justify-center rounded-xl border border-emerald-400/15 bg-emerald-400/5 px-6 py-3 text-sm font-semibold text-emerald-100/70">{text.lemonPending}</span>}
             </div>
 
-            <div className="mt-10 grid gap-4 sm:grid-cols-2">{[text.clerkBox, text.lemonBox, text.supabaseBox, text.memberBox].map((item) => <div key={item} className="rounded-2xl border border-slate-800 bg-slate-900/60 px-4 py-4 text-sm text-slate-200">{item}</div>)}</div>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2">{[text.clerkBox, text.lemonBox, text.supabaseBox, text.memberBox].map((item, index) => <div key={item} className="group flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-900/60 px-4 py-4 text-sm text-slate-200"><EmojiAvatar emoji={membershipEmojis.stack[index]} tone="violet" />{item}</div>)}</div>
           </section>
 
           <aside className="space-y-6 rounded-[2rem] border border-slate-800 bg-slate-950/70 p-6 backdrop-blur">
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/55 p-5"><h2 className="text-xl font-bold text-white">{text.setupTitle}</h2><div className="mt-5 space-y-4">{setupCards.map((item) => <div key={item.name} className="rounded-2xl border border-slate-800/80 bg-slate-950/55 p-4"><div className="flex items-center justify-between gap-4"><p className="text-sm font-semibold text-white">{item.name}</p><span className={`rounded-full px-3 py-1 text-xs font-semibold ${item.ready ? 'bg-emerald-400/15 text-emerald-200' : 'bg-amber-400/15 text-amber-100'}`}>{item.ready ? text.ready : text.pending}</span></div><p className="mt-2 text-sm leading-7 text-slate-300">{item.detail}</p></div>)}</div></div>
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/55 p-5"><h2 className="text-xl font-bold text-white">{text.flowTitle}</h2><div className="mt-5 space-y-4">{text.stepTitles.map((title, index) => <div key={title} className="rounded-2xl border border-slate-800/80 bg-slate-950/55 p-4"><p className="text-sm font-semibold text-cyan-200">{title}</p><p className="mt-2 text-sm leading-7 text-slate-300">{text.stepTexts[index]}</p></div>)}</div></div>
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/55 p-5"><h2 className="text-xl font-bold text-white">{text.setupTitle}</h2><div className="mt-5 space-y-4">{setupCards.map((item, index) => <div key={item.name} className="rounded-2xl border border-slate-800/80 bg-slate-950/55 p-4"><div className="flex items-center justify-between gap-4"><p className="flex items-center gap-2 text-sm font-semibold text-white"><EmojiAvatar emoji={membershipEmojis.setup[index % membershipEmojis.setup.length]} tone={item.ready ? 'emerald' : 'amber'} />{item.name}</p><span className={`rounded-full px-3 py-1 text-xs font-semibold ${item.ready ? 'bg-emerald-400/15 text-emerald-200' : 'bg-amber-400/15 text-amber-100'}`}>{item.ready ? text.ready : text.pending}</span></div><p className="mt-2 text-sm leading-7 text-slate-300">{item.detail}</p></div>)}</div></div>
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/55 p-5"><h2 className="text-xl font-bold text-white">{text.flowTitle}</h2><div className="mt-5 space-y-4">{text.stepTitles.map((title, index) => <div key={title} className="rounded-2xl border border-slate-800/80 bg-slate-950/55 p-4"><p className="flex items-center gap-2 text-sm font-semibold text-cyan-200"><EmojiAvatar emoji={membershipEmojis.flow[index % membershipEmojis.flow.length]} />{title}</p><p className="mt-2 text-sm leading-7 text-slate-300">{text.stepTexts[index]}</p></div>)}</div></div>
             <div className="rounded-2xl border border-amber-400/20 bg-amber-400/10 p-5"><h3 className="text-sm font-bold uppercase tracking-[0.24em] text-amber-100">{text.mvpTitle}</h3><p className="mt-3 text-sm leading-7 text-amber-50/90">{text.mvpNote}</p></div>
           </aside>
         </div>

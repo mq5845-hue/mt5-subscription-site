@@ -53,7 +53,7 @@ create table if not exists line_inbound_events (
 
 export default async function ReservationPage() {
   const requestHeaders = await headers();
-  const locale = requestHeaders.get('x-site-locale') || 'zh-Hant';
+  const locale = requestHeaders.get('x-site-locale') || 'en';
   const reservationUrl = getReservationPageUrl();
 
   return (

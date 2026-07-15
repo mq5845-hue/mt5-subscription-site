@@ -9,6 +9,7 @@ import {
   splitModuleContent,
 } from '@/lib/module-library';
 import { localizePath } from '@/lib/locale';
+import EmojiAvatar from '@/components/EmojiAvatar';
 
 export function generateStaticParams() {
   return getModularEntries().map((entry) => ({ slug: entry.slug }));
@@ -51,12 +52,12 @@ function humanizeTitle(title) {
   return title.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2');
 }
 
-function GlassPanel({ title, content, glass = false }) {
+function GlassPanel({ title, content, glass = false, emoji = '\u{1f4d6}' }) {
   return (
     <section className={'relative overflow-hidden rounded-[1.5rem] border border-cyan-400/15 p-6 shadow-[0_18px_60px_rgba(8,145,178,0.12)] ring-1 ring-white/5 sm:p-8 ' + (glass ? 'bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(15,23,42,0.42))] backdrop-blur-xl' : 'bg-[linear-gradient(180deg,rgba(2,6,23,0.96),rgba(3,7,18,0.84))]')}>
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_40%)]" />
       <div className="relative z-10 space-y-4">
-        <h2 className="text-lg font-black tracking-tight text-white sm:text-xl">{title}</h2>
+        <h2 className="flex items-center gap-3 text-lg font-black tracking-tight text-white sm:text-xl"><EmojiAvatar emoji={emoji} tone={glass ? 'violet' : 'cyan'} />{title}</h2>
         {glass ? (
           <div className="relative overflow-hidden rounded-2xl border border-cyan-300/10 bg-slate-950/36">
             <pre className="relative whitespace-pre-wrap break-words p-4 text-sm leading-7 text-slate-200 blur-[2.2px] saturate-65 select-none">{content}</pre>
@@ -72,7 +73,7 @@ function EmptyState({ entry, text }) {
   const candidates = getModuleSourceCandidates(entry).map((name) => `${name}.md`);
   return (
     <div className="rounded-[1.4rem] border border-dashed border-cyan-400/20 bg-slate-950/65 p-6 text-sm leading-7 text-slate-400">
-      <p className="font-semibold text-cyan-200">{text.missingTitle}</p>
+      <p className="flex items-center gap-2 font-semibold text-cyan-200"><EmojiAvatar emoji="\u{1f6a7}" tone="amber" />{text.missingTitle}</p>
       <p className="mt-2">{text.missingBody} <code className="rounded bg-slate-900 px-1.5 py-0.5 text-slate-200">src/content/modules</code></p>
       <ul className="mt-3 list-disc space-y-1 pl-5">{candidates.map((candidate) => <li key={candidate}><code className="rounded bg-slate-900 px-1.5 py-0.5 text-slate-200">{candidate}</code></li>)}</ul>
     </div>
@@ -87,7 +88,7 @@ export default async function ModularDetailPage({ params, searchParams }) {
   const requestHeaders = await headers();
   const query = await searchParams;
   const queryLocale = Array.isArray(query?.__locale) ? query.__locale[0] : query?.__locale;
-  const locale = queryLocale || requestHeaders.get('x-site-locale') || 'zh-Hant';
+  const locale = queryLocale || requestHeaders.get('x-site-locale') || 'en';
   const text = copy[locale] || copy['zh-Hant'];
   const name = humanizeTitle(entry.title);
   const { content, sourcePath } = await readModuleSource(entry);
@@ -103,11 +104,11 @@ export default async function ModularDetailPage({ params, searchParams }) {
       <div aria-hidden="true" className="pointer-events-none absolute inset-0"><div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_30%),radial-gradient(circle_at_70%_20%,rgba(59,130,246,0.1),transparent_26%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_50%)]" /><div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(148,163,184,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.12)_1px,transparent_1px)] [background-size:48px_48px]" /></div>
       <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <div className="mb-8 flex flex-col gap-5 border-b border-slate-800/80 pb-6">
-          <div className="flex flex-wrap items-center gap-3"><span className="inline-flex items-center rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">{typeof entry.number === 'number' ? `Module ${numberLabel}` : entry.number}</span><span className="text-xs text-slate-500">{sourceLabel}</span></div>
+          <div className="flex flex-wrap items-center gap-3"><span className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300"><EmojiAvatar emoji="\u{1f9e9}" tone="cyan" />{typeof entry.number === 'number' ? `Module ${numberLabel}` : entry.number}</span><span className="text-xs text-slate-500">{sourceLabel}</span></div>
           <div className="space-y-3"><h1 className="text-3xl font-black tracking-tight text-white sm:text-4xl">{entry.title}</h1><p className="max-w-3xl text-sm leading-7 text-slate-400">{subtitle}. {summary}</p></div>
           <div className="flex flex-wrap gap-3"><Link href={localizePath('/modular', locale)} className="rounded-xl border border-slate-700 bg-slate-950/60 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-cyan-400/30 hover:text-cyan-200">{text.backModules}</Link><Link href={localizePath('/', locale)} className="rounded-xl bg-cyan-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400">{text.home}</Link></div>
         </div>
-        <div className="grid gap-6 lg:grid-cols-2">{hasContent ? <><GlassPanel title={text.top} content={topHalf} /><GlassPanel title={text.bottom} content={bottomHalf} glass /></> : <><GlassPanel title={text.top} content={text.emptyTop} /><GlassPanel title={text.bottom} content={text.emptyBottom} glass /></>}</div>
+        <div className="grid gap-6 lg:grid-cols-2">{hasContent ? <><GlassPanel title={text.top} content={topHalf} emoji="\u{1f4d6}" /><GlassPanel title={text.bottom} content={bottomHalf} glass emoji="\u{1f6e0}\u{fe0f}" /></> : <><GlassPanel title={text.top} content={text.emptyTop} emoji="\u{1f4d6}" /><GlassPanel title={text.bottom} content={text.emptyBottom} glass emoji="\u{1f6e0}\u{fe0f}" /></>}</div>
         {!hasContent && <div className="mt-6"><EmptyState entry={entry} text={text} /></div>}
         <div className="mt-8 rounded-[1.5rem] border border-cyan-400/15 bg-slate-900/55 p-5 text-sm leading-7 text-slate-300"><p>{text.footer}</p><p className="mt-2 text-slate-400">{text.sourceHint} <code className="rounded bg-slate-900 px-1.5 py-0.5 text-slate-200">src/content/modules</code></p><p className="mt-2 text-slate-500">{lineCount} {text.lines}</p></div>
       </div>

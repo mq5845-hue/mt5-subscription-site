@@ -5,6 +5,9 @@ import {
   getReleaseCandidateEntries,
 } from '@/lib/module-library';
 import { localizePath } from '@/lib/locale';
+import EmojiAvatar from '@/components/EmojiAvatar';
+
+const moduleEmojis = ['🧩', '⚙️', '📊', '🛡️', '🤖', '🔌', '🧪', '🚀'];
 
 export const metadata = {
   title: 'Modular Blocks | AI-Quant Lab',
@@ -75,7 +78,7 @@ function localizeEntry(entry, text) {
   };
 }
 
-function Card({ entry, locale, text }) {
+function Card({ entry, locale, text, index = 0 }) {
   const numberLabel = typeof entry.number === 'number'
     ? String(entry.number).padStart(2, '0')
     : entry.number;
@@ -89,7 +92,8 @@ function Card({ entry, locale, text }) {
       <div className="pointer-events-none absolute inset-0 rounded-[1.5rem] ring-0 ring-cyan-300/0 transition-all duration-300 group-hover:ring-1 group-hover:ring-cyan-300/25" />
       <div className="relative z-10 flex h-full flex-col gap-4">
         <div className="flex items-center justify-between gap-4">
-          <div className="inline-flex items-center rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-cyan-200">
+          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-500/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-cyan-200">
+            <EmojiAvatar emoji={moduleEmojis[index % moduleEmojis.length]} />
             {typeof entry.number === 'number' ? text.module + ' ' + numberLabel : entry.number}
           </div>
           <span className="text-xs font-medium text-slate-500 transition group-hover:text-cyan-200">
@@ -114,7 +118,7 @@ export default async function ModularIndexPage({ searchParams }) {
   const requestHeaders = await headers();
   const params = await searchParams;
   const queryLocale = Array.isArray(params?.__locale) ? params.__locale[0] : params?.__locale;
-  const locale = queryLocale || requestHeaders.get('x-site-locale') || 'zh-Hant';
+  const locale = queryLocale || requestHeaders.get('x-site-locale') || 'en';
   const text = localeCopy[locale] || localeCopy['zh-Hant'];
   const modules = getModuleEntries().map((entry) => localizeEntry(entry, text));
   const releaseCandidates = getReleaseCandidateEntries().map((entry) => localizeEntry(entry, text));
@@ -161,8 +165,8 @@ export default async function ModularIndexPage({ searchParams }) {
         </div>
 
         <section className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-          {modules.map((entry) => (
-            <Card key={entry.id} entry={entry} locale={locale} text={text} />
+          {modules.map((entry, index) => (
+            <Card key={entry.id} entry={entry} locale={locale} text={text} index={index} />
           ))}
         </section>
 
@@ -182,8 +186,8 @@ export default async function ModularIndexPage({ searchParams }) {
           </div>
 
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
-            {releaseCandidates.map((entry) => (
-              <Card key={entry.id} entry={entry} locale={locale} text={text} />
+            {releaseCandidates.map((entry, index) => (
+              <Card key={entry.id} entry={entry} locale={locale} text={text} index={modules.length + index} />
             ))}
           </div>
         </section>

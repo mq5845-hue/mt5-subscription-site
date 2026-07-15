@@ -1,6 +1,6 @@
 export const siteLocales = ['en', 'zh-Hant', 'zh-Hans'];
 
-export const defaultLocale = 'zh-Hant';
+export const defaultLocale = 'en';
 export function detectLocaleFromHeaders(headers) {
   const acceptLanguage = headers.get('accept-language') || '';
   const ranges = acceptLanguage.split(',').map((part) => part.trim().split(';')[0].toLowerCase());

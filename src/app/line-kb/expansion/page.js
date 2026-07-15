@@ -88,7 +88,7 @@ export default async function LineKbExpansionPage({ searchParams }) {
   const requestHeaders = await headers();
   const params = await searchParams;
   const queryLocale = Array.isArray(params?.__locale) ? params.__locale[0] : params?.__locale;
-  const locale = queryLocale || requestHeaders.get('x-site-locale') || 'zh-Hant';
+  const locale = queryLocale || requestHeaders.get('x-site-locale') || 'en';
   const text = copy[locale] || copy['zh-Hant'];
   const expansion = lineKnowledgeExpansion.topicTreeExpansion;
   const blueprint = lineKnowledgeExpansion.topicTreeBlueprint;

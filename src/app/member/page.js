@@ -9,7 +9,7 @@ export const metadata = {
 
 export default async function MemberPage() {
   const requestHeaders = await headers();
-  const locale = requestHeaders.get('x-site-locale') || 'zh-Hant';
+  const locale = requestHeaders.get('x-site-locale') || 'en';
   const setup = getMembershipSetupStatus();
 
   return <MemberCenter locale={locale} supabaseReady={setup.supabaseReady} />;

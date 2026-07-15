@@ -1,6 +1,6 @@
 import { clerkMiddleware } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
-import { detectLocaleFromHeaders } from '@/lib/locale';
+import { defaultLocale } from '@/lib/locale';
 
 export default clerkMiddleware(async (auth, request) => {
   const isMemberRoute = /^\/(?:(?:en|zh-Hant|zh-Hans)\/)?member(?:\/.*)?$/.test(request.nextUrl.pathname);
@@ -18,7 +18,7 @@ export default clerkMiddleware(async (auth, request) => {
   }
 
   if (!request.nextUrl.pathname.startsWith('/api')) {
-    const locale = detectLocaleFromHeaders(request.headers);
+    const locale = defaultLocale;
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = request.nextUrl.pathname === '/' ? `/${locale}` : `/${locale}${request.nextUrl.pathname}`;
     return NextResponse.redirect(redirectUrl);
@@ -28,5 +28,5 @@ export default clerkMiddleware(async (auth, request) => {
 });
 
 export const config = {
-  matcher: ['/((?!_next|.*\..*).*)', '/(api|trpc)(.*)'],
+  matcher: ['/((?!_next|.*\\..*).*)', '/(api|trpc)(.*)'],
 };

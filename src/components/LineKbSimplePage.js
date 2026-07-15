@@ -1,5 +1,8 @@
 ﻿import Link from 'next/link';
 import { localizePath } from '@/lib/locale';
+import EmojiAvatar from '@/components/EmojiAvatar';
+
+const simplePageEmojis = ['\u{1f4da}', '\u{1f4ac}', '\u{1f9ed}', '\u{1f6e0}\u{fe0f}', '\u{2705}', '\u{1f331}'];
 
 const copies = {
   en: {
@@ -134,7 +137,7 @@ export default function LineKbSimplePage({ locale, type }) {
           <header className="rounded-[1.75rem] border border-cyan-400/15 bg-white/[0.03] p-5 shadow-[0_20px_80px_rgba(8,145,178,0.14)] backdrop-blur-xl sm:p-6">
             <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-3xl space-y-4">
-                <div className="inline-flex rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-1 text-xs font-semibold tracking-[0.2em] text-cyan-200">{text.eyebrow}</div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold tracking-[0.2em] text-cyan-200"><EmojiAvatar emoji="\u{1f4da}" tone="cyan" />{text.eyebrow}</div>
                 <h1 className="text-3xl font-black tracking-tight text-white sm:text-5xl">{text.title}</h1>
                 <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">{text.lead}</p>
               </div>
@@ -155,9 +158,9 @@ export default function LineKbSimplePage({ locale, type }) {
                 </div>
               </section>
               <section className="mt-8 grid gap-4 lg:grid-cols-2">
-                {text.sections.map(([title, body]) => (
-                  <article key={title} className="rounded-[1.5rem] border border-cyan-400/14 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(8,15,31,0.95))] p-5 shadow-[0_16px_50px_rgba(2,132,199,0.08)] ring-1 ring-white/5">
-                    <h2 className="text-2xl font-bold text-white">{title}</h2>
+                {text.sections.map(([title, body], index) => (
+                  <article key={title} className="group rounded-[1.5rem] border border-cyan-400/14 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(8,15,31,0.95))] p-5 shadow-[0_16px_50px_rgba(2,132,199,0.08)] ring-1 ring-white/5 transition hover:border-cyan-300/30 hover:shadow-[0_18px_60px_rgba(34,211,238,0.14)]">
+                    <h2 className="flex items-center gap-3 text-2xl font-bold text-white"><EmojiAvatar emoji={simplePageEmojis[index + 2]} tone={index ? 'emerald' : 'violet'} />{title}</h2>
                     <p className="mt-4 text-sm leading-7 text-slate-300">{body}</p>
                   </article>
                 ))}
@@ -166,12 +169,12 @@ export default function LineKbSimplePage({ locale, type }) {
           ) : (
             <>
               <section className="mt-8 grid gap-4 lg:grid-cols-2">
-                {text.cards.map(([id, title, body]) => (
-                  <article key={id} className="rounded-[1.5rem] border border-cyan-400/14 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(8,15,31,0.95))] p-5 shadow-[0_16px_50px_rgba(2,132,199,0.08)] ring-1 ring-white/5">
+                {text.cards.map(([id, title, body], index) => (
+                  <article key={id} className="group rounded-[1.5rem] border border-cyan-400/14 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(8,15,31,0.95))] p-5 shadow-[0_16px_50px_rgba(2,132,199,0.08)] ring-1 ring-white/5 transition hover:border-cyan-300/30 hover:shadow-[0_18px_60px_rgba(34,211,238,0.14)]">
                     {type === 'formal' ? (
-                      <div className="flex items-center gap-3"><span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/10 text-sm font-black text-cyan-200">{id}</span><h2 className="text-2xl font-bold text-white">{title}</h2></div>
+                      <div className="flex items-center gap-3"><span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/10 text-sm font-black text-cyan-200">{id}</span><h2 className="flex items-center gap-3 text-2xl font-bold text-white"><EmojiAvatar emoji={simplePageEmojis[index + 1]} tone={index % 2 ? 'violet' : 'cyan'} />{title}</h2></div>
                     ) : (
-                      <h2 className="text-2xl font-bold text-white">{title}</h2>
+                      <h2 className="flex items-center gap-3 text-2xl font-bold text-white"><EmojiAvatar emoji={simplePageEmojis[index + 1]} tone={index % 2 ? 'violet' : 'cyan'} />{title}</h2>
                     )}
                     <pre className="mt-4 whitespace-pre-wrap rounded-[1.25rem] border border-cyan-400/12 bg-slate-950/70 p-4 text-sm leading-7 text-cyan-100">{body}</pre>
                   </article>
@@ -180,9 +183,9 @@ export default function LineKbSimplePage({ locale, type }) {
               <section className="mt-8 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 sm:p-7">
                 <h2 className="text-2xl font-bold text-white">{text.principlesTitle}</h2>
                 <div className="mt-5 grid gap-4 md:grid-cols-3">
-                  {text.principles.map(([title, body]) => (
-                    <article key={title} className="rounded-[1.25rem] border border-cyan-400/14 bg-slate-950/60 p-5">
-                      <p className="text-xs font-semibold tracking-[0.2em] text-cyan-300">{title}</p>
+                  {text.principles.map(([title, body], index) => (
+                    <article key={title} className="group rounded-[1.25rem] border border-cyan-400/14 bg-slate-950/60 p-5 transition hover:border-cyan-300/30 hover:bg-slate-950/80">
+                      <p className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] text-cyan-300"><EmojiAvatar emoji={simplePageEmojis[index + 2]} tone="emerald" />{title}</p>
                       <p className="mt-3 text-sm leading-7 text-slate-300">{body}</p>
                     </article>
                   ))}

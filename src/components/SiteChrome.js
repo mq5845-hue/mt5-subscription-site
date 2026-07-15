@@ -10,12 +10,13 @@ const homeRoutes = new Set(['/', '/zh-Hant', '/zh-Hans', '/en']);
 const navItems = [
   {
     label: 'AI\u91cd\u69cb\u5f15\u64ce',
-    matches: ['/membership', '/converter'],
+    matches: ['/membership', '/converter', '/multi-agent'],
     children: [
       { href: '/membership', label: '\u6a19\u6e96\u6703\u54e1\u7248' },
       { label: '\u52a0\u76df\u6703\u54e1\u7248', disabled: true },
       { href: '/converter', label: '\u5c0a\u69ae\u5546\u7528\u7248' },
-      { label: 'Docker MCP\u4f3a\u670d\u5668\u7248', disabled: true },
+      { href: '/multi-agent/engine', label: '\u591a\u667a\u80fd\u9ad4MQL\u5168\u81ea\u52d5\u9032\u5316\u5f15\u64ce', newTab: true },
+      { label: 'Docker MCP\u4f3a\u670d\u5650\u7248(\u4f01\u696d\u79c1\u6709\u96f2)', disabled: true },
     ],
   },
   { href: '/modular', label: '\u6a21\u7d44\u5316\u7a4d\u6728', matches: ['/modular'] },
@@ -64,18 +65,18 @@ function isNavItemActive(item, pathname) {
 
 const navTranslations = {
   'zh-Hant': {
-    groups: ['AI重構引擎', '模組化積木', 'LINE 知識庫', '訂閱方案'],
-    children: [['標準會員版', '加盟會員版', '尊榮商用版', 'Docker MCP伺服器版'], null, null, ['標準會員', '加盟會員', '企業VIP會員']],
+    groups: ['AI重構引擎', '模組化積木', 'Lab 知識庫', '訂閱方案'],
+    children: [['標準會員版', '加盟會員版', '尊榮商用版', '多智能體MQL全自動進化引擎', 'Docker MCP伺服噐版(企業私有雲)'], null, null, ['標準會員', '加盟會員', '企業VIP會員']],
     login: '登錄',
   },
   'zh-Hans': {
-    groups: ['AI重构引擎', '模块化积木', 'LINE 知识库', '订阅方案'],
-    children: [['标准会员版', '加盟会员版', '尊荣商用版', 'Docker MCP服务器版'], null, null, ['标准会员', '加盟会员', '企业VIP会员']],
+    groups: ['AI重构引擎', '模块化积木', 'Lab 知识库', '订阅方案'],
+    children: [['标准会员版', '加盟会员版', '尊荣商用版', '多智能体MQL全自动进化引擎', 'Docker MCP服务器版(企业私有云)'], null, null, ['标准会员', '加盟会员', '企业VIP会员']],
     login: '登录',
   },
   en: {
-    groups: ['AI Refactoring', 'Modular Blocks', 'LINE Knowledge Base', 'Subscription Plans'],
-    children: [['Standard Membership', 'Affiliate Membership', 'Premium Commercial', 'Docker MCP Server'], null, null, ['Standard Membership', 'Affiliate Membership', 'Enterprise VIP']],
+    groups: ['AI Refactoring', 'Modular Blocks', 'Lab Knowledge Base', 'Subscription Plans'],
+    children: [['Standard Membership', 'Affiliate Membership', 'Premium Commercial', 'Multi-Agent MQL Evolution Engine', 'Docker MCP Server (Enterprise Private Cloud)'], null, null, ['Standard Membership', 'Affiliate Membership', 'Enterprise VIP']],
     login: 'LOGIN',
   },
 };
@@ -114,7 +115,7 @@ const footerLabels = {
 };
 
 function getFooterLinks(locale) {
-  const labels = footerLabels[locale] || footerLabels['zh-Hant'];
+  const labels = footerLabels[locale] || footerLabels.en;
   return footerLinks.map((group, groupIndex) => ({
     ...group,
     title: labels[groupIndex][0],
@@ -125,7 +126,7 @@ function getFooterLinks(locale) {
   }));
 }
 function getLocalizedNavItems(locale) {
-  const translation = navTranslations[locale] || navTranslations['zh-Hant'];
+  const translation = navTranslations[locale] || navTranslations.en;
   return navItems.map((item, index) => ({
     ...item,
     label: translation.groups[index],
@@ -139,7 +140,7 @@ function getLocalizedNavItems(locale) {
 }
 
 function getLoginLabel(locale) {
-  return (navTranslations[locale] || navTranslations['zh-Hant']).login;
+  return (navTranslations[locale] || navTranslations.en).login;
 }
 function LogoMark() {
   return (
@@ -218,6 +219,7 @@ function LanguageMenu({ pathname, mobile = false }) {
 }
 function DesktopNavItem({ item, pathname, locale }) {
   const isActive = isNavItemActive(item, pathname);
+  const isAiMenu = item.children?.some((child) => child.href === '/multi-agent/engine');
   const baseClasses = isActive
     ? 'bg-cyan-500/12 text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.18)]'
     : 'text-slate-400 hover:text-cyan-300';
@@ -250,13 +252,13 @@ function DesktopNavItem({ item, pathname, locale }) {
         <MenuDots />
       </button>
 
-      <div className={'pointer-events-none invisible absolute left-1/2 top-full z-50 -translate-x-1/2 translate-y-1 pt-3 opacity-0 transition-[opacity,transform,visibility] duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 ' + (item.label.includes('訂閱方案') || item.label.includes('订阅方案') || item.label === 'Subscription Plans' ? 'w-28' : (item.label.includes('AI重構引擎') || item.label.includes('AI重构引擎') || item.label === 'AI Refactoring' ? 'w-32' : 'w-56'))}>
+      <div className={'pointer-events-none invisible absolute left-1/2 top-full z-50 -translate-x-1/2 translate-y-1 pt-3 opacity-0 transition-[opacity,transform,visibility] duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 ' + (item.label.includes('訂閱方案') || item.label.includes('订阅方案') || item.label === 'Subscription Plans' ? 'w-28' : (item.label.includes('AI重構引擎') || item.label.includes('AI重构引擎') || item.label === 'AI Refactoring' ? 'w-36' : 'w-56'))}>
         <div className="overflow-hidden rounded-2xl border border-cyan-300/18 bg-slate-950/92 p-2 shadow-[0_0_28px_rgba(34,211,238,0.16)] backdrop-blur-xl">
           {item.children.map((child) =>
             child.disabled ? (
               <span
                 key={child.label}
-                className="flex items-center rounded-xl px-4 py-3 text-sm font-medium text-slate-500"
+                className={'flex items-center rounded-xl py-3 font-medium text-slate-500 ' + (isAiMenu ? 'px-3 text-[12px] leading-4 whitespace-normal break-words' : 'px-4 text-sm')}
               >
                 {child.label}
               </span>
@@ -264,7 +266,9 @@ function DesktopNavItem({ item, pathname, locale }) {
               <Link
                 key={child.label}
                 href={localizePath(child.href, locale)}
-                className="flex items-center rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-cyan-500/10 hover:text-cyan-200"
+                target={child.newTab ? '_blank' : undefined}
+                rel={child.newTab ? 'noopener noreferrer' : undefined}
+                className={'flex items-center rounded-xl py-3 font-medium text-slate-300 transition hover:bg-cyan-500/10 hover:text-cyan-200 ' + (isAiMenu ? 'px-3 text-[12px] leading-4 whitespace-normal break-words' : 'px-4 text-sm')}
               >
                 {child.label}
               </Link>
@@ -335,6 +339,8 @@ function MobileNavItem({ item, pathname, locale, onNavigate }) {
             <Link
               key={child.label}
               href={localizePath(child.href, locale)}
+              target={child.newTab ? '_blank' : undefined}
+              rel={child.newTab ? 'noopener noreferrer' : undefined}
               className="rounded-xl border border-slate-800 bg-slate-950/75 px-3 py-2.5 text-sm text-slate-300 transition hover:border-cyan-400/30 hover:text-cyan-200"
               onClick={() => {
                 setExpanded(false);
@@ -353,7 +359,7 @@ function MobileNavItem({ item, pathname, locale, onNavigate }) {
 export default function SiteChrome({ children }) {
   const pathname = usePathname() || '/';
   const locale = getLocaleFromPath(pathname);
-  const footerText = footerTranslations[locale] || footerTranslations['zh-Hant'];
+  const footerText = footerTranslations[locale] || footerTranslations.en;
   const localizedNavItems = getLocalizedNavItems(locale);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);

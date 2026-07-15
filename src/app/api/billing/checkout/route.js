@@ -9,7 +9,7 @@ export const runtime = 'nodejs';
 export async function GET(request) {
   try {
     const requestedLocale = request.nextUrl.searchParams.get('locale');
-    const locale = siteLocales.includes(requestedLocale) ? requestedLocale : 'zh-Hant';
+    const locale = siteLocales.includes(requestedLocale) ? requestedLocale : 'en';
     const setup = getMembershipSetupStatus();
 
     if (!setup.clerkReady) {
@@ -37,7 +37,7 @@ export async function GET(request) {
   } catch (error) {
     console.error('Membership checkout redirect error:', error);
     const requestedLocale = request.nextUrl.searchParams.get('locale');
-    const locale = siteLocales.includes(requestedLocale) ? requestedLocale : 'zh-Hant';
+    const locale = siteLocales.includes(requestedLocale) ? requestedLocale : 'en';
     return NextResponse.redirect(new URL(localizePath('/membership?setup=error', locale), request.url));
   }
 }
