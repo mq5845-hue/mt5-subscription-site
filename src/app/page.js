@@ -4,8 +4,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { getLocaleFromPath, localizePath } from '@/lib/locale';
-import EmojiAvatar from '@/components/EmojiAvatar';
+import { getLocaleFromPath, localizePath } from '../lib/locale';
+import EmojiAvatar from '../components/EmojiAvatar';
 
 const glowText = 'drop-shadow-[0_0_10px_rgba(34,211,238,0.22)]';
 const tapClass =
@@ -223,7 +223,7 @@ const homeCopy = {
     heroTitleBottom: '\u89e3\u9396\u6cd5\u4eba\u7d1a MT5 EA \u5546\u696d\u6e90\u4ee3\u78bc',
     heroBody: '\u96f6\u57fa\u790e\u4e5f\u80fd\u7528 AI LLM \u63d0\u793a\u8a5e\u6a21\u677f\u9ad8\u6548\u91cd\u69cb\u6838\u5fc3\u7b56\u7565\u3002\u7121\u7248\u6b0a\u9650\u5236\u3001\u7121\u9808\u8a31\u53ef\uff0c\u6253\u9020\u5c08\u5c6c\u60a8\u7684\u500b\u4eba\u4ea4\u6613\u54c1\u724c\u8207\u6578\u4f4d\u8cc7\u7522\uff0c\u5229\u6f64 100% \u5168\u6b78\u81ea\u5df1\u3002',
     membershipCta: '\u524d\u5f80\u6a19\u6e96\u6703\u54e1',
-    knowledgeCta: '\u5148\u770b\u77e5\u8b58\u5eab\u67b6\u69cb',
+    knowledgeCta: '\u5143\u4ea4\u6613\u64cd\u4f5c\u63a7\u5236(\u6cd5\u4eba\u6a5f\u69cb\u4f01\u696d\u7248)',
     reasonsBadge: '\u5148\u770b\u898b\u7bc0\u594f\uff0c\u518d\u770b\u898b\u50f9\u503c',
     reasonsTitle: '\u4e09\u500b\u8b93\u4eba\u9858\u610f\u5f80\u4e0b\u770b\u7684\u7406\u7531',
     reasonsBody: '\u5982\u679c\u4f60\u60f3\u77e5\u9053\u9019\u500b\u9996\u9801\u5230\u5e95\u5728\u8ce3\u4ec0\u9ebc\u3001\u5f37\u5728\u54ea\u88e1\u3001\u9069\u4e0d\u9069\u5408\u4f60\uff0c\u5148\u770b\u5b8c\u9019\u4e09\u500b\u5340\u584a\uff0c\u518d\u5f80\u4e0b\u770b\u65b9\u6848\u6703\u66f4\u6709\u611f\u3002'
@@ -235,7 +235,7 @@ const homeCopy = {
     heroTitleBottom: '\u89e3\u9501\u6cd5\u4eba\u7ea7 MT5 EA \u5546\u4e1a\u6e90\u4ee3\u7801',
     heroBody: '\u96f6\u57fa\u7840\u4e5f\u80fd\u7528 AI LLM \u63d0\u793a\u8bcd\u6a21\u677f\u9ad8\u6548\u91cd\u6784\u6838\u5fc3\u7b56\u7565\u3002\u65e0\u7248\u6743\u9650\u5236\u3001\u65e0\u987b\u8bb8\u53ef\uff0c\u6253\u9020\u4e13\u5c5e\u4e8e\u60a8\u7684\u4e2a\u4eba\u4ea4\u6613\u54c1\u724c\u4e0e\u6570\u5b57\u8d44\u4ea7\uff0c\u5229\u6da6 100% \u5168\u5f52\u81ea\u5df1\u3002',
     membershipCta: '\u524d\u5f80\u6807\u51c6\u4f1a\u5458',
-    knowledgeCta: '\u5148\u770b\u77e5\u8bc6\u5e93\u67b6\u6784',
+    knowledgeCta: '\u5143\u4ea4\u6613\u64cd\u4f5c\u63a7\u5236(\u6cd5\u4eba\u673a\u6784\u4f01\u4e1a\u7248)',
     reasonsBadge: '\u5148\u770b\u89c1\u8282\u594f\uff0c\u518d\u770b\u89c1\u4ef7\u503c',
     reasonsTitle: '\u4e09\u4e2a\u8ba9\u4eba\u613f\u610f\u5f80\u4e0b\u770b\u7684\u7406\u7531',
     reasonsBody: '\u5982\u679c\u4f60\u60f3\u77e5\u9053\u8fd9\u4e2a\u9996\u9875\u5230\u5e95\u5728\u5356\u4ec0\u4e48\u3001\u5f3a\u5728\u54ea\u91cc\u3001\u9002\u4e0d\u9002\u5408\u4f60\uff0c\u5148\u770b\u5b8c\u8fd9\u4e09\u4e2a\u533a\u5757\uff0c\u518d\u5f80\u4e0b\u770b\u65b9\u6848\u4f1a\u66f4\u6709\u611f\u3002'
@@ -247,7 +247,7 @@ const homeCopy = {
     heroTitleBottom: 'Unlock Institutional MT5 EA Source Code',
     heroBody: 'Even from zero, you can use AI LLM prompt templates to rebuild core strategies efficiently. No copyright lock-in, no permission required. Build your own trading brand and digital assets, and keep 100% of the upside.',
     membershipCta: 'Go to Standard Membership',
-    knowledgeCta: 'View Knowledge Base',
+    knowledgeCta: 'Meta-transaction operation control (corporate version)',
     reasonsBadge: 'See the rhythm, then the value',
     reasonsTitle: 'Three reasons to keep scrolling',
     reasonsBody: 'If you want to know what this homepage is offering, where it stands out, and whether it fits you, start with these three sections before comparing the plans below.'
@@ -290,9 +290,9 @@ function LanguageMenu({ pathname, mobile = false }) {
         <MenuDots />
       </button>
       <div
-        className={'absolute right-0 top-full z-[60] pt-2 transition-all duration-150 ' + (mobile ? 'left-0' : '') + ' ' + (open ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-1 opacity-0') + ' md:group-hover:pointer-events-auto md:group-hover:translate-y-0 md:group-hover:opacity-100'}
+        className={'absolute right-0 top-full z-[60] pt-2 ' + (mobile ? 'left-0' : '') + ' ' + (open ? 'visible pointer-events-auto' : 'invisible pointer-events-none')}
       >
-        <div className={'overflow-hidden rounded-2xl border border-cyan-300/20 bg-slate-950/95 p-1.5 shadow-[0_0_28px_rgba(34,211,238,0.22)] backdrop-blur-xl ' + (mobile ? 'w-full' : 'w-20')}>
+        <div className={'overflow-hidden rounded-2xl border border-cyan-300/20 bg-[#020617] p-1.5 shadow-[0_0_28px_rgba(34,211,238,0.22)] ' + (mobile ? 'w-full' : 'w-20')}>
           {languageTabs.map((tab) => {
             const isActive = tab.label === activeTab.label;
             return (
@@ -313,6 +313,7 @@ function LanguageMenu({ pathname, mobile = false }) {
   );
 }
 function HomeDesktopNavItem({ item, pathname, locale }) {
+  const [open, setOpen] = useState(false);
   const isActive = isNavItemActive(item, pathname);
   const isAiMenu = item.children?.some((child) => child.href === '/multi-agent/engine');
   const baseClasses = isActive
@@ -334,17 +335,20 @@ function HomeDesktopNavItem({ item, pathname, locale }) {
   }
 
   return (
-    <div className="group relative">
+    <div className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} onFocus={() => setOpen(true)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }} onKeyDown={(event) => { if (event.key === 'Escape') setOpen(false); }}>
       <button
         type="button"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        onClick={() => setOpen((value) => !value)}
         className={`group relative flex items-center gap-1.5 rounded-full px-2.5 py-2 transition-all duration-300 ${baseClasses}`}
       >
         <span className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${dotClasses}`} />
         <span className={isActive ? 'drop-shadow-[0_0_12px_rgba(34,211,238,0.36)]' : ''}>{item.label}</span>
         <MenuDots />
       </button>
-      <div className={'pointer-events-none invisible absolute left-1/2 top-full z-50 -translate-x-1/2 translate-y-1 pt-3 opacity-0 transition-[opacity,transform,visibility] duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 ' + (item.label.includes('訂閱方案') || item.label.includes('订阅方案') || item.label === 'Subscription Plans' ? 'w-28' : (item.label.includes('AI重構引擎') || item.label.includes('AI重构引擎') || item.label === 'AI Refactoring' ? 'w-36' : 'w-56'))}>
-        <div className="overflow-hidden rounded-2xl border border-cyan-300/18 bg-slate-950/92 p-2 shadow-[0_0_28px_rgba(34,211,238,0.16)] backdrop-blur-xl">
+      <div className={'absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 ' + (open ? 'visible pointer-events-auto' : 'invisible pointer-events-none') + ' ' + (item.label.includes('訂閱方案') || item.label.includes('订阅方案') || item.label === 'Subscription Plans' ? 'w-28' : (item.label.includes('AI重構引擎') || item.label.includes('AI重构引擎') || item.label === 'AI Refactoring' ? 'w-36' : 'w-56'))}>
+        <div className="overflow-hidden rounded-2xl border border-cyan-300/18 bg-[#020617] p-2 shadow-[0_0_28px_rgba(34,211,238,0.16)]">
           {item.children.map((child) =>
             child.disabled ? (
               <span key={child.label} className={'flex items-center rounded-xl py-3 font-medium text-slate-500 ' + (isAiMenu ? 'px-3 text-[12px] leading-4 whitespace-normal break-words' : 'px-4 text-sm')}>
@@ -983,7 +987,7 @@ export default function Home({ locale = 'en' }) {
               : 'border-slate-800/14 bg-slate-950/10 sm:backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/06'
           }`}
         >
-          <div className="mx-auto flex h-14 min-w-0 max-w-7xl items-center justify-between bg-slate-950/80 px-2 backdrop-blur-md sm:h-16 sm:bg-transparent sm:px-6 sm:backdrop-blur-0 lg:px-8">
+          <div className="flex h-14 w-full min-w-0 max-w-none items-center justify-between bg-slate-950/80 px-3 backdrop-blur-md sm:h-16 sm:bg-transparent sm:px-4 sm:backdrop-blur-0 lg:px-5">
             <div className="flex min-w-0 shrink items-center gap-2 sm:gap-3">
               <div className="animate-badge-glow relative flex h-9 w-9 flex-none sm:h-10 sm:w-10 items-center justify-center overflow-hidden rounded-[1.25rem] border border-white/35 bg-gradient-to-br from-white via-cyan-100 to-cyan-400 px-2 py-1 text-[0.72rem] font-black leading-none tracking-[0.14em] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.22),0_0_22px_rgba(34,211,238,0.92),0_0_14px_rgba(59,130,246,0.52),inset_0_1px_0_rgba(255,255,255,0.95)] ring-2 ring-cyan-300/28">
                 <span
@@ -1004,6 +1008,9 @@ export default function Home({ locale = 'en' }) {
               </div>
               <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-[clamp(0.8rem,4.3vw,1.25rem)] font-black leading-none whitespace-nowrap tracking-wide text-transparent sm:text-xl">
                 AI-Quant Lab
+              </span>
+              <span className="inline-flex shrink-0 items-center rounded-full border border-amber-100/70 bg-amber-300 px-1.5 py-1 text-[8px] font-black leading-none tracking-[0.04em] text-amber-950 shadow-[0_0_14px_rgba(252,211,77,0.48)] sm:px-2.5 sm:text-[10px]">
+                <span className="sm:hidden">Beta</span><span className="hidden sm:inline">Beta版測試</span>
               </span>
             </div>
 
@@ -1092,17 +1099,17 @@ export default function Home({ locale = 'en' }) {
             <p className="hero-copy mx-auto max-w-3xl text-base leading-relaxed text-slate-100/95 sm:text-lg lg:text-xl">
               {copy.heroBody}
             </p>
-            <div className="flex w-full flex-col items-center justify-center gap-3 pt-4 sm:flex-row">
+            <div className="mx-auto grid w-[70%] max-w-[33.6rem] grid-cols-1 items-stretch gap-3 pt-4 sm:w-full sm:grid-cols-2">
               <Link
                 href={localizePath('/membership', pageLocale)}
-                className={`btn-pulse w-full rounded-xl bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-xl shadow-cyan-400/20 transition hover:bg-cyan-300 sm:w-auto ${tapClass}`}
+                className={`hero-cta-glow hero-cta-primary btn-pulse inline-flex min-h-[4.75rem] h-full w-full items-center justify-center rounded-xl bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-xl shadow-cyan-400/20 hover:bg-cyan-300 ${tapClass}`}
                 onClick={() => withTapLock(() => {})}
               >
                 {copy.membershipCta}
               </Link>
               <Link
-                href={localizePath('/line-kb', pageLocale)}
-                className={`btn-pulse w-full rounded-xl border border-slate-800 bg-slate-900 px-8 py-3 text-center text-base font-medium text-slate-300 transition hover:bg-slate-800 sm:w-auto ${tapClass}`}
+                href={localizePath('/control-room', pageLocale)}
+                className={`hero-cta-glow hero-cta-secondary btn-pulse inline-flex min-h-[4.75rem] h-full w-full items-center justify-center rounded-xl border border-slate-800 bg-slate-900 px-8 py-3 text-center text-base font-medium text-slate-300 hover:bg-slate-800 ${pageLocale === 'en' ? 'text-balance whitespace-normal leading-snug' : ''} ${tapClass}`}
                 onClick={() => withTapLock(() => {})}
               >
                 {copy.knowledgeCta}

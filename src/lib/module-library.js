@@ -292,10 +292,13 @@ export function getLibraryEntryBySlug(slug) {
   return getModularEntries().find((entry) => entry.slug === slug) || null;
 }
 
-export async function readModuleSource(entry) {
+export async function readModuleSource(entry, locale = '') {
   const sourceCandidates = getSourceCandidates(entry);
+  const contentRoots = locale === 'en'
+    ? moduleContentRoots.map((root) => path.join(root, 'en'))
+    : moduleContentRoots;
 
-  for (const root of moduleContentRoots) {
+  for (const root of contentRoots) {
     for (const sourceName of sourceCandidates) {
       const filePath = readableSourcePath(root, sourceName);
 

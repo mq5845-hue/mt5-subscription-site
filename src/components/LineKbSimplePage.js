@@ -137,7 +137,7 @@ export default function LineKbSimplePage({ locale, type }) {
           <header className="rounded-[1.75rem] border border-cyan-400/15 bg-white/[0.03] p-5 shadow-[0_20px_80px_rgba(8,145,178,0.14)] backdrop-blur-xl sm:p-6">
             <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-3xl space-y-4">
-                <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold tracking-[0.2em] text-cyan-200"><EmojiAvatar emoji="\u{1f4da}" tone="cyan" />{text.eyebrow}</div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold tracking-[0.2em] text-cyan-200"><EmojiAvatar emoji={'\u{1f4da}'} tone="cyan" />{text.eyebrow}</div>
                 <h1 className="text-3xl font-black tracking-tight text-white sm:text-5xl">{text.title}</h1>
                 <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">{text.lead}</p>
               </div>

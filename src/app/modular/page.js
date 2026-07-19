@@ -3,9 +3,9 @@ import Link from 'next/link';
 import {
   getModuleEntries,
   getReleaseCandidateEntries,
-} from '@/lib/module-library';
-import { localizePath } from '@/lib/locale';
-import EmojiAvatar from '@/components/EmojiAvatar';
+} from '../../lib/module-library';
+import { localizePath } from '../../lib/locale';
+import EmojiAvatar from '../../components/EmojiAvatar';
 
 const moduleEmojis = ['🧩', '⚙️', '📊', '🛡️', '🤖', '🔌', '🧪', '🚀'];
 

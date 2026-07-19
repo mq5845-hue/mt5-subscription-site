@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { headers } from 'next/headers';
-import { getMembershipSetupStatus } from '@/lib/membership-setup';
-import { defaultLocale, localizePath } from '@/lib/locale';
-import EmojiAvatar from '@/components/EmojiAvatar';
+import { getMembershipSetupStatus } from '../../lib/membership-setup';
+import { defaultLocale, localizePath } from '../../lib/locale';
+import EmojiAvatar from '../../components/EmojiAvatar';
 
 const membershipEmojis = { stack: ['🔐', '💳', '🗄️', '👤'], setup: ['🔑', '💰', '🧾', '🛡️'], flow: ['👋', '🪪', '💳', '✅'] };
 

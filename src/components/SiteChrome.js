@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { getLocaleFromPath, localizePath, stripLocale } from '@/lib/locale';
+import { getLocaleFromPath, localizePath, stripLocale } from '../lib/locale';
 
 const homeRoutes = new Set(['/', '/zh-Hant', '/zh-Hans', '/en']);
 
@@ -195,9 +195,9 @@ function LanguageMenu({ pathname, mobile = false }) {
         <MenuDots />
       </button>
       <div
-        className={'absolute right-0 top-full z-[60] pt-2 transition-all duration-150 ' + (mobile ? 'left-0' : '') + ' ' + (open ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-1 opacity-0') + ' md:group-hover:pointer-events-auto md:group-hover:translate-y-0 md:group-hover:opacity-100'}
+        className={'absolute right-0 top-full z-[60] pt-2 ' + (mobile ? 'left-0' : '') + ' ' + (open ? 'visible pointer-events-auto' : 'invisible pointer-events-none')}
       >
-        <div className={'overflow-hidden rounded-2xl border border-cyan-300/20 bg-slate-950/95 p-1.5 shadow-[0_0_28px_rgba(34,211,238,0.22)] backdrop-blur-xl ' + (mobile ? 'w-full' : 'w-20')}>
+        <div className={'overflow-hidden rounded-2xl border border-cyan-300/20 bg-[#020617] p-1.5 shadow-[0_0_28px_rgba(34,211,238,0.22)] ' + (mobile ? 'w-full' : 'w-20')}>
           {languageTabs.map((tab) => {
             const isActive = tab.label === activeTab.label;
             return (
@@ -218,6 +218,7 @@ function LanguageMenu({ pathname, mobile = false }) {
   );
 }
 function DesktopNavItem({ item, pathname, locale }) {
+  const [open, setOpen] = useState(false);
   const isActive = isNavItemActive(item, pathname);
   const isAiMenu = item.children?.some((child) => child.href === '/multi-agent/engine');
   const baseClasses = isActive
@@ -242,9 +243,12 @@ function DesktopNavItem({ item, pathname, locale }) {
   }
 
   return (
-    <div className="group relative">
+    <div className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} onFocus={() => setOpen(true)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }} onKeyDown={(event) => { if (event.key === 'Escape') setOpen(false); }}>
       <button
         type="button"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        onClick={() => setOpen((value) => !value)}
         className={`group relative flex items-center gap-1.5 rounded-full px-2.5 py-2 transition-all duration-300 ${baseClasses}`}
       >
         <span className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${dotClasses}`} />
@@ -252,8 +256,8 @@ function DesktopNavItem({ item, pathname, locale }) {
         <MenuDots />
       </button>
 
-      <div className={'pointer-events-none invisible absolute left-1/2 top-full z-50 -translate-x-1/2 translate-y-1 pt-3 opacity-0 transition-[opacity,transform,visibility] duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 ' + (item.label.includes('訂閱方案') || item.label.includes('订阅方案') || item.label === 'Subscription Plans' ? 'w-28' : (item.label.includes('AI重構引擎') || item.label.includes('AI重构引擎') || item.label === 'AI Refactoring' ? 'w-36' : 'w-56'))}>
-        <div className="overflow-hidden rounded-2xl border border-cyan-300/18 bg-slate-950/92 p-2 shadow-[0_0_28px_rgba(34,211,238,0.16)] backdrop-blur-xl">
+      <div className={'absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 ' + (open ? 'visible pointer-events-auto' : 'invisible pointer-events-none') + ' ' + (item.label.includes('訂閱方案') || item.label.includes('订阅方案') || item.label === 'Subscription Plans' ? 'w-28' : (item.label.includes('AI重構引擎') || item.label.includes('AI重构引擎') || item.label === 'AI Refactoring' ? 'w-36' : 'w-56'))}>
+        <div className="overflow-hidden rounded-2xl border border-cyan-300/18 bg-[#020617] p-2 shadow-[0_0_28px_rgba(34,211,238,0.16)]">
           {item.children.map((child) =>
             child.disabled ? (
               <span
@@ -399,11 +403,14 @@ useEffect(() => {
             : 'border-slate-800/14 bg-slate-950/10 sm:backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/06'
         }`}
       >
-        <div className="mx-auto flex h-14 min-w-0 max-w-7xl items-center justify-between bg-slate-950/80 px-2 backdrop-blur-md sm:h-16 sm:bg-transparent sm:px-6 sm:backdrop-blur-0 lg:px-8">
+        <div className="flex h-14 w-full min-w-0 max-w-none items-center justify-between bg-slate-950/80 px-3 backdrop-blur-md sm:h-16 sm:bg-transparent sm:px-4 sm:backdrop-blur-0 lg:px-5">
           <Link href={localizePath('/', locale)} className="flex min-w-0 shrink items-center gap-2 sm:gap-3">
             <LogoMark />
             <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-[clamp(0.8rem,4.3vw,1.25rem)] font-black leading-none whitespace-nowrap tracking-wide text-transparent sm:text-xl drop-shadow-[0_0_16px_rgba(34,211,238,0.34)]">
               AI-Quant Lab
+            </span>
+            <span className="inline-flex shrink-0 items-center rounded-full border border-amber-100/70 bg-amber-300 px-1.5 py-1 text-[8px] font-black leading-none tracking-[0.04em] text-amber-950 shadow-[0_0_14px_rgba(252,211,77,0.48)] sm:px-2.5 sm:text-[10px]">
+              <span className="sm:hidden">Beta</span><span className="hidden sm:inline">Beta版測試</span>
             </span>
           </Link>
 

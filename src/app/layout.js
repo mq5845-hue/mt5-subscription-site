@@ -1,9 +1,9 @@
 ﻿import { ClerkProvider } from '@clerk/nextjs';
 import { headers } from 'next/headers';
-import { defaultLocale } from '@/lib/locale';
+import { defaultLocale } from '../lib/locale';
 import { Geist, Geist_Mono } from 'next/font/google';
 import Script from 'next/script';
-import SiteChrome from '@/components/SiteChrome';
+import SiteChrome from '../components/SiteChrome';
 import './globals.css';
 
 const geistSans = Geist({

@@ -46,17 +46,18 @@ function analyzeMqlSource(code) {
   if (!text) return { version: 'MQL4', product: 'ea', confidence: 0, signals: [] };
 
   const mql5Rules = [
-    [/\bOnInit\s*\(/, 'OnInit'], [/\bOnTick\s*\(/, 'OnTick'], [/\bOnCalculate\s*\(/, 'OnCalculate'],
-    [/\bOnStart\s*\(/, 'OnStart'], [/\bMqlTrade(Request|Result)\b/, 'MqlTradeRequest'],
-    [/\b(CTrade|PositionSelect|CopyBuffer|CopyRates)\b/, 'MQL5 API'], [/#include\s*<Trade\\Trade\.mqh>/i, 'Trade.mqh'],
+    [/\bMqlTrade(Request|Result)\b/, 'MqlTradeRequest'], [/\b(CTrade|CPositionInfo|CDealInfo)\b/, 'MQL5 trade classes'],
+    [/\b(PositionSelect|PositionGet|HistoryDealGet|CopyBuffer|CopyRates)\w*\b/, 'MQL5 API'],
+    [/#include\s*<Trade[\\/]Trade\.mqh>/i, 'Trade.mqh'], [/\bENUM_(TRADE|POSITION|DEAL|ORDER)_/i, 'MQL5 enums'],
   ];
   const mql4Rules = [
     [/\b(init|deinit|start)\s*\(/, 'legacy event'], [/\b(OP_BUY|OP_SELL|MarketInfo)\b/, 'MQL4 constants'],
-    [/\bOrderSelect\s*\(/, 'OrderSelect'], [/\bextern\s+(bool|int|double|string)/, 'extern input'],
+    [/\b(OrderSelect|OrderTicket|OrderMagicNumber|OrdersTotal)\s*\(/, 'MQL4 order pool'],
+    [/\bextern\s+(bool|int|double|string)/, 'extern input'], [/\bMODE_(BID|ASK|POINT|DIGITS|STOPLEVEL)\b/, 'MQL4 market modes'],
   ];
   const matched5 = mql5Rules.filter(([rule]) => rule.test(text));
   const matched4 = mql4Rules.filter(([rule]) => rule.test(text));
-  const version = matched5.length >= matched4.length ? 'MQL5' : 'MQL4';
+  const version = matched5.length > matched4.length ? 'MQL5' : 'MQL4';
 
   let product = 'tools';
   let productSignal = '通用工具結構';
@@ -66,7 +67,7 @@ function analyzeMqlSource(code) {
     product = 'library'; productSignal = 'library / export';
   } else if (/#property\s+script_|\bOnStart\s*\(/i.test(text)) {
     product = 'script'; productSignal = 'script / OnStart';
-  } else if (/\bOnTick\s*\(|\bOrderSend\s*\(|\bCTrade\b|\bOP_(BUY|SELL)\b/i.test(text)) {
+  } else if (/\bOnTick\s*\(|\bOrderSend\s*\(|\bCTrade\b|\bOP_(BUY|SELL)\b|\bPositionSelect\s*\(/i.test(text)) {
     product = 'ea'; productSignal = 'trade event / order API';
   } else if (/\bOnChartEvent\s*\(|\b(ObjectCreate|ChartSet|CAppDialog)\s*\(/i.test(text)) {
     product = 'tools'; productSignal = 'chart event / UI tool';
@@ -96,6 +97,7 @@ export default function MqlEvolutionEngineExperience() {
 
   const lineCount = useMemo(() => sourceCode ? sourceCode.split(/\r?\n/).length : 0, [sourceCode]);
   const sourceAnalysis = useMemo(() => analyzeMqlSource(sourceCode), [sourceCode]);
+  const hasSource = Boolean(sourceCode.trim());
 
   useEffect(() => {
     document.title = copy.metaTitle;
@@ -170,9 +172,9 @@ export default function MqlEvolutionEngineExperience() {
 
         <section className="mt-5 rounded-[1.5rem] border border-slate-700/60 bg-slate-950/60 p-3 shadow-[0_18px_70px_rgba(2,6,23,0.42)] backdrop-blur-2xl sm:p-4">
           <div className="flex flex-col gap-4 xl:flex-row xl:items-center">
-            <div className="flex flex-wrap items-center gap-2"><span className="px-2 font-mono text-[9px] font-black tracking-[0.18em] text-slate-600">SOURCE</span>{['MQL4', 'MQL5'].map((type) => <button key={type} type="button" onClick={() => { setSourceType(type); setPrepared(false); }} className={`rounded-xl border px-4 py-2.5 text-xs font-black transition ${sourceType === type ? 'border-cyan-300/60 bg-cyan-300 text-slate-950 shadow-[0_0_22px_rgba(34,211,238,0.25)]' : 'border-slate-700 bg-slate-900/70 text-slate-400 hover:border-cyan-300/30'}`}>{type}</button>)}</div>
+            <div className="flex flex-wrap items-center gap-2"><span className="px-2 font-mono text-[9px] font-black tracking-[0.18em] text-slate-600">SOURCE</span>{['MQL4', 'MQL5'].map((type) => <button key={type} type="button" aria-pressed={hasSource && sourceType === type} onClick={() => { setSourceType(type); setPrepared(false); }} className={`rounded-xl border px-4 py-2.5 text-xs font-black transition duration-300 ${hasSource && sourceType === type ? 'border-cyan-200/80 bg-cyan-300 text-slate-950 shadow-[0_0_12px_rgba(103,232,249,0.75),0_0_30px_rgba(34,211,238,0.42)]' : 'border-slate-700 bg-slate-900/70 text-slate-400 hover:border-cyan-300/30'}`}>{type}</button>)}</div>
             <div className="hidden h-8 w-px bg-slate-800 xl:block" />
-            <div className="flex flex-wrap items-center gap-2"><span className="px-2 font-mono text-[9px] font-black tracking-[0.18em] text-slate-600">PRODUCT</span>{productTypes.map(([key, label]) => <button key={key} type="button" onClick={() => { setProductType(key); setPrepared(false); }} className={`rounded-xl border px-3 py-2.5 text-xs font-bold transition ${productType === key ? 'border-violet-300/45 bg-violet-500/20 text-violet-100 shadow-[0_0_18px_rgba(139,92,246,0.15)]' : 'border-slate-700 bg-slate-900/70 text-slate-500 hover:border-violet-300/30 hover:text-violet-200'}`}>{label}</button>)}</div>
+            <div className="flex flex-wrap items-center gap-2"><span className="px-2 font-mono text-[9px] font-black tracking-[0.18em] text-slate-600">PRODUCT</span>{productTypes.map(([key, label]) => <button key={key} type="button" aria-pressed={hasSource && productType === key} onClick={() => { setProductType(key); setPrepared(false); }} className={`rounded-xl border px-3 py-2.5 text-xs font-bold transition duration-300 ${hasSource && productType === key ? 'border-violet-200/70 bg-violet-400/25 text-violet-50 shadow-[0_0_12px_rgba(196,181,253,0.62),0_0_28px_rgba(139,92,246,0.38)]' : 'border-slate-700 bg-slate-900/70 text-slate-500 hover:border-violet-300/30 hover:text-violet-200'}`}>{label}</button>)}</div>
             <div className="hidden h-8 w-px bg-slate-800 xl:block" />
             <div className="flex flex-wrap items-center gap-2"><span className="px-2 font-mono text-[9px] font-black tracking-[0.18em] text-slate-600">{copy.riskMode}</span>{Object.entries(copy.risks).map(([mode, label]) => <button key={mode} type="button" onClick={() => setRiskMode(mode)} className={`rounded-xl border px-3 py-2.5 text-xs font-bold transition ${riskMode === mode ? 'border-emerald-300/40 bg-emerald-300/10 text-emerald-200' : 'border-slate-700 bg-slate-900/70 text-slate-500'}`}>{label}</button>)}</div>
             <button type="button" onClick={prepareJob} disabled={isProcessing} className="relative ml-auto overflow-hidden rounded-xl bg-gradient-to-r from-cyan-400 via-sky-500 to-blue-600 px-7 py-3 text-sm font-black text-slate-950 shadow-[0_0_30px_rgba(34,211,238,0.24)] transition hover:-translate-y-0.5 hover:brightness-110 disabled:cursor-wait disabled:opacity-70"><span className="relative z-10">{isProcessing ? copy.processing : copy.preflight}</span></button>

@@ -67,10 +67,11 @@ export default function LlmProviderHoverPicker({ value, onChange, copy }) {
       <div
         role="listbox"
         aria-label={copy.chooseCompany}
-        className={`absolute left-0 top-full z-[80] w-[min(32rem,calc(100vw-2rem))] origin-top-left overflow-hidden rounded-2xl border border-fuchsia-300/20 bg-slate-950/98 p-2 shadow-[0_30px_90px_rgba(2,6,23,0.78),0_0_50px_rgba(217,70,239,0.1)] backdrop-blur-2xl transition duration-200 ${open ? 'pointer-events-auto translate-y-0 scale-100 opacity-100' : 'pointer-events-none -translate-y-2 scale-[0.98] opacity-0'}`}
+        style={{ left: 0, right: 0, width: 'auto', maxWidth: 'none' }}
+        className={`absolute top-full z-[80] origin-top-left overflow-hidden rounded-2xl border border-fuchsia-300/20 bg-slate-950/98 p-2 shadow-[0_30px_90px_rgba(2,6,23,0.78),0_0_50px_rgba(217,70,239,0.1)] backdrop-blur-2xl transition duration-200 ${open ? 'pointer-events-auto translate-y-0 scale-100 opacity-100' : 'pointer-events-none -translate-y-2 scale-[0.98] opacity-0'}`}
       >
         <div className="mb-2 flex items-center justify-between border-b border-slate-800 px-2 pb-2"><span className="font-mono text-[9px] font-black tracking-[0.16em] text-fuchsia-300">SELECT AI COMPANY</span><span className="text-[9px] text-slate-600">{copy.hover}</span></div>
-        <div className="grid max-h-80 gap-1 overflow-y-auto sm:grid-cols-2">
+        <div style={{ gridTemplateColumns: 'minmax(0, 1fr)' }} className="grid max-h-80 gap-1 overflow-y-auto">
           {providers.map((provider) => {
             const active = provider.value === value;
             return (

@@ -1,6 +1,6 @@
 import { clerkMiddleware } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
-import { defaultLocale } from '@/lib/locale';
+import { defaultLocale } from './lib/locale';
 
 export default clerkMiddleware(async (auth, request) => {
   const isMemberRoute = /^\/(?:(?:en|zh-Hant|zh-Hans)\/)?member(?:\/.*)?$/.test(request.nextUrl.pathname);

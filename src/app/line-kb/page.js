@@ -1,7 +1,7 @@
 ﻿import { headers } from 'next/headers';
 import Link from 'next/link';
-import { localizePath } from '@/lib/locale';
-import EmojiAvatar from '@/components/EmojiAvatar';
+import { localizePath } from '../../lib/locale';
+import EmojiAvatar from '../../components/EmojiAvatar';
 
 const resourceEmojis = { '/': '🏠', '/line-kb/formal-tree': '🌳', '/line-kb/flex-template': '💬', '/line-kb/spec': '📐', '/line-kb/expansion': '🌱', '/line-kb/backend-export': '📦', '/line-kb/reservation': '📅' };
 const knowledgeEmojis = { highlights: ['👋', '🧭', '💡', '🌱', '📤'], story: ['✨', '🤝', '🎯'], expansion: ['🧱', '🎨', '🔄'], process: ['📥', '💬', '📈'] };

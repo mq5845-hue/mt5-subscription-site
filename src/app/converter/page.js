@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useAuth, SignInButton, SignUpButton } from '@clerk/nextjs';
 import { usePathname } from 'next/navigation';
-import { getLocaleFromPath } from '@/lib/locale';
+import { getLocaleFromPath } from '../../lib/locale';
 
 const copy = {
   en: {

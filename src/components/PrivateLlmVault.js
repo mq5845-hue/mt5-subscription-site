@@ -1,9 +1,9 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import LlmProviderHoverPicker from '@/components/LlmProviderHoverPicker';
-import LlmModelHoverPicker from '@/components/LlmModelHoverPicker';
-import { getMqlEngineCopy } from '@/lib/mqlEngineI18n';
+import LlmProviderHoverPicker from './LlmProviderHoverPicker';
+import LlmModelHoverPicker from './LlmModelHoverPicker';
+import { getMqlEngineCopy } from '../lib/mqlEngineI18n';
 
 function EyeIcon({ hidden }) {
   return (
@@ -49,7 +49,7 @@ export default function PrivateLlmVault({ locale = 'en' }) {
           <div className="mt-4 flex items-center gap-2 font-mono text-[10px]"><span className={`h-1.5 w-1.5 rounded-full ${keyState.live ? 'bg-emerald-300 shadow-[0_0_10px_rgba(110,231,183,0.8)]' : 'bg-slate-700'}`} /><span className={keyState.color}>{keyState.label}</span></div>
         </div>
 
-        <div className="grid gap-3 lg:grid-cols-[0.8fr_1fr_1.55fr_auto] lg:items-end">
+        <div className="grid gap-3 lg:grid-cols-[10rem_12rem_minmax(16rem,1fr)_auto] lg:items-end [&>*]:min-w-0">
           <LlmProviderHoverPicker value={provider} onChange={setProvider} copy={c} locale={locale} />
 
           <LlmModelHoverPicker provider={provider} value={model} onChange={setModel} copy={c} locale={locale} />
