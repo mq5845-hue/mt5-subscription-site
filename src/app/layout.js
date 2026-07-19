@@ -16,7 +16,29 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ai-quant-lab.vercel.app';
+const defaultSiteUrl = 'https://ai-quant-lab.vercel.app';
+
+function resolveSiteUrl(value) {
+  const candidate = value?.trim();
+  if (!candidate) return defaultSiteUrl;
+
+  try {
+    const normalized = /^[a-z][a-z\d+.-]*:\/\//i.test(candidate)
+      ? candidate
+      : `https://${candidate}`;
+    const url = new URL(normalized);
+
+    if (url.protocol !== 'https:' && url.protocol !== 'http:') {
+      return defaultSiteUrl;
+    }
+
+    return url.toString().replace(/\/$/, '');
+  } catch {
+    return defaultSiteUrl;
+  }
+}
+
+const siteUrl = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
 const siteDescription = 'AI-Quant Lab brings MQL5 quantitative strategies, AI workflows, and practical knowledge resources together in one clear member experience.';
 
 export const metadata = {
