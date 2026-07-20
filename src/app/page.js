@@ -223,7 +223,7 @@ const homeCopy = {
     heroTitleBottom: '\u89e3\u9396\u6cd5\u4eba\u7d1a MT5 EA \u5546\u696d\u6e90\u4ee3\u78bc',
     heroBody: '\u96f6\u57fa\u790e\u4e5f\u80fd\u7528 AI LLM \u63d0\u793a\u8a5e\u6a21\u677f\u9ad8\u6548\u91cd\u69cb\u6838\u5fc3\u7b56\u7565\u3002\u7121\u7248\u6b0a\u9650\u5236\u3001\u7121\u9808\u8a31\u53ef\uff0c\u6253\u9020\u5c08\u5c6c\u60a8\u7684\u500b\u4eba\u4ea4\u6613\u54c1\u724c\u8207\u6578\u4f4d\u8cc7\u7522\uff0c\u5229\u6f64 100% \u5168\u6b78\u81ea\u5df1\u3002',
     membershipCta: '\u524d\u5f80\u6a19\u6e96\u6703\u54e1',
-    knowledgeCta: '\u5143\u4ea4\u6613\u64cd\u4f5c\u63a7\u5236(\u6cd5\u4eba\u6a5f\u69cb\u4f01\u696d\u7248)',
+    knowledgeCta: '\u5143\u4ea4\u6613\u64cd\u4f5c\u63a7\u5236\u5ba4(\u6cd5\u4eba\u6a5f\u69cb_\u96e2\u7dda.\u4f01\u696d\u79c1\u6709\u96f2)',
     reasonsBadge: '\u5148\u770b\u898b\u7bc0\u594f\uff0c\u518d\u770b\u898b\u50f9\u503c',
     reasonsTitle: '\u4e09\u500b\u8b93\u4eba\u9858\u610f\u5f80\u4e0b\u770b\u7684\u7406\u7531',
     reasonsBody: '\u5982\u679c\u4f60\u60f3\u77e5\u9053\u9019\u500b\u9996\u9801\u5230\u5e95\u5728\u8ce3\u4ec0\u9ebc\u3001\u5f37\u5728\u54ea\u88e1\u3001\u9069\u4e0d\u9069\u5408\u4f60\uff0c\u5148\u770b\u5b8c\u9019\u4e09\u500b\u5340\u584a\uff0c\u518d\u5f80\u4e0b\u770b\u65b9\u6848\u6703\u66f4\u6709\u611f\u3002'
@@ -235,7 +235,7 @@ const homeCopy = {
     heroTitleBottom: '\u89e3\u9501\u6cd5\u4eba\u7ea7 MT5 EA \u5546\u4e1a\u6e90\u4ee3\u7801',
     heroBody: '\u96f6\u57fa\u7840\u4e5f\u80fd\u7528 AI LLM \u63d0\u793a\u8bcd\u6a21\u677f\u9ad8\u6548\u91cd\u6784\u6838\u5fc3\u7b56\u7565\u3002\u65e0\u7248\u6743\u9650\u5236\u3001\u65e0\u987b\u8bb8\u53ef\uff0c\u6253\u9020\u4e13\u5c5e\u4e8e\u60a8\u7684\u4e2a\u4eba\u4ea4\u6613\u54c1\u724c\u4e0e\u6570\u5b57\u8d44\u4ea7\uff0c\u5229\u6da6 100% \u5168\u5f52\u81ea\u5df1\u3002',
     membershipCta: '\u524d\u5f80\u6807\u51c6\u4f1a\u5458',
-    knowledgeCta: '\u5143\u4ea4\u6613\u64cd\u4f5c\u63a7\u5236(\u6cd5\u4eba\u673a\u6784\u4f01\u4e1a\u7248)',
+    knowledgeCta: '\u5143\u4ea4\u6613\u64cd\u4f5c\u63a7\u5236\u5ba4(\u6cd5\u4eba\u673a\u6784_\u79bb\u7ebf.\u4f01\u4e1a\u79c1\u6709\u4e91)',
     reasonsBadge: '\u5148\u770b\u89c1\u8282\u594f\uff0c\u518d\u770b\u89c1\u4ef7\u503c',
     reasonsTitle: '\u4e09\u4e2a\u8ba9\u4eba\u613f\u610f\u5f80\u4e0b\u770b\u7684\u7406\u7531',
     reasonsBody: '\u5982\u679c\u4f60\u60f3\u77e5\u9053\u8fd9\u4e2a\u9996\u9875\u5230\u5e95\u5728\u5356\u4ec0\u4e48\u3001\u5f3a\u5728\u54ea\u91cc\u3001\u9002\u4e0d\u9002\u5408\u4f60\uff0c\u5148\u770b\u5b8c\u8fd9\u4e09\u4e2a\u533a\u5757\uff0c\u518d\u5f80\u4e0b\u770b\u65b9\u6848\u4f1a\u66f4\u6709\u611f\u3002'
@@ -247,7 +247,7 @@ const homeCopy = {
     heroTitleBottom: 'Unlock Institutional MT5 EA Source Code',
     heroBody: 'Even from zero, you can use AI LLM prompt templates to rebuild core strategies efficiently. No copyright lock-in, no permission required. Build your own trading brand and digital assets, and keep 100% of the upside.',
     membershipCta: 'Go to Standard Membership',
-    knowledgeCta: 'Meta-transaction operation control (corporate version)',
+    knowledgeCta: 'Meta Trading Operations Control Room (Institutional_Offline. Enterprise Private Cloud)',
     reasonsBadge: 'See the rhythm, then the value',
     reasonsTitle: 'Three reasons to keep scrolling',
     reasonsBody: 'If you want to know what this homepage is offering, where it stands out, and whether it fits you, start with these three sections before comparing the plans below.'
@@ -280,9 +280,9 @@ const documentFeatures = [
   { kicker: "👀 A1", title: "MQ4/MQ5程式碼轉換與升級", description: "從MQ4轉碼編譯、策略設計、嚴謹回測驗證，到最終的實盤上線部署一次搞定。從策略轉碼、編譯優化、歷史回測到實盤部署，打造完整流暢的MT5量化交易流程。", icon: "chart" },
   { kicker: "🧩 A2", title: "MQL5程式碼核心模組化AI輔助教學", description: "拆解EA交易核心模組架構邏輯，AI輔助讓您輕鬆創建生成程式碼，快速掌握策略SOP獨家技巧。深入淺出解析EA關鍵結構與執行邏輯，適合想自己動手創建交易策略的您。", icon: "code" },
   { kicker: "🧪 A3", title: "專屬VIP社群支援與專業引導", description: "透過深度策略交流與最新版本解析，並結合實作建議，協助您快速上手，大幅縮短學習曲線與試錯成本。獲取最新版本動態、交流實戰策略與具體實作建議，幫助您避開常見誤區，加速目標達成並提升執行效率。", icon: "users" },
-  { kicker: "✅  01", title: "創建策略只是開始，能持續優化才是關鍵", description: "真正有價值的內容，不只讓你看過，而是讓你能拿去驗證、修正、再進一步。這也是我們把教學、範例與回測脈絡一起放進首頁的原因。優質內容帶你親自驗證與修正。我們將教學、範例及回測脈絡完整收錄，助你打造不斷進化的獲利迴圈。", icon: "chart" },
-  { kicker: "✅  02", title: "當發現每個區塊都在引導進入源代碼世界", description: "不過度堆疊資訊，跟隨漸進式節奏：先建立信任基礎、再傳遞核心價值，最後自然對接方案。透過層層遞進的引導，有效延長停留時間並提升轉換率。 展現內容匹配方案， 打造讓讀者不斷探索的程式碼生成體驗，更能留住目標客群。", icon: "code" },
-  { kicker: "✅  03", title: "讓有心人能快速創建自己個人品牌的事業", description: "當頁面把價值說清楚，方案區就不只是價格，而是清楚的下一步。你會更容易知道自己該看哪一層、該從哪裡開始。不再茫然，輕鬆找到適合的切入點。具體方案讓你掌握核心價值，助你快速創建個人品牌事業 。", icon: "users" }
+  { kicker: "✅  01", title: "創建策略只是開始，能持續優化才是關鍵", description: "真正有價值的內容，不只讓你看過，而是讓你能拿去驗證、修正、再進一步。這也是我們把教學、範例與回測脈絡一起放進首頁的原因。優質內容帶你親自驗證與修正。我們將教學、範例及回測脈絡完整收錄，助你打造不斷進化的獲利迴圈。", icon: 'iterate' },
+  { kicker: "✅  02", title: "當發現每個區塊都在引導進入源代碼世界", description: "不過度堆疊資訊，跟隨漸進式節奏：先建立信任基礎、再傳遞核心價值，最後自然對接方案。透過層層遞進的引導，有效延長停留時間並提升轉換率。 展現內容匹配方案， 打造讓讀者不斷探索的程式碼生成體驗，更能留住目標客群。", icon: 'discover' },
+  { kicker: "✅  03", title: "讓有心人能快速創建自己個人品牌的事業", description: "當頁面把價值說清楚，方案區就不只是價格，而是清楚的下一步。你會更容易知道自己該看哪一層、該從哪裡開始。不再茫然，輕鬆找到適合的切入點。具體方案讓你掌握核心價值，助你快速創建個人品牌事業 。", icon: 'launch' }
 ];
 
 const englishDocumentHomepageCopy = {
@@ -308,9 +308,9 @@ const englishDocumentFeatures = [
   { kicker: 'A1', title: 'MQ4/MQ5 Code Conversion and Upgrade', description: 'Cover conversion, compilation, strategy design, rigorous backtesting, and live deployment in one MT5 workflow.', icon: 'chart' },
   { kicker: 'A2', title: 'AI-Assisted MQL5 Core Modularization Training', description: 'Break down EA core modules and use AI guidance to create code and master strategy SOPs faster.', icon: 'code' },
   { kicker: 'A3', title: 'Dedicated VIP Community Support and Professional Guidance', description: 'Combine in-depth strategy exchange, version updates, and practical recommendations to shorten the learning curve.', icon: 'users' },
-  { kicker: '01', title: 'Creating a Strategy Is Only the Beginning', description: 'The real value is the ability to validate, refine, and keep improving through connected lessons, examples, and backtest context.', icon: 'chart' },
-  { kicker: '02', title: 'Every Section Guides You into the Source-Code World', description: 'A progressive flow builds trust, communicates core value, and naturally connects visitors with the right solution.', icon: 'code' },
-  { kicker: '03', title: 'Build Your Personal Brand Business Faster', description: 'When the value is clear, each plan becomes a practical next step for building a personal technology brand.', icon: 'users' },
+  { kicker: '01', title: 'Creating a Strategy Is Only the Beginning', description: 'The real value is the ability to validate, refine, and keep improving through connected lessons, examples, and backtest context.', icon: 'iterate' },
+  { kicker: '02', title: 'Every Section Guides You into the Source-Code World', description: 'A progressive flow builds trust, communicates core value, and naturally connects visitors with the right solution.', icon: 'discover' },
+  { kicker: '03', title: 'Build Your Personal Brand Business Faster', description: 'When the value is clear, each plan becomes a practical next step for building a personal technology brand.', icon: 'launch' },
 ];
 
 const englishDocumentRouteSteps = [
@@ -390,14 +390,14 @@ function HomeDesktopNavItem({ item, pathname, locale }) {
   const isAiMenu = item.children?.some((child) => child.href === '/multi-agent/engine');
   const baseClasses = isActive
     ? 'bg-cyan-500/12 text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.18)]'
-    : 'text-slate-400 hover:text-cyan-400';
+    : 'text-slate-300 hover:bg-cyan-500/12 hover:text-cyan-100 hover:shadow-[0_0_16px_rgba(34,211,238,0.6),0_0_30px_rgba(34,211,238,0.22)]';
   const dotClasses = isActive
     ? 'bg-cyan-200 shadow-[0_0_12px_rgba(165,243,252,0.95)]'
-    : 'bg-cyan-400/65 group-hover:bg-cyan-200 group-hover:shadow-[0_0_10px_rgba(34,211,238,0.65)]';
+    : 'bg-cyan-400/65 group-hover:bg-cyan-100 group-hover:shadow-[0_0_14px_rgba(34,211,238,0.95)]';
 
   if (!item.children) {
     return (
-      <Link href={localizePath(item.href, locale)} className={`group relative rounded-full px-4 py-2 transition-all duration-300 ${baseClasses}`}>
+      <Link href={localizePath(item.href, locale)} className={`group relative rounded-full px-4 py-2 transition-all duration-300 hover:scale-[1.04] ${baseClasses}`}>
         <span className="relative z-10 flex items-center gap-2">
           <span className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${dotClasses}`} />
           <span className={isActive ? 'drop-shadow-[0_0_12px_rgba(34,211,238,0.36)]' : ''}>{item.label}</span>
@@ -413,7 +413,7 @@ function HomeDesktopNavItem({ item, pathname, locale }) {
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
-        className={`group relative flex items-center gap-1.5 rounded-full px-2.5 py-2 transition-all duration-300 ${baseClasses}`}
+        className={`group relative flex items-center gap-1.5 rounded-full px-3 py-2 transition-all duration-300 hover:scale-[1.04] ${baseClasses}`}
       >
         <span className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${dotClasses}`} />
         <span className={isActive ? 'drop-shadow-[0_0_12px_rgba(34,211,238,0.36)]' : ''}>{item.label}</span>
@@ -555,6 +555,15 @@ function FeatureIcon({ type }) {
           <rect x="7.8" y="10.9" width="8.6" height="2.1" rx="0.7" fill="#dbeafe" />
           <rect x="7.8" y="13.8" width="5.7" height="2.1" rx="0.7" fill="#94a3b8" />
         </svg>
+      </div>
+    );
+  }
+
+  if (type === 'iterate' || type === 'discover' || type === 'launch') {
+    const emoji = type === 'iterate' ? '\u{1F501}' : type === 'discover' ? '\u{1F9ED}' : '\u{1F680}';
+    return (
+      <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-[#111935] text-4xl shadow-sm shadow-cyan-500/10 ring-1 ring-[#1f2a4d]" aria-hidden="true">
+        <span className="drop-shadow-[0_0_12px_rgba(34,211,238,0.35)]">{emoji}</span>
       </div>
     );
   }
@@ -1202,7 +1211,7 @@ export default function Home({ locale = 'en' }) {
             <p className={`mt-4 text-sm leading-relaxed text-slate-400 sm:text-base ${glowText}`}>
               {copy.reasonsBody}
             </p>
-            <p className={`mt-3 text-xs leading-relaxed text-slate-500 sm:text-sm ${glowText}`}>
+            <p className={`mt-3 text-xs leading-relaxed text-slate-200 sm:text-sm ${glowText}`}>
               {copy.reasonsFootnote}
             </p>
           </div>

@@ -175,7 +175,7 @@ function NavLinks({ locale, text }) {
         <Link
           key={item.href}
           href={localizePath(item.href, locale)}
-          className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-semibold tracking-[0.08em] text-cyan-100 transition hover:border-cyan-300/40 hover:bg-cyan-300/15 hover:text-white"
+          className="rounded-full border border-cyan-400/30 bg-[#020617]/95 px-4 py-2 text-xs font-semibold tracking-[0.08em] text-cyan-100 transition hover:border-cyan-300/40 hover:bg-slate-900/90 hover:text-white"
         >
           {item.label}
         </Link>
@@ -221,18 +221,11 @@ export default async function LineKbPage({ searchParams }) {
           <header className="rounded-[1.75rem] border border-cyan-400/15 bg-white/[0.03] p-5 shadow-[0_20px_80px_rgba(8,145,178,0.14)] backdrop-blur-xl sm:p-6">
             <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-3xl space-y-4">
-                <div className="inline-flex flex-wrap gap-2">
-                  <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-1 text-xs font-semibold tracking-[0.2em] text-cyan-200">
-                    {text.eyebrow}
-                  </span>
-                  {text.badges.map((badge) => (
-                    <span key={badge} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold tracking-[0.12em] text-slate-300">
-                      {badge}
-                    </span>
-                  ))}
-                </div>
                 <div>
-                  <h1 className="text-3xl font-black tracking-tight text-white sm:text-5xl">{text.title}</h1>
+                  <span className="inline-flex rounded-xl bg-cyan-500 px-4 py-1.5 text-sm font-semibold text-slate-950 shadow-[0_8px_20px_rgba(6,182,212,0.24)]">
+                    {locale === 'en' ? 'Lab Knowledge Base' : locale === 'zh-Hans' ? 'Lab \u77e5\u8bc6\u5e93' : 'Lab \u77e5\u8b58\u5eab'}
+                  </span>
+                  <h1 className="mt-4 text-3xl font-black tracking-tight text-white sm:text-5xl">{text.title}</h1>
                   <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">{text.lead}</p>
                 </div>
               </div>

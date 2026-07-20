@@ -21,7 +21,7 @@ const localeCopy = {
     description: 'Explore the core AI-Quant Lab modules. Each card opens an independent page for focused reading and implementation.',
     sourceBadge: '.md source content',
     home: 'Back to home',
-    lineKb: 'LINE Knowledge Base',
+    lineKb: 'Lab Knowledge Base',
     open: 'Open module',
     releaseEyebrow: 'Release Candidate',
     releaseTitle: 'RC1 Validation Plan',
@@ -37,7 +37,7 @@ const localeCopy = {
     description: '整理 AI-Quant Lab 的核心模組。每張卡片都對應獨立頁面，方便閱讀與實作。',
     sourceBadge: '.md 原始內容',
     home: '回首頁',
-    lineKb: 'LINE 知識庫',
+    lineKb: 'Lab \u77e5\u8b58\u5eab',
     open: '開啟模組',
     releaseEyebrow: '發佈候選版',
     releaseTitle: 'RC1 驗證計畫',
@@ -53,7 +53,7 @@ const localeCopy = {
     description: '整理 AI-Quant Lab 的核心模块。每张卡片都对应独立页面，方便阅读与实作。',
     sourceBadge: '.md 原始内容',
     home: '回首页',
-    lineKb: 'LINE 知识库',
+    lineKb: 'Lab \u77e5\u8bc6\u5e93',
     open: '打开模块',
     releaseEyebrow: '发布候选版',
     releaseTitle: 'RC1 验证计划',
@@ -151,7 +151,7 @@ export default async function ModularIndexPage({ searchParams }) {
           <div className="flex flex-wrap gap-3">
             <Link
               href={localizePath('/', locale)}
-              className="rounded-xl border border-slate-700 bg-slate-950/60 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-cyan-400/30 hover:text-cyan-200"
+              className="rounded-xl border border-slate-700 bg-slate-950/60 px-4 py-1.5 text-sm font-semibold text-slate-200 transition hover:border-cyan-400/30 hover:text-cyan-200"
             >
               {text.home}
             </Link>
