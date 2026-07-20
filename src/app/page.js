@@ -254,6 +254,78 @@ const homeCopy = {
   },
 };
 
+const documentHomepageCopy = { reasonsBadge: '\u91cf\u5316\u6e90\u4ee3\u78bc\u5275\u5efa\uff0cAI \u8ce6\u80fd\u6f5b\u5728\u50f9\u503c', reasonsTitle: '\u4e00\u3001\u8de8\u8d8a MQL5\uff1a\u6838\u5fc3\u67b6\u69cb\u7684\u964d\u7dad\u6253\u64ca', reasonsBody: '\u300c\u5728\u91d1\u878d\u5927\u5ef3\u9ad8\u58d3\u8077\u5834\u4e0a\uff0c\u5728\u77ac\u606f\u842c\u8b8a\u7684\u5e02\u5834\u4e0b\uff0c\u89e3\u6c7a\u6cd5\u4eba\u6a5f\u69cb\u9802\u7d1a\u4ea4\u6613\u54e1/\u7d93\u7406\u4eba\u7684\u6709\u611f\u75db\u9ede\u3002\u300d', reasonsFootnote: '\u7a0b\u5f0f\u78bc\u964d\u672c\u589e\u6548\u8853\uff1a\u5c07\u300c\u4ee5\u4e0b\u8907\u96dc\u5c08\u6848\u300d\u8f49\u70ba\u300c\u4f01\u696d\u7d1a\u89e3\u6c7a\u65b9\u6848\u300d', journeyBadge: "旅程 / Journey", journeyTitle: "二、 策略生成與風控的AI革命旅程", journeyBody: "「賦能企業的決策引擎！掌握AI技術在商業策略與風險控管的落地應用與未來趨勢。」", guideBadge: "導覽 / Guide", guideTitle: "三、從數據洞察到自動決策，全面解鎖智慧化營運與風險防禦。", guideBody: "「深度解析演算法如何重塑商業邏輯，打造兼具前瞻創新與絕對安全的現代化管理新典範。」\n擺脫低薪輪迴！把複雜原始碼「微型化」，打造自動化獲利引擎", featuresTitle: "源代碼倉庫", featuresBody: "「幫助您釐清混亂的架構，透過模組化積木的組合與延伸，讓你擁有核心源代碼(原始碼Source Code) 。」\n這些複雜的代碼正是您創業的最佳敲門磚，將其萃取成具備商業價值的微型服務" };
+const documentScrollCards = [
+  { kicker: "🧠01 / 先看懂系統", title: "採用「Python 核心驅動  >>>  MQL5 執行」的非對稱架構", description: "搭建一個以 Python 為主體的「決策大腦」，利用 Python MT5 庫（或 MetaAPI / ZeroMQ 協議）進行雙向通訊。Python 負責高密度的數據運算、AI模型推論與策略權重動態分配；MQL5 僅作為「低延遲的執行手腳」，負責下單、風控和即時倉位回傳。" },
+  { kicker: "🛠02 / 再看懂差異", title: "引入多智能體（Multi-Agent）MCP 架構作為「虛擬交易投研部」", description: "Agent A（總體經濟與新聞分析師）： 透過 MCP 連接彭博社（Bloomberg）或路透社 API，即時解析Fed文宣或非農數據，評估市場風險情緒（Risk-on / Risk-off）。Agent B（市場結構偵測師）： 定時量化當前市場處於「高波動趨勢」、「低波動震盪」還是「跳空暴漲暴跌」狀態。Agent C（策略組合調配師）： 根據 A 與 B 的報告，自動調配您旗下 20 支 MQL5 EA 的權重（例如：偵測到震盪，自動調高網格/馬丁策略權重，關閉突破趨勢策略）。" },
+  { kicker: "🚀03 / 最後看懂指引", title: "建立基於機器學習的「市場狀態分類器（Market Regime Classifier）」", description: "利用非監督式學習（如隱馬可夫模型 Hidden Markov Models, HMM 或聚類算法 KMeans），將歷史行情自動分類為 4~6 種狀態。當系統偵測到市場從「狀態一（低波動多頭）」切換到「狀態三（高波動空頭）」時，系統秒級切換 EA 參數，甚至直接換掉策略核心。" }
+];
+const documentNarrativeBlocks = [
+  { tag: "🌱探索 / Explore", title: "利用基因演算法與強化學習（RL）實現「自適應參數優化」", note: "在 Python 端引入強化學習（Reinforcement Learning）演算法（如 PPO 或 DDPG）。把交易環境當成一場賽車遊戲，讓AI在不斷變化的模擬市場中「自主學習」何時該加碼、何時該止損，實現參數的動態自我調整，而非固定參數。" },
+  { tag: "🧭驗證 / Verify", title: "導入大語言模型（LLM）代碼生成流，建立「策略自動工廠」", note: "利用微調過（Fine-tuned）的程式碼大模型（Code LLM），建立一個內部工具。您只需輸入白話文指令：「幫我寫一個基於布林通道跌破下軌、同時RSI超賣、且需加入ATR移動止損的 MQL5 程式碼」，系統在 3 秒內生成毫無語法錯誤的MQL5 EA代碼，並自動丟進 MT5 進行歷史回測，大幅縮短新策略的研發週期。" },
+  { tag: "✨ 行動 / Move", title: "建立「AI 風控裁判（AI Risk Guardian）」審查機制", note: "獨立出一個擁有最高權限的「AI 風控節點」（可用 LangGraph 實作）。它不參與交易，只負責監控。它會計算整體的資產暴露風險（VaR）。當發現某個EA的行為偏離常態，或者遭遇市場流動性危機（Slippage 暴增）時，AI風控裁判可以直接越過該 EA，對 MT5 發出「強制平倉並凍結交易」的最高指令。" }
+];
+const documentRouteSteps = [
+  { step: "👀 A1", title: "串接多元替代數據（Alternative Data）獲取資訊非對稱優勢", text: "透過 MCP 或自建 Web Scraper，將社交媒體情緒（X/Twitter、Reddit 的財經板）、各大央行行長的演講逐字稿情緒分析、甚至特定商品的供應鏈數據（如大宗商品的衛星圖數據、航運指數）轉化為量化因子，作為策略的領先指標（Leading Indicator）。" },
+  { step: "🧩 A2", title: "導入\"量子啟發式\"演算法 或 \"高維度因子庫\"（Factor Library）", text: "建立您自營部門的因子庫管理系統。不要依賴單一指標（如 MACD），而是同時計算數百個數學、統計、動量、波形因子，利用機器學習的特徵選擇（Feature Selection）技術，每天自動篩選出當前最具預測能力的5個因子來指導EA。" },
+  { step: "🧪 A3", title: "採用合成數據（Synthetic Data）進行「極限壓力測試」", text: "利用生成對抗網路（GAN）或變分自編碼器（VAE），模擬出數萬種「歷史上從未發生過、但符合統計學原理」的虛擬崩盤或極端暴漲行情。將您的EA丟進這些虛擬世界中測試，確保它在面對類似1987黑色星期一、2020 負油價等極端事件時，基金依然能活下來。" },
+  { step: "🎯 A4", title: "打造「人機協同（Human-in-the-Loop）」的半自動指揮艙", text: "透過網頁端（如 Streamlit 或 Dash）搭建自營部的中央指揮艙。AI每天早上自動生成市場報告與策略推薦組合，您作為資深交易員，只需在介面上「勾選、微調比例、點擊蓋章核准」，系統隨即自動將調整後的權重發送到底層的各個 MQL5 執行單元。" }
+];
+const documentSignalBlocks = [
+  { title: "搭建「非同步通訊橋樑」回報機制", copy: "使用 ZeroMQ 或是 Shared Memory（共享記憶體），在您的 MT5 伺服器與一台專門跑 Python 的AI伺服器之間建立一條「即時通訊高速公路」。讓 MQL5 將盤中的成交回報、當前滑點、點差（Spread）、撤單率等數據，非同步（不阻塞交易主執行緒）地丟給 Python。" },
+  { title: "開發 Python 端「微觀市場狀態分類器」", copy: "在 Python 端，利用機器學習（如 XGBoost 或 LightGBM）分析微觀結構數據。當AI偵測到微觀市場極度健康（點差小、深度厚）時，透過 ZeroMQ 傳送指令給 MQL5，自動調大EA的單筆手數，或調高 Scalping 的頻率。" },
+  { title: "引入 LangGraph 建立「策略汰弱留強調度艙」", copy: "法人機構不同的短線與套利策略_市場每天變化，有些策略今天盈、明天損。盤後由 LangGraph 驅動的Agent團隊自動去抓取今天所有高頻EA的交易日誌（Logs）。LangGraph 會在經理儀表板（如 Streamlit 介面）產出報告，只需點擊【同意並更新】，Python 系統會自動更改設定檔，隔天開盤時，底層的MQL5 EA就會自動執行新的資金分配。" }
+];
+const documentFeatures = [
+  { kicker: "👀 A1", title: "MQ4/MQ5程式碼轉換與升級", description: "從MQ4轉碼編譯、策略設計、嚴謹回測驗證，到最終的實盤上線部署一次搞定。從策略轉碼、編譯優化、歷史回測到實盤部署，打造完整流暢的MT5量化交易流程。", icon: "chart" },
+  { kicker: "🧩 A2", title: "MQL5程式碼核心模組化AI輔助教學", description: "拆解EA交易核心模組架構邏輯，AI輔助讓您輕鬆創建生成程式碼，快速掌握策略SOP獨家技巧。深入淺出解析EA關鍵結構與執行邏輯，適合想自己動手創建交易策略的您。", icon: "code" },
+  { kicker: "🧪 A3", title: "專屬VIP社群支援與專業引導", description: "透過深度策略交流與最新版本解析，並結合實作建議，協助您快速上手，大幅縮短學習曲線與試錯成本。獲取最新版本動態、交流實戰策略與具體實作建議，幫助您避開常見誤區，加速目標達成並提升執行效率。", icon: "users" },
+  { kicker: "✅  01", title: "創建策略只是開始，能持續優化才是關鍵", description: "真正有價值的內容，不只讓你看過，而是讓你能拿去驗證、修正、再進一步。這也是我們把教學、範例與回測脈絡一起放進首頁的原因。優質內容帶你親自驗證與修正。我們將教學、範例及回測脈絡完整收錄，助你打造不斷進化的獲利迴圈。", icon: "chart" },
+  { kicker: "✅  02", title: "當發現每個區塊都在引導進入源代碼世界", description: "不過度堆疊資訊，跟隨漸進式節奏：先建立信任基礎、再傳遞核心價值，最後自然對接方案。透過層層遞進的引導，有效延長停留時間並提升轉換率。 展現內容匹配方案， 打造讓讀者不斷探索的程式碼生成體驗，更能留住目標客群。", icon: "code" },
+  { kicker: "✅  03", title: "讓有心人能快速創建自己個人品牌的事業", description: "當頁面把價值說清楚，方案區就不只是價格，而是清楚的下一步。你會更容易知道自己該看哪一層、該從哪裡開始。不再茫然，輕鬆找到適合的切入點。具體方案讓你掌握核心價值，助你快速創建個人品牌事業 。", icon: "users" }
+];
+
+const englishDocumentHomepageCopy = {
+  reasonsBadge: 'AI-Powered Quant Source-Code Engineering',
+  reasonsTitle: 'I. Beyond MQL5: A Higher-Level Core Architecture',
+  reasonsBody: 'Solve the real pain points of institutional traders and managers in high-pressure, fast-moving markets.',
+  reasonsFootnote: 'Turn complex projects below into enterprise-grade solutions through efficient engineering.',
+  journeyBadge: 'Journey', journeyTitle: 'II. The AI Revolution in Strategy Creation and Risk Control', journeyBody: 'Equip the decision engine with practical AI applications for strategy and risk management.',
+  guideBadge: 'Guide', guideTitle: 'III. From Data Insight to Automated Decision-Making', guideBody: 'Unlock intelligent operations and risk defenses through modern algorithmic systems.',
+  featuresTitle: 'Source Code Repository', featuresBody: 'Clarify complex architectures with modular building blocks and own the core source code.'
+};
+const englishDocumentScrollCards = [
+  { kicker: '01 / Understand the System', title: 'Use an Asymmetric Python-Core / MQL5-Execution Architecture', description: 'Build a Python decision brain for dense data processing, AI inference, and dynamic strategy weighting, while MQL5 remains the low-latency execution layer for orders, risk control, and position feedback.' },
+  { kicker: '02 / Understand the Difference', title: 'Create a Virtual Research Desk with a Multi-Agent MCP Architecture', description: 'Macro-news, market-structure, and portfolio-allocation agents work together to assess risk sentiment, classify market conditions, and automatically rebalance MQL5 EA weights.' },
+  { kicker: '03 / Understand the Direction', title: 'Build a Machine-Learning Market Regime Classifier', description: 'Use methods such as HMM or KMeans to classify historical markets into regimes, then switch EA parameters or strategy cores within seconds when conditions change.' },
+];
+const englishDocumentNarrativeBlocks = [
+  { tag: 'Explore', title: 'Adaptive Parameter Optimization with Genetic Algorithms and Reinforcement Learning', note: 'Use Python-based RL such as PPO or DDPG so the system learns when to add exposure or cut losses as market conditions evolve.' },
+  { tag: 'Verify', title: 'Build a Strategy Factory with an LLM Code-Generation Workflow', note: 'Turn natural-language strategy requirements into MQL5 EA code, then automatically send it to MT5 for historical testing and faster research cycles.' },
+  { tag: 'Move', title: 'Establish an AI Risk Guardian Review Mechanism', note: 'A highest-authority risk node monitors VaR and abnormal behavior, with the ability to force-close positions and freeze trading during liquidity stress.' },
+];
+const englishDocumentFeatures = [
+  { kicker: 'A1', title: 'MQ4/MQ5 Code Conversion and Upgrade', description: 'Cover conversion, compilation, strategy design, rigorous backtesting, and live deployment in one MT5 workflow.', icon: 'chart' },
+  { kicker: 'A2', title: 'AI-Assisted MQL5 Core Modularization Training', description: 'Break down EA core modules and use AI guidance to create code and master strategy SOPs faster.', icon: 'code' },
+  { kicker: 'A3', title: 'Dedicated VIP Community Support and Professional Guidance', description: 'Combine in-depth strategy exchange, version updates, and practical recommendations to shorten the learning curve.', icon: 'users' },
+  { kicker: '01', title: 'Creating a Strategy Is Only the Beginning', description: 'The real value is the ability to validate, refine, and keep improving through connected lessons, examples, and backtest context.', icon: 'chart' },
+  { kicker: '02', title: 'Every Section Guides You into the Source-Code World', description: 'A progressive flow builds trust, communicates core value, and naturally connects visitors with the right solution.', icon: 'code' },
+  { kicker: '03', title: 'Build Your Personal Brand Business Faster', description: 'When the value is clear, each plan becomes a practical next step for building a personal technology brand.', icon: 'users' },
+];
+
+const englishDocumentRouteSteps = [
+  { step: 'A1', title: 'Connect Alternative Data for an Information Edge', text: 'Use MCP or a custom web scraper to turn social-media sentiment, central-bank speech transcripts, and supply-chain data into quantitative factors and leading indicators for strategy design.' },
+  { step: 'A2', title: 'Adopt Quantum-Inspired Methods or a High-Dimensional Factor Library', text: 'Build a factor-library system that evaluates hundreds of mathematical, statistical, momentum, and waveform factors, then uses machine-learning feature selection to identify the five most predictive factors each day.' },
+  { step: 'A3', title: 'Use Synthetic Data for Extreme Stress Testing', text: 'Use GANs or VAEs to simulate thousands of statistically plausible crashes and extreme rallies that have never occurred historically, ensuring EAs can survive exceptional market events.' },
+  { step: 'A4', title: 'Build a Human-in-the-Loop Semi-Automated Command Center', text: 'Create a web-based command center where AI prepares daily market reports and strategy recommendations; traders review, adjust allocations, approve them, and distribute the updated weights to MQL5 execution units.' },
+];
+
+const englishDocumentSignalBlocks = [
+  { title: "Build an Asynchronous Communication Bridge", copy: "Use ZeroMQ or Shared Memory to create a real-time communication highway between the MT5 server and a dedicated Python AI server. MQL5 can send execution reports, slippage, spread, and cancellation-rate data to Python asynchronously without blocking the trading thread." },
+  { title: "Develop a Python Microstructure Market-State Classifier", copy: "Use machine learning such as XGBoost or LightGBM to analyze market microstructure data. When AI detects a healthy market with tight spreads and strong depth, it can instruct MQL5 through ZeroMQ to increase EA position size or scalping frequency." },
+  { title: "Use LangGraph for a Strategy Strength Allocation Console", copy: "A LangGraph-driven agent team reviews high-frequency EA trading logs after the market closes and produces a dashboard report. After approval, Python updates the configuration so MQL5 EAs automatically apply the new capital allocation at the next open." }
+];
+
 function isNavItemActive(item, pathname = '') {
   return item.matches?.some((prefix) => pathname.startsWith(prefix)) || false;
 }
@@ -882,14 +954,14 @@ export default function Home({ locale = 'en' }) {
   const currentLocalePath = pathname || `/${locale || 'en'}`;
   const pageLocale = getLocaleFromPath(currentLocalePath);
   const currentLocale = homeCopy[pageLocale] ? pageLocale : 'en';
-  const copy = homeCopy[currentLocale];
   const isEnglish = currentLocale === 'en';
-  const localizedScrollCards = isEnglish ? englishScrollCards : scrollCards;
-  const localizedNarrativeBlocks = isEnglish ? englishNarrativeBlocks : narrativeBlocks;
-  const localizedRouteSteps = isEnglish ? englishRouteSteps : routeSteps;
-  const localizedSignalBlocks = isEnglish ? englishSignalBlocks : signalBlocks;
+  const copy = isEnglish ? { ...homeCopy[currentLocale], ...englishDocumentHomepageCopy } : { ...homeCopy[currentLocale], ...documentHomepageCopy };
+  const localizedScrollCards = isEnglish ? englishDocumentScrollCards : documentScrollCards;
+  const localizedNarrativeBlocks = isEnglish ? englishDocumentNarrativeBlocks : documentNarrativeBlocks;
+  const localizedRouteSteps = isEnglish ? englishDocumentRouteSteps : documentRouteSteps;
+  const localizedSignalBlocks = isEnglish ? englishDocumentSignalBlocks : documentSignalBlocks;
   const localizedLineConversationPreview = isEnglish ? englishLineConversationPreview : lineConversationPreview;
-  const localizedFeatures = isEnglish ? englishFeatures : features;
+  const localizedFeatures = isEnglish ? englishDocumentFeatures : documentFeatures;
   const localizedPlans = isEnglish ? englishPlans : plans;
   const localizedFaqItems = isEnglish ? englishFaqItems : faqItems;
   const localizedAccordionFaqItems = isEnglish ? englishAccordionFaqItems : accordionFaqItems;
@@ -1130,6 +1202,9 @@ export default function Home({ locale = 'en' }) {
             <p className={`mt-4 text-sm leading-relaxed text-slate-400 sm:text-base ${glowText}`}>
               {copy.reasonsBody}
             </p>
+            <p className={`mt-3 text-xs leading-relaxed text-slate-500 sm:text-sm ${glowText}`}>
+              {copy.reasonsFootnote}
+            </p>
           </div>
 
           <div className="cards-cluster grid gap-5 lg:grid-cols-3">
@@ -1163,13 +1238,13 @@ export default function Home({ locale = 'en' }) {
         <section id="journey" className="mt-12 space-y-10">
           <div className="animate-reveal-up mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/20 bg-fuchsia-500/10 px-4 py-1.5 text-xs font-medium text-fuchsia-200">
-              {ui?.journeyBadge || '旅程 / Journey'}
+              {copy.journeyBadge || ui?.journeyBadge}
             </div>
             <h2 className={`mt-5 text-3xl font-black tracking-tight sm:text-4xl ${glowText}`}>
-              {ui?.journeyTitle || '這不是單頁介紹，而是一條逐步深入的導覽路徑'}
+              {copy.journeyTitle || ui?.journeyTitle}
             </h2>
             <p className={`mt-4 text-sm leading-relaxed text-slate-400 sm:text-base ${glowText}`}>
-              {ui?.journeyBody || '當內容有節奏、有層次，訪客就會在每一段找到下一個想知道的答案。越往下看，越能看懂你的價值。'}
+              {copy.journeyBody || ui?.journeyBody}
             </p>
           </div>
 
@@ -1208,13 +1283,13 @@ export default function Home({ locale = 'en' }) {
         <section id="modular" className="mt-8 space-y-8">
           <div className="animate-reveal-up mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300">
-              {ui?.guideBadge || '導覽 / Guide'}
+              {copy.guideBadge || ui?.guideBadge}
             </div>
             <h2 className={`mt-5 text-3xl font-black tracking-tight sm:text-4xl ${glowText}`}>
-              {ui?.guideTitle || '先看懂路線，再順著內容一層一層被說服'}
+              {copy.guideTitle || ui?.guideTitle}
             </h2>
             <p className={`mt-4 text-sm leading-relaxed text-slate-400 sm:text-base ${glowText}`}>
-              {ui?.guideBody || '這不是抽象的氛圍文案，而是一條有節奏的導覽：先抓住注意，再講清結構，最後把人自然帶到方案與行動。'}
+              {copy.guideBody || ui?.guideBody}
             </p>
           </div>
 
@@ -1392,9 +1467,9 @@ export default function Home({ locale = 'en' }) {
         {/* Source code library */}
         <section id="features" className="mt-12 space-y-12">
           <div className="animate-reveal-up mx-auto max-w-2xl text-center">
-            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>{ui?.featuresTitle || '源代碼庫'}</h2>
+            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>{copy.featuresTitle || ui?.featuresTitle}</h2>
             <p className={`mt-4 text-slate-400 ${glowText}`}>
-              {ui?.featuresBody || '這一站先讓你看懂核心源代碼(原始碼Source Code)，再慢慢走進模組化積木的組合與延伸。'}
+              {copy.featuresBody || ui?.featuresBody}
             </p>
           </div>
 
@@ -1719,7 +1794,7 @@ export default function Home({ locale = 'en' }) {
               </h3>
               <div className="flex flex-col gap-3 text-sm text-slate-500">
                 <Link href="#features" className="transition hover:text-cyan-300">
-            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>{ui?.featuresTitle || '源代碼庫'}</h2>
+            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>{copy.featuresTitle || ui?.featuresTitle}</h2>
                 </Link>
                 <Link href={localizePath('/modular', pageLocale)} className="transition hover:text-cyan-300">
                   {ui?.footerModular || '模組化積木'}
