@@ -83,6 +83,7 @@ export default function MqlEvolutionEngineExperience() {
   const locale = getLocaleFromPath(pathname);
   const copy = getMqlEngineCopy(locale);
   const productTypes = Object.entries(copy.products);
+  const quasiEdition = locale === 'zh-Hant' ? { label: '\u6e96\u6cd5\u4eba\u7248', detail: '\u9069\u7d93\u7d00\u5546/\u81ea\u71df\u5546\u3001EA\u4ea4\u6613\u5718\u968a\u3001\u5bb6\u65cf\u8fa6\u516c\u5ba4' } : locale === 'zh-Hans' ? { label: '\u51c6\u6cd5\u4eba\u7248', detail: '\u9002\u7ecf\u7eaa\u5546/\u81ea\u8425\u5546\u3001EA\u4ea4\u6613\u56e2\u961f\u3001\u5bb6\u65cf\u529e\u516c\u5ba4' } : { label: 'Quasi-Institutional Edition', detail: 'For brokers, prop firms, EA trading teams, and family offices' };
   const agentNodes = copy.agents.map(([name, role, detail], index) => ({ code: `A${index + 1}`, name, role, detail, color: agentColors[index], avatar: agentAvatars[index] }));
   const deliverables = copy.deliverables.map((label, index) => [deliverableCodes[index], label]);
   const [sourceType, setSourceType] = useState('MQL4');
@@ -146,6 +147,10 @@ export default function MqlEvolutionEngineExperience() {
               <div className="flex flex-wrap items-center gap-2">
                 <span className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/8 px-3 py-1.5 font-mono text-[10px] font-black tracking-[0.18em] text-cyan-200"><SignalDot live /> NEURAL ORCHESTRATION ONLINE</span>
                 <span className="rounded-full border border-violet-300/20 bg-violet-300/8 px-3 py-1.5 font-mono text-[10px] font-black tracking-[0.18em] text-violet-200">MASTER × 5 AGENTS</span>
+              </div>
+              <div className="mt-4">
+                <span className="inline-flex rounded-xl bg-cyan-500 px-4 py-1.5 text-sm font-semibold text-slate-950 shadow-[0_0_18px_rgba(34,211,238,0.5),0_0_36px_rgba(34,211,238,0.25)]">{quasiEdition.label}</span>
+                <p className="mt-2 text-xs font-medium tracking-wide text-cyan-100/90">{quasiEdition.detail}</p>
               </div>
               <h1 className="mt-5 text-balance text-3xl font-black leading-[1.04] tracking-[-0.04em] sm:text-5xl lg:text-6xl">{copy.hero1}<br /><span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-violet-400 bg-clip-text text-transparent">{copy.hero2}</span></h1>
               <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-400 sm:text-base">{copy.hero}</p>

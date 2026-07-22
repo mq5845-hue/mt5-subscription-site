@@ -222,8 +222,8 @@ const homeCopy = {
     heroTitleTop: 'AI \u9769\u547d\u91cf\u5316\u4ea4\u6613\uff1a',
     heroTitleBottom: '\u89e3\u9396\u6cd5\u4eba\u7d1a MT5 EA \u5546\u696d\u6e90\u4ee3\u78bc',
     heroBody: '\u96f6\u57fa\u790e\u4e5f\u80fd\u7528 AI LLM \u63d0\u793a\u8a5e\u6a21\u677f\u9ad8\u6548\u91cd\u69cb\u6838\u5fc3\u7b56\u7565\u3002\u7121\u7248\u6b0a\u9650\u5236\u3001\u7121\u9808\u8a31\u53ef\uff0c\u6253\u9020\u5c08\u5c6c\u60a8\u7684\u500b\u4eba\u4ea4\u6613\u54c1\u724c\u8207\u6578\u4f4d\u8cc7\u7522\uff0c\u5229\u6f64 100% \u5168\u6b78\u81ea\u5df1\u3002',
-    membershipCta: '\u524d\u5f80\u6a19\u6e96\u6703\u54e1',
-    knowledgeCta: '\u5143\u4ea4\u6613\u64cd\u4f5c\u63a7\u5236\u5ba4(\u6cd5\u4eba\u6a5f\u69cb_\u96e2\u7dda.\u4f01\u696d\u79c1\u6709\u96f2)',
+    membershipCta: '\u6e96\u6cd5\u4eba\u7248(\u9069\u7d93\u7d00\u5546/\u81ea\u71df\u5546, EA\u4ea4\u6613\u5718\u968a, \u5bb6\u65cf\u8fa6\u516c\u5ba4)',
+    knowledgeCta: '\u6cd5\u4eba\u6a5f\u69cb\u7248_\u96e2\u7dda100%\u79c1\u5bc6-\u4f01\u696d\u79c1\u6709\u96f2',
     reasonsBadge: '\u5148\u770b\u898b\u7bc0\u594f\uff0c\u518d\u770b\u898b\u50f9\u503c',
     reasonsTitle: '\u4e09\u500b\u8b93\u4eba\u9858\u610f\u5f80\u4e0b\u770b\u7684\u7406\u7531',
     reasonsBody: '\u5982\u679c\u4f60\u60f3\u77e5\u9053\u9019\u500b\u9996\u9801\u5230\u5e95\u5728\u8ce3\u4ec0\u9ebc\u3001\u5f37\u5728\u54ea\u88e1\u3001\u9069\u4e0d\u9069\u5408\u4f60\uff0c\u5148\u770b\u5b8c\u9019\u4e09\u500b\u5340\u584a\uff0c\u518d\u5f80\u4e0b\u770b\u65b9\u6848\u6703\u66f4\u6709\u611f\u3002'
@@ -234,8 +234,8 @@ const homeCopy = {
     heroTitleTop: 'AI \u9769\u547d\u91cf\u5316\u4ea4\u6613\uff1a',
     heroTitleBottom: '\u89e3\u9501\u6cd5\u4eba\u7ea7 MT5 EA \u5546\u4e1a\u6e90\u4ee3\u7801',
     heroBody: '\u96f6\u57fa\u7840\u4e5f\u80fd\u7528 AI LLM \u63d0\u793a\u8bcd\u6a21\u677f\u9ad8\u6548\u91cd\u6784\u6838\u5fc3\u7b56\u7565\u3002\u65e0\u7248\u6743\u9650\u5236\u3001\u65e0\u987b\u8bb8\u53ef\uff0c\u6253\u9020\u4e13\u5c5e\u4e8e\u60a8\u7684\u4e2a\u4eba\u4ea4\u6613\u54c1\u724c\u4e0e\u6570\u5b57\u8d44\u4ea7\uff0c\u5229\u6da6 100% \u5168\u5f52\u81ea\u5df1\u3002',
-    membershipCta: '\u524d\u5f80\u6807\u51c6\u4f1a\u5458',
-    knowledgeCta: '\u5143\u4ea4\u6613\u64cd\u4f5c\u63a7\u5236\u5ba4(\u6cd5\u4eba\u673a\u6784_\u79bb\u7ebf.\u4f01\u4e1a\u79c1\u6709\u4e91)',
+    membershipCta: '\u51c6\u6cd5\u4eba\u7248(\u9002\u7ecf\u7eaa\u5546/\u81ea\u8425\u5546, EA\u4ea4\u6613\u56e2\u961f, \u5bb6\u65cf\u529e\u516c\u5ba4)',
+    knowledgeCta: '\u6cd5\u4eba\u673a\u6784\u7248_\u79bb\u7ebf100%\u79c1\u5bc6-\u4f01\u4e1a\u79c1\u6709\u4e91',
     reasonsBadge: '\u5148\u770b\u89c1\u8282\u594f\uff0c\u518d\u770b\u89c1\u4ef7\u503c',
     reasonsTitle: '\u4e09\u4e2a\u8ba9\u4eba\u613f\u610f\u5f80\u4e0b\u770b\u7684\u7406\u7531',
     reasonsBody: '\u5982\u679c\u4f60\u60f3\u77e5\u9053\u8fd9\u4e2a\u9996\u9875\u5230\u5e95\u5728\u5356\u4ec0\u4e48\u3001\u5f3a\u5728\u54ea\u91cc\u3001\u9002\u4e0d\u9002\u5408\u4f60\uff0c\u5148\u770b\u5b8c\u8fd9\u4e09\u4e2a\u533a\u5757\uff0c\u518d\u5f80\u4e0b\u770b\u65b9\u6848\u4f1a\u66f4\u6709\u611f\u3002'
@@ -246,8 +246,8 @@ const homeCopy = {
     heroTitleTop: 'AI Quant Trading Revolution:',
     heroTitleBottom: 'Unlock Institutional MT5 EA Source Code',
     heroBody: 'Even from zero, you can use AI LLM prompt templates to rebuild core strategies efficiently. No copyright lock-in, no permission required. Build your own trading brand and digital assets, and keep 100% of the upside.',
-    membershipCta: 'Go to Standard Membership',
-    knowledgeCta: 'Meta Trading Operations Control Room (Institutional_Offline. Enterprise Private Cloud)',
+    membershipCta: 'Quasi-Institutional Edition (For Brokers, Prop Firms, EA Trading Teams & Family Offices)',
+    knowledgeCta: 'Institutional Edition_100% Private Offline - Enterprise Private Cloud',
     reasonsBadge: 'See the rhythm, then the value',
     reasonsTitle: 'Three reasons to keep scrolling',
     reasonsBody: 'If you want to know what this homepage is offering, where it stands out, and whether it fits you, start with these three sections before comparing the plans below.'
@@ -636,7 +636,7 @@ const planHighlights = [
 const plans = [
   {
     name: '標準會員',
-    price: 'USD$ 9.00',
+    price: 'USD$ 499.00',
     period: '/ 月',
     description: '適合想先體驗內容、建立量化交易基礎的入門使用者。',
     points: [
@@ -651,7 +651,7 @@ const plans = [
   {
     name: '加盟會員',
     badge: '熱門首選',
-    price: 'USD$ 39.00',
+    price: 'USD$ 14,990.00',
     period: '/ 月',
     description: '適合想更快落地策略、並取得更多實作資源的進階使用者。',
     points: [
@@ -848,7 +848,7 @@ const englishPlanHighlights = [
 const englishPlans = [
   {
     name: 'Standard Membership',
-    price: 'USD$ 9.00',
+    price: 'USD$ 499.00',
     period: '/ month',
     description: 'A practical starting point for exploring the content and building a foundation in quantitative trading.',
     points: [
@@ -863,7 +863,7 @@ const englishPlans = [
   {
     name: 'Affiliate Membership',
     badge: 'Popular choice',
-    price: 'USD$ 39.00',
+    price: 'USD$ 14,990.00',
     period: '/ month',
     description: 'For users who want to implement strategies faster and access more hands-on resources.',
     points: [
@@ -1182,7 +1182,7 @@ export default function Home({ locale = 'en' }) {
             </p>
             <div className="mx-auto grid w-[70%] max-w-[33.6rem] grid-cols-1 items-stretch gap-3 pt-4 sm:w-full sm:grid-cols-2">
               <Link
-                href={localizePath('/membership', pageLocale)}
+                href={localizePath('/multi-agent/engine', pageLocale)}
                 className={`hero-cta-glow hero-cta-primary btn-pulse inline-flex min-h-[4.75rem] h-full w-full items-center justify-center rounded-xl bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-xl shadow-cyan-400/20 hover:bg-cyan-300 ${tapClass}`}
                 onClick={() => withTapLock(() => {})}
               >
