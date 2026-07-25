@@ -1,11 +1,11 @@
-"use client";
+﻿"use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, Radar } from 'recharts';
 import { Shield, Radio, Activity, Cpu, AlertTriangle, Check, X, ShieldAlert, Zap } from 'lucide-react';
 
-// --- 模擬高頻即時數據生成器 ---
+// --- 璅⊥擃?單??豢?????---
 const generateInitialVolData = () => {
   return Array.from({ length: 20 }, (_, i) => ({
     time: `${15 + Math.floor(i / 4)}:${(i % 4) * 15 === 0 ? '00' : (i % 4) * 15}`,
@@ -32,19 +32,19 @@ const initialRadarData = [
 export default function ControlRoomDashboard() {
   const pathname = usePathname();
   const homeLabel = pathname.startsWith('/en') ? 'Back to home' : pathname.startsWith('/zh-Hans') ? '\u56de\u9996\u9875' : '\u56de\u9996\u9801';
-  // 系統全局狀態機: NOMINAL | WARNING | CRISIS | HALT
+  // 蝟餌絞?典????: NOMINAL | WARNING | CRISIS | HALT
   const [systemState, setSystemState] = useState<'NOMINAL' | 'WARNING' | 'CRISIS' | 'HALT'>('NOMINAL');
   const [volData, setVolData] = useState(generateInitialVolData());
   const [accounts, setAccounts] = useState(initialAccounts);
   const [showApproval, setShowApproval] = useState(true);
   const [twoManLock, setTwoManLock] = useState(false);
 
-  // 模擬 WebSocket 每秒推送 Tick 數據更新
+  // 璅⊥ WebSocket 瘥??券?Tick ?豢??湔
   useEffect(() => {
     if (systemState === 'HALT') return;
 
     const interval = setInterval(() => {
-      // 動態更新波動率圖表
+      // ???湔瘜Ｗ???銵?
       setVolData(prev => {
         const next = [...prev.slice(1)];
         const lastHour = parseInt(prev[prev.length - 1].time.split(':')[0]);
@@ -61,10 +61,10 @@ export default function ControlRoomDashboard() {
         return next;
       });
 
-      // 隨機微調帳戶延遲與點差，模擬真實網路狀況
+      // ?冽?敺株矽撣單撱園??撌殷?璅⊥?祕蝬脰楝?瘜?
       setAccounts(prev => prev.map(acc => {
         if (acc.id === 'Acc_Prop4' && systemState === 'NOMINAL') {
-          // 隨機讓某個帳戶進入 WARNING 觸發大廳視覺感官變化
+          // ?冽?霈??董?園脣 WARNING 閫貊憭批輒閬死??霈?
           return { ...acc, latency: 3.5 + Math.random() * 2, spread: 0.6 + Math.random() * 0.4 };
         }
         return {
@@ -78,7 +78,7 @@ export default function ControlRoomDashboard() {
     return () => clearInterval(interval);
   }, [systemState]);
 
-  // 緊急斷路器 (Circuit Breaker) 觸發程序
+  // 蝺交頝臬 (Circuit Breaker) 閫貊蝔?
   const triggerGlobalHalt = () => {
     setSystemState('HALT');
     setShowApproval(false);
@@ -88,7 +88,8 @@ export default function ControlRoomDashboard() {
   return (
     <div className={`min-h-screen bg-[#0B0F19] text-slate-200 font-mono p-4 selection:bg-cyan-500 selection:text-black transition-colors duration-500 ${systemState === 'CRISIS' ? 'border-4 border-red-600' : systemState === 'HALT' ? 'border-4 border-amber-600' : ''}`}>
       
-      {/* HEADER SECTION (軍事級戰術頂層狀態列) */}
+      <div aria-hidden="true" className="control-room-scan-line" />
+      {/* HEADER SECTION (頠?蝝銵?撅斤???) */}
       <header className="flex flex-wrap justify-between items-center border border-slate-800 bg-[#0F1524] p-3 rounded-t-lg shadow-2xl mb-4">
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
@@ -112,10 +113,10 @@ export default function ControlRoomDashboard() {
         </div>
       </header>
 
-      {/* CORE CONTROL QUADRANTS (核心交易戰術象限) */}
+      {/* CORE CONTROL QUADRANTS (?詨?鈭斗??啗?鞊⊿?) */}
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-4">
         
-        {/* 象限 A：環境感知與狀態切換艙 (Left Column - 4 Cols) */}
+        {/* 鞊⊿? A嚗憓??亥?????? (Left Column - 4 Cols) */}
         <div className="xl:col-span-4 space-y-4">
           <div className="border border-slate-800 bg-[#0F1524] p-4 rounded-lg shadow-xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-1 h-full bg-cyan-500" />
@@ -123,7 +124,7 @@ export default function ControlRoomDashboard() {
               <Cpu className="w-4 h-4 text-cyan-400" /> [M2] MARKET REGIME SENSING UNIT
             </h2>
             
-            {/* HMM 狀態分類器 */}
+            {/* HMM ???憿 */}
             <div className="space-y-3 mb-4">
               <div className="text-xs text-slate-400 flex justify-between mb-1">
                 <span>HMM State 3: High Volatility Trend</span>
@@ -142,7 +143,7 @@ export default function ControlRoomDashboard() {
               </div>
             </div>
 
-            {/* 微觀結構衍生指標 */}
+            {/* 敺株?蝯?銵??? */}
             <div className="grid grid-cols-2 gap-2 text-xs border-t border-slate-800/60 pt-3">
               <div className="bg-slate-950 p-2 rounded border border-slate-900">
                 <div className="text-slate-500">Order Flow (OFI)</div>
@@ -159,7 +160,7 @@ export default function ControlRoomDashboard() {
             </div>
           </div>
 
-          {/* 實時動態圖形 (GARCH / Vol 曲線) */}
+          {/* 撖行????耦 (GARCH / Vol ?脩?) */}
           <div className="border border-slate-800 bg-[#0F1524] p-4 rounded-lg shadow-xl">
             <h2 className="text-xs font-bold text-slate-400 tracking-wider mb-3 flex items-center gap-2">
               <Activity className="w-4 h-4 text-emerald-400" /> VOLATILITY DYNAMICS & STREAMING INFERENCE
@@ -178,7 +179,7 @@ export default function ControlRoomDashboard() {
           </div>
         </div>
 
-        {/* 象限 B：MULTI-AGENT 辯論與人機審批流 (Center Column - 5 Cols) */}
+        {/* 鞊⊿? B嚗ULTI-AGENT 颲航??犖璈祟?寞? (Center Column - 5 Cols) */}
         <div className="xl:col-span-5 space-y-4">
           <div className="border border-slate-800 bg-[#0F1524] p-4 rounded-lg shadow-xl relative min-h-[460px] flex flex-col justify-between">
             <div className="absolute top-0 left-0 w-1 h-full bg-violet-500" />
@@ -187,23 +188,23 @@ export default function ControlRoomDashboard() {
                 <Shield className="w-4 h-4 text-violet-400" /> [M3] LANGGRAPH INTERRUPT & ORCHESTRATION ENGINE
               </h2>
               
-              {/* 多智能體狀態視覺化 */}
+              {/* 憭?賡????閬箏? */}
               <div className="grid grid-cols-3 gap-2 mb-4 text-center">
                 <div className="p-2 bg-slate-950 rounded border border-emerald-500/20 text-xs">
-                  <div className="text-emerald-400 font-bold">● AGENT A</div>
+                  <div className="text-emerald-400 font-bold">??AGENT A</div>
                   <span className="text-[10px] text-slate-500">Macro Analyst</span>
                 </div>
                 <div className="p-2 bg-slate-950 rounded border border-emerald-500/20 text-xs">
-                  <div className="text-emerald-400 font-bold">● AGENT B</div>
+                  <div className="text-emerald-400 font-bold">??AGENT B</div>
                   <span className="text-[10px] text-slate-500">Structure Matrix</span>
                 </div>
                 <div className="p-2 bg-slate-950 rounded border border-violet-500 animate-pulse text-xs">
-                  <div className="text-violet-400 font-bold">⏳ AGENT C</div>
+                  <div className="text-violet-400 font-bold">??AGENT C</div>
                   <span className="text-[10px] text-slate-500">Portfolio Allocator</span>
                 </div>
               </div>
 
-              {/* 決策碰撞雷達圖 */}
+              {/* 瘙箇?蝣唳??琿???*/}
               <div className="h-44 flex justify-center items-center my-2">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart cx="50%" cy="50%" outerRadius="80%" data={initialRadarData}>
@@ -215,7 +216,7 @@ export default function ControlRoomDashboard() {
               </div>
             </div>
 
-            {/* 人機協同審批工作流卡片 */}
+            {/* 鈭箸???撖拇撌乩?瘚??*/}
             {showApproval ? (
               <div className="bg-slate-950 p-3 rounded-lg border border-violet-500/40 shadow-inner animate-fade-in">
                 <div className="flex items-center gap-2 text-xs font-bold text-violet-400 mb-1">
@@ -249,7 +250,7 @@ export default function ControlRoomDashboard() {
           </div>
         </div>
 
-        {/* 象限 C：多帳戶執行矩陣與底層通訊架構健康度 (Right Column - 3 Cols) */}
+        {/* 鞊⊿? C嚗?撣單?瑁??拚??撅日??嗆??亙熒摨?(Right Column - 3 Cols) */}
         <div className="xl:col-span-3 space-y-4">
           <div className="border border-slate-800 bg-[#0F1524] p-4 rounded-lg shadow-xl relative overflow-hidden h-full flex flex-col justify-between min-h-[460px]">
             <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500" />
@@ -280,7 +281,7 @@ export default function ControlRoomDashboard() {
               </div>
             </div>
 
-            {/* 常態資訊統計底欄 */}
+            {/* 撣豢?鞈?蝯梯?摨? */}
             <div className="border-t border-slate-800/60 pt-3 text-[10px] text-slate-500 space-y-1">
               <div className="flex justify-between">
                 <span>ZMQ PIPELINE CAPACITY:</span>
@@ -288,7 +289,7 @@ export default function ControlRoomDashboard() {
               </div>
               <div className="flex justify-between">
                 <span>PROTOBUF DESERIALIZATION:</span>
-                <span className="text-emerald-400 font-bold">18微秒</span>
+                <span className="text-emerald-400 font-bold">18敺桃?</span>
               </div>
             </div>
           </div>
@@ -296,7 +297,7 @@ export default function ControlRoomDashboard() {
 
       </div>
 
-      {/* EMERGENCY OVERRIDE OVERLAY / THE BIG RED BUTTON (航天級極限防禦組件) */}
+      {/* EMERGENCY OVERRIDE OVERLAY / THE BIG RED BUTTON (?芸予蝝扔?蝳衣?隞? */}
       <footer className="mt-4 border border-red-950 bg-gradient-to-r from-red-950/20 via-[#0F1524] to-red-950/20 p-4 rounded-lg shadow-xl flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="flex items-center space-x-3">
           <ShieldAlert className={`w-8 h-8 ${systemState === 'HALT' ? 'text-amber-500' : 'text-red-500 animate-pulse'}`} />
@@ -307,7 +308,7 @@ export default function ControlRoomDashboard() {
         </div>
 
         <div className="flex items-center space-x-3 w-full md:w-auto">
-          {/* 二手防誤觸鎖 */}
+          {/* 鈭??脰炊閫賊? */}
           <label className="flex items-center space-x-2 text-xs text-slate-400 bg-slate-950 p-2 rounded border border-slate-800 cursor-pointer select-none">
             <input 
               type="checkbox" 

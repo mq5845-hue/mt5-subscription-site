@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 // env fix v1
 
 import Link from 'next/link';
@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { getLocaleFromPath, localizePath } from '../lib/locale';
 import EmojiAvatar from '../components/EmojiAvatar';
+import HeroPromoVideo from '../components/HeroPromoVideo';
 
 const glowText = 'drop-shadow-[0_0_10px_rgba(34,211,238,0.22)]';
 const tapClass =
@@ -157,7 +158,7 @@ const navItems = [
       { label: '\u52a0\u76df\u6703\u54e1\u7248', disabled: true },
       { href: '/converter', label: '\u5c0a\u69ae\u5546\u7528\u7248' },
       { href: '/multi-agent/engine', label: '\u591a\u667a\u80fd\u9ad4MQL\u5168\u81ea\u52d5\u9032\u5316\u5f15\u64ce', newTab: true },
-      { label: 'Docker MCP\u4f3a\u670d\u5650\u7248(\u4f01\u696d\u79c1\u6709\u96f2)', disabled: true },
+      { href: '/control-room', label: 'Docker MCP\u4f3a\u670d\u5650\u7248(\u4f01\u696d\u79c1\u6709\u96f2)' },
     ],
   },
   { href: '/modular', label: '\u6a21\u7d44\u5316\u7a4d\u6728', matches: ['/modular'] },
@@ -247,7 +248,7 @@ const homeCopy = {
     heroTitleBottom: 'Unlock Institutional MT5 EA Source Code',
     heroBody: 'Even from zero, you can use AI LLM prompt templates to rebuild core strategies efficiently. No copyright lock-in, no permission required. Build your own trading brand and digital assets, and keep 100% of the upside.',
     membershipCta: 'Quasi-Institutional Edition (For Brokers, Prop Firms, EA Trading Teams & Family Offices)',
-    knowledgeCta: 'Institutional Edition_100% Private Offline - Enterprise Private Cloud',
+    knowledgeCta: 'Institutional Edition\n_100% Private Offline -\n(Enterprise Private Cloud)',
     reasonsBadge: 'See the rhythm, then the value',
     reasonsTitle: 'Three reasons to keep scrolling',
     reasonsBody: 'If you want to know what this homepage is offering, where it stands out, and whether it fits you, start with these three sections before comparing the plans below.'
@@ -635,8 +636,9 @@ const planHighlights = [
 
 const plans = [
   {
-    name: '標準會員',
-    price: 'USD$ 499.00',
+    name: '標準會員（方案終止）',
+    price: 'USD$ 299.00',
+    discontinued: true,
     period: '/ 月',
     description: '適合想先體驗內容、建立量化交易基礎的入門使用者。',
     points: [
@@ -651,7 +653,7 @@ const plans = [
   {
     name: '加盟會員',
     badge: '熱門首選',
-    price: 'USD$ 14,990.00',
+    price: 'USD$ 299.00',
     period: '/ 月',
     description: '適合想更快落地策略、並取得更多實作資源的進階使用者。',
     points: [
@@ -666,6 +668,47 @@ const plans = [
   },
 ];
 
+const institutionalPlans = [
+  {
+    ...plans[0],
+    name: '準法人版（適經紀商／自營商、EA交易團隊、家族辦公室、私募基金）',
+    featured: true,
+    href: '/zh-Hant/multi-agent/engine',
+    cta: '立即加入',
+    price: 'USD$ 499.00',
+    discontinued: false,
+    highlights: ['白標品牌授權', '多帳戶策略框架', '專屬部署導引'],
+    description: '適合建立自有策略品牌、整合團隊交易流程，並保留完整產品主導權的準法人營運者。',
+    coreAdvantages: [
+      '可依自有品牌與營運節奏重構策略產品，建立清晰且可延展的服務架構。',
+      '以多帳戶與多策略的模組化框架，讓團隊能有序管理測試、迭代與部署流程。',
+      '提供部署路徑與技術對接，協助將構想落實為可運作的量化產品。',
+    ],
+    points: [
+      '啟用白標品牌化與策略產品定位指引',
+      '取得多帳戶策略架構與部署範例',
+      '優先參與策略模組與產品化更新',
+    ],
+  },
+  {
+    ...plans[1],
+    name: '法人機構版_離線100%私密-企業私有雲',
+    href: '/zh-Hant/control-room',
+    price: 'USD$ 14,990.00',
+    highlights: ['離線私有雲部署', '企業級權限分層', '專屬技術服務'],
+    description: '為重視資料主權、內部治理與長期系統整合的法人團隊，建立完全私密的量化研發環境。',
+    coreAdvantages: [
+      '系統可部署於企業私有環境，核心策略資料與內部流程不離開受控邊界。',
+      '以角色與權限分層管理研發、測試及營運流程，支援團隊治理需求。',
+      '搭配專屬技術服務，規劃從架構評估到穩定上線的整合節奏。',
+    ],
+    points: [
+      '規劃企業私有雲與離線部署架構',
+      '建立分層權限、版本控管與作業流程',
+      '提供長期技術維運與升級評估支援',
+    ],
+  },
+];
 // FAQ / common questions
 const faqItems = [
   {
@@ -847,8 +890,9 @@ const englishPlanHighlights = [
 
 const englishPlans = [
   {
-    name: 'Standard Membership',
-    price: 'USD$ 499.00',
+    name: 'Standard Membership (Discontinued)',
+    price: 'USD$ 299.00',
+    discontinued: true,
     period: '/ month',
     description: 'A practical starting point for exploring the content and building a foundation in quantitative trading.',
     points: [
@@ -859,11 +903,12 @@ const englishPlans = [
     highlights: englishPlanHighlights,
     featured: false,
     cta: 'Open membership',
+    disabledCta: true,
   },
   {
     name: 'Affiliate Membership',
     badge: 'Popular choice',
-    price: 'USD$ 14,990.00',
+    price: 'USD$ 299.00',
     period: '/ month',
     description: 'For users who want to implement strategies faster and access more hands-on resources.',
     points: [
@@ -875,9 +920,51 @@ const englishPlans = [
     highlights: englishPlanHighlights,
     featured: true,
     cta: 'Join now',
+    href: '/en/converter',
   },
 ];
 
+const englishInstitutionalPlans = [
+  {
+    ...englishPlans[0],
+    name: 'Quasi-Institutional Edition (For Brokers, Proprietary Firms, EA Trading Teams, Family Offices & Private Funds)',
+    featured: true,
+    href: '/en/multi-agent/engine',
+    cta: 'Join now',
+    price: 'USD$ 499.00',
+    discontinued: false,
+    highlights: ['White-label licensing', 'Multi-account strategy framework', 'Deployment guidance'],
+    description: 'For near-institutional operators building an independent strategy brand, a team trading workflow, and full product ownership.',
+    coreAdvantages: [
+      'Shape strategy products around your own brand and operating rhythm with an architecture designed to extend.',
+      'Use modular multi-account and multi-strategy foundations to manage testing, iteration, and deployment with discipline.',
+      'Turn an operating concept into a working quantitative product through a defined deployment path and technical alignment.',
+    ],
+    points: [
+      'White-label strategy product positioning guidance',
+      'Multi-account architecture and deployment examples',
+      'Priority access to modular product updates',
+    ],
+  },
+  {
+    ...englishPlans[1],
+    name: 'Institutional Edition — 100% Offline Private Enterprise Cloud',
+    href: '/en/control-room',
+    price: 'USD$ 14,990.00',
+    highlights: ['Offline private-cloud deployment', 'Enterprise access control', 'Dedicated technical service'],
+    description: 'For institutional teams that require data sovereignty, internal governance, and a fully private quantitative research environment.',
+    coreAdvantages: [
+      'Deploy within a controlled enterprise environment so core strategy data and internal workflows remain private.',
+      'Use role-based access layers to manage research, testing, and operational responsibilities.',
+      'Plan a stable path from architecture review to production deployment with dedicated technical support.',
+    ],
+    points: [
+      'Private-cloud and offline deployment architecture',
+      'Access layers, version governance, and operating workflow',
+      'Long-term maintenance and upgrade planning support',
+    ],
+  },
+];
 const englishFaqItems = [
   {
     question: 'Q1: Do I need a specific forex broker to use the EA strategies after subscribing?',
@@ -971,6 +1058,7 @@ export default function Home({ locale = 'en' }) {
   const localizedSignalBlocks = isEnglish ? englishDocumentSignalBlocks : documentSignalBlocks;
   const localizedLineConversationPreview = isEnglish ? englishLineConversationPreview : lineConversationPreview;
   const localizedFeatures = isEnglish ? englishDocumentFeatures : documentFeatures;
+  const localizedInstitutionalPlans = isEnglish ? englishInstitutionalPlans : institutionalPlans;
   const localizedPlans = isEnglish ? englishPlans : plans;
   const localizedFaqItems = isEnglish ? englishFaqItems : faqItems;
   const localizedAccordionFaqItems = isEnglish ? englishAccordionFaqItems : accordionFaqItems;
@@ -1040,17 +1128,16 @@ export default function Home({ locale = 'en' }) {
   }, [mobileNavOpen]);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-slate-950">
+    <div className="home-page relative min-h-screen overflow-hidden bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-slate-950">
       <div className="content-stage relative mx-auto max-w-7xl overflow-hidden">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <div className="tech-grid absolute inset-0 opacity-30" />
           <div className="content-fade absolute inset-0" />
+          <div className="hero-laser-beam" />
+          <div className="hero-scan-pass" />
           <div className="animate-float-slow absolute -top-24 left-1/2 hidden h-96 w-96 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl sm:block" />
           <div className="animate-float-slower absolute right-[-6rem] top-32 hidden h-72 w-72 rounded-full bg-blue-500/10 blur-3xl sm:block" />
           <div className="animate-pulse-glow absolute left-[-5rem] bottom-24 hidden h-80 w-80 rounded-full bg-teal-400/10 blur-3xl sm:block" />
-          <div className="animate-scanline absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent opacity-70" />
-          <div className="animate-scanline absolute inset-x-0 top-1/3 h-px bg-gradient-to-r from-transparent via-cyan-200/30 to-transparent opacity-35 [animation-delay:-3s]" />
-          <div className="animate-scanline absolute inset-x-0 top-2/3 h-px bg-gradient-to-r from-transparent via-blue-300/25 to-transparent opacity-30 [animation-delay:-6s]" />
           {particles.map((particle) => (
             <span
               key={`${particle.className}-${particle.delay}`}
@@ -1091,7 +1178,7 @@ export default function Home({ locale = 'en' }) {
                 AI-Quant Lab
               </span>
               <span className="inline-flex shrink-0 items-center rounded-full border border-amber-100/70 bg-amber-300 px-1.5 py-1 text-[8px] font-black leading-none tracking-[0.04em] text-amber-950 shadow-[0_0_14px_rgba(252,211,77,0.48)] sm:px-2.5 sm:text-[10px]">
-                <span className="sm:hidden">Beta</span><span className="hidden sm:inline">Beta版測試</span>
+                <span className="sm:hidden">Beta</span><span className="hidden sm:inline">{isEnglish ? 'Beta Testing' : 'Beta版測試'}</span>
               </span>
             </div>
 
@@ -1162,7 +1249,7 @@ export default function Home({ locale = 'en' }) {
           <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-one hidden sm:block" />
           <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-two hidden sm:block" />
           <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-three hidden sm:block" />
-          <div className="relative z-10 space-y-7">
+          <div className="relative z-10 w-full space-y-7">
             <div aria-hidden="true" className="hero-spotlight hero-spotlight-one hidden sm:block" />
             <div aria-hidden="true" className="hero-spotlight hero-spotlight-two hidden sm:block" />
             <div aria-hidden="true" className="hero-spotlight hero-spotlight-three hidden sm:block" />
@@ -1180,7 +1267,7 @@ export default function Home({ locale = 'en' }) {
             <p className="hero-copy mx-auto max-w-3xl text-base leading-relaxed text-slate-100/95 sm:text-lg lg:text-xl">
               {copy.heroBody}
             </p>
-            <div className="mx-auto grid w-[70%] max-w-[33.6rem] grid-cols-1 items-stretch gap-3 pt-4 sm:w-full sm:grid-cols-2">
+            <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-stretch gap-4 pt-4 lg:grid-cols-[3fr_1fr] lg:gap-5"><HeroPromoVideo /><div className="grid h-full grid-rows-2 items-stretch gap-3 lg:h-[86%] lg:self-center lg:gap-6">
               <Link
                 href={localizePath('/multi-agent/engine', pageLocale)}
                 className={`hero-cta-glow hero-cta-primary btn-pulse inline-flex min-h-[4.75rem] h-full w-full items-center justify-center rounded-xl bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-xl shadow-cyan-400/20 hover:bg-cyan-300 ${tapClass}`}
@@ -1190,11 +1277,12 @@ export default function Home({ locale = 'en' }) {
               </Link>
               <Link
                 href={localizePath('/control-room', pageLocale)}
-                className={`hero-cta-glow hero-cta-secondary btn-pulse inline-flex min-h-[4.75rem] h-full w-full items-center justify-center rounded-xl border border-slate-800 bg-slate-900 px-8 py-3 text-center text-base font-medium text-slate-300 hover:bg-slate-800 ${pageLocale === 'en' ? 'text-balance whitespace-normal leading-snug' : ''} ${tapClass}`}
+                className={`hero-cta-glow hero-cta-secondary btn-pulse inline-flex min-h-[4.75rem] h-full w-full items-center justify-center rounded-xl border border-slate-800 bg-slate-900 px-8 py-3 text-center text-base font-medium text-slate-300 hover:bg-slate-800 whitespace-pre-line leading-snug ${tapClass}`}
                 onClick={() => withTapLock(() => {})}
               >
                 {copy.knowledgeCta}
               </Link>
+            </div>
             </div>
           </div>
         </section>
@@ -1513,7 +1601,7 @@ export default function Home({ locale = 'en' }) {
           </div>
 
           <div className="cards-cluster mx-auto mt-12 grid max-w-5xl gap-8 md:grid-cols-2">
-            {localizedPlans.map((plan, index) => (
+            {[...localizedInstitutionalPlans, ...localizedPlans].map((plan, index) => (
               <article
                 key={plan.name}
                 className={`interactive-card group animate-card-in relative flex flex-col justify-between overflow-hidden rounded-2xl p-8 transition-all duration-300 ${
@@ -1548,7 +1636,11 @@ export default function Home({ locale = 'en' }) {
                   </div>
 
                   <div className="mt-4 flex items-baseline gap-1">
-                    <span className="text-4xl font-extrabold text-white">{plan.price}</span>
+                    <span
+                      className={`text-4xl font-extrabold ${plan.discontinued ? 'relative inline-block text-slate-300 after:absolute after:left-[-4%] after:top-1/2 after:h-[2px] after:w-[108%] after:-rotate-[8deg] after:bg-rose-400/90 after:shadow-[0_0_8px_rgba(251,113,133,0.8)]' : 'text-white'}`}
+                    >
+                      {plan.price}
+                    </span>
                     <span className="text-sm text-slate-500">{plan.period}</span>
                   </div>
 
@@ -1561,7 +1653,7 @@ export default function Home({ locale = 'en' }) {
                       {ui?.coreLabel || '核心優勢'}
                     </p>
                     <ul className={`mt-3 space-y-2 text-sm leading-6 text-slate-300 ${glowText}`}>
-                      {localizedCoreAdvantages.map((advantage) => (
+                      {(plan.coreAdvantages || localizedCoreAdvantages).map((advantage) => (
                         <li key={advantage} className="flex gap-2">
                           <span className="mt-1 text-cyan-300">◆</span>
                           <span>{advantage}</span>
@@ -1585,9 +1677,11 @@ export default function Home({ locale = 'en' }) {
                 </div>
 
                 <Link
-                  href={plan.featured ? 'https://lin.ee/stqhWhj' : localizePath('/membership', pageLocale)}
-                  target={plan.featured ? '_blank' : undefined}
-                  rel={plan.featured ? 'noopener noreferrer' : undefined}
+                  href={plan.disabledCta ? '#' : (plan.href || (plan.featured ? 'https://lin.ee/stqhWhj' : localizePath('/membership', pageLocale)))}
+                  onClick={plan.disabledCta ? (event) => event.preventDefault() : undefined}
+                  aria-disabled={plan.disabledCta || undefined}
+                  target={!plan.disabledCta && !plan.href && plan.featured ? '_blank' : undefined}
+                  rel={!plan.disabledCta && !plan.href && plan.featured ? 'noopener noreferrer' : undefined}
                   className={`btn-pulse relative z-10 mt-8 w-full rounded-xl px-4 py-3 text-center text-sm font-bold transition-all duration-300 ${
                     plan.featured
                       ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 shadow-lg shadow-cyan-500/20 hover:from-cyan-400 hover:to-blue-500'
@@ -1837,3 +1931,5 @@ export default function Home({ locale = 'en' }) {
     </div>
   );
 }
+
+

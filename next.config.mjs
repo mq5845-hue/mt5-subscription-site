@@ -1,6 +1,7 @@
 ﻿/** @type {import('next').NextConfig} */
 const nextConfig = {
   trailingSlash: false,
+  allowedDevOrigins: ['127.0.0.1'],
   async rewrites() {
     return [
       { source: '/en/membership', destination: '/membership?__locale=en' },

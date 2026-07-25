@@ -16,7 +16,7 @@ const navItems = [
       { label: '\u52a0\u76df\u6703\u54e1\u7248', disabled: true },
       { href: '/converter', label: '\u5c0a\u69ae\u5546\u7528\u7248' },
       { href: '/multi-agent/engine', label: '\u591a\u667a\u80fd\u9ad4MQL\u5168\u81ea\u52d5\u9032\u5316\u5f15\u64ce', newTab: true },
-      { label: 'Docker MCP\u4f3a\u670d\u5650\u7248(\u4f01\u696d\u79c1\u6709\u96f2)', disabled: true },
+      { href: '/control-room', label: 'Docker MCP\u4f3a\u670d\u5650\u7248(\u4f01\u696d\u79c1\u6709\u96f2)' },
     ],
   },
   { href: '/modular', label: '\u6a21\u7d44\u5316\u7a4d\u6728', matches: ['/modular'] },
@@ -410,7 +410,7 @@ useEffect(() => {
               AI-Quant Lab
             </span>
             <span className="inline-flex shrink-0 items-center rounded-full border border-amber-100/70 bg-amber-300 px-1.5 py-1 text-[8px] font-black leading-none tracking-[0.04em] text-amber-950 shadow-[0_0_14px_rgba(252,211,77,0.48)] sm:px-2.5 sm:text-[10px]">
-              <span className="sm:hidden">Beta</span><span className="hidden sm:inline">Beta版測試</span>
+              <span className="sm:hidden">Beta</span><span className="hidden sm:inline">{locale === 'en' ? 'Beta Testing' : 'Beta版測試'}</span>
             </span>
           </Link>
 

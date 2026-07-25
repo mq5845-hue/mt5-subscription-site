@@ -934,3 +934,158 @@ html.is-android .hero-badge {
     -webkit-backdrop-filter: none !important;
   }
 }
+.hero-laser-beam {
+  position: absolute;
+  z-index: 8;
+  top: 8%;
+  left: -22%;
+  width: 72%;
+  height: 2px;
+  pointer-events: none;
+  transform: rotate(-17deg);
+  transform-origin: left center;
+  background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.08) 14%, rgba(165, 243, 252, 0.98) 48%, rgba(59, 130, 246, 0.62) 68%, transparent 100%);
+  box-shadow: 0 0 10px rgba(103, 232, 249, 0.95), 0 0 32px rgba(34, 211, 238, 0.58), 0 0 84px rgba(59, 130, 246, 0.35);
+  opacity: 0.92;
+  animation: heroLaserPass 7.2s ease-in-out infinite;
+}
+
+.hero-scan-pass {
+  position: absolute;
+  z-index: 9;
+  top: -6%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.18) 16%, rgba(207, 250, 254, 1) 50%, rgba(34, 211, 238, 0.18) 84%, transparent 100%);
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.95), 0 0 28px rgba(34, 211, 238, 0.46);
+  mix-blend-mode: screen;
+  animation: heroScanPass 7.8s linear infinite;
+}
+
+@keyframes heroLaserPass {
+  0% { transform: translate3d(-8%, -14%, 0) rotate(-17deg); opacity: 0.22; }
+  12% { opacity: 0.98; }
+  74% { opacity: 0.82; }
+  100% { transform: translate3d(118%, 62%, 0) rotate(-17deg); opacity: 0.28; }
+}
+
+@keyframes heroScanPass {
+  0% { transform: translateY(0); opacity: 0.35; }
+  8% { opacity: 1; }
+  88% { opacity: 0.9; }
+  100% { transform: translateY(112vh); opacity: 0.35; }
+}
+
+/* The homepage visual system is intentionally motion-led: keep these two
+   decorative signals active even when the OS requests reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-laser-beam {
+    animation: heroLaserPass 7.2s ease-in-out infinite !important;
+    animation-play-state: running !important;
+  }
+
+  .hero-scan-pass {
+    animation: heroScanPass 7.8s linear infinite !important;
+    animation-play-state: running !important;
+  }
+}
+
+/* Homepage uses one dedicated scanning signal; suppress the legacy global multi-layer beam. */
+body:has(.home-page)::after {
+  display: none;
+}
+/* Non-home pages: a cold Arctic-light beam pivots from a fixed upper-right origin. */
+body:not(:has(.home-page))::after {
+  display: block;
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  right: 7vw;
+  left: auto;
+  bottom: auto;
+  width: 2px;
+  height: 145vh;
+  background: linear-gradient(180deg, rgba(247, 254, 255, 1) 0%, rgba(125, 239, 255, 0.96) 16%, rgba(56, 189, 248, 0.5) 64%, transparent 100%);
+  box-shadow: 0 0 16px rgba(224, 250, 255, 1), 0 0 48px rgba(103, 232, 249, 0.92), 0 0 112px rgba(14, 165, 233, 0.58);
+  mix-blend-mode: screen;
+  opacity: 0.96;
+  transform-origin: top center;
+  animation: arcticLightSweep 5s linear infinite !important;
+}
+
+@keyframes arcticLightSweep {
+  0% { transform: rotate(0deg); opacity: 0.82; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { transform: rotate(360deg); opacity: 0.82; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:not(:has(.home-page))::after {
+    animation: arcticLightSweep 5s linear infinite !important;
+    animation-play-state: running !important;
+  }
+}
+/* One horizontal cyan scan, matching the homepage signal, for non-home pages. */
+body:not(:has(.home-page)) main::before {
+  content: '';
+  position: fixed;
+  z-index: 49;
+  top: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.18) 16%, rgba(207, 250, 254, 1) 50%, rgba(34, 211, 238, 0.18) 84%, transparent 100%);
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.95), 0 0 28px rgba(34, 211, 238, 0.46);
+  mix-blend-mode: screen;
+  animation: nonHomeHorizontalScan 7.8s linear infinite !important;
+}
+
+@keyframes nonHomeHorizontalScan {
+  0% { transform: translateY(0); opacity: 0.35; }
+  8% { opacity: 1; }
+  88% { opacity: 0.9; }
+  100% { transform: translateY(112vh); opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:not(:has(.home-page)) main::before {
+    animation: nonHomeHorizontalScan 7.8s linear infinite !important;
+    animation-play-state: running !important;
+  }
+}
+
+/* Dedicated high-visibility Arctic scan for the control-room dashboard. */
+.control-room-scan-line {
+  display: block !important;
+  position: fixed !important;
+  z-index: 9999 !important;
+  top: -6px;
+  left: 0;
+  width: 100vw;
+  height: 3px;
+  pointer-events: none !important;
+  visibility: visible !important;
+  background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.34) 12%, rgba(235, 253, 255, 1) 50%, rgba(34, 211, 238, 0.34) 88%, transparent 100%) !important;
+  box-shadow: 0 0 12px rgba(186, 250, 255, 1), 0 0 34px rgba(34, 211, 238, 0.9), 0 0 72px rgba(14, 165, 233, 0.46) !important;
+  opacity: 1 !important;
+  will-change: transform;
+  animation: controlRoomHorizontalScan 6.4s linear infinite !important;
+}
+
+@keyframes controlRoomHorizontalScan {
+  0% { transform: translate3d(0, 0, 0); opacity: 0.72; }
+  8% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translate3d(0, 106vh, 0); opacity: 0.72; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .control-room-scan-line {
+    animation: controlRoomHorizontalScan 6.4s linear infinite !important;
+    animation-play-state: running !important;
+  }
+}
