@@ -157,7 +157,7 @@ const navItems = [
       { href: '/membership', label: '\u6a19\u6e96\u6703\u54e1\u7248' },
       { label: '\u52a0\u76df\u6703\u54e1\u7248', disabled: true },
       { href: '/converter', label: '\u5c0a\u69ae\u5546\u7528\u7248' },
-      { href: '/multi-agent/engine', label: '\u591a\u667a\u80fd\u9ad4MQL\u5168\u81ea\u52d5\u9032\u5316\u5f15\u64ce', newTab: true },
+      { href: '/multi-agent/engine', label: '\u591a\u667a\u80fd\u9ad4MQL\u5168\u81ea\u52d5\u9032\u5316\u5f15\u64ce' },
       { href: '/control-room', label: 'Docker MCP\u4f3a\u670d\u5650\u7248(\u4f01\u696d\u79c1\u6709\u96f2)' },
     ],
   },
@@ -1072,6 +1072,9 @@ export default function Home({ locale = 'en' }) {
   const pageLocale = getLocaleFromPath(currentLocalePath);
   const currentLocale = homeCopy[pageLocale] ? pageLocale : 'en';
   const isEnglish = currentLocale === 'en';
+  const englishCtaTypography = isEnglish
+    ? 'px-4 text-[clamp(0.75rem,1.05vw,0.95rem)] leading-[1.35] tracking-[-0.015em]'
+    : '';
   const copy = localizeChinese(isEnglish ? { ...homeCopy[currentLocale], ...englishDocumentHomepageCopy } : { ...homeCopy[currentLocale], ...documentHomepageCopy }, currentLocale);
   const localizedScrollCards = localizeChinese(isEnglish ? englishDocumentScrollCards : documentScrollCards, currentLocale);
   const localizedNarrativeBlocks = localizeChinese(isEnglish ? englishDocumentNarrativeBlocks : documentNarrativeBlocks, currentLocale);
@@ -1176,6 +1179,10 @@ export default function Home({ locale = 'en' }) {
 
   return (
     <div className="home-page relative min-h-screen overflow-hidden bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-slate-950">
+      <div aria-hidden="true" className="home-mobile-effects">
+        <span className="home-mobile-fixed-laser" />
+        <span className="home-mobile-fixed-scan" />
+      </div>
       <div className="content-stage relative mx-auto max-w-7xl overflow-hidden">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <div className="tech-grid absolute inset-0 opacity-30" />
@@ -1293,6 +1300,9 @@ export default function Home({ locale = 'en' }) {
         className="relative z-10 mx-auto max-w-7xl px-4 pb-10 pt-28 sm:px-6 lg:px-8 lg:pt-32"
       >
         <section className="hero-aurora animate-reveal-up relative z-10 mx-auto flex min-h-[74vh] max-w-5xl flex-col items-center justify-center gap-6 py-12 text-center sm:min-h-[74vh] sm:gap-7 sm:py-16 lg:gap-8">
+          <div aria-hidden="true" className="hero-mobile-laser-beam sm:hidden" />
+          <div aria-hidden="true" className="hero-mobile-scan-emitter sm:hidden" />
+          <div aria-hidden="true" className="hero-mobile-scan-pass sm:hidden" />
           <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-one hidden sm:block" />
           <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-two hidden sm:block" />
           <div aria-hidden="true" className="hero-aurora-layer hero-aurora-layer-three hidden sm:block" />
@@ -1314,14 +1324,14 @@ export default function Home({ locale = 'en' }) {
             <p className="hero-copy mx-auto max-w-3xl text-base leading-relaxed text-slate-100/95 sm:text-lg lg:text-xl">
               {copy.heroBody}
             </p>
-            <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-stretch gap-4 pt-4 lg:h-[19rem] lg:w-4/5 lg:grid-cols-[2.2fr_1fr] lg:gap-5"><HeroPromoVideo /><div className="grid h-full grid-rows-3 items-stretch gap-3 lg:self-center lg:gap-4">
-              <Link href={localizePath('/converter', pageLocale)} className={`inline-flex min-h-[4.25rem] w-full items-center justify-center rounded-xl bg-gradient-to-r from-[#031f2c] via-[#05343d] to-[#070d1d] px-6 py-3 text-center text-sm font-bold text-cyan-50 shadow-xl shadow-cyan-950/45 transition hover:from-[#062b3c] hover:via-[#07505c] hover:to-[#0b1530] ${tapClass}`} onClick={() => withTapLock(() => {})}>
+            <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-stretch gap-4 pt-4 lg:h-[19rem] lg:w-4/5 lg:grid-cols-[2.2fr_1fr] lg:gap-5"><HeroPromoVideo /><div className="grid h-full min-h-0 grid-rows-3 items-stretch gap-3 overflow-hidden lg:grid-rows-[repeat(3,minmax(0,1fr))] lg:self-center lg:gap-4">
+              <Link href={localizePath('/converter', pageLocale)} className={`inline-flex min-h-0 h-full w-full items-center justify-center rounded-xl border border-white/80 bg-gradient-to-r from-[#031f2c] via-[#05343d] to-[#070d1d] px-6 py-3 text-center text-sm font-bold text-cyan-50 shadow-[0_0_9px_rgba(255,255,255,0.36),0_0_34px_rgba(34,211,238,0.22)] transition duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:border-cyan-100 hover:from-[#062b3c] hover:via-[#07505c] hover:to-[#0b1530] hover:shadow-[0_0_4px_rgba(255,255,255,0.16),0_0_48px_rgba(34,211,238,0.48)] ${englishCtaTypography} ${tapClass}`} onClick={() => withTapLock(() => {})}>
                 {copy.premiumCta}
               </Link>
-              <Link href={localizePath('/multi-agent/engine', pageLocale)} className={`hero-cta-glow hero-cta-secondary btn-pulse inline-flex min-h-[4.75rem] h-full w-full items-center justify-center rounded-xl border border-slate-800 bg-slate-900 px-8 py-3 text-center text-base font-medium text-slate-300 hover:bg-slate-800 whitespace-pre-line leading-snug ${tapClass}`} onClick={() => withTapLock(() => {})}>
+              <Link href={localizePath('/multi-agent/engine', pageLocale)} className={`hero-cta-glow hero-cta-secondary btn-pulse inline-flex min-h-0 h-full w-full items-center justify-center rounded-xl border border-white/80 bg-slate-900 px-8 py-3 text-center text-base font-medium text-slate-300 shadow-[0_0_4px_rgba(255,255,255,0.17)] hover:bg-slate-800 whitespace-pre-line leading-snug ${englishCtaTypography} ${tapClass}`} onClick={() => withTapLock(() => {})}>
                 {copy.membershipCta}
               </Link>
-              <Link href={localizePath('/control-room', pageLocale)} className={`hero-cta-glow hero-cta-primary btn-pulse inline-flex min-h-[4.75rem] h-full w-full items-center justify-center rounded-xl bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-xl shadow-cyan-400/20 hover:bg-cyan-300 ${tapClass}`} onClick={() => withTapLock(() => {})}>
+              <Link href={localizePath('/control-room', pageLocale)} className={`hero-cta-glow hero-cta-primary btn-pulse inline-flex min-h-0 h-full w-full items-center justify-center rounded-xl border border-white/80 bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-[0_0_4px_rgba(255,255,255,0.18),0_0_34px_rgba(34,211,238,0.42)] hover:bg-cyan-300 whitespace-pre-line ${englishCtaTypography} ${tapClass}`} onClick={() => withTapLock(() => {})}>
                 {copy.knowledgeCta}
               </Link>
             </div>

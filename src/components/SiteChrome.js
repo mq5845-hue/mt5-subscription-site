@@ -15,7 +15,7 @@ const navItems = [
       { href: '/membership', label: '\u6a19\u6e96\u6703\u54e1\u7248', muted: true },
       { label: '\u52a0\u76df\u6703\u54e1\u7248', disabled: true },
       { href: '/converter', label: '\u5c0a\u69ae\u5546\u7528\u7248' },
-      { href: '/multi-agent/engine', label: '\u591a\u667a\u80fd\u9ad4MQL\u5168\u81ea\u52d5\u9032\u5316\u5f15\u64ce', newTab: true },
+      { href: '/multi-agent/engine', label: '\u591a\u667a\u80fd\u9ad4MQL\u5168\u81ea\u52d5\u9032\u5316\u5f15\u64ce' },
       { href: '/control-room', label: 'Docker MCP\u4f3a\u670d\u5650\u7248(\u4f01\u696d\u79c1\u6709\u96f2)' },
     ],
   },

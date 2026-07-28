@@ -324,7 +324,7 @@ html {
     transform: translate3d(0, 0, 0) scale(1.05);
     opacity: 1;
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.28),
+      0 0 0 1px rgba(255, 255, 255, 0.07),
       0 0 30px rgba(34, 211, 238, 1),
       0 0 18px rgba(59, 130, 246, 0.6),
       inset 0 1px 0 rgba(255, 255, 255, 1);
@@ -635,14 +635,11 @@ html {
 @media (hover: hover) and (pointer: fine) {
   .hero-cta-glow:hover {
     animation: none;
-    transform: translateY(-4px) scale(1.015);
-    filter: brightness(1.28) saturate(1.2);
+    transform: translateY(-4px) scale(1.02);
+    filter: brightness(1.12) saturate(1.08);
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.28),
-      0 0 0 10px rgba(34, 211, 238, 0.13),
-      0 22px 68px rgba(8, 145, 178, 0.36),
-      0 0 92px rgba(34, 211, 238, 0.52),
-      0 0 150px rgba(59, 130, 246, 0.24);
+      0 0 4px rgba(255, 255, 255, 0.16),
+      0 0 48px rgba(34, 211, 238, 0.48);
   }
 
   .hero-cta-secondary:hover {
@@ -832,6 +829,48 @@ html.is-android .hero-badge {
 }
 
 @media (max-width: 640px) {
+  .hero-mobile-laser-beam,
+  .hero-mobile-scan-emitter,
+  .hero-mobile-scan-pass {
+    display: none !important;
+  }
+
+  .home-mobile-effects {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: block;
+    pointer-events: none;
+  }
+
+  .home-mobile-fixed-laser,
+  .home-mobile-fixed-scan {
+    display: block;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .home-mobile-fixed-laser {
+    top: 15svh;
+    left: -32vw;
+    width: 142vw;
+    height: 3px;
+    transform-origin: left center;
+    background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.16) 12%, rgba(236, 254, 255, 1) 48%, rgba(59, 130, 246, 0.78) 70%, transparent 100%);
+    box-shadow: 0 0 10px rgba(207, 250, 254, 1), 0 0 34px rgba(34, 211, 238, 0.72), 0 0 84px rgba(59, 130, 246, 0.42);
+    animation: homeMobileFixedLaser 7.2s ease-in-out infinite !important;
+  }
+
+  .home-mobile-fixed-scan {
+    top: 14svh;
+    left: 0;
+    width: 100vw;
+    height: 8px;
+    background: linear-gradient(180deg, transparent 0%, rgba(34, 211, 238, 0.32) 22%, rgba(236, 254, 255, 1) 50%, rgba(34, 211, 238, 0.32) 78%, transparent 100%);
+    box-shadow: 0 0 10px rgba(207, 250, 254, 1), 0 0 34px rgba(34, 211, 238, 0.76), 0 0 72px rgba(14, 165, 233, 0.4);
+    animation: homeMobileFixedScan 8.8s linear infinite !important;
+  }
+
   body::before {
     opacity: 0.18;
     filter: blur(28px);
@@ -964,6 +1003,101 @@ html.is-android .hero-badge {
   animation: heroScanPass 7.8s linear infinite;
 }
 
+.home-mobile-effects {
+  display: none;
+}
+
+@media (max-width: 1023px), (pointer: coarse) {
+  .home-mobile-effects {
+    display: block !important;
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 9999 !important;
+    visibility: visible !important;
+    pointer-events: none !important;
+  }
+
+  .home-mobile-fixed-laser,
+  .home-mobile-fixed-scan {
+    display: block !important;
+    position: absolute !important;
+    visibility: visible !important;
+    pointer-events: none !important;
+    animation-play-state: running !important;
+  }
+
+  .home-mobile-fixed-laser {
+    top: 15vh !important;
+    left: -32vw !important;
+    width: 142vw !important;
+    height: 3px !important;
+    transform-origin: left center;
+    opacity: 1 !important;
+    background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.16) 12%, rgba(236, 254, 255, 1) 48%, rgba(59, 130, 246, 0.78) 70%, transparent 100%) !important;
+    box-shadow: 0 0 10px rgba(207, 250, 254, 1), 0 0 34px rgba(34, 211, 238, 0.72), 0 0 84px rgba(59, 130, 246, 0.42) !important;
+    animation: homeMobileFixedLaser 7.2s ease-in-out infinite !important;
+  }
+
+  .home-mobile-fixed-scan {
+    top: 14vh !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 8px !important;
+    opacity: 1 !important;
+    background: linear-gradient(180deg, transparent 0%, rgba(34, 211, 238, 0.32) 22%, rgba(236, 254, 255, 1) 50%, rgba(34, 211, 238, 0.32) 78%, transparent 100%) !important;
+    box-shadow: 0 0 10px rgba(207, 250, 254, 1), 0 0 34px rgba(34, 211, 238, 0.76), 0 0 72px rgba(14, 165, 233, 0.4) !important;
+    animation: homeMobileFixedScan 8.8s linear infinite !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-page .hero-laser-beam,
+  .home-page .hero-scan-pass {
+    display: none !important;
+  }
+
+  .hero-mobile-laser-beam,
+  .hero-mobile-scan-emitter,
+  .hero-mobile-scan-pass {
+    display: block;
+    pointer-events: none;
+    position: absolute;
+    z-index: 20;
+    mix-blend-mode: normal;
+  }
+
+  .hero-mobile-laser-beam {
+    top: 8%;
+    left: -36%;
+    width: 140%;
+    height: 2px;
+    transform-origin: left center;
+    background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.12) 14%, rgba(207, 250, 254, 1) 48%, rgba(59, 130, 246, 0.72) 68%, transparent 100%);
+    box-shadow: 0 0 10px rgba(103, 232, 249, 0.95), 0 0 32px rgba(34, 211, 238, 0.58), 0 0 84px rgba(59, 130, 246, 0.35);
+    animation: heroMobileLaserSweep 6.6s ease-in-out infinite !important;
+  }
+
+  .hero-mobile-scan-pass {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(180deg, transparent 0%, rgba(34, 211, 238, 0.28) 22%, rgba(207, 250, 254, 1) 50%, rgba(34, 211, 238, 0.28) 78%, transparent 100%);
+    box-shadow: 0 0 10px rgba(34, 211, 238, 1), 0 0 32px rgba(34, 211, 238, 0.7);
+    animation: heroMobileScanPass 8.4s linear infinite !important;
+  }
+
+  .hero-mobile-scan-emitter {
+    top: 8%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.24) 16%, rgba(207, 250, 254, 0.92) 50%, rgba(34, 211, 238, 0.24) 84%, transparent 100%);
+    box-shadow: 0 0 8px rgba(34, 211, 238, 0.95), 0 0 24px rgba(34, 211, 238, 0.52);
+    animation: heroMobileScanEmitter 2.4s ease-in-out infinite;
+  }
+}
+
 @keyframes heroLaserPass {
   0% { transform: translate3d(-8%, -14%, 0) rotate(-17deg); opacity: 0.22; }
   12% { opacity: 0.98; }
@@ -976,6 +1110,39 @@ html.is-android .hero-badge {
   8% { opacity: 1; }
   88% { opacity: 0.9; }
   100% { transform: translateY(112vh); opacity: 0.35; }
+}
+
+@keyframes heroMobileLaserSweep {
+  0% { transform: translate3d(-12%, -6%, 0) rotate(-17deg); opacity: 0.35; }
+  16% { opacity: 1; }
+  78% { opacity: 0.9; }
+  100% { transform: translate3d(12%, 12%, 0) rotate(-17deg); opacity: 0.4; }
+}
+
+@keyframes heroMobileScanPass {
+  0% { transform: translateY(8vh); opacity: 0.55; }
+  8% { opacity: 1; }
+  82% { opacity: 0.96; }
+  100% { transform: translateY(66vh); opacity: 0.55; }
+}
+
+@keyframes heroMobileScanEmitter {
+  0%, 100% { opacity: 0.52; }
+  50% { opacity: 1; }
+}
+
+@keyframes homeMobileFixedLaser {
+  0% { transform: translate3d(-8%, -4%, 0) rotate(-17deg); opacity: 0.5; }
+  14% { opacity: 1; }
+  82% { opacity: 0.94; }
+  100% { transform: translate3d(12%, 14%, 0) rotate(-17deg); opacity: 0.5; }
+}
+
+@keyframes homeMobileFixedScan {
+  0% { transform: translateY(0); opacity: 0.62; }
+  8% { opacity: 1; }
+  86% { opacity: 0.98; }
+  100% { transform: translateY(66svh); opacity: 0.62; }
 }
 
 /* The homepage visual system is intentionally motion-led: keep these two
