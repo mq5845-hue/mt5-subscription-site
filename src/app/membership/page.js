@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import { headers } from 'next/headers';
 import { getMembershipSetupStatus } from '../../lib/membership-setup';
 import { defaultLocale, localizePath } from '../../lib/locale';
@@ -177,7 +177,7 @@ export default async function MembershipPage({ searchParams }) {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               {setup.clerkReady ? <><Link href={signUpHref} className="inline-flex min-h-12 items-center justify-center rounded-xl bg-cyan-400 px-6 py-3 text-sm font-bold text-slate-950 transition hover:bg-cyan-300">{text.signup}</Link><Link href={signInHref} className="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-700 bg-slate-900 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-cyan-400/35 hover:text-white">{text.signin}</Link></> : <><span className="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-700/80 bg-slate-900/70 px-6 py-3 text-sm font-semibold text-slate-400">{text.clerkBox}</span><span className="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-700/80 bg-slate-900/70 px-6 py-3 text-sm font-semibold text-slate-400">{text.clerkPending}</span></>}
-              {setup.clerkReady && setup.lemonCheckoutUrlReady ? <Link href="/api/billing/checkout" className="inline-flex min-h-12 items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-400/10 px-6 py-3 text-sm font-semibold text-emerald-200 transition hover:bg-emerald-400/15">{text.checkout}</Link> : <span className="inline-flex min-h-12 items-center justify-center rounded-xl border border-emerald-400/15 bg-emerald-400/5 px-6 py-3 text-sm font-semibold text-emerald-100/70">{text.lemonPending}</span>}
+              {setup.clerkReady && setup.lemonCheckoutUrlReady ? <Link href={`/api/billing/checkout?locale=${locale}`} className="inline-flex min-h-12 items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-400/10 px-6 py-3 text-sm font-semibold text-emerald-200 transition hover:bg-emerald-400/15">{text.checkout}</Link> : <span className="inline-flex min-h-12 items-center justify-center rounded-xl border border-emerald-400/15 bg-emerald-400/5 px-6 py-3 text-sm font-semibold text-emerald-100/70">{text.lemonPending}</span>}
             </div>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-2">{[text.clerkBox, text.lemonBox, text.supabaseBox, text.memberBox].map((item, index) => <div key={item} className="group flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-900/60 px-4 py-4 text-sm text-slate-200"><EmojiAvatar emoji={membershipEmojis.stack[index]} tone="violet" />{item}</div>)}</div>

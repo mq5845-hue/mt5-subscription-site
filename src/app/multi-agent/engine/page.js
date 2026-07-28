@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -8,6 +8,7 @@ import { getMqlEngineCopy } from '../../../lib/mqlEngineI18n';
 import PrivateLlmVault from '../../../components/PrivateLlmVault';
 
 const agentColors = ['cyan', 'blue', 'violet', 'amber', 'emerald'];
+const agentCodes = ['SubAgent1', 'SubAagent2', 'SubAagent3', 'SubAgent4', 'SubAgent5'];
 const agentAvatars = ['🔍', '🧭', '💻', '🛠️', '📈'];
 const deliverableCodes = ['SOURCE', 'BUILD', 'MAP', 'PROOF', 'VERSION'];
 
@@ -30,13 +31,15 @@ function SignalDot({ live = false }) {
   return <span className={`h-1.5 w-1.5 rounded-full ${live ? 'bg-emerald-300 shadow-[0_0_12px_rgba(110,231,183,0.95)]' : 'bg-slate-600'}`} />;
 }
 
-function AgentNode({ agent, active, onSelect }) {
+function AgentNode({ agent, active, onSelect, processing = false, pulseDelay = 0 }) {
   return (
-    <button type="button" onClick={onSelect} className={`group relative flex h-32 w-full min-w-0 flex-col rounded-2xl border bg-slate-950/72 p-3 text-left backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:bg-slate-900/90 sm:p-4 ${active ? accent[agent.color] : 'border-slate-700/70 text-slate-400'}`}>
+    <button type="button" onClick={onSelect} style={processing ? { animationDelay: `${pulseDelay * 140}ms` } : undefined} className={`group relative flex h-32 w-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-[radial-gradient(circle_at_15%_0%,rgba(34,211,238,0.13),transparent_42%),rgba(2,6,23,0.88)] p-3 text-left shadow-[inset_0_1px_0_rgba(165,243,252,0.1),0_12px_32px_rgba(2,6,23,0.34)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-cyan-300/55 hover:shadow-[0_0_34px_rgba(34,211,238,0.2),inset_0_1px_0_rgba(165,243,252,0.2)] sm:p-4 ${processing ? 'agent-engine-active' : ''} ${active ? accent[agent.color] : 'border-slate-700/70 text-slate-400'}`}>
+      <div aria-hidden="true" className="absolute inset-1 rounded-[0.85rem] border border-cyan-300/10" />
       <div aria-hidden="true" className={`absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent ${active ? 'via-cyan-300/80' : 'via-slate-600/40'} to-transparent`} />
-      <div className="flex items-center justify-between gap-2"><span className="font-mono text-[10px] font-black tracking-[0.18em]">{agent.code}</span><SignalDot live={active} /></div>
-      <strong className="mt-5 block min-h-10 text-sm leading-5 text-white">{agent.role}</strong>
-      <span className="mt-auto flex min-w-0 items-center gap-2 pt-2 font-mono text-[9px] uppercase tracking-[0.12em] text-slate-600"><span aria-hidden="true" className="flex h-5 w-5 flex-none items-center justify-center rounded-md border border-cyan-300/15 bg-cyan-300/[0.07] text-[12px] shadow-[0_0_12px_rgba(34,211,238,0.1)]">{agent.avatar}</span><span className="truncate">{agent.name}</span></span>
+      <div aria-hidden="true" className="absolute right-3 top-3 h-3 w-3 border-r border-t border-cyan-300/35" />
+      <div className="relative z-10 flex items-center justify-between gap-2"><span className="font-mono text-[10px] font-black tracking-[0.14em] text-cyan-100 drop-shadow-[0_0_7px_rgba(103,232,249,0.7)]">{agent.code}</span><span className="flex items-center gap-1.5"><span className="font-mono text-[7px] tracking-[0.18em] text-cyan-300/55">SYNC</span><SignalDot live={active} /></span></div>
+      <strong className="relative z-10 mt-5 block min-h-10 text-sm leading-5 text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.18)]">{agent.role}</strong>
+      <span className="relative z-10 mt-auto flex min-w-0 items-center gap-2 border-t border-cyan-300/10 pt-2 font-mono text-[9px] uppercase tracking-[0.12em] text-slate-600"><span aria-hidden="true" className="flex h-5 w-5 flex-none items-center justify-center rounded-md border border-cyan-300/15 bg-cyan-300/[0.07] text-[12px] shadow-[0_0_12px_rgba(34,211,238,0.1)]">{agent.avatar}</span><span className="truncate">{agent.name}</span></span>
     </button>
   );
 }
@@ -84,7 +87,7 @@ export default function MqlEvolutionEngineExperience() {
   const copy = getMqlEngineCopy(locale);
   const productTypes = Object.entries(copy.products);
   const quasiEdition = locale === 'zh-Hant' ? { label: '\u6e96\u6cd5\u4eba\u7248', detail: '\u9069\u7d93\u7d00\u5546/\u81ea\u71df\u5546\u3001EA\u4ea4\u6613\u5718\u968a\u3001\u5bb6\u65cf\u8fa6\u516c\u5ba4' } : locale === 'zh-Hans' ? { label: '\u51c6\u6cd5\u4eba\u7248', detail: '\u9002\u7ecf\u7eaa\u5546/\u81ea\u8425\u5546\u3001EA\u4ea4\u6613\u56e2\u961f\u3001\u5bb6\u65cf\u529e\u516c\u5ba4' } : { label: 'Quasi-Institutional Edition', detail: 'For brokers, prop firms, EA trading teams, and family offices' };
-  const agentNodes = copy.agents.map(([name, role, detail], index) => ({ code: `A${index + 1}`, name, role, detail, color: agentColors[index], avatar: agentAvatars[index] }));
+  const agentNodes = copy.agents.map(([name, role, detail], index) => ({ code: agentCodes[index], name, role, detail, color: agentColors[index], avatar: agentAvatars[index] }));
   const deliverables = copy.deliverables.map((label, index) => [deliverableCodes[index], label]);
   const [sourceType, setSourceType] = useState('MQL4');
   const [productType, setProductType] = useState('ea');
@@ -157,16 +160,21 @@ export default function MqlEvolutionEngineExperience() {
             </div>
 
             <div className="relative mx-auto w-full max-w-xl">
-              <div aria-hidden="true" className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/15 blur-3xl" />
+              <div aria-hidden="true" className="absolute inset-4 opacity-[0.14] [background-image:linear-gradient(rgba(34,211,238,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.5)_1px,transparent_1px)] [background-size:18px_18px]" />
+              <div aria-hidden="true" className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/20 blur-3xl" />
+              <div aria-hidden="true" className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-300/20 border-dashed" />
+              <div aria-hidden="true" className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-300/10" />
               <div className="relative grid grid-cols-[minmax(0,1fr)_8rem_minmax(0,1fr)] items-center gap-3 sm:grid-cols-[minmax(0,1fr)_10rem_minmax(0,1fr)] sm:gap-4">
-                <div className="space-y-4">{agentNodes.slice(0, 2).map((agent, index) => <AgentNode key={agent.code} agent={agent} active={activeAgent === index} onSelect={() => setActiveAgent(index)} />)}</div>
-                <button type="button" onClick={() => setActiveAgent(-1)} className="group relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-[2rem] border border-cyan-200/45 bg-[radial-gradient(circle_at_50%_25%,rgba(34,211,238,0.28),rgba(8,15,35,0.96)_65%)] text-center shadow-[0_0_60px_rgba(34,211,238,0.22)] transition hover:scale-[1.03]">
-                  <div aria-hidden="true" className="absolute inset-3 rounded-[1.4rem] border border-cyan-300/10" />
-                  <span className="font-mono text-[9px] tracking-[0.2em] text-cyan-300">MASTER</span><strong className="mt-2 text-4xl font-black text-white">M</strong><span className="mt-2 flex items-center gap-1.5 text-[9px] font-bold tracking-[0.12em] text-slate-500"><span aria-hidden="true" className="flex h-6 w-6 items-center justify-center rounded-lg border border-cyan-200/25 bg-cyan-300/10 text-sm shadow-[0_0_16px_rgba(34,211,238,0.18)]">🤖</span><span>COMMAND CORE</span></span>
+                <div className="space-y-4">{agentNodes.slice(0, 2).map((agent, index) => <AgentNode key={agent.code} agent={agent} active={activeAgent === index} onSelect={() => setActiveAgent(index)} processing={isProcessing} pulseDelay={index} />)}</div>
+                <button type="button" onClick={() => setActiveAgent(-1)} className={`group relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-[2rem] border border-cyan-200/60 bg-[radial-gradient(circle_at_50%_22%,rgba(103,232,249,0.38),rgba(8,15,35,0.98)_64%)] text-center shadow-[0_0_28px_rgba(103,232,249,0.35),0_0_90px_rgba(34,211,238,0.22),inset_0_0_36px_rgba(34,211,238,0.12)] transition hover:scale-[1.03] ${isProcessing ? 'agent-core-active' : ''}`}>
+                  <div aria-hidden="true" className="absolute inset-3 rounded-[1.4rem] border border-cyan-300/20" />
+                  <div aria-hidden="true" className="absolute inset-x-4 top-7 h-px bg-gradient-to-r from-transparent via-cyan-200/80 to-transparent shadow-[0_0_12px_rgba(103,232,249,0.9)]" />
+                  <div aria-hidden="true" className="absolute left-4 top-4 h-3 w-3 border-l border-t border-cyan-200/70" /><div aria-hidden="true" className="absolute bottom-4 right-4 h-3 w-3 border-b border-r border-cyan-200/70" />
+                  <span className="font-mono text-[11px] font-black tracking-[0.16em] text-cyan-200 drop-shadow-[0_0_8px_rgba(103,232,249,1)]">Master Agent</span><strong className="mt-2 text-4xl font-black text-white">M</strong><span className="mt-2 flex items-center gap-1.5 text-[9px] font-bold tracking-[0.12em] text-slate-500"><span aria-hidden="true" className="flex h-6 w-6 items-center justify-center rounded-lg border border-cyan-200/25 bg-cyan-300/10 text-sm shadow-[0_0_16px_rgba(34,211,238,0.18)]">🤖</span><span>COMMAND CORE</span></span>
                 </button>
-                <div className="space-y-4">{agentNodes.slice(2, 4).map((agent, index) => <AgentNode key={agent.code} agent={agent} active={activeAgent === index + 2} onSelect={() => setActiveAgent(index + 2)} />)}</div>
+                <div className="space-y-4">{agentNodes.slice(2, 4).map((agent, index) => <AgentNode key={agent.code} agent={agent} active={activeAgent === index + 2} onSelect={() => setActiveAgent(index + 2)} processing={isProcessing} pulseDelay={index + 2} />)}</div>
               </div>
-              <div className="mx-auto mt-4 w-full max-w-48"><AgentNode agent={agentNodes[4]} active={activeAgent === 4} onSelect={() => setActiveAgent(4)} /></div>
+              <div className="mx-auto mt-4 w-full max-w-48"><AgentNode agent={agentNodes[4]} active={activeAgent === 4} onSelect={() => setActiveAgent(4)} processing={isProcessing} pulseDelay={4} /></div>
             </div>
           </div>
 

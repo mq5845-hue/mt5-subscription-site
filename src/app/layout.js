@@ -1,4 +1,4 @@
-﻿import { ClerkProvider } from '@clerk/nextjs';
+import { ClerkProvider } from '@clerk/nextjs';
 import { headers } from 'next/headers';
 import { defaultLocale } from '../lib/locale';
 import { Geist, Geist_Mono } from 'next/font/google';
@@ -82,19 +82,6 @@ export default async function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col">
         <ClerkProvider>
-          <Script
-            id="detect-locale"
-            strategy="beforeInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `(function(){try{var p=window.location.pathname;var m=p.match(/^\/(en|zh-Hant|zh-Hans)(?=\/|$)/);var l=m?m[1]:'en';document.documentElement.lang=l;}catch(e){}})();`,
-            }}
-          />          <Script
-            id="detect-android"
-            strategy="beforeInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `(function(){try{if(/Android/i.test(navigator.userAgent)){document.documentElement.classList.add('is-android');}}catch(e){}})();`,
-            }}
-          />
           <SiteChrome>{children}</SiteChrome>
         </ClerkProvider>
       </body>

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { getLocaleFromPath, localizePath } from '../../lib/locale';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, Radar } from 'recharts';
 import { Shield, Radio, Activity, Cpu, AlertTriangle, Check, X, ShieldAlert, Zap } from 'lucide-react';
 
@@ -31,6 +32,7 @@ const initialRadarData = [
 
 export default function ControlRoomDashboard() {
   const pathname = usePathname();
+  const locale = getLocaleFromPath(pathname);
   const homeLabel = pathname.startsWith('/en') ? 'Back to home' : pathname.startsWith('/zh-Hans') ? '\u56de\u9996\u9875' : '\u56de\u9996\u9801';
   // 蝟餌絞?典????: NOMINAL | WARNING | CRISIS | HALT
   const [systemState, setSystemState] = useState<'NOMINAL' | 'WARNING' | 'CRISIS' | 'HALT'>('NOMINAL');
@@ -338,7 +340,7 @@ export default function ControlRoomDashboard() {
 
       <div className="mt-8 flex justify-center">
         <Link
-          href="/"
+          href={localizePath('/', locale)}
           className="rounded-xl border border-slate-700 bg-slate-950/60 px-4 py-1.5 text-sm font-semibold text-slate-200 transition-all duration-300 hover:border-cyan-300/70 hover:bg-cyan-500/10 hover:text-cyan-100 hover:shadow-[0_0_14px_rgba(34,211,238,0.65),0_0_30px_rgba(34,211,238,0.28)]"
         >
           {homeLabel}

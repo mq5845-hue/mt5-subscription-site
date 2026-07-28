@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -996,14 +996,14 @@ html.is-android .hero-badge {
 body:has(.home-page)::after {
   display: none;
 }
-/* Non-home pages: a cold Arctic-light beam pivots from a fixed upper-right origin. */
+/* Non-home pages: a cold Arctic-light beam pivots from the header logo center. */
 body:not(:has(.home-page))::after {
   display: block;
   position: fixed;
   z-index: 50;
-  top: 0;
-  right: 7vw;
-  left: auto;
+  top: 28px;
+  right: auto;
+  left: 30px;
   bottom: auto;
   width: 2px;
   height: 145vh;
@@ -1014,12 +1014,24 @@ body:not(:has(.home-page))::after {
   transform-origin: top center;
   animation: arcticLightSweep 5s linear infinite !important;
 }
+@media (min-width: 640px) {
+  body:not(:has(.home-page))::after {
+    top: 32px;
+    left: 36px;
+  }
+}
+
+@media (min-width: 1024px) {
+  body:not(:has(.home-page))::after {
+    left: 40px;
+  }
+}
 
 @keyframes arcticLightSweep {
   0% { transform: rotate(0deg); opacity: 0.82; }
   12% { opacity: 1; }
   88% { opacity: 1; }
-  100% { transform: rotate(360deg); opacity: 0.82; }
+  100% { transform: rotate(-360deg); opacity: 0.82; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1027,6 +1039,28 @@ body:not(:has(.home-page))::after {
     animation: arcticLightSweep 5s linear infinite !important;
     animation-play-state: running !important;
   }
+}
+/* A direct DOM scan line keeps the converter signal visible across every shell. */
+.converter-horizontal-scan {
+  display: block !important;
+  visibility: visible !important;
+  position: fixed !important;
+  z-index: 9999 !important;
+  top: 66px !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 3px !important;
+  pointer-events: none !important;
+  background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.38) 12%, rgba(235, 253, 255, 1) 50%, rgba(34, 211, 238, 0.38) 88%, transparent 100%) !important;
+  box-shadow: 0 0 12px rgba(186, 250, 255, 1), 0 0 34px rgba(34, 211, 238, 0.95), 0 0 72px rgba(14, 165, 233, 0.58) !important;
+  opacity: 1 !important;
+  animation: converterHorizontalPulse 1.8s ease-in-out infinite !important;
+  animation-play-state: running !important;
+}
+
+@keyframes converterHorizontalPulse {
+  0%, 100% { filter: brightness(0.82); opacity: 0.72; }
+  50% { filter: brightness(1.3); opacity: 1; }
 }
 /* One horizontal cyan scan, matching the homepage signal, for non-home pages. */
 body:not(:has(.home-page)) main::before {
@@ -1088,4 +1122,102 @@ body:not(:has(.home-page)) main::before {
     animation: controlRoomHorizontalScan 6.4s linear infinite !important;
     animation-play-state: running !important;
   }
+}
+/* Multi-agent conversion telemetry: active only while the engine processes source. */
+.agent-engine-active {
+  animation: agentEngineFloat 1.35s ease-in-out infinite;
+  border-color: rgba(103, 232, 249, 0.88) !important;
+  box-shadow: 0 0 18px rgba(103, 232, 249, 0.64), 0 0 52px rgba(34, 211, 238, 0.32), inset 0 0 22px rgba(34, 211, 238, 0.16) !important;
+}
+
+.agent-engine-active::before {
+  content: '';
+  position: absolute;
+  inset: -35% 0 auto;
+  z-index: 1;
+  height: 45%;
+  background: linear-gradient(180deg, transparent, rgba(165, 243, 252, 0.24), transparent);
+  animation: agentEngineScan 1.35s linear infinite;
+  pointer-events: none;
+}
+
+.agent-core-active {
+  animation: agentCorePulse 1.05s ease-in-out infinite;
+}
+
+@keyframes agentEngineFloat {
+  0%, 100% { transform: translate3d(0, 0, 0); filter: brightness(1); }
+  50% { transform: translate3d(0, -7px, 0); filter: brightness(1.2); }
+}
+
+@keyframes agentEngineScan {
+  from { transform: translateY(-15%); opacity: 0; }
+  22% { opacity: 1; }
+  to { transform: translateY(310%); opacity: 0; }
+}
+
+@keyframes agentCorePulse {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.045); filter: brightness(1.3); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent-engine-active,
+  .agent-core-active,
+  .agent-engine-active::before {
+    animation: none !important;
+  }
+}
+/* A discontinued plan is intentionally subdued and has no visual activity. */
+.interactive-card.plan-disabled {
+  opacity: 0.8 !important;
+  filter: brightness(0.8) saturate(0.7) !important;
+  background: rgba(15, 23, 42, 0.72) !important;
+  border-color: rgba(71, 85, 105, 0.36) !important;
+  box-shadow: none !important;
+}
+
+.plan-disabled,
+.plan-disabled * {
+  text-shadow: none !important;
+}
+
+.plan-disabled * {
+  box-shadow: none !important;
+}
+
+.plan-disabled::before,
+.plan-disabled::after,
+.plan-disabled > .absolute {
+  opacity: 0 !important;
+}
+
+/* Native hover fallback for embedded browsers that do not hydrate client events. */
+details.group:hover > .site-dropdown-panel {
+  display: block !important;
+}
+.converter-horizontal-scan {
+  position: fixed;
+  z-index: 9999;
+  top: 108px;
+  left: 0;
+  width: 100vw;
+  height: 3px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 0%, rgba(34,211,238,.4) 12%, #67e8f9 48%, rgba(34,211,238,.4) 88%, transparent 100%);
+  box-shadow: 0 0 8px #22d3ee, 0 0 22px rgba(34,211,238,.9), 0 0 50px rgba(14,165,233,.55);
+  opacity: .95;
+  animation: converter-horizontal-sweep 7s linear infinite;
+}
+@keyframes converter-horizontal-sweep {
+  0% { transform: translateY(0); opacity: 0; }
+  4% { opacity: 1; }
+  94% { opacity: 1; }
+  100% { transform: translateY(calc(100vh - 150px)); opacity: 0; }
+}
+
+.converter-horizontal-scan {
+  top: 108px !important;
+  animation: converter-horizontal-sweep 7s linear infinite !important;
+  animation-play-state: running !important;
 }

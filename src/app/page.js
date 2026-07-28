@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 // env fix v1
 
 import Link from 'next/link';
@@ -184,12 +184,12 @@ const languageTabs = [
 const navTranslations = {
   'zh-Hant': {
     groups: ['AI重構引擎', '模組化積木', 'Lab 知識庫', '訂閱方案'],
-    children: [['標準會員版', '加盟會員版', '尊榮商用版', '\u591a\u667a\u80fd\u9ad4MQL\u5168\u81ea\u52d5\u9032\u5316\u5f15\u64ce', 'Docker MCP伺服噐版(企業私有雲)'], null, null, ['標準會員', '加盟會員', '企業VIP會員']],
+    children: [['標準會員版', '加盟會員版', '尊爵商用版', '\u591a\u667a\u80fd\u9ad4MQL\u5168\u81ea\u52d5\u9032\u5316\u5f15\u64ce', 'Docker MCP伺服噐版(企業私有雲)'], null, null, ['標準會員', '加盟會員', '企業VIP會員']],
     login: '登錄',
   },
   'zh-Hans': {
     groups: ['AI重构引擎', '模块化积木', 'Lab 知识库', '订阅方案'],
-    children: [['标准会员版', '加盟会员版', '尊荣商用版', '\u591a\u667a\u80fd\u4f53MQL\u5168\u81ea\u52a8\u8fdb\u5316\u5f15\u64ce', 'Docker MCP服务器版(企业私有云)'], null, null, ['标准会员', '加盟会员', '企业VIP会员']],
+    children: [['标准会员版', '加盟会员版', '尊爵商用版', '\u591a\u667a\u80fd\u4f53MQL\u5168\u81ea\u52a8\u8fdb\u5316\u5f15\u64ce', 'Docker MCP服务器版(企业私有云)'], null, null, ['标准会员', '加盟会员', '企业VIP会员']],
     login: '登录',
   },
   en: {
@@ -225,6 +225,7 @@ const homeCopy = {
     heroBody: '\u96f6\u57fa\u790e\u4e5f\u80fd\u7528 AI LLM \u63d0\u793a\u8a5e\u6a21\u677f\u9ad8\u6548\u91cd\u69cb\u6838\u5fc3\u7b56\u7565\u3002\u7121\u7248\u6b0a\u9650\u5236\u3001\u7121\u9808\u8a31\u53ef\uff0c\u6253\u9020\u5c08\u5c6c\u60a8\u7684\u500b\u4eba\u4ea4\u6613\u54c1\u724c\u8207\u6578\u4f4d\u8cc7\u7522\uff0c\u5229\u6f64 100% \u5168\u6b78\u81ea\u5df1\u3002',
     membershipCta: '\u6e96\u6cd5\u4eba\u7248(\u9069\u7d93\u7d00\u5546/\u81ea\u71df\u5546, EA\u4ea4\u6613\u5718\u968a, \u5bb6\u65cf\u8fa6\u516c\u5ba4)',
     knowledgeCta: '\u6cd5\u4eba\u6a5f\u69cb\u7248_\u96e2\u7dda100%\u79c1\u5bc6-\u4f01\u696d\u79c1\u6709\u96f2',
+    premiumCta: '\u5c0a\u7235\u5546\u7528\u7248(\u9069\u500b\u4eba/EA\u5718\u968a/\u5c08\u696d\u6236\u2026)',
     reasonsBadge: '\u5148\u770b\u898b\u7bc0\u594f\uff0c\u518d\u770b\u898b\u50f9\u503c',
     reasonsTitle: '\u4e09\u500b\u8b93\u4eba\u9858\u610f\u5f80\u4e0b\u770b\u7684\u7406\u7531',
     reasonsBody: '\u5982\u679c\u4f60\u60f3\u77e5\u9053\u9019\u500b\u9996\u9801\u5230\u5e95\u5728\u8ce3\u4ec0\u9ebc\u3001\u5f37\u5728\u54ea\u88e1\u3001\u9069\u4e0d\u9069\u5408\u4f60\uff0c\u5148\u770b\u5b8c\u9019\u4e09\u500b\u5340\u584a\uff0c\u518d\u5f80\u4e0b\u770b\u65b9\u6848\u6703\u66f4\u6709\u611f\u3002'
@@ -237,6 +238,7 @@ const homeCopy = {
     heroBody: '\u96f6\u57fa\u7840\u4e5f\u80fd\u7528 AI LLM \u63d0\u793a\u8bcd\u6a21\u677f\u9ad8\u6548\u91cd\u6784\u6838\u5fc3\u7b56\u7565\u3002\u65e0\u7248\u6743\u9650\u5236\u3001\u65e0\u987b\u8bb8\u53ef\uff0c\u6253\u9020\u4e13\u5c5e\u4e8e\u60a8\u7684\u4e2a\u4eba\u4ea4\u6613\u54c1\u724c\u4e0e\u6570\u5b57\u8d44\u4ea7\uff0c\u5229\u6da6 100% \u5168\u5f52\u81ea\u5df1\u3002',
     membershipCta: '\u51c6\u6cd5\u4eba\u7248(\u9002\u7ecf\u7eaa\u5546/\u81ea\u8425\u5546, EA\u4ea4\u6613\u56e2\u961f, \u5bb6\u65cf\u529e\u516c\u5ba4)',
     knowledgeCta: '\u6cd5\u4eba\u673a\u6784\u7248_\u79bb\u7ebf100%\u79c1\u5bc6-\u4f01\u4e1a\u79c1\u6709\u4e91',
+    premiumCta: '\u5c0a\u7235\u5546\u7528\u7248(\u9002\u4e2a\u4eba/EA\u56e2\u961f/\u4e13\u4e1a\u6237\u2026)',
     reasonsBadge: '\u5148\u770b\u89c1\u8282\u594f\uff0c\u518d\u770b\u89c1\u4ef7\u503c',
     reasonsTitle: '\u4e09\u4e2a\u8ba9\u4eba\u613f\u610f\u5f80\u4e0b\u770b\u7684\u7406\u7531',
     reasonsBody: '\u5982\u679c\u4f60\u60f3\u77e5\u9053\u8fd9\u4e2a\u9996\u9875\u5230\u5e95\u5728\u5356\u4ec0\u4e48\u3001\u5f3a\u5728\u54ea\u91cc\u3001\u9002\u4e0d\u9002\u5408\u4f60\uff0c\u5148\u770b\u5b8c\u8fd9\u4e09\u4e2a\u533a\u5757\uff0c\u518d\u5f80\u4e0b\u770b\u65b9\u6848\u4f1a\u66f4\u6709\u611f\u3002'
@@ -249,6 +251,7 @@ const homeCopy = {
     heroBody: 'Even from zero, you can use AI LLM prompt templates to rebuild core strategies efficiently. No copyright lock-in, no permission required. Build your own trading brand and digital assets, and keep 100% of the upside.',
     membershipCta: 'Quasi-Institutional Edition (For Brokers, Prop Firms, EA Trading Teams & Family Offices)',
     knowledgeCta: 'Institutional Edition\n_100% Private Offline -\n(Enterprise Private Cloud)',
+    premiumCta: 'Premium Commercial (For Individuals / EA Teams / Professional Traders...)',
     reasonsBadge: 'See the rhythm, then the value',
     reasonsTitle: 'Three reasons to keep scrolling',
     reasonsBody: 'If you want to know what this homepage is offering, where it stands out, and whether it fits you, start with these three sections before comparing the plans below.'
@@ -639,6 +642,7 @@ const plans = [
     name: '標準會員（方案終止）',
     price: 'USD$ 299.00',
     discontinued: true,
+    disabledCta: true,
     period: '/ 月',
     description: '適合想先體驗內容、建立量化交易基礎的入門使用者。',
     points: [
@@ -651,7 +655,7 @@ const plans = [
     cta: '前往會員頁',
   },
   {
-    name: '加盟會員',
+    name: '尊爵商用版',
     badge: '熱門首選',
     price: 'USD$ 299.00',
     period: '/ 月',
@@ -664,7 +668,8 @@ const plans = [
     ],
     highlights: planHighlights,
     featured: true,
-    cta: '立即加入',
+    href: '/zh-Hant/converter',
+    cta: '前往重構引擎',
   },
 ];
 
@@ -674,9 +679,10 @@ const institutionalPlans = [
     name: '準法人版（適經紀商／自營商、EA交易團隊、家族辦公室、私募基金）',
     featured: true,
     href: '/zh-Hant/multi-agent/engine',
-    cta: '立即加入',
+    cta: '前往重構引擎',
     price: 'USD$ 499.00',
     discontinued: false,
+    disabledCta: false,
     highlights: ['白標品牌授權', '多帳戶策略框架', '專屬部署導引'],
     description: '適合建立自有策略品牌、整合團隊交易流程，並保留完整產品主導權的準法人營運者。',
     coreAdvantages: [
@@ -906,7 +912,7 @@ const englishPlans = [
     disabledCta: true,
   },
   {
-    name: 'Affiliate Membership',
+    name: 'Premium Commercial',
     badge: 'Popular choice',
     price: 'USD$ 299.00',
     period: '/ month',
@@ -919,7 +925,7 @@ const englishPlans = [
     ],
     highlights: englishPlanHighlights,
     featured: true,
-    cta: 'Join now',
+    cta: 'Go to AI Refactoring Engine >>>',
     href: '/en/converter',
   },
 ];
@@ -930,9 +936,10 @@ const englishInstitutionalPlans = [
     name: 'Quasi-Institutional Edition (For Brokers, Proprietary Firms, EA Trading Teams, Family Offices & Private Funds)',
     featured: true,
     href: '/en/multi-agent/engine',
-    cta: 'Join now',
+    cta: 'Go to AI Refactoring Engine >>>',
     price: 'USD$ 499.00',
     discontinued: false,
+    disabledCta: false,
     highlights: ['White-label licensing', 'Multi-account strategy framework', 'Deployment guidance'],
     description: 'For near-institutional operators building an independent strategy brand, a team trading workflow, and full product ownership.',
     coreAdvantages: [
@@ -1014,7 +1021,7 @@ const englishUi = {
   guideBody: 'This is not abstract brand copy. It is a guided sequence: capture attention, explain the structure, then lead naturally to plans and action.',
   featuresTitle: 'Source Code Library',
   featuresBody: 'Start by understanding the core source code, then move into modular blocks and their practical extensions.',
-  pricingTitle: 'Your Next Step',
+  pricingTitle: 'Subscription Plans Overview',
   pricingBody: 'Once the route above is clear, this is the natural entry point for taking action.',
   coreLabel: 'Core advantages',
   legalTitle: 'Risk and technical positioning',
@@ -1040,6 +1047,20 @@ const englishUi = {
   footerJourneyTwo: 'This is not the destination. It is the start of your next quantitative journey.',
   footerTag: 'AI-Quant Lab Source-Code Quantitative Lab | MQL5 x AI Modular Education',
 };
+const simplifiedCharacterMap = {
+  '\u6a19':'\u6807','\u6e96':'\u51c6','\u7d44':'\u7ec4','\u7a4d':'\u79ef','\u7d04':'\u7ea6','\u8a02':'\u8ba2','\u95b1':'\u9605','\u6703':'\u4f1a','\u54e1':'\u5458','\u8fa6':'\u529e','\u5be6':'\u5b9e','\u9ad4':'\u4f53','\u9a57':'\u9a8c','\u6a5f':'\u673a','\u69cb':'\u6784','\u8f49':'\u8f6c','\u78bc':'\u7801','\u7d66':'\u7ed9','\u7d71':'\u7edf','\u7dda':'\u7ebf','\u7db2':'\u7f51','\u96f2':'\u4e91','\u6b0a':'\u6743','\u8b58':'\u8bc6','\u8cc7':'\u8d44','\u7522':'\u4ea7','\u696d':'\u4e1a','\u8207':'\u4e0e','\u70ba':'\u4e3a','\u9032':'\u8fdb','\u96e2':'\u79bb','\u958b':'\u5f00','\u767c':'\u53d1','\u8f38':'\u8f93','\u5165':'\u5165','\u8f38':'\u8f93','\u51fa':'\u51fa','\u8655':'\u5904','\u7406':'\u7406','\u6e05':'\u6e05','\u9664':'\u9664','\u958b':'\u5f00','\u95dc':'\u5173','\u92b7':'\u9500','\u552e':'\u552e','\u55ae':'\u5355','\u865f':'\u53f7','\u5e33':'\u8d26','\u627f':'\u627f','\u8afe':'\u8bfa','\u6b61':'\u6b22','\u8fce':'\u8fce','\u806f':'\u8054','\u7d61':'\u7edc','\u53f0':'\u53f0','\u7063':'\u6e7e','\u5be6':'\u5b9e','\u61c9':'\u5e94','\u8b49':'\u8bc1','\u91cb':'\u91ca','\u91cf':'\u91cf','\u50f9':'\u4ef7','\u570b':'\u56fd','\u7fa9':'\u4e49','\u6b77':'\u5386','\u8655':'\u5904','\u64ca':'\u51fb','\u6559':'\u6559','\u5b78':'\u5b66','\u7fd2':'\u4e60','\u89ba':'\u89c9','\u5be9':'\u5ba1','\u6838':'\u6838','\u8b70':'\u8bae','\u95dc':'\u5173','\u65bc':'\u4e8e','\u8a08':'\u8ba1','\u5283':'\u5212','\u6eff':'\u6ee1','\u8db3':'\u8db3','\u5ee3':'\u5e7f','\u544a':'\u544a','\u8d77':'\u8d77','\u7528':'\u7528','\u50b3':'\u4f20','\u9054':'\u8fbe','\u5de5':'\u5de5','\u4f5c':'\u4f5c','\u6d41':'\u6d41','\u7a0b':'\u7a0b','\u6a21':'\u6a21','\u7bc4':'\u8303','\u570d':'\u56f4','\u5f37':'\u5f3a','\u8abf':'\u8c03','\u6574':'\u6574','\u756b':'\u753b','\u9762':'\u9762','\u8d77':'\u8d77','\u59cb':'\u59cb','\u80fd':'\u80fd','\u5920':'\u591f','\u5c08':'\u4e13','\u5c6c':'\u5c5e','\u512a':'\u4f18','\u52e2':'\u52bf','\u5c55':'\u5c55','\u793a':'\u793a','\u63d0':'\u63d0','\u793a':'\u793a','\u8a5e':'\u8bcd','\u7121':'\u65e0','\u7d00':'\u7eaa','\u6f64':'\u6da6','\u6b78':'\u5f52','\u500b':'\u4e2a','\u7bc0':'\u8282','\u9ede':'\u70b9','\u9019':'\u8fd9','\u88e1':'\u91cc','\u8aaa':'\u8bf4','\u5be6':'\u5b9e','\u65bc':'\u4e8e'
+};
+function toSimplified(value) {
+  if (typeof value !== 'string') return value;
+  return Array.from(value).map((char) => simplifiedCharacterMap[char] || char).join('');
+}
+function localizeChinese(value, locale) {
+  if (locale !== 'zh-Hans') return value;
+  if (Array.isArray(value)) return value.map((item) => localizeChinese(item, locale));
+  if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, localizeChinese(item, locale)]));
+  return toSimplified(value);
+}
+
 export default function Home({ locale = 'en' }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -1051,24 +1072,50 @@ export default function Home({ locale = 'en' }) {
   const pageLocale = getLocaleFromPath(currentLocalePath);
   const currentLocale = homeCopy[pageLocale] ? pageLocale : 'en';
   const isEnglish = currentLocale === 'en';
-  const copy = isEnglish ? { ...homeCopy[currentLocale], ...englishDocumentHomepageCopy } : { ...homeCopy[currentLocale], ...documentHomepageCopy };
-  const localizedScrollCards = isEnglish ? englishDocumentScrollCards : documentScrollCards;
-  const localizedNarrativeBlocks = isEnglish ? englishDocumentNarrativeBlocks : documentNarrativeBlocks;
-  const localizedRouteSteps = isEnglish ? englishDocumentRouteSteps : documentRouteSteps;
-  const localizedSignalBlocks = isEnglish ? englishDocumentSignalBlocks : documentSignalBlocks;
-  const localizedLineConversationPreview = isEnglish ? englishLineConversationPreview : lineConversationPreview;
-  const localizedFeatures = isEnglish ? englishDocumentFeatures : documentFeatures;
-  const localizedInstitutionalPlans = isEnglish ? englishInstitutionalPlans : institutionalPlans;
-  const localizedPlans = isEnglish ? englishPlans : plans;
-  const localizedFaqItems = isEnglish ? englishFaqItems : faqItems;
-  const localizedAccordionFaqItems = isEnglish ? englishAccordionFaqItems : accordionFaqItems;
-  const localizedCoreAdvantages = isEnglish
+  const copy = localizeChinese(isEnglish ? { ...homeCopy[currentLocale], ...englishDocumentHomepageCopy } : { ...homeCopy[currentLocale], ...documentHomepageCopy }, currentLocale);
+  const localizedScrollCards = localizeChinese(isEnglish ? englishDocumentScrollCards : documentScrollCards, currentLocale);
+  const localizedNarrativeBlocks = localizeChinese(isEnglish ? englishDocumentNarrativeBlocks : documentNarrativeBlocks, currentLocale);
+  const localizedRouteSteps = localizeChinese(isEnglish ? englishDocumentRouteSteps : documentRouteSteps, currentLocale);
+  const localizedSignalBlocks = localizeChinese(isEnglish ? englishDocumentSignalBlocks : documentSignalBlocks, currentLocale);
+  const localizedLineConversationPreview = localizeChinese(isEnglish ? englishLineConversationPreview : lineConversationPreview, currentLocale);
+  const localizedFeatures = localizeChinese(isEnglish ? englishDocumentFeatures : documentFeatures, currentLocale);
+  const localizedInstitutionalPlans = localizeChinese(isEnglish ? englishInstitutionalPlans : institutionalPlans, currentLocale);
+  const localizedPlans = localizeChinese(isEnglish ? englishPlans : plans, currentLocale);
+  const displayPlanName = (plan) => {
+    if (plan.href && plan.href.includes("/converter")) {
+      if (pageLocale === "en") return "Premium Commercial (For Individuals / EA Teams / Professional Traders...)";
+      if (pageLocale === "zh-Hans") return "尊爵商用版(适个人/EA团队/专业户…)";
+      return "尊爵商用版(適個人/EA團隊/專業戶…)";
+    }
+    return plan.name;
+  };
+  const displayPlanCta = (plan) => {
+    if (plan.href && plan.href.includes("/converter")) {
+      if (pageLocale === "en") return "Go to AI Refactoring Engine >>>";
+      if (pageLocale === "zh-Hans") return "前往 AI重构引擎 >>>";
+      return "前往 AI重構引擎 >>>";
+    }
+    return plan.cta;
+  };
+  const displayPlanBadge = (plan) => {
+    if (plan.badge) return plan.badge;
+    if (!plan.featured) return null;
+    if (pageLocale === 'en') return 'Popular choice';
+    if (pageLocale === 'zh-Hans') return '\u70ed\u95e8\u9996\u9009';
+    return '\u71b1\u9580\u9996\u9078';
+  };
+  const orderedPlans = [...localizedPlans].reverse();
+
+
+  const localizedFaqItems = localizeChinese(isEnglish ? englishFaqItems : faqItems, currentLocale);
+  const localizedAccordionFaqItems = localizeChinese(isEnglish ? englishAccordionFaqItems : accordionFaqItems, currentLocale);
+  const localizedCoreAdvantages = localizeChinese(isEnglish
     ? englishCoreAdvantages
     : [
         '100% 原始碼交付，無鎖帳號、無硬體綁定、無任何跟單版權限制。',
         'AI LLM 提示詞賦能，透過模組化積木與模板快速重構策略。',
         '1-on-1 技術對接，直接透過 LINE 官方帳號啟動專屬授權。',
-      ];
+      ], currentLocale);
   const ui = isEnglish ? englishUi : null;
 
   const withTapLock = (callback) => {
@@ -1267,19 +1314,14 @@ export default function Home({ locale = 'en' }) {
             <p className="hero-copy mx-auto max-w-3xl text-base leading-relaxed text-slate-100/95 sm:text-lg lg:text-xl">
               {copy.heroBody}
             </p>
-            <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-stretch gap-4 pt-4 lg:grid-cols-[3fr_1fr] lg:gap-5"><HeroPromoVideo /><div className="grid h-full grid-rows-2 items-stretch gap-3 lg:h-[86%] lg:self-center lg:gap-6">
-              <Link
-                href={localizePath('/multi-agent/engine', pageLocale)}
-                className={`hero-cta-glow hero-cta-primary btn-pulse inline-flex min-h-[4.75rem] h-full w-full items-center justify-center rounded-xl bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-xl shadow-cyan-400/20 hover:bg-cyan-300 ${tapClass}`}
-                onClick={() => withTapLock(() => {})}
-              >
+            <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-stretch gap-4 pt-4 lg:h-[19rem] lg:w-4/5 lg:grid-cols-[2.2fr_1fr] lg:gap-5"><HeroPromoVideo /><div className="grid h-full grid-rows-3 items-stretch gap-3 lg:self-center lg:gap-4">
+              <Link href={localizePath('/converter', pageLocale)} className={`inline-flex min-h-[4.25rem] w-full items-center justify-center rounded-xl bg-gradient-to-r from-[#031f2c] via-[#05343d] to-[#070d1d] px-6 py-3 text-center text-sm font-bold text-cyan-50 shadow-xl shadow-cyan-950/45 transition hover:from-[#062b3c] hover:via-[#07505c] hover:to-[#0b1530] ${tapClass}`} onClick={() => withTapLock(() => {})}>
+                {copy.premiumCta}
+              </Link>
+              <Link href={localizePath('/multi-agent/engine', pageLocale)} className={`hero-cta-glow hero-cta-secondary btn-pulse inline-flex min-h-[4.75rem] h-full w-full items-center justify-center rounded-xl border border-slate-800 bg-slate-900 px-8 py-3 text-center text-base font-medium text-slate-300 hover:bg-slate-800 whitespace-pre-line leading-snug ${tapClass}`} onClick={() => withTapLock(() => {})}>
                 {copy.membershipCta}
               </Link>
-              <Link
-                href={localizePath('/control-room', pageLocale)}
-                className={`hero-cta-glow hero-cta-secondary btn-pulse inline-flex min-h-[4.75rem] h-full w-full items-center justify-center rounded-xl border border-slate-800 bg-slate-900 px-8 py-3 text-center text-base font-medium text-slate-300 hover:bg-slate-800 whitespace-pre-line leading-snug ${tapClass}`}
-                onClick={() => withTapLock(() => {})}
-              >
+              <Link href={localizePath('/control-room', pageLocale)} className={`hero-cta-glow hero-cta-primary btn-pulse inline-flex min-h-[4.75rem] h-full w-full items-center justify-center rounded-xl bg-cyan-400 px-8 py-3 text-center text-base font-bold text-slate-950 shadow-xl shadow-cyan-400/20 hover:bg-cyan-300 ${tapClass}`} onClick={() => withTapLock(() => {})}>
                 {copy.knowledgeCta}
               </Link>
             </div>
@@ -1594,17 +1636,17 @@ export default function Home({ locale = 'en' }) {
         {/* Pricing */}
         <section id="pricing" className="mt-12 pb-20">
           <div className="animate-reveal-up mx-auto max-w-2xl text-center">
-            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>{ui?.pricingTitle || '前往下一站'}</h2>
+            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>{ui?.pricingTitle || (pageLocale === 'zh-Hans' ? '订阅方案_简介' : '訂閱方案_簡介')}</h2>
             <p className={`mt-4 text-slate-400 ${glowText}`}>
               {ui?.pricingBody || '當你把前面的路看懂了，這裡就是自然接續的行動入口。'}
             </p>
           </div>
 
           <div className="cards-cluster mx-auto mt-12 grid max-w-5xl gap-8 md:grid-cols-2">
-            {[...localizedInstitutionalPlans, ...localizedPlans].map((plan, index) => (
+            {[...localizedInstitutionalPlans, ...orderedPlans].map((plan, index) => (
               <article
-                key={plan.name}
-                className={`interactive-card group animate-card-in relative flex flex-col justify-between overflow-hidden rounded-2xl p-8 transition-all duration-300 ${
+                key={displayPlanName(plan)}
+                className={`interactive-card group animate-card-in relative flex flex-col justify-between overflow-hidden rounded-2xl p-8 transition-all duration-300 ${plan.disabledCta ? 'plan-disabled pointer-events-none !transform-none !transition-none' : ''} ${
                   plan.featured
                     ? 'border-2 border-cyan-500 bg-slate-900/80 shadow-2xl shadow-cyan-500/10 hover:border-cyan-300'
                     : 'border border-slate-800 bg-slate-900/40 hover:border-cyan-400/40 hover:bg-slate-900/65'
@@ -1613,7 +1655,7 @@ export default function Home({ locale = 'en' }) {
               >
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_55%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 ring-cyan-300/0 transition-all duration-300 group-hover:ring-1 group-hover:ring-cyan-300/25" />
-                {plan.badge ? (
+                {displayPlanBadge(plan) ? (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-1 text-xs font-black uppercase tracking-wider text-slate-950 shadow-lg shadow-cyan-500/20">
                     {plan.badge}
                   </div>
@@ -1621,7 +1663,7 @@ export default function Home({ locale = 'en' }) {
 
                 <div className="relative z-10">
                   <h3 className={`text-lg font-bold transition-colors duration-300 group-hover:text-cyan-300 ${glowText} ${plan.featured ? 'text-cyan-400' : 'text-slate-300'}`}>
-                    {plan.name}
+                    {displayPlanName(plan)}
                   </h3>
 
                   <div className="mt-4 flex flex-wrap gap-2">
@@ -1677,18 +1719,21 @@ export default function Home({ locale = 'en' }) {
                 </div>
 
                 <Link
-                  href={plan.disabledCta ? '#' : (plan.href || (plan.featured ? 'https://lin.ee/stqhWhj' : localizePath('/membership', pageLocale)))}
+                  href={plan.disabledCta ? '#' : (plan.href && plan.href.includes('/converter') ? localizePath('/converter', pageLocale) : (plan.href || (plan.featured ? 'https://lin.ee/stqhWhj' : localizePath('/membership', pageLocale))))}
                   onClick={plan.disabledCta ? (event) => event.preventDefault() : undefined}
                   aria-disabled={plan.disabledCta || undefined}
+                  tabIndex={plan.disabledCta ? -1 : undefined}
                   target={!plan.disabledCta && !plan.href && plan.featured ? '_blank' : undefined}
                   rel={!plan.disabledCta && !plan.href && plan.featured ? 'noopener noreferrer' : undefined}
-                  className={`btn-pulse relative z-10 mt-8 w-full rounded-xl px-4 py-3 text-center text-sm font-bold transition-all duration-300 ${
-                    plan.featured
-                      ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 shadow-lg shadow-cyan-500/20 hover:from-cyan-400 hover:to-blue-500'
-                      : 'bg-slate-800 text-white hover:bg-slate-700'
+                  className={`relative z-10 mt-8 w-full rounded-xl px-4 py-3 text-center text-sm font-bold ${
+                    plan.disabledCta
+                      ? 'pointer-events-none cursor-not-allowed overflow-hidden bg-slate-800/75 text-slate-400 opacity-70 after:absolute after:left-[34%] after:top-1/2 after:h-[2px] after:w-[32%] after:-rotate-[8deg] after:bg-rose-400/90 after:shadow-[0_0_8px_rgba(251,113,133,0.8)]'
+                      : plan.featured
+                        ? 'btn-pulse transition-all duration-300 bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 shadow-lg shadow-cyan-500/20 hover:from-cyan-400 hover:to-blue-500'
+                        : 'btn-pulse transition-all duration-300 bg-slate-800 text-white hover:bg-slate-700'
                   }`}
                 >
-                  {plan.cta}
+                  {displayPlanCta(plan)}
                 </Link>
               </article>
             ))}

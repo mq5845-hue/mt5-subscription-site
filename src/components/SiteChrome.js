@@ -1,8 +1,8 @@
-﻿'use client';
+'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getLocaleFromPath, localizePath, stripLocale } from '../lib/locale';
 
 const homeRoutes = new Set(['/', '/zh-Hant', '/zh-Hans', '/en']);
@@ -12,7 +12,7 @@ const navItems = [
     label: 'AI\u91cd\u69cb\u5f15\u64ce',
     matches: ['/membership', '/converter', '/multi-agent'],
     children: [
-      { href: '/membership', label: '\u6a19\u6e96\u6703\u54e1\u7248' },
+      { href: '/membership', label: '\u6a19\u6e96\u6703\u54e1\u7248', muted: true },
       { label: '\u52a0\u76df\u6703\u54e1\u7248', disabled: true },
       { href: '/converter', label: '\u5c0a\u69ae\u5546\u7528\u7248' },
       { href: '/multi-agent/engine', label: '\u591a\u667a\u80fd\u9ad4MQL\u5168\u81ea\u52d5\u9032\u5316\u5f15\u64ce', newTab: true },
@@ -25,7 +25,7 @@ const navItems = [
     label: '\u8a02\u95b1\u65b9\u6848',
     matches: ['/membership'],
     children: [
-      { href: '/membership', label: '\u6a19\u6e96\u6703\u54e1' },
+      { href: '/membership', label: '\u6a19\u6e96\u6703\u54e1', muted: true },
       { label: '\u52a0\u76df\u6703\u54e1', disabled: true },
       { label: '\u4f01\u696dVIP\u6703\u54e1', disabled: true },
     ],
@@ -66,12 +66,12 @@ function isNavItemActive(item, pathname) {
 const navTranslations = {
   'zh-Hant': {
     groups: ['AI重構引擎', '模組化積木', 'Lab 知識庫', '訂閱方案'],
-    children: [['標準會員版', '加盟會員版', '尊榮商用版', '多智能體MQL全自動進化引擎', 'Docker MCP伺服噐版(企業私有雲)'], null, null, ['標準會員', '加盟會員', '企業VIP會員']],
+    children: [['標準會員版', '加盟會員版', '尊爵商用版', '多智能體MQL全自動進化引擎', 'Docker MCP伺服噐版(企業私有雲)'], null, null, ['標準會員', '加盟會員', '企業VIP會員']],
     login: '登錄',
   },
   'zh-Hans': {
     groups: ['AI重构引擎', '模块化积木', 'Lab 知识库', '订阅方案'],
-    children: [['标准会员版', '加盟会员版', '尊荣商用版', '多智能体MQL全自动进化引擎', 'Docker MCP服务器版(企业私有云)'], null, null, ['标准会员', '加盟会员', '企业VIP会员']],
+    children: [['标准会员版', '加盟会员版', '尊爵商用版', '多智能体MQL全自动进化引擎', 'Docker MCP服务器版(企业私有云)'], null, null, ['标准会员', '加盟会员', '企业VIP会员']],
     login: '登录',
   },
   en: {
@@ -173,40 +173,38 @@ function MenuDots() {
     </span>
   );
 }
+function useDropdownBoundary(open, setOpen) {
+  const boundaryRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const closeOutside = (event) => {
+      if (!boundaryRef.current?.contains(event.target)) setOpen(false);
+    };
+    document.addEventListener('pointermove', closeOutside, true);
+    return () => document.removeEventListener('pointermove', closeOutside, true);
+  }, [open, setOpen]);
+
+  return boundaryRef;
+}
 function LanguageMenu({ pathname, mobile = false }) {
   const [open, setOpen] = useState(false);
+  const boundaryRef = useDropdownBoundary(open, setOpen);
   const activeTab = languageTabs.find((tab) => pathname.startsWith(tab.match)) || languageTabs[0];
 
   return (
-    <div
-      className={'group relative ' + (mobile ? 'w-full' : '')}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
-      <button
-        type="button"
-        aria-haspopup="menu"
-        aria-expanded={open}
-        onClick={() => setOpen((value) => (mobile ? !value : true))}
-        className={'flex cursor-pointer list-none items-center justify-center gap-1.5 rounded-full border border-cyan-300/20 bg-slate-950/55 px-2.5 py-2 text-xs font-bold tracking-[0.1em] text-slate-200 shadow-[0_0_22px_rgba(34,211,238,0.14)] backdrop-blur-xl transition hover:border-cyan-300/45 hover:text-cyan-100 ' + (mobile ? 'w-full min-h-11' : 'min-w-[5.6rem] max-sm:min-w-[4.5rem] max-sm:gap-1 max-sm:px-2 max-sm:py-1.5 max-sm:text-[11px]')}
-      >
+    <details ref={boundaryRef} open={open} onPointerEnter={() => setOpen(true)} onPointerLeave={() => setOpen(false)} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} onToggle={(event) => setOpen(event.currentTarget.open)} className={'group relative ' + (mobile ? 'w-full' : '')}>
+      <summary className={'flex cursor-pointer list-none items-center justify-center gap-1.5 rounded-full border border-cyan-300/20 bg-slate-950/55 px-2.5 py-2 text-xs font-bold tracking-[0.1em] text-slate-200 shadow-[0_0_22px_rgba(34,211,238,0.14)] backdrop-blur-xl transition hover:border-cyan-300/45 hover:text-cyan-100 [&::-webkit-details-marker]:hidden ' + (mobile ? 'w-full min-h-11' : 'min-w-[5.6rem] max-sm:min-w-[4.5rem] max-sm:gap-1 max-sm:px-2 max-sm:py-1.5 max-sm:text-[11px]')}>
         <span className="h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(34,211,238,0.7)]" />
         <span>{activeTab.label}</span>
         <MenuDots />
-      </button>
-      <div
-        className={'absolute right-0 top-full z-[60] pt-2 ' + (mobile ? 'left-0' : '') + ' ' + (open ? 'visible pointer-events-auto' : 'invisible pointer-events-none')}
-      >
+      </summary>
+      <div className={'site-dropdown-panel absolute right-0 top-full z-[1300] pt-2 ' + (mobile ? 'left-0' : '')}>
         <div className={'overflow-hidden rounded-2xl border border-cyan-300/20 bg-[#020617] p-1.5 shadow-[0_0_28px_rgba(34,211,238,0.22)] ' + (mobile ? 'w-full' : 'w-20')}>
           {languageTabs.map((tab) => {
             const isActive = tab.label === activeTab.label;
             return (
-              <Link
-                key={tab.label}
-                href={localizePath(pathname || '/', tab.match.slice(1))}
-                onClick={() => setOpen(false)}
-                className={'flex items-center justify-between rounded-xl px-2 py-2.5 text-xs font-bold tracking-[0.08em] transition ' + (isActive ? 'bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 shadow-[0_0_16px_rgba(34,211,238,0.35)]' : 'text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-100')}
-              >
+              <Link key={tab.label} href={localizePath(pathname || '/', tab.match.slice(1))} className={'flex items-center justify-between rounded-xl px-2 py-2.5 text-xs font-bold tracking-[0.08em] transition ' + (isActive ? 'bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 shadow-[0_0_16px_rgba(34,211,238,0.35)]' : 'text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-100')}>
                 <span className="flex items-center gap-1.5"><span className={'h-1.5 w-1.5 rounded-full ' + (isActive ? 'bg-white' : 'bg-cyan-300/70')} />{tab.label}</span>
                 {isActive ? <span aria-hidden="true" className="text-[10px]">✓</span> : null}
               </Link>
@@ -214,76 +212,37 @@ function LanguageMenu({ pathname, mobile = false }) {
           })}
         </div>
       </div>
-    </div>
+    </details>
   );
 }
 function DesktopNavItem({ item, pathname, locale }) {
   const [open, setOpen] = useState(false);
+  const boundaryRef = useDropdownBoundary(open, setOpen);
   const isActive = isNavItemActive(item, pathname);
   const isAiMenu = item.children?.some((child) => child.href === '/multi-agent/engine');
-  const baseClasses = isActive
-    ? 'bg-cyan-500/12 text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.18)]'
-    : 'text-slate-400 hover:text-cyan-300';
-  const dotClasses = isActive
-    ? 'bg-cyan-200 shadow-[0_0_12px_rgba(165,243,252,0.95)]'
-    : 'bg-cyan-400/65 group-hover:bg-cyan-200 group-hover:shadow-[0_0_10px_rgba(34,211,238,0.65)]';
+  const baseClasses = isActive ? 'bg-cyan-500/12 text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.18)]' : 'text-slate-400 hover:text-cyan-300';
+  const dotClasses = isActive ? 'bg-cyan-200 shadow-[0_0_12px_rgba(165,243,252,0.95)]' : 'bg-cyan-400/65 group-hover:bg-cyan-200 group-hover:shadow-[0_0_10px_rgba(34,211,238,0.65)]';
 
   if (!item.children) {
-    return (
-      <Link
-        href={localizePath(item.href, locale)}
-        className={`group relative rounded-full px-4 py-2 transition-all duration-300 ${baseClasses}`}
-      >
-        <span className="relative z-10 flex items-center gap-2">
-          <span className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${dotClasses}`} />
-          <span className={isActive ? 'drop-shadow-[0_0_12px_rgba(34,211,238,0.36)]' : ''}>{item.label}</span>
-        </span>
-      </Link>
-    );
+    return <Link href={localizePath(item.href, locale)} className={`group relative rounded-full px-4 py-2 transition-all duration-300 ${baseClasses}`}><span className="relative z-10 flex items-center gap-2"><span className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${dotClasses}`} /><span className={isActive ? 'drop-shadow-[0_0_12px_rgba(34,211,238,0.36)]' : ''}>{item.label}</span></span></Link>;
   }
 
+  const menuWidth = item.label.includes('訂閱方案') || item.label.includes('订阅方案') || item.label === 'Subscription Plans' ? 'w-28' : (item.label.includes('AI重構引擎') || item.label.includes('AI重构引擎') || item.label === 'AI Refactoring' ? 'w-36' : 'w-56');
   return (
-    <div className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} onFocus={() => setOpen(true)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }} onKeyDown={(event) => { if (event.key === 'Escape') setOpen(false); }}>
-      <button
-        type="button"
-        aria-haspopup="menu"
-        aria-expanded={open}
-        onClick={() => setOpen((value) => !value)}
-        className={`group relative flex items-center gap-1.5 rounded-full px-2.5 py-2 transition-all duration-300 ${baseClasses}`}
-      >
+    <details ref={boundaryRef} open={open} onPointerEnter={() => setOpen(true)} onPointerLeave={() => setOpen(false)} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} onToggle={(event) => setOpen(event.currentTarget.open)} className="group relative">
+      <summary className={`flex cursor-pointer list-none items-center gap-1.5 rounded-full px-2.5 py-2 transition-all duration-300 [&::-webkit-details-marker]:hidden ${baseClasses}`}>
         <span className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${dotClasses}`} />
         <span className={isActive ? 'drop-shadow-[0_0_12px_rgba(34,211,238,0.36)]' : ''}>{item.label}</span>
         <MenuDots />
-      </button>
-
-      <div className={'absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 ' + (open ? 'visible pointer-events-auto' : 'invisible pointer-events-none') + ' ' + (item.label.includes('訂閱方案') || item.label.includes('订阅方案') || item.label === 'Subscription Plans' ? 'w-28' : (item.label.includes('AI重構引擎') || item.label.includes('AI重构引擎') || item.label === 'AI Refactoring' ? 'w-36' : 'w-56'))}>
+      </summary>
+      <div className={`site-dropdown-panel absolute left-1/2 top-full z-[1300] -translate-x-1/2 pt-3 ${menuWidth}`}>
         <div className="overflow-hidden rounded-2xl border border-cyan-300/18 bg-[#020617] p-2 shadow-[0_0_28px_rgba(34,211,238,0.16)]">
-          {item.children.map((child) =>
-            child.disabled ? (
-              <span
-                key={child.label}
-                className={'flex items-center rounded-xl py-3 font-medium text-slate-500 ' + (isAiMenu ? 'px-3 text-[12px] leading-4 whitespace-normal break-words' : 'px-4 text-sm')}
-              >
-                {child.label}
-              </span>
-            ) : (
-              <Link
-                key={child.label}
-                href={localizePath(child.href, locale)}
-                target={child.newTab ? '_blank' : undefined}
-                rel={child.newTab ? 'noopener noreferrer' : undefined}
-                className={'flex items-center rounded-xl py-3 font-medium text-slate-300 transition hover:bg-cyan-500/10 hover:text-cyan-200 ' + (isAiMenu ? 'px-3 text-[12px] leading-4 whitespace-normal break-words' : 'px-4 text-sm')}
-              >
-                {child.label}
-              </Link>
-            ),
-          )}
+          {item.children.map((child) => child.disabled || child.muted ? <span key={child.label} className={'flex items-center rounded-xl py-3 font-medium text-slate-500 ' + (isAiMenu ? 'px-3 text-[12px] leading-4 whitespace-normal break-words' : 'px-4 text-sm')}>{child.label}</span> : <Link key={child.label} href={localizePath(child.href, locale) + (child.href === '/converter' ? '#converter-top' : '')} target={child.newTab ? '_blank' : undefined} rel={child.newTab ? 'noopener noreferrer' : undefined} onClick={() => { setOpen(false); window.scrollTo(0, 0); window.setTimeout(() => window.scrollTo(0, 0), 120); }} className={'flex items-center rounded-xl py-3 font-medium text-slate-300 transition hover:bg-cyan-500/10 hover:text-cyan-200 ' + (isAiMenu ? 'px-3 text-[12px] leading-4 whitespace-normal break-words' : 'px-4 text-sm')}>{child.label}</Link>)}
         </div>
       </div>
-    </div>
+    </details>
   );
 }
-
 function MobileNavItem({ item, pathname, locale, onNavigate }) {
   const isActive = isNavItemActive(item, pathname);
   const [expanded, setExpanded] = useState(false);
@@ -332,7 +291,7 @@ function MobileNavItem({ item, pathname, locale, onNavigate }) {
         )}
       >
         {item.children.map((child) =>
-          child.disabled ? (
+          child.disabled || child.muted ? (
             <span
               key={child.label}
               className="rounded-xl border border-slate-800/60 bg-slate-950/65 px-3 py-2.5 text-sm text-slate-500"
@@ -342,14 +301,11 @@ function MobileNavItem({ item, pathname, locale, onNavigate }) {
           ) : (
             <Link
               key={child.label}
-              href={localizePath(child.href, locale)}
+              href={localizePath(child.href, locale) + (child.href === '/converter' ? '#converter-top' : '')}
               target={child.newTab ? '_blank' : undefined}
               rel={child.newTab ? 'noopener noreferrer' : undefined}
               className="rounded-xl border border-slate-800 bg-slate-950/75 px-3 py-2.5 text-sm text-slate-300 transition hover:border-cyan-400/30 hover:text-cyan-200"
-              onClick={() => {
-                setExpanded(false);
-                onNavigate();
-              }}
+              onClick={() => { setExpanded(false); onNavigate(); window.scrollTo(0, 0); window.setTimeout(() => window.scrollTo(0, 0), 120); }}
             >
               {child.label}
             </Link>
