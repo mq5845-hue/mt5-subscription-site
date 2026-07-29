@@ -382,7 +382,7 @@ void PosCounter(int &b, int &s)
 
       {/* 標頭區 */}
       <div className="max-w-7xl w-full mx-auto mb-6 shrink-0">
-        <div className="mb-2 inline-flex items-center rounded-full border border-amber-200/80 bg-amber-300 px-3 py-1 text-xs font-black tracking-[0.16em] text-amber-950 shadow-[0_0_18px_rgba(251,191,36,0.55)]">{premiumLabel}</div>
+        <div className="mb-2 inline-flex items-center rounded-full border border-cyan-200/80 bg-cyan-500 px-3 py-1 text-xs font-black tracking-[0.16em] text-slate-950 shadow-[0_0_18px_rgba(34,211,238,0.55)]">{premiumLabel}</div>
         <p className="mb-4 max-w-6xl text-xs leading-6 text-white/85 sm:text-sm sm:leading-7">{dataSovereigntyNote}</p>
         <div aria-hidden="true" className="mb-4 h-px w-full max-w-6xl bg-gradient-to-r from-transparent via-violet-300/90 to-transparent shadow-[0_0_9px_rgba(196,181,253,0.82)]" />
         <h1 className="text-3xl font-bold text-cyan-400 flex items-center gap-2">{llmText.pageTitle}</h1>

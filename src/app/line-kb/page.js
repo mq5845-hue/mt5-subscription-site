@@ -1,4 +1,4 @@
-﻿import { headers } from 'next/headers';
+import { headers } from 'next/headers';
 import Link from 'next/link';
 import { localizePath } from '../../lib/locale';
 import EmojiAvatar from '../../components/EmojiAvatar';
@@ -61,7 +61,7 @@ const localeCopy = {
     metadataTitle: '知識庫 | AI-Quant Lab',
     metadataDescription: 'AI-Quant Lab 的 LINE 知識庫，整理品牌導覽、預約、產品教育與回應流程。',
     eyebrow: '知識庫',
-    title: 'AI-Quant Lab 知識庫',
+    title: 'AI-Quant Lab知識庫',
     lead: '把品牌導覽、預約、產品教育與客戶回應，整理成清楚、可持續維護的入口。',
     badges: ['公開入口', 'FAQ 就緒', '可匯出'],
     quickLinks: [
@@ -111,7 +111,7 @@ const localeCopy = {
     metadataTitle: '知识库 | AI-Quant Lab',
     metadataDescription: 'AI-Quant Lab 的 LINE 知识库，整理品牌导览、预约、产品教育与回应流程。',
     eyebrow: '知识库',
-    title: 'AI-Quant Lab 知识库',
+    title: 'AI-Quant Lab知识库',
     lead: '把品牌导览、预约、产品教育与客户回应，整理成清楚、可持续维护的入口。',
     badges: ['公开入口', 'FAQ 就绪', '可汇出'],
     quickLinks: [

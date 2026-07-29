@@ -183,12 +183,12 @@ const languageTabs = [
 
 const navTranslations = {
   'zh-Hant': {
-    groups: ['AI重構引擎', '模組化積木', 'Lab 知識庫', '訂閱方案'],
+    groups: ['AI重構引擎', '模組化積木', 'Lab知識庫', '訂閱方案'],
     children: [['標準會員版', '加盟會員版', '尊爵商用版', '\u591a\u667a\u80fd\u9ad4MQL\u5168\u81ea\u52d5\u9032\u5316\u5f15\u64ce', 'Docker MCP伺服噐版(企業私有雲)'], null, null, ['標準會員', '加盟會員', '企業VIP會員']],
     login: '登錄',
   },
   'zh-Hans': {
-    groups: ['AI重构引擎', '模块化积木', 'Lab 知识库', '订阅方案'],
+    groups: ['AI重构引擎', '模块化积木', 'Lab知识库', '订阅方案'],
     children: [['标准会员版', '加盟会员版', '尊爵商用版', '\u591a\u667a\u80fd\u4f53MQL\u5168\u81ea\u52a8\u8fdb\u5316\u5f15\u64ce', 'Docker MCP服务器版(企业私有云)'], null, null, ['标准会员', '加盟会员', '企业VIP会员']],
     login: '登录',
   },
