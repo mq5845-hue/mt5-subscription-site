@@ -12,7 +12,7 @@ const navItems = [
     label: 'AI\u91cd\u69cb\u5f15\u64ce',
     matches: ['/membership', '/converter', '/multi-agent'],
     children: [
-      { href: '/membership', label: '\u6a19\u6e96\u6703\u54e1\u7248', muted: true },
+      { label: '\u6a19\u6e96\u6703\u54e1\u7248', disabled: true },
       { label: '\u52a0\u76df\u6703\u54e1\u7248', disabled: true },
       { href: '/converter', label: '\u5c0a\u69ae\u5546\u7528\u7248' },
       { href: '/multi-agent/engine', label: '\u591a\u667a\u80fd\u9ad4MQL\u5168\u81ea\u52d5\u9032\u5316\u5f15\u64ce' },
@@ -25,7 +25,7 @@ const navItems = [
     label: '\u8a02\u95b1\u65b9\u6848',
     matches: ['/membership'],
     children: [
-      { href: '/membership', label: '\u6a19\u6e96\u6703\u54e1', muted: true },
+      { label: '\u6a19\u6e96\u6703\u54e1', disabled: true },
       { label: '\u52a0\u76df\u6703\u54e1', disabled: true },
       { label: '\u4f01\u696dVIP\u6703\u54e1', disabled: true },
     ],
@@ -318,6 +318,10 @@ function MobileNavItem({ item, pathname, locale, onNavigate }) {
 
 export default function SiteChrome({ children }) {
   const pathname = usePathname() || '/';
+  const isNoticeDividerRoute =
+    pathname.endsWith('/multi-agent/engine') ||
+    pathname.endsWith('/converter') ||
+    pathname.endsWith('/control-room');
   const locale = getLocaleFromPath(pathname);
   const footerText = footerTranslations[locale] || footerTranslations.en;
   const localizedNavItems = getLocalizedNavItems(locale);
@@ -353,7 +357,7 @@ useEffect(() => {
   return (
     <div className="relative flex min-h-screen flex-col text-slate-100">
       <header data-site-header
-        className={`fixed inset-x-0 top-0 z-[1000] isolate border-b transition-all duration-300 max-sm:!bg-transparent max-sm:!backdrop-blur-0 ${
+        className={`fixed inset-x-0 top-0 z-[1000] isolate ${isNoticeDividerRoute ? 'border-b !border-transparent' : 'border-b'} transition-all duration-300 max-sm:!bg-transparent max-sm:!backdrop-blur-0 ${
           scrolled
             ? 'border-slate-700/10 bg-slate-950/05 sm:backdrop-blur-[22px] supports-[backdrop-filter]:bg-slate-950/[0.03]'
             : 'border-slate-800/14 bg-slate-950/10 sm:backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/06'

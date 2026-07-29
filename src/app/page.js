@@ -154,7 +154,7 @@ const navItems = [
     label: 'AI\u91cd\u69cb\u5f15\u64ce',
     matches: ['/membership', '/converter', '/multi-agent'],
     children: [
-      { href: '/membership', label: '\u6a19\u6e96\u6703\u54e1\u7248' },
+      { label: '\u6a19\u6e96\u6703\u54e1\u7248', disabled: true },
       { label: '\u52a0\u76df\u6703\u54e1\u7248', disabled: true },
       { href: '/converter', label: '\u5c0a\u69ae\u5546\u7528\u7248' },
       { href: '/multi-agent/engine', label: '\u591a\u667a\u80fd\u9ad4MQL\u5168\u81ea\u52d5\u9032\u5316\u5f15\u64ce' },
@@ -167,7 +167,7 @@ const navItems = [
     label: '\u8a02\u95b1\u65b9\u6848',
     matches: ['/membership'],
     children: [
-      { href: '/membership', label: '\u6a19\u6e96\u6703\u54e1' },
+      { label: '\u6a19\u6e96\u6703\u54e1', disabled: true },
       { label: '\u52a0\u76df\u6703\u54e1', disabled: true },
       { label: '\u4f01\u696dVIP\u6703\u54e1', disabled: true },
     ],
@@ -223,7 +223,7 @@ const homeCopy = {
     heroTitleTop: 'AI \u9769\u547d\u91cf\u5316\u4ea4\u6613\uff1a',
     heroTitleBottom: '\u89e3\u9396\u6cd5\u4eba\u7d1a MT5 EA \u5546\u696d\u6e90\u4ee3\u78bc',
     heroBody: '\u96f6\u57fa\u790e\u4e5f\u80fd\u7528 AI LLM \u63d0\u793a\u8a5e\u6a21\u677f\u9ad8\u6548\u91cd\u69cb\u6838\u5fc3\u7b56\u7565\u3002\u7121\u7248\u6b0a\u9650\u5236\u3001\u7121\u9808\u8a31\u53ef\uff0c\u6253\u9020\u5c08\u5c6c\u60a8\u7684\u500b\u4eba\u4ea4\u6613\u54c1\u724c\u8207\u6578\u4f4d\u8cc7\u7522\uff0c\u5229\u6f64 100% \u5168\u6b78\u81ea\u5df1\u3002',
-    membershipCta: '\u6e96\u6cd5\u4eba\u7248(\u9069\u7d93\u7d00\u5546/\u81ea\u71df\u5546, EA\u4ea4\u6613\u5718\u968a, \u5bb6\u65cf\u8fa6\u516c\u5ba4)',
+    membershipCta: '\u6e96\u6cd5\u4eba\u7248(\u9069\u7d93\u7d00\u5546/\u81ea\u71df\u5546, EA\u4ea4\u6613\u5718\u968a, \u5bb6\u65cf\u8fa6\u516c\u5ba4\u3001\u79c1\u52df\u57fa\u91d1)',
     knowledgeCta: '\u6cd5\u4eba\u6a5f\u69cb\u7248_\u96e2\u7dda100%\u79c1\u5bc6-\u4f01\u696d\u79c1\u6709\u96f2',
     premiumCta: '\u5c0a\u7235\u5546\u7528\u7248(\u9069\u500b\u4eba/EA\u5718\u968a/\u5c08\u696d\u6236\u2026)',
     reasonsBadge: '\u5148\u770b\u898b\u7bc0\u594f\uff0c\u518d\u770b\u898b\u50f9\u503c',
@@ -236,7 +236,7 @@ const homeCopy = {
     heroTitleTop: 'AI \u9769\u547d\u91cf\u5316\u4ea4\u6613\uff1a',
     heroTitleBottom: '\u89e3\u9501\u6cd5\u4eba\u7ea7 MT5 EA \u5546\u4e1a\u6e90\u4ee3\u7801',
     heroBody: '\u96f6\u57fa\u7840\u4e5f\u80fd\u7528 AI LLM \u63d0\u793a\u8bcd\u6a21\u677f\u9ad8\u6548\u91cd\u6784\u6838\u5fc3\u7b56\u7565\u3002\u65e0\u7248\u6743\u9650\u5236\u3001\u65e0\u987b\u8bb8\u53ef\uff0c\u6253\u9020\u4e13\u5c5e\u4e8e\u60a8\u7684\u4e2a\u4eba\u4ea4\u6613\u54c1\u724c\u4e0e\u6570\u5b57\u8d44\u4ea7\uff0c\u5229\u6da6 100% \u5168\u5f52\u81ea\u5df1\u3002',
-    membershipCta: '\u51c6\u6cd5\u4eba\u7248(\u9002\u7ecf\u7eaa\u5546/\u81ea\u8425\u5546, EA\u4ea4\u6613\u56e2\u961f, \u5bb6\u65cf\u529e\u516c\u5ba4)',
+    membershipCta: '\u51c6\u6cd5\u4eba\u7248(\u9002\u7ecf\u7eaa\u5546/\u81ea\u8425\u5546, EA\u4ea4\u6613\u56e2\u961f, \u5bb6\u65cf\u529e\u516c\u5ba4\u3001\u79c1\u52df\u57fa\u91d1)',
     knowledgeCta: '\u6cd5\u4eba\u673a\u6784\u7248_\u79bb\u7ebf100%\u79c1\u5bc6-\u4f01\u4e1a\u79c1\u6709\u4e91',
     premiumCta: '\u5c0a\u7235\u5546\u7528\u7248(\u9002\u4e2a\u4eba/EA\u56e2\u961f/\u4e13\u4e1a\u6237\u2026)',
     reasonsBadge: '\u5148\u770b\u89c1\u8282\u594f\uff0c\u518d\u770b\u89c1\u4ef7\u503c',
@@ -249,7 +249,7 @@ const homeCopy = {
     heroTitleTop: 'AI Quant Trading Revolution:',
     heroTitleBottom: 'Unlock Institutional MT5 EA Source Code',
     heroBody: 'Even from zero, you can use AI LLM prompt templates to rebuild core strategies efficiently. No copyright lock-in, no permission required. Build your own trading brand and digital assets, and keep 100% of the upside.',
-    membershipCta: 'Quasi-Institutional Edition (For Brokers, Prop Firms, EA Trading Teams & Family Offices)',
+    membershipCta: 'Quasi-Institutional Edition (For Brokers, Prop Firms, EA Trading Teams, Family Offices & Private Funds)',
     knowledgeCta: 'Institutional Edition\n_100% Private Offline -\n(Enterprise Private Cloud)',
     premiumCta: 'Premium Commercial (For Individuals / EA Teams / Professional Traders...)',
     reasonsBadge: 'See the rhythm, then the value',
@@ -680,7 +680,7 @@ const institutionalPlans = [
     featured: true,
     href: '/zh-Hant/multi-agent/engine',
     cta: '前往重構引擎',
-    price: 'USD$ 499.00',
+    price: 'USD$ 1,499.00',
     discontinued: false,
     disabledCta: false,
     highlights: ['白標品牌授權', '多帳戶策略框架', '專屬部署導引'],
@@ -937,7 +937,7 @@ const englishInstitutionalPlans = [
     featured: true,
     href: '/en/multi-agent/engine',
     cta: 'Go to AI Refactoring Engine >>>',
-    price: 'USD$ 499.00',
+    price: 'USD$ 1,499.00',
     discontinued: false,
     disabledCta: false,
     highlights: ['White-label licensing', 'Multi-account strategy framework', 'Deployment guidance'],
@@ -1179,6 +1179,7 @@ export default function Home({ locale = 'en' }) {
 
   return (
     <div className="home-page relative min-h-screen overflow-hidden bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-slate-950">
+      <div aria-hidden="true" className="home-page-scan-line" />
       <div aria-hidden="true" className="home-mobile-effects">
         <span className="home-mobile-fixed-laser" />
         <span className="home-mobile-fixed-scan" />
@@ -1324,8 +1325,8 @@ export default function Home({ locale = 'en' }) {
             <p className="hero-copy mx-auto max-w-3xl text-base leading-relaxed text-slate-100/95 sm:text-lg lg:text-xl">
               {copy.heroBody}
             </p>
-            <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-stretch gap-4 pt-4 lg:h-[19rem] lg:w-4/5 lg:grid-cols-[2.2fr_1fr] lg:gap-5"><HeroPromoVideo /><div className="grid h-full min-h-0 grid-rows-3 items-stretch gap-3 overflow-hidden lg:grid-rows-[repeat(3,minmax(0,1fr))] lg:self-center lg:gap-4">
-              <Link href={localizePath('/converter', pageLocale)} className={`inline-flex min-h-0 h-full w-full items-center justify-center rounded-xl border border-white/80 bg-gradient-to-r from-[#031f2c] via-[#05343d] to-[#070d1d] px-6 py-3 text-center text-sm font-bold text-cyan-50 shadow-[0_0_9px_rgba(255,255,255,0.36),0_0_34px_rgba(34,211,238,0.22)] transition duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:border-cyan-100 hover:from-[#062b3c] hover:via-[#07505c] hover:to-[#0b1530] hover:shadow-[0_0_4px_rgba(255,255,255,0.16),0_0_48px_rgba(34,211,238,0.48)] ${englishCtaTypography} ${tapClass}`} onClick={() => withTapLock(() => {})}>
+            <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-stretch gap-4 pt-4 lg:h-[19rem] lg:w-4/5 lg:grid-cols-[2.2fr_1fr] lg:gap-5"><HeroPromoVideo /><div className="grid h-full min-h-0 grid-rows-3 items-stretch gap-3 overflow-visible lg:grid-rows-[repeat(3,minmax(0,1fr))] lg:self-center lg:gap-4">
+              <Link href={localizePath('/converter', pageLocale)} className={`hero-cta-glow inline-flex min-h-0 h-full w-full items-center justify-center rounded-xl border border-white/80 bg-gradient-to-r from-[#031f2c] via-[#05343d] to-[#070d1d] px-6 py-3 text-center text-sm font-bold text-cyan-50 shadow-[0_0_9px_rgba(255,255,255,0.36),0_0_34px_rgba(34,211,238,0.22)] transition duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:border-cyan-100 hover:from-[#062b3c] hover:via-[#07505c] hover:to-[#0b1530] hover:shadow-[0_0_4px_rgba(255,255,255,0.16),0_0_48px_rgba(34,211,238,0.48)] ${englishCtaTypography} ${tapClass}`} onClick={() => withTapLock(() => {})}>
                 {copy.premiumCta}
               </Link>
               <Link href={localizePath('/multi-agent/engine', pageLocale)} className={`hero-cta-glow hero-cta-secondary btn-pulse inline-flex min-h-0 h-full w-full items-center justify-center rounded-xl border border-white/80 bg-slate-900 px-8 py-3 text-center text-base font-medium text-slate-300 shadow-[0_0_4px_rgba(255,255,255,0.17)] hover:bg-slate-800 whitespace-pre-line leading-snug ${englishCtaTypography} ${tapClass}`} onClick={() => withTapLock(() => {})}>
@@ -1665,11 +1666,9 @@ export default function Home({ locale = 'en' }) {
               >
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_55%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 ring-cyan-300/0 transition-all duration-300 group-hover:ring-1 group-hover:ring-cyan-300/25" />
-                {displayPlanBadge(plan) ? (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-1 text-xs font-black uppercase tracking-wider text-slate-950 shadow-lg shadow-cyan-500/20">
-                    {plan.badge}
-                  </div>
-                ) : null}
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-1 text-xs font-black uppercase tracking-wider text-slate-950 shadow-lg shadow-cyan-500/20">
+                  {displayPlanBadge(plan) || '✦'}
+                </div>
 
                 <div className="relative z-10">
                   <h3 className={`text-lg font-bold transition-colors duration-300 group-hover:text-cyan-300 ${glowText} ${plan.featured ? 'text-cyan-400' : 'text-slate-300'}`}>
@@ -1986,5 +1985,4 @@ export default function Home({ locale = 'en' }) {
     </div>
   );
 }
-
 

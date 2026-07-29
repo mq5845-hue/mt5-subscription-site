@@ -637,9 +637,10 @@ html {
     animation: none;
     transform: translateY(-4px) scale(1.02);
     filter: brightness(1.12) saturate(1.08);
+    border-color: rgba(207, 250, 254, 0.95) !important;
     box-shadow:
-      0 0 4px rgba(255, 255, 255, 0.16),
-      0 0 48px rgba(34, 211, 238, 0.48);
+      0 0 12px rgba(255, 255, 255, 0.45),
+      0 0 60px rgba(34, 211, 238, 0.68) !important;
   }
 
   .hero-cta-secondary:hover {
@@ -1027,26 +1028,26 @@ html.is-android .hero-badge {
   }
 
   .home-mobile-fixed-laser {
-    top: 15vh !important;
-    left: -32vw !important;
-    width: 142vw !important;
-    height: 3px !important;
+    top: 8vh !important;
+    left: -22vw !important;
+    width: 72vw !important;
+    height: 2px !important;
     transform-origin: left center;
-    opacity: 1 !important;
-    background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.16) 12%, rgba(236, 254, 255, 1) 48%, rgba(59, 130, 246, 0.78) 70%, transparent 100%) !important;
-    box-shadow: 0 0 10px rgba(207, 250, 254, 1), 0 0 34px rgba(34, 211, 238, 0.72), 0 0 84px rgba(59, 130, 246, 0.42) !important;
-    animation: homeMobileFixedLaser 7.2s ease-in-out infinite !important;
+    mix-blend-mode: screen;
+    background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.08) 14%, rgba(165, 243, 252, 0.98) 48%, rgba(59, 130, 246, 0.62) 68%, transparent 100%) !important;
+    box-shadow: 0 0 10px rgba(103, 232, 249, 0.95), 0 0 32px rgba(34, 211, 238, 0.58), 0 0 84px rgba(59, 130, 246, 0.35) !important;
+    animation: heroLaserPass 4.8s ease-in-out infinite !important;
   }
 
   .home-mobile-fixed-scan {
-    top: 14vh !important;
+    top: -6vh !important;
     left: 0 !important;
     width: 100vw !important;
-    height: 8px !important;
-    opacity: 1 !important;
-    background: linear-gradient(180deg, transparent 0%, rgba(34, 211, 238, 0.32) 22%, rgba(236, 254, 255, 1) 50%, rgba(34, 211, 238, 0.32) 78%, transparent 100%) !important;
-    box-shadow: 0 0 10px rgba(207, 250, 254, 1), 0 0 34px rgba(34, 211, 238, 0.76), 0 0 72px rgba(14, 165, 233, 0.4) !important;
-    animation: homeMobileFixedScan 8.8s linear infinite !important;
+    height: 1px !important;
+    mix-blend-mode: screen;
+    background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.18) 16%, rgba(207, 250, 254, 1) 50%, rgba(34, 211, 238, 0.18) 84%, transparent 100%) !important;
+    box-shadow: 0 0 7px rgba(34, 211, 238, 0.88), 0 0 20px rgba(34, 211, 238, 0.36) !important;
+    animation: heroScanPass 7.8s linear infinite !important;
   }
 }
 
@@ -1244,6 +1245,26 @@ body:not(:has(.home-page)) main::before {
   mix-blend-mode: screen;
   animation: nonHomeHorizontalScan 7.8s linear infinite !important;
 }
+/* Homepage scanner: a viewport-wide 2px beam that sweeps from top to bottom. */
+body:has(.home-page) main::before,
+body:has(.home-page) .hero-aurora .hero-scan-pass {
+  display: none !important;
+}
+
+.home-page-scan-line {
+  position: fixed;
+  z-index: 49;
+  top: -4px;
+  left: 0;
+  width: 100vw;
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.18) 16%, rgba(207, 250, 254, 1) 50%, rgba(34, 211, 238, 0.18) 84%, transparent 100%);
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.95), 0 0 28px rgba(34, 211, 238, 0.46);
+  mix-blend-mode: screen;
+  will-change: transform;
+  animation: nonHomeHorizontalScan 7.8s linear infinite;
+}
 
 @keyframes nonHomeHorizontalScan {
   0% { transform: translateY(0); opacity: 0.35; }
@@ -1387,4 +1408,27 @@ details.group:hover > .site-dropdown-panel {
   top: 108px !important;
   animation: converter-horizontal-sweep 7s linear infinite !important;
   animation-play-state: running !important;
+}
+
+/* Touch homepages use the same native signal elements and keyframes as desktop. */
+@media (max-width: 1023px), (pointer: coarse) {
+  .home-mobile-effects {
+    display: none !important;
+  }
+
+  .hero-mobile-laser-beam,
+  .hero-mobile-scan-emitter,
+  .hero-mobile-scan-pass {
+    display: none !important;
+  }
+
+  .home-page .hero-laser-beam,
+  .home-page .hero-scan-pass {
+    display: block !important;
+  }
+
+  .home-page .hero-laser-beam {
+    top: 8%;
+    width: 72%;
+  }
 }

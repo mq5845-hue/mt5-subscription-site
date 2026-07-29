@@ -1,10 +1,13 @@
-﻿"use client";
+"use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { getLocaleFromPath, localizePath } from '../../lib/locale';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, Radar } from 'recharts';
 import { Shield, Radio, Activity, Cpu, AlertTriangle, Check, X, ShieldAlert, Zap } from 'lucide-react';
+
+
+import MqlEvolutionEngineExperience from '../../components/MqlEvolutionEngineExperience';
 
 // --- 璅⊥擃?單??豢?????---
 const generateInitialVolData = () => {
@@ -34,12 +37,26 @@ export default function ControlRoomDashboard() {
   const pathname = usePathname();
   const locale = getLocaleFromPath(pathname);
   const homeLabel = pathname.startsWith('/en') ? 'Back to home' : pathname.startsWith('/zh-Hans') ? '\u56de\u9996\u9875' : '\u56de\u9996\u9801';
+  const institutionalEdition = ({
+    en: { label: 'Institutional Edition — 100% Offline Private Enterprise Cloud', detail: 'Built for financial investment and trading, this 100% offline, fully private enterprise-cloud architecture meets institutions\' highest demands for quantitative strategies, client-asset privacy, high-frequency algorithms, and protection against insider or industrial espionage leaks.' },
+    'zh-Hant': { label: '\u6cd5\u4eba\u6a5f\u69cb\u7248_\u96e2\u7dda100%\u79c1\u5bc6-\u4f01\u696d\u79c1\u6709\u96f2', detail: '\u91dd\u5c0d\u91d1\u878d\u6295\u8cc7\u4ea4\u6613\u9818\u57df\uff0c\u4e3b\u6253\u300c100%\u96e2\u7dda\u3001\u7d55\u5c0d\u79c1\u5bc6\u3001\u4f01\u696d\u79c1\u6709\u96f2\u300d\u7684\u67b6\u69cb\uff0c\u6700\u80fd\u5207\u4e2d\u9019\u985e\u6a5f\u69cb\u5c0d\u65bc\u91cf\u5316\u4ea4\u6613\u7b56\u7565\u3001\u5ba2\u6236\u8cc7\u7522\u96b1\u79c1\u3001\u9ad8\u983b\u4ea4\u6613\u6f14\u7b97\u6cd5\u4ee5\u53ca\u9632\u7bc4\u5167\u7dda/\u5546\u696d\u9593\u8adc\u5916\u6d29\u7684\u6975\u81f4\u8981\u6c42\u3002' },
+    'zh-Hans': { label: '\u6cd5\u4eba\u673a\u6784\u7248_\u79bb\u7ebf100%\u79c1\u5bc6-\u4f01\u4e1a\u79c1\u6709\u4e91', detail: '\u9488\u5bf9\u91d1\u878d\u6295\u8d44\u4ea4\u6613\u9886\u57df\uff0c\u4e3b\u6253\u300c100%\u79bb\u7ebf\u3001\u7edd\u5bf9\u79c1\u5bc6\u3001\u4f01\u4e1a\u79c1\u6709\u4e91\u300d\u7684\u67b6\u6784\uff0c\u6700\u80fd\u5207\u4e2d\u8fd9\u7c7b\u673a\u6784\u5bf9\u4e8e\u91cf\u5316\u4ea4\u6613\u7b56\u7565\u3001\u5ba2\u6237\u8d44\u4ea7\u9690\u79c1\u3001\u9ad8\u9891\u4ea4\u6613\u7b97\u6cd5\u4ee5\u53ca\u9632\u8303\u5185\u7ebf/\u5546\u4e1a\u95f4\u8c0d\u5916\u6cc4\u7684\u6781\u81f4\u8981\u6c42\u3002' },
+  })[locale] || { label: 'Institutional Edition', detail: '' };  const institutionalCap = ({
+    en: 'TOP-TIER ISO/IEC 27001 NETWORK ISOLATION & PHYSICAL SECURITY CERTIFICATION',
+    'zh-Hant': '\u6700\u9802\u7d1aISO/IEC 27001\u7db2\u8def\u9694\u96e2\u8207\u5be6\u9ad4\u5b89\u5168\u8a8d\u8b49',
+    'zh-Hans': '\u6700\u9876\u7ea7ISO/IEC 27001\u7f51\u7edc\u9694\u79bb\u4e0e\u5b9e\u4f53\u5b89\u5168\u8ba4\u8bc1',
+  })[locale] || 'ISO/IEC 27001 SECURITY CERTIFICATION';  const institutionalSecuritySummary = ({
+    en: 'Our system is a capsule-core Docker Compose deployment that is 100% offline. It meets ISO 27001 A.8.22 network-boundary physical-isolation requirements, and its core encryption reaches FIPS 140-3 military-grade protection. This enterprise private cloud aligns with global financial DORA and SOC 2 privacy-compliance frameworks.',
+    'zh-Hant': '\u300c\u6211\u5011\u7684\u7cfb\u7d71\u662f\u81a0\u56ca\u8259\u6838\u5fc3Docker compose100% \u96e2\u7dda\u5e03\u7f72\uff0c\u5b8c\u5168\u7b26\u5408 ISO 27001 A.8.22 \u6700\u56b4\u683c\u7684\u7db2\u8def\u908a\u754c\u5be6\u9ad4\u9694\u96e2\u6a19\u6e96\uff0c\u6838\u5fc3\u52a0\u5bc6\u6a21\u7d44\u66f4\u9054\u5230 FIPS 140-3 \u8ecd\u898f\u7d1a\u9632\u8b77\u3002\u9019\u4e0d\u662f\u4e00\u500b\u5c01\u9589\u7684\u967d\u6625\u7cfb\u7d71\uff0c\u800c\u662f\u5b8c\u5168\u7b26\u5408\u5168\u7403\u91d1\u878d DORA \u6cd5\u6848\u8207 SOC 2 \u96b1\u79c1\u5408\u898f\u67b6\u69cb\u7684\u9802\u7d1a\u4f01\u696d\u79c1\u6709\u96f2\u3002\u300d',
+    'zh-Hans': '\u300c\u6211\u4eec\u7684\u7cfb\u7edf\u662f\u80f6\u56ca\u8231\u6838\u5fc3Docker compose100% \u79bb\u7ebf\u90e8\u7f72\uff0c\u5b8c\u5168\u7b26\u5408 ISO 27001 A.8.22 \u6700\u4e25\u683c\u7684\u7f51\u7edc\u8fb9\u754c\u5b9e\u4f53\u9694\u79bb\u6807\u51c6\uff0c\u6838\u5fc3\u52a0\u5bc6\u6a21\u7ec4\u66f4\u8fbe\u5230 FIPS 140-3 \u519b\u89c4\u7ea7\u9632\u62a4\u3002\u8fd9\u4e0d\u662f\u4e00\u4e2a\u5c01\u95ed\u7684\u7b80\u964b\u7cfb\u7edf\uff0c\u800c\u662f\u5b8c\u5168\u7b26\u5408\u5168\u7403\u91d1\u878d DORA \u6cd5\u6848\u4e0e SOC 2 \u9690\u79c1\u5408\u89c4\u67b6\u6784\u7684\u9876\u7ea7\u4f01\u4e1a\u79c1\u6709\u4e91\u3002\u300d',
+  })[locale] || '';  const institutionalNotices = { en: 'Web version “AI Refactoring Engine” (Institutional Edition) usage notice: This page runs a front-end demonstration and simulation workflow that produces sample MQL5 output and logs. It is not connected to a real AI model API, MetaEditor compilation/debugging, or MT5 backtesting/optimization service. The interface is fully operable, but it is not an actual AI code-conversion service. You can download the “(Institutional Edition) Docker AI MCP Server — 100% offline, secure and private personal / organization / enterprise private cloud” edition. Visitors (non-members) may trial the AI Refactoring Engine with their own valid AI LLM & API keys, up to five examples per day (a maximum of five MQL4/MQL5 source-code pastes).', 'zh-Hant': '\u7db2\u9801\u7248\u300cAI\u91cd\u69cb\u5f15\u64ce\u300d(\u6cd5\u4eba\u6a5f\u69cb\u7248)\u4f7f\u7528\u8aaa\u660e\uff1a\u672c\u7db2\u9801\u7684\u300cAI\u91cd\u69cb\u5f15\u64ce\u300d\uff0c\u5176\u904b\u884c\u4efb\u52d9\u4e4b\u6d41\u7a0b\uff0c\u662f\u524d\u7aef\u5c55\u793a\uff0f\u6a21\u64ec\u6d41\u7a0b\uff0c\u6703\u7522\u751f\u7bc4\u4f8b MQL5 \u8f38\u51fa\u8207\u65e5\u8a8c\uff1b\u5c1a\u672a\u9023\u63a5\u771f\u6b63\u7684AI\u6a21\u578bAPI\u3001MetaEditor\u7de8\u8b6f(\u9664\u932f)\u6216MT5\u56de\u6e2c(\u512a\u5316)\u7b49\u670d\u52d9\u3002\u56e0\u6b64\u4ecb\u9762\u529f\u80fd\u5b8c\u6574\u53ef\u64cd\u4f5c\uff0c\u4f46\u5c1a\u4e0d\u662f\u5be6\u969bAI\u8f49\u78bc\u670d\u52d9\u3002\u6b61\u8fce\u4e0b\u8f09\u300c(\u6cd5\u4eba\u6a5f\u69cb\u7248) Docker AI MCP\u4f3a\u670d\u5650-\u96e2\u7dda\u8cc7\u5b89100%\u79c1\u5bc6_\u500b\u4eba/\u7d44\u7e54/\u4f01\u696d\u79c1\u6709\u96f2\u300d\u7248\u672c\u3002\u672c\u7db2\u9801\u4e4b\u8a2a\u554f\u8005(\u975e\u6703\u54e1)\uff0c\u5f97\u8a66\u884c\u4f7f\u7528\u300cAI\u91cd\u69cb\u5f15\u64ce\u300d\u904b\u884c\u8f49\u78bc\u4efb\u52d9\uff0c\u8a2a\u554f\u8005\u52fe\u9078\u586b\u5165\u6240\u5c6c\u7684\u771f\u5be6AI LLM & API keys\uff0c\u6bcf\u65e5\u8a66\u7528\u4e0a\u9650\u70ba5\u5247\u5be6\u4f8b(\u8cbc\u4e0aMQL4/5\u6e90\u78bc\u4ee55\u6b21\u70ba\u9650)\u3002', 'zh-Hans': '\u7f51\u9875\u7248\u300cAI\u91cd\u6784\u5f15\u64ce\u300d(\u6cd5\u4eba\u673a\u6784\u7248)\u4f7f\u7528\u8bf4\u660e\uff1a\u672c\u7f51\u9875\u7684\u300cAI\u91cd\u6784\u5f15\u64ce\u300d\u8fd0\u884c\u4efb\u52a1\u6d41\u7a0b\u4e3a\u524d\u7aef\u5c55\u793a\uff0f\u6a21\u62df\u6d41\u7a0b\uff0c\u4f1a\u4ea7\u751f\u793a\u4f8b MQL5 \u8f93\u51fa\u4e0e\u65e5\u5fd7\uff1b\u5c1a\u672a\u8fde\u63a5\u771f\u6b63\u7684AI\u6a21\u578bAPI\u3001MetaEditor\u7f16\u8bd1(\u9664\u9519)\u6216MT5\u56de\u6d4b(\u4f18\u5316)\u7b49\u670d\u52a1\u3002\u56e0\u6b64\u754c\u9762\u529f\u80fd\u5b8c\u6574\u53ef\u64cd\u4f5c\uff0c\u4f46\u5c1a\u4e0d\u662f\u5b9e\u9645AI\u8f6c\u7801\u670d\u52a1\u3002\u6b22\u8fce\u4e0b\u8f7d\u300c(\u6cd5\u4eba\u673a\u6784\u7248) Docker AI MCP\u670d\u52a1\u5668-\u79bb\u7ebf\u8d44\u5b89100%\u79c1\u5bc6_\u4e2a\u4eba/\u7ec4\u7ec7/\u4f01\u4e1a\u79c1\u6709\u4e91\u300d\u7248\u672c\u3002\u672c\u7f51\u9875\u8bbf\u95ee\u8005(\u975e\u4f1a\u5458)\u53ef\u8bd5\u7528\u300cAI\u91cd\u6784\u5f15\u64ce\u300d\u8fd0\u884c\u8f6c\u7801\u4efb\u52a1\uff1b\u8bbf\u95ee\u8005\u52fe\u9009\u5e76\u586b\u5165\u6240\u5c5e\u7684\u771f\u5b9eAI LLM & API keys\uff0c\u6bcf\u65e5\u8bd5\u7528\u4e0a\u9650\u4e3a5\u5219\u5b9e\u4f8b(\u8d34\u4e0aMQL4/5\u6e90\u7801\u4ee55\u6b21\u4e3a\u9650)\u3002' };
   // 蝟餌絞?典????: NOMINAL | WARNING | CRISIS | HALT
   const [systemState, setSystemState] = useState<'NOMINAL' | 'WARNING' | 'CRISIS' | 'HALT'>('NOMINAL');
   const [volData, setVolData] = useState(generateInitialVolData());
   const [accounts, setAccounts] = useState(initialAccounts);
   const [showApproval, setShowApproval] = useState(true);
   const [twoManLock, setTwoManLock] = useState(false);
+
 
   // 璅⊥ WebSocket 瘥??券?Tick ?豢??湔
   useEffect(() => {
@@ -91,6 +108,14 @@ export default function ControlRoomDashboard() {
     <div className={`min-h-screen bg-[#0B0F19] text-slate-200 font-mono p-4 selection:bg-cyan-500 selection:text-black transition-colors duration-500 ${systemState === 'CRISIS' ? 'border-4 border-red-600' : systemState === 'HALT' ? 'border-4 border-amber-600' : ''}`}>
       
       <div aria-hidden="true" className="control-room-scan-line" />
+      <aside className="mb-4 text-left text-[10px] leading-5 text-white/80 sm:text-[11px]" role="note">
+        {'\uD83D\uDEE1\uFE0F '}{institutionalNotices[locale]}
+      </aside>
+      <div aria-hidden="true" className="mb-4 h-px w-full bg-gradient-to-r from-transparent via-white/90 to-transparent shadow-[0_0_8px_rgba(255,255,255,0.72)]" />
+      <div className="mb-6">
+        <span className="inline-flex rounded-xl bg-cyan-500 px-4 py-1.5 text-sm font-semibold text-slate-950 shadow-[0_0_18px_rgba(34,211,238,0.5),0_0_36px_rgba(34,211,238,0.25)]">{institutionalEdition.label}</span>
+        <p className="mt-2 text-xs font-medium tracking-wide text-cyan-100/90">{institutionalEdition.detail}</p>
+      </div>
       {/* HEADER SECTION (頠?蝝銵?撅斤???) */}
       <header className="flex flex-wrap justify-between items-center border border-slate-800 bg-[#0F1524] p-3 rounded-t-lg shadow-2xl mb-4">
         <div className="flex items-center space-x-4">
@@ -346,6 +371,11 @@ export default function ControlRoomDashboard() {
           {homeLabel}
         </Link>
       </div>
+
+      <section className="mt-6" aria-label="AI Refactoring Engine">
+        <MqlEvolutionEngineExperience showNotice={false} showEdition={false} edition={institutionalEdition} frameCap={institutionalCap} securitySummary={institutionalSecuritySummary} />
+      </section>
+
     </div>
   );
 }

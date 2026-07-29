@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import LlmProviderHoverPicker from './LlmProviderHoverPicker';
 import LlmModelHoverPicker from './LlmModelHoverPicker';
 import { getMqlEngineCopy } from '../lib/mqlEngineI18n';
+import { hasReachedDailyTrialLimit } from '../lib/dailyTrialLimit';
 
 function EyeIcon({ hidden }) {
   return (
@@ -15,7 +16,7 @@ function EyeIcon({ hidden }) {
   );
 }
 
-export default function PrivateLlmVault({ locale = 'en' }) {
+export default function PrivateLlmVault({ locale = 'en', onLimitReached }) {
   const c = getMqlEngineCopy(locale).vault;
   const [provider, setProvider] = useState('openai');
   const [model, setModel] = useState('');
@@ -57,7 +58,7 @@ export default function PrivateLlmVault({ locale = 'en' }) {
           <label className="block">
             <span className="mb-2 flex items-center justify-between font-mono text-[9px] font-black tracking-[0.14em] text-slate-600"><span>ENCRYPTED API KEY INPUT</span><span>NEVER LOGGED</span></span>
             <span className="relative block">
-              <input type={visible ? 'text' : 'password'} value={apiKey} onChange={(event) => setApiKey(event.target.value)} placeholder={c.placeholder} autoComplete="new-password" autoCapitalize="none" autoCorrect="off" spellCheck={false} data-1p-ignore="true" data-lpignore="true" className="h-12 w-full rounded-xl border border-slate-700 bg-slate-950/85 px-4 pr-14 font-mono text-xs tracking-[0.08em] text-fuchsia-100 outline-none transition placeholder:tracking-normal placeholder:text-slate-700 focus:border-fuchsia-300/55 focus:ring-2 focus:ring-fuchsia-300/10" />
+              <input type={visible ? 'text' : 'password'} value={apiKey} onChange={(event) => { if (hasReachedDailyTrialLimit()) { onLimitReached?.(); return; } setApiKey(event.target.value); }} placeholder={c.placeholder} autoComplete="new-password" autoCapitalize="none" autoCorrect="off" spellCheck={false} data-1p-ignore="true" data-lpignore="true" className="h-12 w-full rounded-xl border border-slate-700 bg-slate-950/85 px-4 pr-14 font-mono text-xs tracking-[0.08em] text-fuchsia-100 outline-none transition placeholder:tracking-normal placeholder:text-slate-700 focus:border-fuchsia-300/55 focus:ring-2 focus:ring-fuchsia-300/10" />
               <button type="button" onClick={() => setVisible((value) => !value)} aria-label={visible ? c.hide : c.show} aria-pressed={visible} className="absolute right-2 top-1/2 flex h-9 w-10 -translate-y-1/2 items-center justify-center rounded-lg text-slate-500 transition hover:bg-slate-800 hover:text-fuchsia-200 focus-visible:outline-2 focus-visible:outline-fuchsia-300"><EyeIcon hidden={!visible} /></button>
             </span>
           </label>

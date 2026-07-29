@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import DailyTrialLimitModal from "../../components/DailyTrialLimitModal";
+import { consumeDailyTrial, hasReachedDailyTrialLimit } from "../../lib/dailyTrialLimit";
 
 const llmCopy = {
   en: {
@@ -38,6 +40,11 @@ const premiumLabels = {
   "zh-Hans": "尊爵商用版",
 };
 
+const dataSovereigntyNotes = {
+  en: '“In an era of increasingly strict data sovereignty and financial regulation, AI-Quant Lab has built its proprietary Capsule Core technology. Docker Compose enables 100% offline, air-gapped deployment so your core investment decisions and client privacy begin inside an absolute security boundary. The system has no dependency on any public cloud, removing non-systemic risks from network interruption or overseas supplier ransomware incidents, and protects your reputation and core assets with a precise, compliant private architecture.”',
+  'zh-Hant': '「在數據主權（Data Sovereignty）與金融監管日益嚴苛的今天，我們打造了獨家的『膠囊艙核心』技術。透過 Docker Compose 的 100% 離線實體隔離（Air-Gapped）布署，讓您的核心投資決策與客戶隱私，一出生就處於絕對的安全網內。系統不依賴任何外部公有雲、免除網路斷線或海外供應商遭勒索軟體挾持的非系統性風險，以最精準、合規的私有架構，守護您的商譽與核心資產。」',
+  'zh-Hans': '「在数据主权（Data Sovereignty）与金融监管日益严苛的今天，我们打造了独家的『胶囊舱核心』技术。通过 Docker Compose 的 100% 离线实体隔离（Air-Gapped）部署，让您的核心投资决策与客户隐私，从诞生起就处于绝对的安全网内。系统不依赖任何外部公有云，免除网络中断或海外供应商遭勒索软件挟持的非系统性风险，以最精准、合规的私有架构，守护您的商誉与核心资产。」',
+};
 const panelCopy = {
   en: { enable: "Enable AI semantic refactoring and multi-pass MetaEditor self-healing compilation", premium: "(Premium Commercial) 【 MQL4 transfer >>> MQL5 】", undo: "Undo previous step ↩️", clear: "Clear all 🗑️", start: "Start upgrade 🚀", running: "Self-healing core is running...", complete: "Refactoring complete ✔️", source: "▼ Paste or upload your MQL4 source code:", upload: "Upload source (.mq4) 📥", input: "// Paste or upload your MQL4 code here...", log: "▼ Compiler review log (Strict Mode):", logEmpty: "// Waiting to start refactoring. Self-healing diagnostics will appear here...", output: "▼ Refactored output · 0 errors / 0 warnings · MQL5 source:", copy: "Copy clean code 📋", download: "Download file (.mq5) 💾", loading: "Refactoring legacy iMA and Bid/Ask logic to current MQL5 standards...", outputEmpty: "// Compatible Strict Mode MQL5 code will stream here after self-healing compilation..." },
   "zh-Hant": { enable: "啟用 AI 深度語意重構與多輪 MetaEditor 自癒編譯", premium: "（尊爵商用版）【 MQL4 轉碼>>> MQL5 】", undo: "回復前一步 ↩️", clear: "全部清空 🗑️", start: "開始一鍵升級 🚀", running: "編譯自癒核心運轉中...", complete: "重構已完成 ✔️", source: "▼ 請貼上或上傳您的 MQL4 原始程式碼：", upload: "上載來源檔案 (.mq4) 📥", input: "// 在此貼上或上傳您的 MQL4 程式碼...", log: "▼ 核心編譯器動態審查日誌（Strict Mode 監控）：", logEmpty: "// 靜待重構發動，此處將透傳自癒排查細節...", output: "▼ 重構引擎輸出 · 0 errors / 0 warnings · MQL5 源代碼：", copy: "複製乾淨程式碼 📋", download: "下載完成檔案 (.mq5) 💾", loading: "正在重構舊版 iMA 與 Bid/Ask 函數缺陷，全面自癒對齊 MQL5 官方新規範...", outputEmpty: "// 待自癒編譯通過後，完全相容 Strict Mode 的代碼將在此串流輸出..." },
@@ -67,8 +74,10 @@ export default function MqlConverter() {
   const llmText = { ...llmCopy.en, ...(llmCopy[locale] || {}) };
   const subtitle = pageSubtitle[locale] || pageSubtitle.en;
   const premiumLabel = premiumLabels[locale] || premiumLabels.en;
+  const dataSovereigntyNote = dataSovereigntyNotes[locale] || dataSovereigntyNotes.en;
   const panelText = { ...panelCopy.en, ...(panelCopy[locale] || {}) };
   const conversionText = conversionCopy[locale] || conversionCopy.en;
+  const converterNotices = { en: 'Web version “AI Refactoring Engine” (Premium Commercial) usage notice: This page runs a front-end demonstration and simulation workflow that produces sample MQL5 output and logs. It is not connected to a real AI model API or MetaEditor compilation/debugging service. The interface is fully operable, but it is not an actual AI code-conversion service. You can download the “(Premium Commercial) Docker AI MCP Server — 100% offline, secure and private personal / organization / enterprise private cloud” edition. Visitors (non-members) may trial the AI Refactoring Engine with their own valid AI LLM & API keys, up to five examples per day (a maximum of five MQL4 source-code pastes).', 'zh-Hant': '\u7db2\u9801\u7248\u300cAI\u91cd\u69cb\u5f15\u64ce\u300d(\u5c0a\u7235\u7248)\u4f7f\u7528\u8aaa\u660e\uff1a\u672c\u7db2\u9801\u7684\u300cAI\u91cd\u69cb\u5f15\u64ce\u300d\uff0c\u5176\u904b\u884c\u4efb\u52d9\u4e4b\u6d41\u7a0b\uff0c\u662f\u524d\u7aef\u5c55\u793a\uff0f\u6a21\u64ec\u6d41\u7a0b\uff0c\u6703\u7522\u751f\u7bc4\u4f8b MQL5 \u8f38\u51fa\u8207\u65e5\u8a8c\uff1b\u5c1a\u672a\u9023\u63a5\u771f\u6b63\u7684AI\u6a21\u578bAPI\u3001MetaEditor\u7de8\u8b6f(\u9664\u932f)\u670d\u52d9\u3002\u56e0\u6b64\u4ecb\u9762\u529f\u80fd\u5b8c\u6574\u53ef\u64cd\u4f5c\uff0c\u4f46\u5c1a\u4e0d\u662f\u5be6\u969bAI\u8f49\u78bc\u670d\u52d9\u3002\u6b61\u8fce\u4e0b\u8f09\u300c(\u5c0a\u7235\u7248) Docker AI MCP\u4f3a\u670d\u5650-\u96e2\u7dda\u8cc7\u5b89100%\u79c1\u5bc6_\u500b\u4eba/\u7d44\u7e54/\u4f01\u696d\u79c1\u6709\u96f2\u300d\u7248\u672c\u3002\u672c\u7db2\u9801\u4e4b\u8a2a\u554f\u8005(\u975e\u6703\u54e1)\uff0c\u5f97\u8a66\u884c\u4f7f\u7528\u300cAI\u91cd\u69cb\u5f15\u64ce\u300d\u904b\u884c\u8f49\u78bc\u4efb\u52d9\uff0c\u8a2a\u554f\u8005\u52fe\u9078\u586b\u5165\u6240\u5c6c\u7684\u771f\u5be6AI LLM & API keys\uff0c\u6bcf\u65e5\u8a66\u7528\u4e0a\u9650\u70ba5\u5247\u5be6\u4f8b(\u8cbc\u4e0aMQL4\u6e90\u78bc\u4ee55\u6b21\u70ba\u9650)\u3002', 'zh-Hans': '\u7f51\u9875\u7248\u300cAI\u91cd\u6784\u5f15\u64ce\u300d(\u5c0a\u7235\u7248)\u4f7f\u7528\u8bf4\u660e\uff1a\u672c\u7f51\u9875\u7684\u300cAI\u91cd\u6784\u5f15\u64ce\u300d\u8fd0\u884c\u4efb\u52a1\u6d41\u7a0b\u4e3a\u524d\u7aef\u5c55\u793a\uff0f\u6a21\u62df\u6d41\u7a0b\uff0c\u4f1a\u4ea7\u751f\u793a\u4f8b MQL5 \u8f93\u51fa\u4e0e\u65e5\u5fd7\uff1b\u5c1a\u672a\u8fde\u63a5\u771f\u6b63\u7684AI\u6a21\u578bAPI\u3001MetaEditor\u7f16\u8bd1(\u9664\u9519)\u670d\u52a1\u3002\u56e0\u6b64\u754c\u9762\u529f\u80fd\u5b8c\u6574\u53ef\u64cd\u4f5c\uff0c\u4f46\u5c1a\u4e0d\u662f\u5b9e\u9645AI\u8f6c\u7801\u670d\u52a1\u3002\u6b22\u8fce\u4e0b\u8f7d\u300c(\u5c0a\u7235\u7248) Docker AI MCP\u670d\u52a1\u5668-\u79bb\u7ebf\u8d44\u5b89100%\u79c1\u5bc6_\u4e2a\u4eba/\u7ec4\u7ec7/\u4f01\u4e1a\u79c1\u6709\u4e91\u300d\u7248\u672c\u3002\u672c\u7f51\u9875\u8bbf\u95ee\u8005(\u975e\u4f1a\u5458)\u53ef\u8bd5\u7528\u300cAI\u91cd\u6784\u5f15\u64ce\u300d\u8fd0\u884c\u8f6c\u7801\u4efb\u52a1\uff1b\u8bbf\u95ee\u8005\u52fe\u9009\u5e76\u586b\u5165\u6240\u5c5e\u7684\u771f\u5b9eAI LLM & API keys\uff0c\u6bcf\u65e5\u8bd5\u7528\u4e0a\u9650\u4e3a5\u5219\u5b9e\u4f8b(\u8d34\u4e0aMQL4\u6e90\u7801\u4ee55\u6b21\u4e3a\u9650)\u3002' };
   const [sourceCode, setSourceCode] = useState("");
   const [convertedCode, setConvertedCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -79,6 +88,7 @@ export default function MqlConverter() {
   const [llmProvider, setLlmProvider] = useState("OpenAI");
   const [llmModel, setLlmModel] = useState("GPT-5.2");
   const [apiKey, setApiKey] = useState("");
+  const [showTrialLimit, setShowTrialLimit] = useState(false);
   const availableModels = providerModels[llmProvider] || providerModels.OpenAI;
 
   const progressIntervalRef = useRef(null);
@@ -165,6 +175,10 @@ export default function MqlConverter() {
   // 🚀 發動最新 MQL5 規範重構引擎
   const handleConvert = async () => {
     if (!sourceCode.trim() || isLoading || isConverted) return;
+    if (!consumeDailyTrial().allowed) {
+      setShowTrialLimit(true);
+      return;
+    }
 
     setHistory({ sourceCode, convertedCode, pipelineLog, progress, isConverted });
     setIsLoading(true);
@@ -361,10 +375,16 @@ void PosCounter(int &b, int &s)
           animation: hardSpin 1s linear infinite !important;
         }
       `}</style>
+      <aside className="mx-auto mb-4 w-full max-w-7xl shrink-0 text-justify text-[10px] leading-5 text-white/80 [text-align-last:left] sm:text-[11px]" role="note">
+        {'\uD83D\uDEE1\uFE0F '}{converterNotices[locale]}
+      </aside>
+      <div aria-hidden="true" className="mx-auto mb-4 h-px w-full max-w-7xl shrink-0 bg-gradient-to-r from-transparent via-white/90 to-transparent shadow-[0_0_8px_rgba(255,255,255,0.72)]" />
 
       {/* 標頭區 */}
       <div className="max-w-7xl w-full mx-auto mb-6 shrink-0">
         <div className="mb-2 inline-flex items-center rounded-full border border-amber-200/80 bg-amber-300 px-3 py-1 text-xs font-black tracking-[0.16em] text-amber-950 shadow-[0_0_18px_rgba(251,191,36,0.55)]">{premiumLabel}</div>
+        <p className="mb-4 max-w-6xl text-xs leading-6 text-white/85 sm:text-sm sm:leading-7">{dataSovereigntyNote}</p>
+        <div aria-hidden="true" className="mb-4 h-px w-full max-w-6xl bg-gradient-to-r from-transparent via-violet-300/90 to-transparent shadow-[0_0_9px_rgba(196,181,253,0.82)]" />
         <h1 className="text-3xl font-bold text-cyan-400 flex items-center gap-2">{llmText.pageTitle}</h1>
         <p className="text-slate-400 mt-2 text-sm">{subtitle}</p>
         <section className="mt-6 rounded-2xl border border-cyan-300/20 bg-[radial-gradient(circle_at_15%_0%,rgba(34,211,238,0.14),transparent_38%),rgba(2,6,23,0.88)] px-6 py-5 shadow-[0_16px_45px_rgba(0,0,0,0.22)]">
@@ -375,7 +395,7 @@ void PosCounter(int &b, int &s)
             </div>
             <label className="block"><span className="mb-2 block font-mono text-[10px] font-bold tracking-[0.18em] text-slate-500">{llmText.provider}</span><select value={llmProvider} onChange={(event) => { const provider = event.target.value; setLlmProvider(provider); setLlmModel(providerModels[provider][0]); }} className="h-14 w-full rounded-xl border border-slate-700 bg-slate-950/80 px-4 text-sm font-bold text-slate-100 outline-none"><option>OpenAI</option><option>Anthropic</option><option>Google AI</option><option>xAI</option><option>Meta AI</option><option>Mistral AI</option></select></label>
             <label className="block"><span className="mb-2 block font-mono text-[10px] font-bold tracking-[0.18em] text-slate-500">{llmText.model}</span><select value={llmModel} onChange={(event) => setLlmModel(event.target.value)} className="h-14 w-full rounded-xl border border-slate-700 bg-slate-950/80 px-4 text-sm font-bold text-slate-100 outline-none">{availableModels.map((model) => <option key={model}>{model}</option>)}</select></label>
-            <label className="block"><span className="mb-2 flex justify-between font-mono text-[10px] font-bold tracking-[0.18em] text-slate-500"><span>{llmText.key}</span><span className="text-cyan-300">{llmText.never}</span></span><input value={apiKey} onChange={(event) => setApiKey(event.target.value)} type="password" autoComplete="off" placeholder={llmText.placeholder} className="h-14 w-full rounded-xl border border-slate-700 bg-slate-950/80 px-4 font-mono text-sm text-slate-100 outline-none placeholder:text-slate-600" /></label>
+            <label className="block"><span className="mb-2 flex justify-between font-mono text-[10px] font-bold tracking-[0.18em] text-slate-500"><span>{llmText.key}</span><span className="text-cyan-300">{llmText.never}</span></span><input value={apiKey} onChange={(event) => { if (hasReachedDailyTrialLimit()) { setShowTrialLimit(true); return; } setApiKey(event.target.value); }} type="password" autoComplete="off" placeholder={llmText.placeholder} className="h-14 w-full rounded-xl border border-slate-700 bg-slate-950/80 px-4 font-mono text-sm text-slate-100 outline-none placeholder:text-slate-600" /></label>
             <button type="button" onClick={() => setApiKey("")} disabled={!apiKey} className="h-14 rounded-xl border border-slate-700 bg-slate-900 px-4 text-sm font-bold text-slate-300 transition hover:border-cyan-300/50 disabled:opacity-40">{llmText.clear}</button>
           </div>
         </section>
@@ -512,6 +532,7 @@ void PosCounter(int &b, int &s)
         </div>
 
       </div>
+    <DailyTrialLimitModal open={showTrialLimit} locale={locale} onClose={() => setShowTrialLimit(false)} />
     </div>
   );
 }
