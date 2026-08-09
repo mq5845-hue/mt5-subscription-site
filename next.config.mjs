@@ -1,7 +1,15 @@
-﻿/** @type {import('next').NextConfig} */
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const projectRoot = path.dirname(fileURLToPath(import.meta.url));
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   trailingSlash: false,
   allowedDevOrigins: ['127.0.0.1'],
+  turbopack: {
+    root: projectRoot,
+  },
   async rewrites() {
     return [
       { source: '/en/membership', destination: '/membership?__locale=en' },

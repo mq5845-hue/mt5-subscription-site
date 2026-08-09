@@ -11,7 +11,9 @@ export default clerkMiddleware(async (auth, request) => {
   if (isMemberRoute) {
     if (!hasClerkConfiguration) {
       const locale = pathname.match(new RegExp('^/(' + localePattern + ')'))?.[1] || defaultLocale;
-      return NextResponse.redirect(new URL('/' + locale + '/sign-in', request.url));
+      const signInUrl = request.nextUrl.clone();
+      signInUrl.pathname = `/${locale}/sign-in`;
+      return NextResponse.redirect(signInUrl);
     }
     await auth.protect();
   }
