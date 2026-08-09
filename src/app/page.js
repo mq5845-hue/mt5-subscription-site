@@ -1139,6 +1139,31 @@ function localizeChinese(value, locale) {
   return toSimplified(value);
 }
 
+function FooterRefactorMenu({ locale }) {
+  const refactorItem = getLocalizedNavItems(locale)[0];
+
+  return (
+    <details className="group relative">
+      <summary className="flex cursor-pointer list-none items-center gap-1.5 text-sm text-slate-500 transition hover:text-cyan-300 [&::-webkit-details-marker]:hidden">
+        <span>{refactorItem.label}</span>
+        <MenuDots />
+      </summary>
+      <div className="site-dropdown-panel absolute bottom-full left-0 z-[1300] mb-2 w-64">
+        <div className="overflow-hidden rounded-2xl border border-cyan-300/20 bg-[#020617] p-2 shadow-[0_0_28px_rgba(34,211,238,0.22)]">
+          {refactorItem.children.map((child) => child.disabled || child.muted ? (
+            <span key={child.label} className="flex rounded-xl px-3 py-2.5 text-xs leading-4 text-slate-500">
+              {child.label}
+            </span>
+          ) : (
+            <Link key={child.label} href={localizePath(child.href, locale) + (child.href === '/converter' ? '#converter-top' : '')} className="flex rounded-xl px-3 py-2.5 text-xs leading-4 text-slate-300 transition hover:bg-cyan-500/10 hover:text-cyan-200">
+              {child.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </details>
+  );
+}
 export default function Home({ locale = 'en' }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -2012,14 +2037,12 @@ export default function Home({ locale = 'en' }) {
                 Explore
               </h3>
               <div className="flex flex-col gap-3 text-sm text-slate-500">
-                <Link href="#features" className="transition hover:text-cyan-300">
-            <h2 className={`text-3xl font-bold tracking-tight ${glowText}`}>{copy.featuresTitle || ui?.featuresTitle}</h2>
-                </Link>
+                <FooterRefactorMenu locale={pageLocale} />
                 <Link href={localizePath('/modular', pageLocale)} className="transition hover:text-cyan-300">
                   {ui?.footerModular || '模組化積木'}
                 </Link>
                 <Link href={localizePath('/line-kb', pageLocale)} className="transition hover:text-cyan-300">
-                  {ui?.footerLine || 'LINE 知識庫'}
+                  {getLocalizedNavItems(pageLocale)[2].label}
                 </Link>
                 <Link href="#pricing" className="transition hover:text-cyan-300">
                   {ui?.footerPlans || '訂閱方案'}
