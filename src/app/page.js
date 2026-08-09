@@ -175,9 +175,12 @@ const navItems = [
 ];
 
 const languageTabs = [
-  { href: '/en', label: 'EN', match: '/en' },
-  { href: '/zh-Hant', label: '繁中', match: '/zh-Hant' },
-  { href: '/zh-Hans', label: '简中', match: '/zh-Hans' },
+  { href: '/en', label: '\u{1F1FA}\u{1F1F8}', ariaLabel: 'English', match: '/en' },
+  { href: '/zh-Hant', label: '\u{1F1F9}\u{1F1FC}', ariaLabel: '繁體中文', match: '/zh-Hant' },
+  { href: '/zh-Hans', label: '\u{1F1E8}\u{1F1F3}', ariaLabel: '简体中文', match: '/zh-Hans' },
+  { href: '/ja', label: '\u{1F1EF}\u{1F1F5}', ariaLabel: '日本語', match: '/ja' },
+  { href: '/de', label: '\u{1F1E9}\u{1F1EA}', ariaLabel: 'Deutsch', match: '/de' },
+  { href: '/es', label: '\u{1F1EA}\u{1F1F8}', ariaLabel: 'Español', match: '/es' },
 ];
 
 
@@ -362,7 +365,7 @@ function LanguageMenu({ pathname, mobile = false }) {
         className={'flex cursor-pointer list-none items-center justify-center gap-1.5 rounded-full border border-cyan-300/20 bg-slate-950/55 px-2.5 py-2 text-xs font-bold tracking-[0.1em] text-slate-200 shadow-[0_0_22px_rgba(34,211,238,0.14)] backdrop-blur-xl transition hover:border-cyan-300/45 hover:text-cyan-100 ' + (mobile ? 'w-full min-h-11' : 'min-w-[5.6rem] max-sm:min-w-[4.5rem] max-sm:gap-1 max-sm:px-2 max-sm:py-1.5 max-sm:text-[11px]')}
       >
         <span className="h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(34,211,238,0.7)]" />
-        <span>{activeTab.label}</span>
+        <span role="img" aria-label={activeTab.ariaLabel}>{activeTab.label}</span>
         <MenuDots />
       </button>
       <div
@@ -378,7 +381,7 @@ function LanguageMenu({ pathname, mobile = false }) {
                 onClick={() => setOpen(false)}
                 className={'flex items-center justify-between rounded-xl px-2 py-2.5 text-xs font-bold tracking-[0.08em] transition ' + (isActive ? 'bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 shadow-[0_0_16px_rgba(34,211,238,0.35)]' : 'text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-100')}
               >
-                <span className="flex items-center gap-1.5"><span className={'h-1.5 w-1.5 rounded-full ' + (isActive ? 'bg-white' : 'bg-cyan-300/70')} />{tab.label}</span>
+                <span className="flex items-center gap-1.5"><span className={'h-1.5 w-1.5 rounded-full ' + (isActive ? 'bg-white' : 'bg-cyan-300/70')} /><span role="img" aria-label={tab.ariaLabel}>{tab.label}</span></span>
                 {isActive ? <span aria-hidden="true" className="text-[10px]">✓</span> : null}
               </Link>
             );
