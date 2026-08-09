@@ -9,7 +9,6 @@ import { Shield, Radio, Activity, Cpu, AlertTriangle, Check, X, ShieldAlert, Zap
 
 import MqlEvolutionEngineExperience from '../../components/MqlEvolutionEngineExperience';
 
-// --- 璅⊥擃?單??豢?????---
 const generateInitialVolData = () => {
   return Array.from({ length: 20 }, (_, i) => ({
     time: `${15 + Math.floor(i / 4)}:${(i % 4) * 15 === 0 ? '00' : (i % 4) * 15}`,
@@ -58,7 +57,6 @@ export default function ControlRoomDashboard() {
   const [twoManLock, setTwoManLock] = useState(false);
 
 
-  // 璅⊥ WebSocket 瘥??券?Tick ?豢??湔
   useEffect(() => {
     if (systemState === 'HALT') return;
 
@@ -80,7 +78,6 @@ export default function ControlRoomDashboard() {
         return next;
       });
 
-      // ?冽?敺株矽撣單撱園??撌殷?璅⊥?祕蝬脰楝?瘜?
       setAccounts(prev => prev.map(acc => {
         if (acc.id === 'Acc_Prop4' && systemState === 'NOMINAL') {
           // ?冽?霈??董?園脣 WARNING 閫貊憭批輒閬死??霈?
@@ -170,7 +167,6 @@ export default function ControlRoomDashboard() {
               </div>
             </div>
 
-            {/* 敺株?蝯?銵??? */}
             <div className="grid grid-cols-2 gap-2 text-xs border-t border-slate-800/60 pt-3">
               <div className="bg-slate-950 p-2 rounded border border-slate-900">
                 <div className="text-slate-500">Order Flow (OFI)</div>
@@ -308,7 +304,6 @@ export default function ControlRoomDashboard() {
               </div>
             </div>
 
-            {/* 撣豢?鞈?蝯梯?摨? */}
             <div className="border-t border-slate-800/60 pt-3 text-[10px] text-slate-500 space-y-1">
               <div className="flex justify-between">
                 <span>ZMQ PIPELINE CAPACITY:</span>
