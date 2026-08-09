@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { getLocaleFromPath, localizePath, stripLocale } from '../lib/locale';
 
-const homeRoutes = new Set(['/', '/zh-Hant', '/zh-Hans', '/en']);
+const homeRoutes = new Set(['/', '/zh-Hant', '/zh-Hans', '/en', '/ja', '/de', '/es']);
 
 const navItems = [
   {
@@ -53,8 +53,11 @@ const footerLinks = [
 
 const languageTabs = [
   { href: '/en', label: 'EN', match: '/en' },
-  { href: '/zh-Hant', label: '繁中', match: '/zh-Hant' },
-  { href: '/zh-Hans', label: '简中', match: '/zh-Hans' },
+  { href: '/zh-Hant', label: 'ZH-Hant', match: '/zh-Hant' },
+  { href: '/zh-Hans', label: 'ZH-Hans', match: '/zh-Hans' },
+  { href: '/ja', label: 'JA', match: '/ja' },
+  { href: '/de', label: 'DE', match: '/de' },
+  { href: '/es', label: 'ES', match: '/es' },
 ];
 
 function isNavItemActive(item, pathname) {
@@ -65,14 +68,14 @@ function isNavItemActive(item, pathname) {
 
 const navTranslations = {
   'zh-Hant': {
-    groups: ['AI重構引擎', '模組化積木', 'Lab知識庫', '訂閱方案'],
-    children: [['標準會員版', '加盟會員版', '尊爵商用版', '多智能體MQL全自動進化引擎', 'Docker MCP伺服噐版(企業私有雲)'], null, null, ['標準會員', '加盟會員', '企業VIP會員']],
-    login: '登錄',
+    groups: ['AI??撘?', '璅∠?????, 'Lab?亥?摨?, '閮?寞?'],
+    children: [['璅????, '?????, '撠???, '憭?賡?MQL?刻?脣?撘?', 'Docker MCP隡箸???(隡平蝘???'], null, null, ['璅??', '???', '隡平VIP?']],
+    login: '?駁?',
   },
   'zh-Hans': {
-    groups: ['AI重构引擎', '模块化积木', 'Lab知识库', '订阅方案'],
-    children: [['标准会员版', '加盟会员版', '尊爵商用版', '多智能体MQL全自动进化引擎', 'Docker MCP服务器版(企业私有云)'], null, null, ['标准会员', '加盟会员', '企业VIP会员']],
-    login: '登录',
+    groups: ['AI??撘?', '璅∪??妖??, 'Lab?亥?摨?, '霈ａ??寞?'],
+    children: [['??隡???, '??隡???, '撠???, '憭?賭?MQL?刻?刻?????, 'Docker MCP??函?(隡?蝘?鈭?'], null, null, ['??隡?', '??隡?', '隡?VIP隡?']],
+    login: '?餃?',
   },
   en: {
     groups: ['AI Refactoring', 'Modular Blocks', 'Lab Knowledge Base', 'Subscription Plans'],
@@ -83,14 +86,14 @@ const navTranslations = {
 
 const footerTranslations = {
   'zh-Hant': {
-    description: 'AI-Quant Lab 專注於把 MQL5 量化策略、AI 工作流與知識入口整合成一套好看、好讀、好行動的品牌體驗。',
-    badge: '商業級 MT5 原始碼 (Source Code) 入口',
-    tagline: 'AI-Quant Lab｜量化交易、MQL5 與 AI 工作流',
+    description: 'AI-Quant Lab 撠釣?潭? MQL5 ??蝑?I 撌乩?瘚??亥??亙?游???憟末?末霈?末銵?????撽?,
+    badge: '?平蝝?MT5 ??蝣?(Source Code) ?亙',
+    tagline: 'AI-Quant Lab嚚??漱?QL5 ??AI 撌乩?瘚?,
   },
   'zh-Hans': {
-    description: 'AI-Quant Lab 专注于把 MQL5 量化策略、AI 工作流与知识入口整合成一套好看、好读、好行动的品牌体验。',
-    badge: '商业级 MT5 原始码 (Source Code) 入口',
-    tagline: 'AI-Quant Lab｜量化交易、MQL5 与 AI 工作流',
+    description: 'AI-Quant Lab 銝釣鈭? MQL5 ??蝑?I 撌乩?瘚??亥??亙?游???憟末?末霂颯末銵????撉?,
+    badge: '??蝥?MT5 ????(Source Code) ?亙',
+    tagline: 'AI-Quant Lab嚚??漱?QL5 銝?AI 撌乩?瘚?,
   },
   en: {
     description: 'AI-Quant Lab brings MQL5 quantitative strategies, AI workflows, and knowledge resources together in a clear, polished, action-oriented brand experience.',
@@ -101,12 +104,12 @@ const footerTranslations = {
 
 const footerLabels = {
   'zh-Hant': [
-    ['探索', '首頁', 'AI 重構引擎', '模組化積木'],
-    ['旅程', 'LINE 知識庫', '標準會員', '會員中心'],
+    ['?Ｙ揣', '擐?', 'AI ??撘?', '璅∠?????],
+    ['??', 'LINE ?亥?摨?, '璅??', '?銝剖?'],
   ],
   'zh-Hans': [
-    ['探索', '首页', 'AI 重构引擎', '模块化积木'],
-    ['旅程', 'LINE 知识库', '标准会员', '会员中心'],
+    ['?Ｙ揣', '擐△', 'AI ??撘?', '璅∪??妖??],
+    ['??', 'LINE ?亥?摨?, '??隡?', '隡?銝剖?'],
   ],
   en: [
     ['Explore', 'Home', 'AI Refactoring Engine', 'Modular Blocks'],
@@ -206,7 +209,7 @@ function LanguageMenu({ pathname, mobile = false }) {
             return (
               <Link key={tab.label} href={localizePath(pathname || '/', tab.match.slice(1))} className={'flex items-center justify-between rounded-xl px-2 py-2.5 text-xs font-bold tracking-[0.08em] transition ' + (isActive ? 'bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 shadow-[0_0_16px_rgba(34,211,238,0.35)]' : 'text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-100')}>
                 <span className="flex items-center gap-1.5"><span className={'h-1.5 w-1.5 rounded-full ' + (isActive ? 'bg-white' : 'bg-cyan-300/70')} />{tab.label}</span>
-                {isActive ? <span aria-hidden="true" className="text-[10px]">✓</span> : null}
+                {isActive ? <span aria-hidden="true" className="text-[10px]">??/span> : null}
               </Link>
             );
           })}
@@ -227,7 +230,7 @@ function DesktopNavItem({ item, pathname, locale }) {
     return <Link href={localizePath(item.href, locale)} className={`group relative rounded-full px-4 py-2 transition-all duration-300 ${baseClasses}`}><span className="relative z-10 flex items-center gap-2"><span className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${dotClasses}`} /><span>{item.label}</span></span></Link>;
   }
 
-  const menuWidth = item.label.includes('訂閱方案') || item.label.includes('订阅方案') || item.label === 'Subscription Plans' ? 'w-28' : (item.label.includes('AI重構引擎') || item.label.includes('AI重构引擎') || item.label === 'AI Refactoring' ? 'w-36' : 'w-56');
+  const menuWidth = item.label.includes('閮?寞?') || item.label.includes('霈ａ??寞?') || item.label === 'Subscription Plans' ? 'w-28' : (item.label.includes('AI??撘?') || item.label.includes('AI??撘?') || item.label === 'AI Refactoring' ? 'w-36' : 'w-56');
   return (
     <details ref={boundaryRef} open={open} onPointerEnter={() => setOpen(true)} onPointerLeave={() => setOpen(false)} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} onToggle={(event) => setOpen(event.currentTarget.open)} className="group relative">
       <summary className={`flex cursor-pointer list-none items-center gap-1.5 rounded-full px-2.5 py-2 transition-all duration-300 [&::-webkit-details-marker]:hidden ${baseClasses}`}>
@@ -370,7 +373,7 @@ useEffect(() => {
               AI-Quant Lab
             </span>
             <span className="inline-flex shrink-0 items-center rounded-full border border-amber-100/70 bg-amber-300 px-1.5 py-1 text-[8px] font-black leading-none tracking-[0.04em] text-amber-950 shadow-[0_0_14px_rgba(252,211,77,0.48)] sm:px-2.5 sm:text-[10px]">
-              <span className="sm:hidden">Beta</span><span className="hidden sm:inline">{locale === 'en' ? 'Beta Testing' : 'Beta版測試'}</span>
+              <span className="sm:hidden">Beta</span><span className="hidden sm:inline">{locale === 'en' ? 'Beta Testing' : 'Beta?葫閰?}</span>
             </span>
           </Link>
 
