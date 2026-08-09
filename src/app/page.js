@@ -1,6 +1,7 @@
 'use client';
 // env fix v1
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -1290,24 +1291,14 @@ export default function Home({ locale = 'en' }) {
         >
           <div className="flex h-14 w-full min-w-0 max-w-none items-center justify-between bg-slate-950/80 px-3 backdrop-blur-md sm:h-16 sm:bg-transparent sm:px-4 sm:backdrop-blur-0 lg:px-5">
             <div className="flex min-w-0 shrink items-center gap-2 sm:gap-3">
-              <div className="animate-badge-glow relative flex h-9 w-9 flex-none sm:h-10 sm:w-10 items-center justify-center overflow-hidden rounded-[1.25rem] border border-white/35 bg-gradient-to-br from-white via-cyan-100 to-cyan-400 px-2 py-1 text-[0.72rem] font-black leading-none tracking-[0.14em] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.22),0_0_22px_rgba(34,211,238,0.92),0_0_14px_rgba(59,130,246,0.52),inset_0_1px_0_rgba(255,255,255,0.95)] ring-2 ring-cyan-300/28">
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.55),transparent_38%),linear-gradient(135deg,rgba(255,255,255,0.2),transparent_48%),linear-gradient(180deg,rgba(255,255,255,0.08),transparent_60%)]"
-                />
-                <span
-                  className="relative z-10 normal-case drop-shadow-[0_0_8px_rgba(255,255,255,0.65)]"
-                  style={{
-                    fontFamily: 'Georgia, "Times New Roman", serif',
-                    fontStyle: 'italic',
-                    letterSpacing: '0.06em',
-                    color: '#0f172a',
-                  }}
-                >
-                  mq5
-                </span>
-              </div>
-              <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-[clamp(0.8rem,4.3vw,1.25rem)] font-black leading-none whitespace-nowrap tracking-wide text-transparent sm:text-xl">
+              <Image
+                src="/aql-logo.png"
+                alt="AQL"
+                width={40}
+                height={40}
+                priority
+                className="animate-badge-glow h-9 w-9 flex-none rounded-full object-contain sm:h-10 sm:w-10"
+              />              <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-[clamp(0.8rem,4.3vw,1.25rem)] font-black leading-none whitespace-nowrap tracking-wide text-transparent sm:text-xl">
                 AI-Quant Lab
               </span>
               <span className="inline-flex shrink-0 items-center rounded-full border border-amber-100/70 bg-amber-300 px-1.5 py-1 text-[8px] font-black leading-none tracking-[0.04em] text-amber-950 shadow-[0_0_14px_rgba(252,211,77,0.48)] sm:px-2.5 sm:text-[10px]">
@@ -1994,24 +1985,13 @@ export default function Home({ locale = 'en' }) {
           <div className="grid gap-10 md:grid-cols-[1.4fr_0.8fr_0.8fr]">
             <div className="space-y-5">
               <div className="flex items-center gap-3">
-                <div className="animate-badge-glow relative flex h-9 w-9 flex-none sm:h-10 sm:w-10 items-center justify-center overflow-hidden rounded-[1.25rem] border border-white/30 bg-gradient-to-br from-white via-cyan-100 to-cyan-400 text-white shadow-[0_0_0_1px_rgba(255,255,255,0.2),0_0_22px_rgba(34,211,238,0.88),0_0_14px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.95)] ring-2 ring-cyan-300/22">
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.48),transparent_38%),linear-gradient(135deg,rgba(255,255,255,0.16),transparent_48%),linear-gradient(180deg,rgba(255,255,255,0.08),transparent_60%)]"
-                  />
-                  <span
-                    className="relative z-10 text-[0.72rem] font-black leading-none normal-case drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]"
-                    style={{
-                      fontFamily: 'Georgia, "Times New Roman", serif',
-                      fontStyle: 'italic',
-                      letterSpacing: '0.06em',
-                      color: '#0f172a',
-                    }}
-                  >
-                    mq5
-                  </span>
-                </div>
-                <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-lg font-black tracking-wide text-transparent">
+                <Image
+                  src="/aql-logo.png"
+                  alt="AQL"
+                  width={40}
+                  height={40}
+                  className="animate-badge-glow h-9 w-9 flex-none rounded-full object-contain sm:h-10 sm:w-10"
+                />                <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-lg font-black tracking-wide text-transparent">
                   AI-Quant Lab
                 </span>
               </div>

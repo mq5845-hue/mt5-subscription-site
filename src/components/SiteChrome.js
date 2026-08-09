@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -154,26 +155,16 @@ function getLoginLabel(locale) {
 }
 function LogoMark() {
   return (
-    <div className="animate-badge-glow relative flex h-9 w-9 flex-none sm:h-10 sm:w-10 items-center justify-center overflow-hidden rounded-[1.25rem] border border-white/35 bg-gradient-to-br from-white via-cyan-100 to-cyan-400 px-2 py-1 text-[0.72rem] font-black leading-none tracking-[0.14em] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.22),0_0_22px_rgba(34,211,238,0.92),0_0_14px_rgba(59,130,246,0.52),inset_0_1px_0_rgba(255,255,255,0.95)] ring-2 ring-cyan-300/28">
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.55),transparent_38%),linear-gradient(135deg,rgba(255,255,255,0.2),transparent_48%),linear-gradient(180deg,rgba(255,255,255,0.08),transparent_60%)]"
-      />
-      <span
-        className="relative z-10 normal-case drop-shadow-[0_0_8px_rgba(255,255,255,0.65)]"
-        style={{
-          fontFamily: 'Georgia, "Times New Roman", serif',
-          fontStyle: 'italic',
-          letterSpacing: '0.06em',
-          color: '#0f172a',
-        }}
-      >
-        mq5
-      </span>
-    </div>
+    <Image
+      src="/aql-logo.png"
+      alt=""
+      aria-hidden="true"
+      width={40}
+      height={40}
+      className="animate-badge-glow h-9 w-9 flex-none rounded-full object-contain sm:h-10 sm:w-10"
+    />
   );
 }
-
 function MenuDots() {
   return (
     <span aria-hidden="true" className="inline-flex flex-col items-center gap-px">
