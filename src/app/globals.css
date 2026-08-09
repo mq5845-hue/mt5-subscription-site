@@ -1478,3 +1478,34 @@ details.group:hover > .site-dropdown-panel {
     animation-play-state: running !important;
   }
 }
+/* A dedicated ring sits behind the image, so the glow remains visible even
+   when the logo file itself includes transparent padding. */
+.aql-logo-halo {
+  position: relative;
+  display: inline-flex;
+  isolation: isolate;
+}
+
+.aql-logo-halo::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -16%;
+  border: 2px solid rgba(207, 250, 254, 0.95);
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(207, 250, 254, 0.24) 0%, rgba(34, 211, 238, 0.18) 38%, transparent 69%);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 1), 0 0 20px rgba(34, 211, 238, 0.98), 0 0 42px rgba(14, 165, 233, 0.8);
+  animation: aqlHaloRingPulse 1.15s ease-in-out infinite !important;
+}
+
+@keyframes aqlHaloRingPulse {
+  0%, 100% { opacity: 0.64; transform: scale(0.94); filter: brightness(0.92); }
+  50% { opacity: 1; transform: scale(1.11); filter: brightness(1.4); }
+}
+
+/* The desktop globe control is 30% narrower; its globe icon retains h-9/w-9. */
+.language-menu-trigger:not(.language-menu-trigger--mobile) {
+  min-width: 3.95rem !important;
+  gap: 0.25rem !important;
+  padding: 0.125rem 0.3rem !important;
+}

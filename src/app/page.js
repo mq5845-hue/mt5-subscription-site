@@ -438,7 +438,7 @@ function LanguageMenu({ pathname, mobile = false }) {
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((value) => (mobile ? !value : true))}
-        className={'flex cursor-pointer list-none items-center justify-center gap-1.5 rounded-full border border-cyan-300/20 bg-slate-950/55 px-2.5 py-2 text-xs font-bold tracking-[0.1em] text-slate-200 shadow-[0_0_22px_rgba(34,211,238,0.14)] backdrop-blur-xl transition hover:border-cyan-300/45 hover:text-cyan-100 ' + (mobile ? 'w-full min-h-11' : 'min-w-[5.6rem] max-sm:min-w-[4.5rem] max-sm:gap-1 max-sm:px-2 max-sm:py-1.5 max-sm:text-[11px]')}
+        className={'language-menu-trigger flex cursor-pointer list-none items-center justify-center gap-1.5 rounded-full border border-cyan-300/20 bg-slate-950/55 px-2.5 py-2 text-xs font-bold tracking-[0.1em] text-slate-200 shadow-[0_0_22px_rgba(34,211,238,0.14)] backdrop-blur-xl transition hover:border-cyan-300/45 hover:text-cyan-100 ' + (mobile ? 'language-menu-trigger--mobile w-full min-h-11' : 'min-w-[5.6rem] max-sm:min-w-[4.5rem] max-sm:gap-1 max-sm:px-2 max-sm:py-1.5 max-sm:text-[11px]')}
       >
         <span aria-hidden="true" className="inline-flex h-9 w-9 items-center justify-center text-[23px] leading-none">🌐</span>
         <MenuDots />
@@ -1291,6 +1291,7 @@ export default function Home({ locale = 'en' }) {
         >
           <div className="flex h-14 w-full min-w-0 max-w-none items-center justify-between bg-slate-950/80 px-3 backdrop-blur-md sm:h-16 sm:bg-transparent sm:px-4 sm:backdrop-blur-0 lg:px-5">
             <div className="flex min-w-0 shrink items-center gap-2 sm:gap-3">
+              <span className="aql-logo-halo">
               <Image
                 src="/aql-logo.png"
                 alt="AQL"
@@ -1298,7 +1299,8 @@ export default function Home({ locale = 'en' }) {
                 height={40}
                 priority
                 className="aql-logo-glow h-9 w-9 flex-none rounded-full object-contain sm:h-10 sm:w-10"
-              />              <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-[clamp(0.8rem,4.3vw,1.25rem)] font-black leading-none whitespace-nowrap tracking-wide text-transparent sm:text-xl">
+              />
+            </span>              <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-[clamp(0.8rem,4.3vw,1.25rem)] font-black leading-none whitespace-nowrap tracking-wide text-transparent sm:text-xl">
                 AI-Quant Lab
               </span>
               <span className="inline-flex shrink-0 items-center rounded-full border border-amber-100/70 bg-amber-300 px-1.5 py-1 text-[8px] font-black leading-none tracking-[0.04em] text-amber-950 shadow-[0_0_14px_rgba(252,211,77,0.48)] sm:px-2.5 sm:text-[10px]">
@@ -1985,13 +1987,15 @@ export default function Home({ locale = 'en' }) {
           <div className="grid gap-10 md:grid-cols-[1.4fr_0.8fr_0.8fr]">
             <div className="space-y-5">
               <div className="flex items-center gap-3">
-                <Image
-                  src="/aql-logo.png"
+                <span className="aql-logo-halo">
+              <Image
+                src="/aql-logo.png"
                   alt="AQL"
                   width={40}
                   height={40}
                   className="aql-logo-glow h-9 w-9 flex-none rounded-full object-contain sm:h-10 sm:w-10"
-                />                <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-lg font-black tracking-wide text-transparent">
+              />
+            </span>                <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-lg font-black tracking-wide text-transparent">
                   AI-Quant Lab
                 </span>
               </div>

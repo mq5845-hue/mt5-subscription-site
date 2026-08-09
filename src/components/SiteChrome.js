@@ -155,14 +155,16 @@ function getLoginLabel(locale) {
 }
 function LogoMark() {
   return (
-    <Image
-      src="/aql-logo.png"
+    <span className="aql-logo-halo">
+      <Image
+        src="/aql-logo.png"
       alt=""
       aria-hidden="true"
       width={40}
       height={40}
       className="aql-logo-glow h-9 w-9 flex-none rounded-full object-contain sm:h-10 sm:w-10"
-    />
+      />
+    </span>
   );
 }
 function MenuDots() {
@@ -194,7 +196,7 @@ function LanguageMenu({ pathname, mobile = false }) {
 
   return (
     <details ref={boundaryRef} open={open} onPointerEnter={() => setOpen(true)} onPointerLeave={() => setOpen(false)} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} onToggle={(event) => setOpen(event.currentTarget.open)} className={'group relative ' + (mobile ? 'w-full' : '')}>
-      <summary className={'flex cursor-pointer list-none items-center justify-center gap-1.5 rounded-full border border-cyan-300/20 bg-slate-950/55 px-2.5 py-2 text-xs font-bold tracking-[0.1em] text-slate-200 shadow-[0_0_22px_rgba(34,211,238,0.14)] backdrop-blur-xl transition hover:border-cyan-300/45 hover:text-cyan-100 [&::-webkit-details-marker]:hidden ' + (mobile ? 'w-full min-h-11' : 'min-w-[5.6rem] max-sm:min-w-[4.5rem] max-sm:gap-1 max-sm:px-2 max-sm:py-1.5 max-sm:text-[11px]')}>
+      <summary className={'language-menu-trigger flex cursor-pointer list-none items-center justify-center gap-1.5 rounded-full border border-cyan-300/20 bg-slate-950/55 px-2.5 py-2 text-xs font-bold tracking-[0.1em] text-slate-200 shadow-[0_0_22px_rgba(34,211,238,0.14)] backdrop-blur-xl transition hover:border-cyan-300/45 hover:text-cyan-100 [&::-webkit-details-marker]:hidden ' + (mobile ? 'language-menu-trigger--mobile w-full min-h-11' : 'min-w-[5.6rem] max-sm:min-w-[4.5rem] max-sm:gap-1 max-sm:px-2 max-sm:py-1.5 max-sm:text-[11px]')}>
         <span aria-hidden="true" className="inline-flex h-9 w-9 items-center justify-center text-[23px] leading-none">🌐</span>
         <MenuDots />
       </summary>
