@@ -20,5 +20,5 @@ const flags = {
 };
 
 export default function FlagAvatar({ locale, className = '' }) {
-  return <span aria-hidden="true" className={`inline-flex h-7 w-7 flex-none overflow-hidden rounded-full border border-cyan-200/35 shadow-[0_0_12px_rgba(34,211,238,0.22)] ${className}`}>{flags[locale] || flags.en}</span>;
+  return <span aria-hidden="true" className={`inline-flex h-5 w-7 flex-none overflow-hidden rounded-sm border border-cyan-200/35 shadow-[0_0_8px_rgba(34,211,238,0.16)] ${className}`}>{flags[locale] || flags.en}</span>;
 }
