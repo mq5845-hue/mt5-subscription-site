@@ -161,7 +161,7 @@ function LogoMark() {
       aria-hidden="true"
       width={40}
       height={40}
-      className="animate-badge-glow h-9 w-9 flex-none rounded-full object-contain sm:h-10 sm:w-10"
+      className="aql-logo-glow h-9 w-9 flex-none rounded-full object-contain sm:h-10 sm:w-10"
     />
   );
 }

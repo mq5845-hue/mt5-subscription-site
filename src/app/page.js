@@ -1297,7 +1297,7 @@ export default function Home({ locale = 'en' }) {
                 width={40}
                 height={40}
                 priority
-                className="animate-badge-glow h-9 w-9 flex-none rounded-full object-contain sm:h-10 sm:w-10"
+                className="aql-logo-glow h-9 w-9 flex-none rounded-full object-contain sm:h-10 sm:w-10"
               />              <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-[clamp(0.8rem,4.3vw,1.25rem)] font-black leading-none whitespace-nowrap tracking-wide text-transparent sm:text-xl">
                 AI-Quant Lab
               </span>
@@ -1990,7 +1990,7 @@ export default function Home({ locale = 'en' }) {
                   alt="AQL"
                   width={40}
                   height={40}
-                  className="animate-badge-glow h-9 w-9 flex-none rounded-full object-contain sm:h-10 sm:w-10"
+                  className="aql-logo-glow h-9 w-9 flex-none rounded-full object-contain sm:h-10 sm:w-10"
                 />                <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-lg font-black tracking-wide text-transparent">
                   AI-Quant Lab
                 </span>
