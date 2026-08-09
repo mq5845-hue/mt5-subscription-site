@@ -1003,7 +1003,7 @@ const englishPlans = [
     highlights: englishPlanHighlights,
     featured: true,
     cta: 'Go to AI Refactoring Engine >>>',
-    href: '/en/converter',
+    href: '/converter',
   },
 ];
 
@@ -1012,7 +1012,7 @@ const englishInstitutionalPlans = [
     ...englishPlans[0],
     name: 'Quasi-Institutional Edition (For Brokers, Proprietary Firms, EA Trading Teams, Family Offices & Private Funds)',
     featured: true,
-    href: '/en/multi-agent/engine',
+    href: '/multi-agent/engine',
     cta: 'Go to AI Refactoring Engine >>>',
     price: 'USD$ 1,499.00',
     discontinued: false,
@@ -1033,7 +1033,7 @@ const englishInstitutionalPlans = [
   {
     ...englishPlans[1],
     name: 'Institutional Edition — 100% Offline Private Enterprise Cloud',
-    href: '/en/control-room',
+    href: '/control-room',
     price: 'USD$ 14,990.00',
     highlights: ['Offline private-cloud deployment', 'Enterprise access control', 'Dedicated technical service'],
     description: 'For institutional teams that require data sovereignty, internal governance, and a fully private quantitative research environment.',
@@ -1806,7 +1806,7 @@ export default function Home({ locale = 'en' }) {
                 </div>
 
                 <Link
-                  href={plan.disabledCta ? '#' : (plan.href && plan.href.includes('/converter') ? localizePath('/converter', pageLocale) : (plan.href || (plan.featured ? 'https://lin.ee/stqhWhj' : localizePath('/membership', pageLocale))))}
+                  href={plan.disabledCta ? '#' : (plan.href ? localizePath(plan.href, pageLocale) : (plan.featured ? 'https://lin.ee/stqhWhj' : localizePath('/membership', pageLocale)))}
                   onClick={plan.disabledCta ? (event) => event.preventDefault() : undefined}
                   aria-disabled={plan.disabledCta || undefined}
                   tabIndex={plan.disabledCta ? -1 : undefined}
