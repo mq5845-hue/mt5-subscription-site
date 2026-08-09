@@ -636,7 +636,7 @@ html {
   .hero-cta-glow:hover {
     animation: none;
     transform: translateY(-4px) scale(1.02);
-    filter: brightness(1.12) saturate(1.08);
+    filter: brightness(1.06) saturate(1.08);
     border-color: rgba(207, 250, 254, 0.95) !important;
     box-shadow:
       0 0 12px rgba(255, 255, 255, 0.45),
@@ -1438,12 +1438,12 @@ details.group:hover > .site-dropdown-panel {
   position: relative;
   z-index: 1;
   filter:
-    brightness(1.14)
-    saturate(1.21)
-    drop-shadow(0 0 3px rgba(255, 255, 255, 1))
-    drop-shadow(0 0 5px rgba(165, 243, 252, 0.5))
-    drop-shadow(0 0 11px rgba(34, 211, 238, 0.49))
-    drop-shadow(0 0 17px rgba(14, 165, 233, 0.35));
+    brightness(1.07)
+    saturate(1.11)
+    drop-shadow(0 0 1.5px rgba(255, 255, 255, 0.5))
+    drop-shadow(0 0 2.5px rgba(165, 243, 252, 0.25))
+    drop-shadow(0 0 5.5px rgba(34, 211, 238, 0.245))
+    drop-shadow(0 0 8.5px rgba(14, 165, 233, 0.175));
   transform: scale(1.18);
   transform-origin: center;
   animation: aqlLogoGlowPulse 1.15s ease-in-out infinite !important;
@@ -1452,22 +1452,22 @@ details.group:hover > .site-dropdown-panel {
 @keyframes aqlLogoGlowPulse {
   0%, 100% {
     filter:
-      brightness(1.12)
-      saturate(1.24)
-      drop-shadow(0 0 2px rgba(255, 255, 255, 0.96))
-      drop-shadow(0 0 7px rgba(103, 232, 249, 0.92))
-      drop-shadow(0 0 15px rgba(34, 211, 238, 0.72))
-      drop-shadow(0 0 24px rgba(14, 165, 233, 0.42));
+      brightness(1.06)
+      saturate(1.12)
+      drop-shadow(0 0 1px rgba(255, 255, 255, 0.48))
+      drop-shadow(0 0 3.5px rgba(103, 232, 249, 0.46))
+      drop-shadow(0 0 7.5px rgba(34, 211, 238, 0.36))
+      drop-shadow(0 0 12px rgba(14, 165, 233, 0.21));
     transform: scale(1.13);
   }
   50% {
     filter:
-      brightness(1.46)
-      saturate(1.58)
-      drop-shadow(0 0 4px rgba(255, 255, 255, 1))
-      drop-shadow(0 0 13px rgba(207, 250, 254, 1))
-      drop-shadow(0 0 29px rgba(34, 211, 238, 1))
-      drop-shadow(0 0 46px rgba(14, 165, 233, 0.9));
+      brightness(1.23)
+      saturate(1.29)
+      drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))
+      drop-shadow(0 0 6.5px rgba(207, 250, 254, 0.5))
+      drop-shadow(0 0 14.5px rgba(34, 211, 238, 0.5))
+      drop-shadow(0 0 23px rgba(14, 165, 233, 0.45));
     transform: scale(1.23);
   }
 }
@@ -1491,16 +1491,16 @@ details.group:hover > .site-dropdown-panel {
   position: absolute;
   z-index: -1;
   inset: -16%;
-  border: 2px solid rgba(207, 250, 254, 0.48);
+  border: 2px solid rgba(207, 250, 254, 0.24);
   border-radius: 9999px;
-  background: radial-gradient(circle, rgba(207, 250, 254, 0.12) 0%, rgba(34, 211, 238, 0.09) 38%, transparent 69%);
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5), 0 0 10px rgba(34, 211, 238, 0.49), 0 0 21px rgba(14, 165, 233, 0.4);
+  background: radial-gradient(circle, rgba(207, 250, 254, 0.06) 0%, rgba(34, 211, 238, 0.045) 38%, transparent 69%);
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.25), 0 0 5px rgba(34, 211, 238, 0.245), 0 0 10.5px rgba(14, 165, 233, 0.2);
   animation: aqlHaloRingPulse 1.15s ease-in-out infinite !important;
 }
 
 @keyframes aqlHaloRingPulse {
-  0%, 100% { opacity: 0.64; transform: scale(0.94); filter: brightness(0.92); }
-  50% { opacity: 1; transform: scale(1.11); filter: brightness(1.4); }
+  0%, 100% { opacity: 0.32; transform: scale(0.94); filter: brightness(0.96); }
+  50% { opacity: 0.5; transform: scale(1.11); filter: brightness(1.2); }
 }
 
 /* The desktop globe control is 30% narrower; its globe icon retains h-9/w-9. */
