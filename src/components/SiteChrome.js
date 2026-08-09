@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { getLocaleFromPath, localizePath, stripLocale } from '../lib/locale';
+import EmojiAvatar from './EmojiAvatar';
+import FlagAvatar from './FlagAvatar';
 
 const homeRoutes = new Set(['/', '/zh-Hant', '/zh-Hans', '/en', '/ja', '/de', '/es']);
 
@@ -52,12 +54,12 @@ const footerLinks = [
 ];
 
 const languageTabs = [
-  { href: '/en', label: '\u{1F1FA}\u{1F1F8}', ariaLabel: 'English', match: '/en' },
-  { href: '/zh-Hant', label: '\u{1F1F9}\u{1F1FC}', ariaLabel: '繁體中文', match: '/zh-Hant' },
-  { href: '/zh-Hans', label: '\u{1F1E8}\u{1F1F3}', ariaLabel: '简体中文', match: '/zh-Hans' },
-  { href: '/ja', label: '\u{1F1EF}\u{1F1F5}', ariaLabel: '日本語', match: '/ja' },
-  { href: '/de', label: '\u{1F1E9}\u{1F1EA}', ariaLabel: 'Deutsch', match: '/de' },
-  { href: '/es', label: '\u{1F1EA}\u{1F1F8}', ariaLabel: 'Español', match: '/es' },
+  { href: '/en', locale: 'en', ariaLabel: 'English', match: '/en' },
+  { href: '/zh-Hant', locale: 'zh-Hant', ariaLabel: '繁體中文', match: '/zh-Hant' },
+  { href: '/zh-Hans', locale: 'zh-Hans', ariaLabel: '简体中文', match: '/zh-Hans' },
+  { href: '/ja', locale: 'ja', ariaLabel: '日本語', match: '/ja' },
+  { href: '/de', locale: 'de', ariaLabel: 'Deutsch', match: '/de' },
+  { href: '/es', locale: 'es', ariaLabel: 'Español', match: '/es' },
 ];
 
 function isNavItemActive(item, pathname) {
@@ -84,6 +86,11 @@ const navTranslations = {
   },
 };
 
+Object.assign(navTranslations, {
+  ja: { groups: ['AIリファクタリング', 'モジュール・ブロック', 'Labナレッジベース', 'サブスクリプション'], children: [['標準メンバーシップ', 'アフィリエイト会員', 'プレミアム商用版', 'マルチエージェントMQL自動進化エンジン', 'Docker MCPサーバー（企業プライベートクラウド）'], null, null, ['標準会員', 'アフィリエイト会員', '企業VIP会員']], login: 'ログイン' },
+  de: { groups: ['KI-Refactoring', 'Modulare Bausteine', 'Lab-Wissensbasis', 'Abonnements'], children: [['Standardmitgliedschaft', 'Affiliate-Mitgliedschaft', 'Premium Commercial', 'Multi-Agent-MQL-Evolutionsengine', 'Docker-MCP-Server (Enterprise Private Cloud)'], null, null, ['Standardmitglied', 'Affiliate-Mitglied', 'Enterprise VIP']], login: 'ANMELDEN' },
+  es: { groups: ['Refactorización con IA', 'Bloques modulares', 'Base de conocimiento Lab', 'Suscripciones'], children: [['Membresía estándar', 'Membresía afiliada', 'Comercial premium', 'Motor de evolución MQL multiagente', 'Servidor Docker MCP (nube privada empresarial)'], null, null, ['Miembro estándar', 'Miembro afiliado', 'VIP empresarial']], login: 'INICIAR SESIÓN' },
+});
 const footerTranslations = {
   'zh-Hant': {
     description: 'AI-Quant Lab 專注於把 MQL5 量化策略、AI 工作流與知識入口整合成一套好看、好讀、好行動的品牌體驗。',
@@ -193,22 +200,20 @@ function useDropdownBoundary(open, setOpen) {
 function LanguageMenu({ pathname, mobile = false }) {
   const [open, setOpen] = useState(false);
   const boundaryRef = useDropdownBoundary(open, setOpen);
-  const activeTab = languageTabs.find((tab) => pathname.startsWith(tab.match)) || languageTabs[0];
 
   return (
     <details ref={boundaryRef} open={open} onPointerEnter={() => setOpen(true)} onPointerLeave={() => setOpen(false)} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} onToggle={(event) => setOpen(event.currentTarget.open)} className={'group relative ' + (mobile ? 'w-full' : '')}>
       <summary className={'flex cursor-pointer list-none items-center justify-center gap-1.5 rounded-full border border-cyan-300/20 bg-slate-950/55 px-2.5 py-2 text-xs font-bold tracking-[0.1em] text-slate-200 shadow-[0_0_22px_rgba(34,211,238,0.14)] backdrop-blur-xl transition hover:border-cyan-300/45 hover:text-cyan-100 [&::-webkit-details-marker]:hidden ' + (mobile ? 'w-full min-h-11' : 'min-w-[5.6rem] max-sm:min-w-[4.5rem] max-sm:gap-1 max-sm:px-2 max-sm:py-1.5 max-sm:text-[11px]')}>
-        <span className="h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(34,211,238,0.7)]" />
-        <span role="img" aria-label={activeTab.ariaLabel}>{activeTab.label}</span>
+        <span aria-hidden="true" className="inline-flex h-9 w-9 items-center justify-center text-[23px] leading-none">🌐</span>
         <MenuDots />
       </summary>
       <div className={'site-dropdown-panel absolute right-0 top-full z-[1300] pt-2 ' + (mobile ? 'left-0' : '')}>
-        <div className={'overflow-hidden rounded-2xl border border-cyan-300/20 bg-[#020617] p-1.5 shadow-[0_0_28px_rgba(34,211,238,0.22)] ' + (mobile ? 'w-full' : 'w-20')}>
+        <div className={'overflow-hidden rounded-2xl border border-cyan-300/20 bg-[#020617] p-1.5 shadow-[0_0_28px_rgba(34,211,238,0.22)] ' + (mobile ? 'w-full' : 'w-16')}>
           {languageTabs.map((tab) => {
-            const isActive = tab.label === activeTab.label;
+            const isActive = pathname.startsWith(tab.match);
             return (
-              <Link key={tab.label} href={localizePath(pathname || '/', tab.match.slice(1))} className={'flex items-center justify-between rounded-xl px-2 py-2.5 text-xs font-bold tracking-[0.08em] transition ' + (isActive ? 'bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 shadow-[0_0_16px_rgba(34,211,238,0.35)]' : 'text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-100')}>
-                <span className="flex items-center gap-1.5"><span className={'h-1.5 w-1.5 rounded-full ' + (isActive ? 'bg-white' : 'bg-cyan-300/70')} /><span role="img" aria-label={tab.ariaLabel}>{tab.label}</span></span>
+              <Link key={tab.locale} href={localizePath(pathname || '/', tab.match.slice(1))} aria-label={tab.ariaLabel} title={tab.ariaLabel} className={'flex items-center justify-center rounded-xl px-2 py-2 text-xs font-bold tracking-[0.08em] transition ' + (isActive ? 'bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 shadow-[0_0_16px_rgba(34,211,238,0.35)]' : 'text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-100')}>
+                <FlagAvatar locale={tab.locale} />
                 {isActive ? <span aria-hidden="true" className="text-[10px]">✓</span> : null}
               </Link>
             );

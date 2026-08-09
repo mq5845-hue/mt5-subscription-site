@@ -1,4 +1,4 @@
-﻿import { headers } from 'next/headers';
+import { headers } from 'next/headers';
 import Link from 'next/link';
 import {
   getModuleEntries,
@@ -65,6 +65,11 @@ const localeCopy = {
   },
 };
 
+Object.assign(localeCopy, {
+  ja: { eyebrow: 'モジュール・ブロック', title: 'モジュール・ブロック ライブラリ', description: 'AI-Quant Labの中核モジュールを確認できます。各カードから独立したページを開き、集中して読み、実装できます。', sourceBadge: '.md ソースコンテンツ', home: 'ホームへ戻る', lineKb: 'Labナレッジベース', open: 'モジュールを開く', releaseEyebrow: 'リリース候補', releaseTitle: 'RC1 検証計画', releaseDescription: 'テスト準備、証跡確認、Go / No-Go判断のためのリリース候補検証計画です。', releaseCount: 'リリース候補', module: 'モジュール', moduleSummary: '定量取引ワークフローの構築、検証、統制に再利用できる{name}コンポーネントです。', moduleSubtitle: '{name} コアモジュール' },
+  de: { eyebrow: 'Modulare Bausteine', title: 'Bibliothek modularer Bausteine', description: 'Entdecken Sie die Kernmodule von AI-Quant Lab. Jede Karte öffnet eine eigene Seite für fokussiertes Lesen und Implementieren.', sourceBadge: '.md-Quellinhalt', home: 'Zur Startseite', lineKb: 'Lab-Wissensbasis', open: 'Modul öffnen', releaseEyebrow: 'Release Candidate', releaseTitle: 'RC1-Validierungsplan', releaseDescription: 'Ein Validierungsplan für Testbereitschaft, Evidenzprüfung und Go-/No-Go-Entscheidungen.', releaseCount: 'Release Candidates', module: 'Modul', moduleSummary: 'Eine wiederverwendbare {name}-Komponente zum Erstellen, Testen und Steuern quantitativer Handels-Workflows.', moduleSubtitle: '{name}-Kernmodul' },
+  es: { eyebrow: 'Bloques modulares', title: 'Biblioteca de bloques modulares', description: 'Explore los módulos centrales de AI-Quant Lab. Cada tarjeta abre una página independiente para lectura e implementación enfocadas.', sourceBadge: 'contenido fuente .md', home: 'Volver al inicio', lineKb: 'Base de conocimiento Lab', open: 'Abrir módulo', releaseEyebrow: 'Candidato de lanzamiento', releaseTitle: 'Plan de validación RC1', releaseDescription: 'Un plan de validación para preparación de pruebas, revisión de evidencias y decisiones Go / No-Go.', releaseCount: 'candidatos de lanzamiento', module: 'Módulo', moduleSummary: 'Un componente {name} reutilizable para crear, probar y gobernar flujos de trabajo de trading cuantitativo.', moduleSubtitle: 'Módulo central {name}' },
+});
 function humanizeTitle(title) {
   return title.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2');
 }

@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { getLocaleFromPath, localizePath } from '../lib/locale';
 import EmojiAvatar from '../components/EmojiAvatar';
+import FlagAvatar from '../components/FlagAvatar';
 import HeroPromoVideo from '../components/HeroPromoVideo';
 
 const glowText = 'drop-shadow-[0_0_10px_rgba(34,211,238,0.22)]';
@@ -175,12 +176,12 @@ const navItems = [
 ];
 
 const languageTabs = [
-  { href: '/en', label: '\u{1F1FA}\u{1F1F8}', ariaLabel: 'English', match: '/en' },
-  { href: '/zh-Hant', label: '\u{1F1F9}\u{1F1FC}', ariaLabel: '繁體中文', match: '/zh-Hant' },
-  { href: '/zh-Hans', label: '\u{1F1E8}\u{1F1F3}', ariaLabel: '简体中文', match: '/zh-Hans' },
-  { href: '/ja', label: '\u{1F1EF}\u{1F1F5}', ariaLabel: '日本語', match: '/ja' },
-  { href: '/de', label: '\u{1F1E9}\u{1F1EA}', ariaLabel: 'Deutsch', match: '/de' },
-  { href: '/es', label: '\u{1F1EA}\u{1F1F8}', ariaLabel: 'Español', match: '/es' },
+  { href: '/en', locale: 'en', ariaLabel: 'English', match: '/en' },
+  { href: '/zh-Hant', locale: 'zh-Hant', ariaLabel: '繁體中文', match: '/zh-Hant' },
+  { href: '/zh-Hans', locale: 'zh-Hans', ariaLabel: '简体中文', match: '/zh-Hans' },
+  { href: '/ja', locale: 'ja', ariaLabel: '日本語', match: '/ja' },
+  { href: '/de', locale: 'de', ariaLabel: 'Deutsch', match: '/de' },
+  { href: '/es', locale: 'es', ariaLabel: 'Español', match: '/es' },
 ];
 
 
@@ -219,6 +220,11 @@ function getLocalizedNavItems(locale) {
 function getLoginLabel(locale) {
   return (navTranslations[locale] || navTranslations.en).login;
 }
+Object.assign(navTranslations, {
+  ja: { groups: ['AIリファクタリング', 'モジュール・ブロック', 'Labナレッジベース', 'サブスクリプション'], children: [['標準メンバーシップ', 'アフィリエイト会員', 'プレミアム商用版', 'マルチエージェントMQL自動進化エンジン', 'Docker MCPサーバー（企業プライベートクラウド）'], null, null, ['標準会員', 'アフィリエイト会員', '企業VIP会員']], login: 'ログイン' },
+  de: { groups: ['KI-Refactoring', 'Modulare Bausteine', 'Lab-Wissensbasis', 'Abonnements'], children: [['Standardmitgliedschaft', 'Affiliate-Mitgliedschaft', 'Premium Commercial', 'Multi-Agent-MQL-Evolutionsengine', 'Docker-MCP-Server (Enterprise Private Cloud)'], null, null, ['Standardmitglied', 'Affiliate-Mitglied', 'Enterprise VIP']], login: 'ANMELDEN' },
+  es: { groups: ['Refactorización con IA', 'Bloques modulares', 'Base de conocimiento Lab', 'Suscripciones'], children: [['Membresía estándar', 'Membresía afiliada', 'Comercial premium', 'Motor de evolución MQL multiagente', 'Servidor Docker MCP (nube privada empresarial)'], null, null, ['Miembro estándar', 'Miembro afiliado', 'VIP empresarial']], login: 'INICIAR SESIÓN' },
+});
 const homeCopy = {
   'zh-Hant': {
     topLogin: '\u767b\u9304',
@@ -261,6 +267,26 @@ const homeCopy = {
   },
 };
 
+Object.assign(homeCopy, {
+  ja: {
+    topLogin: 'ログイン', heroBadge: '商用リリース', heroTitleTop: 'AIによる量的取引革命：', heroTitleBottom: '機関投資家向けMT5 EAソースコードを解放',
+    heroBody: 'AI LLMプロンプトテンプレートを活用し、主要戦略を効率的に再構築します。著作権の拘束や許可は不要です。独自の取引ブランドとデジタル資産を構築し、成果を自らのものにできます。',
+    membershipCta: '準機関投資家版（ブローカー、プロップ会社、EA取引チーム、ファミリーオフィス、私募ファンド向け）', knowledgeCta: '機関投資家版｜100%オフラインの企業向けプライベートクラウド', premiumCta: 'プレミアム商用版（個人・EAチーム・プロトレーダー向け）',
+    reasonsBadge: 'リズムを知り、価値を知る', reasonsTitle: '読み進めるべき3つの理由', reasonsBody: 'このホームページが何を提供し、どこに強みがあり、自分に合うかを確認するために、まず以下の3つのセクションをご覧ください。'
+  },
+  de: {
+    topLogin: 'ANMELDEN', heroBadge: 'KOMMERZIELLE VERÖFFENTLICHUNG', heroTitleTop: 'KI-Revolution im quantitativen Handel:', heroTitleBottom: 'Institutionellen MT5-EA-Quellcode freischalten',
+    heroBody: 'Mit KI-LLM-Promptvorlagen können Sie Kernstrategien effizient neu aufbauen. Ohne Lizenzbindung und ohne Genehmigung. Entwickeln Sie Ihre eigene Handelsmarke und digitale Vermögenswerte und behalten Sie den gesamten Mehrwert.',
+    membershipCta: 'Quasi-institutionelle Edition (für Broker, Prop-Firmen, EA-Teams, Family Offices und Private Funds)', knowledgeCta: 'Institutionelle Edition | 100% privat und offline – Enterprise Private Cloud', premiumCta: 'Premium Commercial Edition (für Einzelpersonen, EA-Teams und professionelle Trader)',
+    reasonsBadge: 'Erst den Rhythmus, dann den Wert erkennen', reasonsTitle: 'Drei Gründe weiterzulesen', reasonsBody: 'Erfahren Sie, was diese Startseite bietet, worin ihre Stärken liegen und ob sie zu Ihnen passt – beginnen Sie mit diesen drei Bereichen.'
+  },
+  es: {
+    topLogin: 'INICIAR SESIÓN', heroBadge: 'LANZAMIENTO COMERCIAL', heroTitleTop: 'Revolución de trading cuantitativo con IA:', heroTitleBottom: 'Desbloquee código fuente MT5 EA institucional',
+    heroBody: 'Incluso desde cero, puede usar plantillas de prompts de IA LLM para reconstruir estrategias centrales con eficiencia. Sin bloqueo de derechos ni permisos. Cree su propia marca de trading y activos digitales, y conserve todo el valor generado.',
+    membershipCta: 'Edición cuasiinstitucional (para brókers, firmas prop, equipos EA, family offices y fondos privados)', knowledgeCta: 'Edición institucional | 100% privada sin conexión – nube privada empresarial', premiumCta: 'Edición comercial premium (para particulares, equipos EA y traders profesionales)',
+    reasonsBadge: 'Primero el ritmo, después el valor', reasonsTitle: 'Tres razones para seguir explorando', reasonsBody: 'Para saber qué ofrece esta página, dónde destaca y si encaja con usted, comience por estas tres secciones.'
+  },
+});
 const documentHomepageCopy = { reasonsBadge: '\u91cf\u5316\u6e90\u4ee3\u78bc\u5275\u5efa\uff0cAI \u8ce6\u80fd\u6f5b\u5728\u50f9\u503c', reasonsTitle: '\u4e00\u3001\u8de8\u8d8a MQL5\uff1a\u6838\u5fc3\u67b6\u69cb\u7684\u964d\u7dad\u6253\u64ca', reasonsBody: '\u300c\u5728\u91d1\u878d\u5927\u5ef3\u9ad8\u58d3\u8077\u5834\u4e0a\uff0c\u5728\u77ac\u606f\u842c\u8b8a\u7684\u5e02\u5834\u4e0b\uff0c\u89e3\u6c7a\u6cd5\u4eba\u6a5f\u69cb\u9802\u7d1a\u4ea4\u6613\u54e1/\u7d93\u7406\u4eba\u7684\u6709\u611f\u75db\u9ede\u3002\u300d', reasonsFootnote: '\u7a0b\u5f0f\u78bc\u964d\u672c\u589e\u6548\u8853\uff1a\u5c07\u300c\u4ee5\u4e0b\u8907\u96dc\u5c08\u6848\u300d\u8f49\u70ba\u300c\u4f01\u696d\u7d1a\u89e3\u6c7a\u65b9\u6848\u300d', journeyBadge: "旅程 / Journey", journeyTitle: "二、 策略生成與風控的AI革命旅程", journeyBody: "「賦能企業的決策引擎！掌握AI技術在商業策略與風險控管的落地應用與未來趨勢。」", guideBadge: "導覽 / Guide", guideTitle: "三、從數據洞察到自動決策，全面解鎖智慧化營運與風險防禦。", guideBody: "「深度解析演算法如何重塑商業邏輯，打造兼具前瞻創新與絕對安全的現代化管理新典範。」\n擺脫低薪輪迴！把複雜原始碼「微型化」，打造自動化獲利引擎", featuresTitle: "源代碼倉庫", featuresBody: "「幫助您釐清混亂的架構，透過模組化積木的組合與延伸，讓你擁有核心源代碼(原始碼Source Code) 。」\n這些複雜的代碼正是您創業的最佳敲門磚，將其萃取成具備商業價值的微型服務" };
 const documentScrollCards = [
   { kicker: "🧠01 / 先看懂系統", title: "採用「Python 核心驅動  >>>  MQL5 執行」的非對稱架構", description: "搭建一個以 Python 為主體的「決策大腦」，利用 Python MT5 庫（或 MetaAPI / ZeroMQ 協議）進行雙向通訊。Python 負責高密度的數據運算、AI模型推論與策略權重動態分配；MQL5 僅作為「低延遲的執行手腳」，負責下單、風控和即時倉位回傳。" },
@@ -333,6 +359,36 @@ const englishDocumentSignalBlocks = [
   { title: "Use LangGraph for a Strategy Strength Allocation Console", copy: "A LangGraph-driven agent team reviews high-frequency EA trading logs after the market closes and produces a dashboard report. After approval, Python updates the configuration so MQL5 EAs automatically apply the new capital allocation at the next open." }
 ];
 
+const homeSecondaryCopy = {
+  ja: {
+    scrollCards: [{ kicker: '01 / システムを理解する', title: '非対称な Python コア／MQL5 実行アーキテクチャを採用', description: '密度の高いデータ処理、AI 推論、動的な戦略ウェイトには Python の判断コアを使い、注文、リスク制御、ポジションのフィードバックは低遅延の MQL5 実行層に残します。' }, { kicker: '02 / 違いを理解する', title: 'マルチエージェント MCP アーキテクチャで仮想リサーチデスクを構築', description: 'マクロニュース、市場構造、ポートフォリオ配分のエージェントが連携し、リスク心理と市場状態を評価して MQL5 EA のウェイトを自動調整します。' }, { kicker: '03 / 方向を理解する', title: '機械学習による市場レジーム分類器を構築', description: 'HMM や KMeans などで過去の市場をレジームに分類し、状況変化に応じて数秒で EA パラメータまたは戦略コアを切り替えます。' }],
+    narrativeBlocks: [{ tag: '探索', title: '遺伝的アルゴリズムと強化学習による適応パラメータ最適化', note: 'PPO や DDPG などの Python ベースの RL を使い、市場環境の変化に応じてエクスポージャーを増やす時点と損失を抑える時点をシステムに学習させます。' }, { tag: '検証', title: 'LLM コード生成ワークフローで戦略ファクトリーを構築', note: '自然言語の戦略要件を MQL5 EA コードに変換し、MT5 へ自動送信して履歴テストと研究サイクルを高速化します。' }, { tag: '実行', title: 'AI リスクガーディアンのレビュー機構を確立', note: '最高権限のリスクノードが VaR と異常行動を監視し、流動性ストレス時にはポジションの強制決済と取引凍結を行えます。' }],
+    routeSteps: [{ step: 'A1', title: '情報優位のための代替データを接続', text: 'MCP または独自の Web スクレイパーを使い、SNS の心理、中央銀行の発言記録、サプライチェーンデータを戦略設計の定量ファクターと先行指標に変換します。' }, { step: 'A2', title: '量子着想手法または高次元ファクターライブラリを採用', text: '数百の数学的、統計的、モメンタム、波形ファクターを評価するライブラリを構築し、機械学習の特徴選択で毎日もっとも予測力の高い五つを特定します。' }, { step: 'A3', title: '極端なストレステストに合成データを使用', text: 'GAN や VAE を用いて、歴史上起きていない統計的に妥当な暴落と急騰を数千件シミュレートし、EA が例外的な市場イベントを生き残れるようにします。' }, { step: 'A4', title: '人間参加型の半自動コマンドセンターを構築', text: 'AI が日次市場レポートと戦略提案を用意し、トレーダーが確認、配分調整、承認後に更新ウェイトを MQL5 実行ユニットへ配布する Web 指令センターを作ります。' }],
+    signalBlocks: [{ title: '非同期通信ブリッジを構築', copy: 'ZeroMQ または共有メモリで MT5 サーバーと専用 Python AI サーバーのリアルタイム通信路を作ります。MQL5 は取引スレッドを停止せず、約定、スリッページ、スプレッド、取消率を Python へ非同期送信できます。' }, { title: 'Python のマイクロ構造市場状態分類器を開発', copy: 'XGBoost や LightGBM で市場のマイクロ構造データを分析します。スプレッドが狭く板の厚い健全な市場を AI が検知した場合、ZeroMQ 経由で MQL5 に EA のポジションサイズやスキャルピング頻度を増やすよう指示できます。' }, { title: 'LangGraph で戦略強度配分コンソールを使う', copy: 'LangGraph 駆動のエージェントチームが市場終了後に高頻度 EA の取引ログをレビューし、ダッシュボードレポートを作成します。承認後、Python が設定を更新し、MQL5 EA は次回開始時に新しい資本配分を自動適用します。' }],
+  },
+  de: {
+    scrollCards: [{ kicker: '01 / System verstehen', title: 'Asymmetrische Python-Core-/MQL5-Ausführungsarchitektur', description: 'Python verarbeitet dichte Daten, AI-Inferenz und Strategiegewichtung; MQL5 bleibt die latenzarme Ebene für Orders, Risikokontrolle und Positionsfeedback.' }, { kicker: '02 / Unterschied verstehen', title: 'Virtuellen Research Desk mit Multi-Agent-MCP aufbauen', description: 'Agenten für Makronachrichten, Marktstruktur und Portfolioallokation bewerten Risikostimmung und Marktbedingungen und gewichten MQL5-EAs automatisch neu.' }, { kicker: '03 / Richtung verstehen', title: 'Machine-Learning-Klassifikator für Marktregime bauen', description: 'Märkte mit HMM oder KMeans in Regime einteilen und bei Veränderungen EA-Parameter oder Strategiekern in Sekunden wechseln.' }],
+    narrativeBlocks: [{ tag: 'Erkunden', title: 'Adaptive Parameteroptimierung mit genetischen Algorithmen und Reinforcement Learning', note: 'Python-RL wie PPO oder DDPG lernt, wann Exponierung erhöht oder Verluste reduziert werden sollen.' }, { tag: 'Prüfen', title: 'Strategiefabrik mit LLM-Codegenerierung aufbauen', note: 'Strategieanforderungen in natürlicher Sprache in MQL5-EA-Code überführen und für schnellere Forschung an MT5 senden.' }, { tag: 'Handeln', title: 'AI-Risk-Guardian-Prüfmechanismus etablieren', note: 'Ein Risikoknoten mit höchster Autorität überwacht VaR und Abweichungen und kann bei Liquiditätsstress Positionen schließen und Handel einfrieren.' }],
+    routeSteps: [{ step: 'A1', title: 'Alternative Daten für Informationsvorsprung verbinden', text: 'MCP oder einen Web-Scraper nutzen, um Social-Media-Stimmung, Zentralbankreden und Lieferkettendaten in quantitative Faktoren und Frühindikatoren zu verwandeln.' }, { step: 'A2', title: 'Hochdimensionale Faktor-Bibliothek einsetzen', text: 'Hunderte mathematische, statistische, Momentum- und Wellenformfaktoren bewerten und täglich die fünf stärksten Prädiktoren wählen.' }, { step: 'A3', title: 'Synthetische Daten für extreme Stresstests nutzen', text: 'Mit GANs oder VAEs plausible Crashs und Rallyes simulieren, damit EAs außergewöhnliche Marktphasen überstehen.' }, { step: 'A4', title: 'Halbautomatisches Command Center mit menschlicher Kontrolle', text: 'AI erstellt Berichte und Empfehlungen; Trader prüfen, passen Allokationen an, genehmigen sie und verteilen Gewichte an MQL5-Einheiten.' }],
+    signalBlocks: [{ title: 'Asynchrone Kommunikationsbrücke aufbauen', copy: 'ZeroMQ oder Shared Memory verbindet MT5-Server und Python-AI-Server in Echtzeit. MQL5 sendet Ausführungsberichte, Slippage, Spreads und Stornoraten asynchron, ohne den Handelsthread zu blockieren.' }, { title: 'Python-Klassifikator für mikrostrukturelle Marktbedingungen', copy: 'XGBoost oder LightGBM analysiert Mikrostrukturdaten. Erkennt die AI enge Spreads und hohe Tiefe, kann sie MQL5 über ZeroMQ zur Anpassung von Positionsgröße oder Scalping-Frequenz anweisen.' }, { title: 'LangGraph-Konsole zur Strategiegewichtung', copy: 'Ein LangGraph-Agententeam prüft nach Marktschluss EA-Logs und erstellt einen Dashboard-Bericht. Nach Freigabe aktualisiert Python die Konfiguration für die nächste MQL5-Ausführung.' }],
+  },
+  es: {
+    scrollCards: [{ kicker: '01 / Comprenda el sistema', title: 'Use una arquitectura asimétrica de núcleo Python y ejecución MQL5', description: 'Use Python como cerebro de decisión para procesamiento de datos, inferencia AI y ponderación dinámica; MQL5 permanece como capa de baja latencia para órdenes, riesgo y retroalimentación de posiciones.' }, { kicker: '02 / Comprenda la diferencia', title: 'Cree una mesa de investigación virtual con arquitectura MCP multiagente', description: 'Agentes de noticias macro, estructura de mercado y asignación de cartera evalúan el sentimiento de riesgo y las condiciones de mercado para reequilibrar automáticamente los pesos de EAs MQL5.' }, { kicker: '03 / Comprenda la dirección', title: 'Construya un clasificador de regímenes de mercado con aprendizaje automático', description: 'Clasifique mercados históricos con HMM o KMeans y cambie parámetros EA o núcleos de estrategia en segundos cuando cambien las condiciones.' }],
+    narrativeBlocks: [{ tag: 'Explorar', title: 'Optimización adaptativa de parámetros con algoritmos genéticos y aprendizaje por refuerzo', note: 'RL basado en Python, como PPO o DDPG, ayuda al sistema a aprender cuándo aumentar exposición o reducir pérdidas según evoluciona el mercado.' }, { tag: 'Verificar', title: 'Construya una fábrica de estrategias con generación de código LLM', note: 'Convierta requisitos de estrategia en lenguaje natural a código MQL5 EA y envíelo automáticamente a MT5 para pruebas históricas y ciclos de investigación más rápidos.' }, { tag: 'Actuar', title: 'Establezca un mecanismo de revisión AI Risk Guardian', note: 'Un nodo de riesgo de máxima autoridad supervisa VaR y comportamientos anómalos, y puede cerrar posiciones o congelar operaciones bajo estrés de liquidez.' }],
+    routeSteps: [{ step: 'A1', title: 'Conecte datos alternativos para obtener ventaja informativa', text: 'Use MCP o un raspador web propio para convertir sentimiento de redes sociales, discursos de bancos centrales y datos de cadena de suministro en factores cuantitativos e indicadores adelantados.' }, { step: 'A2', title: 'Adopte una biblioteca de factores de alta dimensión', text: 'Evalúe cientos de factores matemáticos, estadísticos, de momentum y de forma de onda, y seleccione cada día los cinco predictores más potentes.' }, { step: 'A3', title: 'Use datos sintéticos para pruebas de estrés extremas', text: 'Use GANs o VAEs para simular miles de caídas y subidas estadísticamente plausibles que nunca ocurrieron históricamente, asegurando que los EAs sobrevivan eventos excepcionales.' }, { step: 'A4', title: 'Construya un centro de mando semiautomático con supervisión humana', text: 'AI prepara informes de mercado y recomendaciones; los operadores revisan, ajustan asignaciones, aprueban y distribuyen los pesos actualizados a las unidades de ejecución MQL5.' }],
+    signalBlocks: [{ title: 'Construya un puente de comunicación asíncrono', copy: 'ZeroMQ o memoria compartida crea una vía en tiempo real entre el servidor MT5 y un servidor Python AI. MQL5 puede enviar informes de ejecución, deslizamiento, spreads y tasas de cancelación sin bloquear el hilo de negociación.' }, { title: 'Desarrolle un clasificador Python de estado de mercado microestructural', copy: 'XGBoost o LightGBM analiza datos de microestructura. Cuando AI detecta un mercado sano con spreads estrechos y profundidad sólida, puede indicar a MQL5 por ZeroMQ que ajuste tamaño de posición o frecuencia de scalping.' }, { title: 'Use LangGraph para una consola de asignación de fuerza estratégica', copy: 'Un equipo de agentes LangGraph revisa registros de EAs de alta frecuencia al cierre y genera un informe de panel. Tras la aprobación, Python actualiza la configuración para que los EAs MQL5 apliquen la nueva asignación en la siguiente apertura.' }],
+  },
+};
+Object.assign(homeSecondaryCopy, {
+  ja: { ...homeSecondaryCopy.ja, features: [{ kicker: 'A1', title: 'MQ4／MQ5 コード変換とアップグレード', description: '変換、コンパイル、戦略設計、厳密なバックテスト、本番展開までを一つの MT5 ワークフローで扱います。', icon: 'chart' }, { kicker: 'A2', title: 'AI 支援による MQL5 コア・モジュール化トレーニング', description: 'EA のコアモジュールを分解し、AI ガイドでコード作成と戦略 SOP の習得を高速化します。', icon: 'code' }, { kicker: 'A3', title: '専用 VIP コミュニティ支援と専門ガイダンス', description: '深い戦略交流、バージョン更新、実践的な提案を組み合わせ、学習曲線を短縮します。', icon: 'users' }, { kicker: '01', title: '戦略を作ることは始まりにすぎない', description: '本当の価値は、つながったレッスン、実例、バックテストの文脈を通じて検証・改善・継続的な向上を行えることです。', icon: 'iterate' }, { kicker: '02', title: 'すべてのセクションがソースコードの世界へ導く', description: '段階的な流れが信頼を築き、コア価値を伝え、訪問者を自然に適切なソリューションへつなげます。', icon: 'discover' }, { kicker: '03', title: '個人ブランドのビジネスをより速く構築', description: '価値が明確になれば、各プランは個人テクノロジーブランドを築く実践的な次の一歩になります。', icon: 'launch' }] },
+  de: { ...homeSecondaryCopy.de, features: [{ kicker: 'A1', title: 'MQ4/MQ5-Codekonvertierung und Upgrade', description: 'Konvertierung, Kompilierung, Strategiedesign, strenges Backtesting und Live-Bereitstellung in einem MT5-Workflow verbinden.', icon: 'chart' }, { kicker: 'A2', title: 'AI-gestütztes Training zur MQL5-Kernmodularisierung', description: 'EA-Kernmodule zerlegen und mit AI-Anleitung schneller Code und Strategie-SOPs erstellen.', icon: 'code' }, { kicker: 'A3', title: 'Dedizierter VIP-Community-Support und professionelle Anleitung', description: 'Tiefen Strategieaustausch, Versionsupdates und praktische Empfehlungen verbinden, um die Lernkurve zu verkürzen.', icon: 'users' }, { kicker: '01', title: 'Eine Strategie zu erstellen ist nur der Anfang', description: 'Der echte Wert liegt darin, mit verbundenen Lektionen, Beispielen und Backtest-Kontext zu validieren, zu verfeinern und fortlaufend zu verbessern.', icon: 'iterate' }, { kicker: '02', title: 'Jeder Bereich führt in die Welt des Quellcodes', description: 'Ein schrittweiser Ablauf schafft Vertrauen, vermittelt Kernwert und verbindet Besucher natürlich mit der passenden Lösung.', icon: 'discover' }, { kicker: '03', title: 'Ihr persönliches Markenbusiness schneller aufbauen', description: 'Wenn der Wert klar ist, wird jeder Plan zu einem praktischen nächsten Schritt für den Aufbau einer persönlichen Technologiemarke.', icon: 'launch' }] },
+  es: { ...homeSecondaryCopy.es, features: [{ kicker: 'A1', title: 'Conversión y actualización de código MQ4/MQ5', description: 'Reúna conversión, compilación, diseño de estrategia, backtesting riguroso y despliegue en vivo en un flujo MT5.', icon: 'chart' }, { kicker: 'A2', title: 'Formación de modularización del núcleo MQL5 asistida por AI', description: 'Descomponga módulos centrales de EA y use guía AI para crear código y dominar SOPs de estrategia con mayor rapidez.', icon: 'code' }, { kicker: 'A3', title: 'Soporte dedicado de comunidad VIP y guía profesional', description: 'Combine intercambio profundo de estrategias, actualizaciones de versión y recomendaciones prácticas para acortar la curva de aprendizaje.', icon: 'users' }, { kicker: '01', title: 'Crear una estrategia es solo el comienzo', description: 'El valor real consiste en validar, perfeccionar y mejorar continuamente mediante lecciones conectadas, ejemplos y contexto de backtesting.', icon: 'iterate' }, { kicker: '02', title: 'Cada sección le guía al mundo del código fuente', description: 'Un flujo progresivo genera confianza, comunica valor central y conecta naturalmente a los visitantes con la solución adecuada.', icon: 'discover' }, { kicker: '03', title: 'Construya antes su negocio de marca personal', description: 'Cuando el valor está claro, cada plan se convierte en un siguiente paso práctico para construir una marca tecnológica personal.', icon: 'launch' }] },
+});
+Object.assign(homeSecondaryCopy, {
+  ja: { ...homeSecondaryCopy.ja, lineConversationPreview: { badge: 'LINE 会話プレビュー', title: '選択式の質問から始め、サイトと予約導線へ自然につなぐ', description: '訪問者は長いメッセージを書く必要がありません。次のステップを選び、提供内容を理解し、会話から適切なページへ進めます。', messages: [{ type: 'incoming', title: 'エンジニアやソフトウェア開発者ですか？', text: 'まず何をしている会社なのか知りたいです。' }, { type: 'outgoing', title: 'AI-Quant Lab とは？', text: 'MQL5 ソースコード開発、AI モジュール型プロンプトエンジニアリング、定量取引教育に注力しています。次のステップを選んで全体をご覧ください。' }], quickReplies: [{ label: '機能ガイドを見る', href: '/line-kb' }, { label: 'ブランドストーリーを読む', href: '/line-kb/expansion' }, { label: '予約リストに参加', href: 'https://lin.ee/stqhWhj', external: true }, { label: '標準メンバーシップ', href: '/membership' }] } },
+  de: { ...homeSecondaryCopy.de, lineConversationPreview: { badge: 'LINE-Gesprächsvorschau', title: 'Mit geführten Fragen beginnen und natürlich zu Website und Reservierung führen', description: 'Besucher müssen keine lange Nachricht schreiben. Sie wählen den nächsten Schritt, verstehen das Angebot und gelangen aus dem Gespräch zur richtigen Seite.', messages: [{ type: 'incoming', title: 'Sind Sie Ingenieure oder Softwareentwickler?', text: 'Ich möchte zuerst verstehen, was Sie machen.' }, { type: 'outgoing', title: 'Was ist AI-Quant Lab?', text: 'Wir konzentrieren uns auf MQL5-Quellcodeentwicklung, modulare AI-Prompt-Engineering und quantitative Trading-Ausbildung. Wählen Sie einen nächsten Schritt für den Überblick.' }], quickReplies: [{ label: 'Funktionsguide ansehen', href: '/line-kb' }, { label: 'Markengeschichte lesen', href: '/line-kb/expansion' }, { label: 'Reservierungsliste beitreten', href: 'https://lin.ee/stqhWhj', external: true }, { label: 'Standardmitgliedschaft', href: '/membership' }] } },
+  es: { ...homeSecondaryCopy.es, lineConversationPreview: { badge: 'Vista previa de conversación LINE', title: 'Empiece con preguntas guiadas y conecte de forma natural con su sitio y reservas', description: 'Los visitantes no necesitan escribir un mensaje largo. Pueden elegir el siguiente paso, entender la oferta y pasar de la conversación a la página adecuada.', messages: [{ type: 'incoming', title: '¿Son ingenieros o desarrolladores de software?', text: 'Primero me gustaría entender a qué se dedican.' }, { type: 'outgoing', title: '¿Qué es AI-Quant Lab?', text: 'Nos centramos en desarrollo de código fuente MQL5, ingeniería de prompts AI modular y educación de trading cuantitativo. Elija un siguiente paso para ver la visión completa.' }], quickReplies: [{ label: 'Ver guía de funciones', href: '/line-kb' }, { label: 'Leer la historia de marca', href: '/line-kb/expansion' }, { label: 'Unirse a la lista de reserva', href: 'https://lin.ee/stqhWhj', external: true }, { label: 'Membresía estándar', href: '/membership' }] } },
+});
 function isNavItemActive(item, pathname = '') {
   return item.matches?.some((prefix) => pathname.startsWith(prefix)) || false;
 }
@@ -349,7 +405,6 @@ function MenuDots() {
 }
 function LanguageMenu({ pathname, mobile = false }) {
   const [open, setOpen] = useState(false);
-  const activeTab = languageTabs.find((tab) => pathname.startsWith(tab.match)) || languageTabs[0];
 
   return (
     <div
@@ -364,24 +419,23 @@ function LanguageMenu({ pathname, mobile = false }) {
         onClick={() => setOpen((value) => (mobile ? !value : true))}
         className={'flex cursor-pointer list-none items-center justify-center gap-1.5 rounded-full border border-cyan-300/20 bg-slate-950/55 px-2.5 py-2 text-xs font-bold tracking-[0.1em] text-slate-200 shadow-[0_0_22px_rgba(34,211,238,0.14)] backdrop-blur-xl transition hover:border-cyan-300/45 hover:text-cyan-100 ' + (mobile ? 'w-full min-h-11' : 'min-w-[5.6rem] max-sm:min-w-[4.5rem] max-sm:gap-1 max-sm:px-2 max-sm:py-1.5 max-sm:text-[11px]')}
       >
-        <span className="h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(34,211,238,0.7)]" />
-        <span role="img" aria-label={activeTab.ariaLabel}>{activeTab.label}</span>
+        <span aria-hidden="true" className="inline-flex h-9 w-9 items-center justify-center text-[23px] leading-none">🌐</span>
         <MenuDots />
       </button>
       <div
         className={'absolute right-0 top-full z-[60] pt-2 ' + (mobile ? 'left-0' : '') + ' ' + (open ? 'visible pointer-events-auto' : 'invisible pointer-events-none')}
       >
-        <div className={'overflow-hidden rounded-2xl border border-cyan-300/20 bg-[#020617] p-1.5 shadow-[0_0_28px_rgba(34,211,238,0.22)] ' + (mobile ? 'w-full' : 'w-20')}>
+        <div className={'overflow-hidden rounded-2xl border border-cyan-300/20 bg-[#020617] p-1.5 shadow-[0_0_28px_rgba(34,211,238,0.22)] ' + (mobile ? 'w-full' : 'w-16')}>
           {languageTabs.map((tab) => {
-            const isActive = tab.label === activeTab.label;
+            const isActive = pathname.startsWith(tab.match);
             return (
               <Link
-                key={tab.label}
+                key={tab.locale}
                 href={localizePath(pathname || '/', tab.match.slice(1))}
                 onClick={() => setOpen(false)}
-                className={'flex items-center justify-between rounded-xl px-2 py-2.5 text-xs font-bold tracking-[0.08em] transition ' + (isActive ? 'bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 shadow-[0_0_16px_rgba(34,211,238,0.35)]' : 'text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-100')}
+                aria-label={tab.ariaLabel} title={tab.ariaLabel} className={'flex items-center justify-center rounded-xl px-2 py-2 text-xs font-bold tracking-[0.08em] transition ' + (isActive ? 'bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 shadow-[0_0_16px_rgba(34,211,238,0.35)]' : 'text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-100')}
               >
-                <span className="flex items-center gap-1.5"><span className={'h-1.5 w-1.5 rounded-full ' + (isActive ? 'bg-white' : 'bg-cyan-300/70')} /><span role="img" aria-label={tab.ariaLabel}>{tab.label}</span></span>
+                <FlagAvatar locale={tab.locale} />
                 {isActive ? <span aria-hidden="true" className="text-[10px]">✓</span> : null}
               </Link>
             );
@@ -1074,17 +1128,18 @@ export default function Home({ locale = 'en' }) {
   const currentLocalePath = pathname || `/${locale || 'en'}`;
   const pageLocale = getLocaleFromPath(currentLocalePath);
   const currentLocale = homeCopy[pageLocale] ? pageLocale : 'en';
-  const isEnglish = currentLocale === 'en';
+  const isEnglish = ['en', 'ja', 'de', 'es'].includes(currentLocale);
   const englishCtaTypography = isEnglish
     ? 'px-4 text-[clamp(0.75rem,1.05vw,0.95rem)] leading-[1.35] tracking-[-0.015em]'
     : '';
   const copy = localizeChinese(isEnglish ? { ...homeCopy[currentLocale], ...englishDocumentHomepageCopy } : { ...homeCopy[currentLocale], ...documentHomepageCopy }, currentLocale);
-  const localizedScrollCards = localizeChinese(isEnglish ? englishDocumentScrollCards : documentScrollCards, currentLocale);
-  const localizedNarrativeBlocks = localizeChinese(isEnglish ? englishDocumentNarrativeBlocks : documentNarrativeBlocks, currentLocale);
-  const localizedRouteSteps = localizeChinese(isEnglish ? englishDocumentRouteSteps : documentRouteSteps, currentLocale);
-  const localizedSignalBlocks = localizeChinese(isEnglish ? englishDocumentSignalBlocks : documentSignalBlocks, currentLocale);
-  const localizedLineConversationPreview = localizeChinese(isEnglish ? englishLineConversationPreview : lineConversationPreview, currentLocale);
-  const localizedFeatures = localizeChinese(isEnglish ? englishDocumentFeatures : documentFeatures, currentLocale);
+  const secondaryCopy = homeSecondaryCopy[currentLocale];
+  const localizedScrollCards = localizeChinese(secondaryCopy?.scrollCards || (isEnglish ? englishDocumentScrollCards : documentScrollCards), currentLocale);
+  const localizedNarrativeBlocks = localizeChinese(secondaryCopy?.narrativeBlocks || (isEnglish ? englishDocumentNarrativeBlocks : documentNarrativeBlocks), currentLocale);
+  const localizedRouteSteps = localizeChinese(secondaryCopy?.routeSteps || (isEnglish ? englishDocumentRouteSteps : documentRouteSteps), currentLocale);
+  const localizedSignalBlocks = localizeChinese(secondaryCopy?.signalBlocks || (isEnglish ? englishDocumentSignalBlocks : documentSignalBlocks), currentLocale);
+  const localizedLineConversationPreview = localizeChinese(secondaryCopy?.lineConversationPreview || (isEnglish ? englishLineConversationPreview : lineConversationPreview), currentLocale);
+  const localizedFeatures = localizeChinese(secondaryCopy?.features || (isEnglish ? englishDocumentFeatures : documentFeatures), currentLocale);
   const localizedInstitutionalPlans = localizeChinese(isEnglish ? englishInstitutionalPlans : institutionalPlans, currentLocale);
   const localizedPlans = localizeChinese(isEnglish ? englishPlans : plans, currentLocale);
   const displayPlanName = (plan) => {

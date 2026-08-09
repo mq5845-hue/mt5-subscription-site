@@ -3,11 +3,18 @@ import { NextResponse } from 'next/server';
 import { defaultLocale, siteLocales } from './lib/locale';
 
 const localePattern = siteLocales.join('|');
+const hasClerkConfiguration = Boolean(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY);
 
 export default clerkMiddleware(async (auth, request) => {
   const pathname = request.nextUrl.pathname;
   const isMemberRoute = new RegExp(`^/(?:(?:${localePattern})/)?member(?:/.*)?$`).test(pathname);
-  if (isMemberRoute) await auth.protect();
+  if (isMemberRoute) {
+    if (!hasClerkConfiguration) {
+      const locale = pathname.match(new RegExp('^/(' + localePattern + ')'))?.[1] || defaultLocale;
+      return NextResponse.redirect(new URL('/' + locale + '/sign-in', request.url));
+    }
+    await auth.protect();
+  }
 
   const localeMatch = pathname.match(new RegExp(`^/(${localePattern})(/.*)?$`));
   if (localeMatch) {

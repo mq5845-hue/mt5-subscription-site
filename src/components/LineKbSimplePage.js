@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import { localizePath } from '@/lib/locale';
 import EmojiAvatar from '@/components/EmojiAvatar';
 
@@ -111,6 +111,52 @@ const copies = {
   },
 };
 
+Object.assign(copies, {
+  ja: {
+    nav: [['ナレッジベース', '/line-kb'], ['FAQツリー', '/line-kb/formal-tree'], ['Flexテンプレート', '/line-kb/flex-template'], ['技術仕様', '/line-kb/spec'], ['FAQ拡張', '/line-kb/expansion'], ['バックエンド出力', '/line-kb/backend-export']], back: 'ナレッジベースへ戻る', open: '開く',
+    formal: { eyebrow: '正式 FAQ ツリー', title: '質問から行動までの明確なルート', lead: '12の実践的な質問構造により、初めての訪問者に安心感を与え、経験者には有用な文脈を提供し、会話を前へ進めます。', cards: [['01','基本から始める','AI-Quant Labとは何か、対象者、最初に確認すべき場所を説明します。'],['02','適切な分岐を探す','ブランド、製品、技術、予約の質問を分け、最も近い回答へ導きます。'],['03','次のステップを見せる','すべての回答を有用なリンク、ボタン、リソースで終えます。'],['04','見直して改善する','実際の質問でツリーを改善し、将来の回答をより速く一貫させます。']], principlesTitle: '安定したFAQツリーの3原則', principles: [['開始','まず何であるかを答え、新規訪問者に安心感を与えます。'],['分岐','次に仕組みを説明し、構造を示します。'],['出口','最後に次の行動を示し、会話を前へ進めます。']], footer: '各ページ下部に同じクイックリソースを配置します。' },
+    flex: { eyebrow: 'FLEX テンプレート', title: '再利用できる LINE 返信レイアウト', lead: '短文、標準、詳細、ボタン誘導のテンプレートで、読みやすく一貫した返信を実現します。', cards: [['短い回答','Q: <訪問者の質問>\nA: <明確な結論>\n\n最初の返信に使用します。'],['標準回答','Q: <訪問者の質問>\nA: <平易な回答>\n補足: <技術説明>\n\n多くのFAQに適しています。'],['詳細回答','Q: <訪問者の質問>\nA: <平易な回答>\n技術: <構造と詳細>\n背景: <ブランド文脈>\n次: <CTA>'],['ボタン誘導回答','Q: <訪問者の質問>\nA: <平易な回答>\n\n機能、ブランド、知識庫、予約へのボタンを提示します。']], principlesTitle: '信頼できる返信の3層', principles: [['質問','質問を見せ、回答の関連性を保ちます。'],['回答','詳細の前に平易な結論を示します。'],['CTA','準備ができた訪問者へ次の行動を提示します。']], footer: 'すべてのLINE返信で同じテンプレートのリズムを使います。' },
+    spec: { eyebrow: '技術仕様', title: '保守可能な応答システムのルール', lead: 'LINEナレッジベースを運用標準に変え、テンプレート、Webページ、FAQを整合させます。', rows: [['目的','応答ルール、導線、保守基準を提供可能なシステムとして記述します。'],['入力形式','Q / Aを基本とし、必要に応じてキーワード、補足、CTAを加えます。'],['応答層','平易、技術、ビジョンの層を保持します。'],['導線','ホーム、予約、リソース、次の重要画面へ案内します。'],['保守','仕様、テンプレート、公開FAQの順に更新します。'],['フォールバック','意図が不明な場合は安全な案内と具体的なキーワードを求めます。']], sections: [['保守順序','最初に仕様、次にテンプレート、最後に公開文面を更新します。'],['使用原則','安心感、技術的明確さ、行動の順で回答します。']], footer: 'フッターに同じ3つのクイックリソースを置きます。' },
+  },
+});
+Object.assign(copies, {
+  de: { nav: [['Wissensbasis','/line-kb'],['FAQ-Baum','/line-kb/formal-tree'],['Flex-Vorlagen','/line-kb/flex-template'],['Technische Spezifikation','/line-kb/spec'],['FAQ-Erweiterung','/line-kb/expansion'],['Backend-Export','/line-kb/backend-export']], back: 'Zur Wissensbasis', open: 'ÖFFNEN', formal: { eyebrow: 'FORMELLER FAQ-BAUM', title: 'Ein klarer Weg von der Frage zur Handlung', lead: 'Eine praktische Struktur mit zwölf Fragen, die neuen Besuchern Sicherheit gibt und jede Unterhaltung voranbringt.', cards: [['01','Mit den Grundlagen beginnen','Erklären Sie AI-Quant Lab, die Zielgruppe und den besten Einstieg.'],['02','Den richtigen Zweig finden','Trennen Sie Marken-, Produkt-, Technik- und Reservierungsfragen.'],['03','Den nächsten Schritt sichtbar halten','Jede Antwort endet mit einem Link, Button oder einer Ressource.'],['04','Prüfen und verbessern','Nutzen Sie echte Fragen, um zukünftige Antworten schneller und konsistenter zu machen.']], principlesTitle: 'Drei Regeln für einen stabilen FAQ-Baum', principles: [['Start','Zuerst erklären, worum es geht.'],['Zweig','Dann erklären, wie es funktioniert.'],['Ausgang','Zum Schluss die nächste Handlung zeigen.']], footer: 'Behalten Sie dieselben Schnellressourcen auf jeder Seite bei.' }, flex: {
+      eyebrow: 'FLEX-VORLAGEN',
+      title: 'Wiederverwendbare LINE-Antwortlayouts',
+      lead: 'Nutzen Sie kurze, Standard-, ausführliche und schaltflächenbasierte Vorlagen, damit Antworten lesbar, konsistent und handlungsorientiert bleiben.',
+      cards: [['Kurze Antwort', 'F: <Besucherfrage>\nA: <eine klare Schlussfolgerung>\n\nFür die erste Antwort: kurz halten und leicht lesbar machen.'], ['Standardantwort', 'F: <Besucherfrage>\nA: <verständliche Antwort>\nKontext: <technische Erklärung>\n\nFür die meisten FAQ-Gespräche verwenden.'], ['Ausführliche Antwort', 'F: <Besucherfrage>\nA: <verständliche Antwort>\nTechnik: <Architektur und Details>\nGeschichte: <Markenkontext>\nNächster Schritt: <CTA>'], ['Antwort mit Schaltflächen', 'F: <Besucherfrage>\nA: <verständliche Antwort>\n\nSchaltflächen zur Funktionsanleitung, Markengeschichte, Wissensbasis oder Reservierung anbieten.']],
+      principlesTitle: 'Eine verlässliche Antwort hat drei Ebenen',
+      principles: [['Frage', 'Die Besucherfrage sichtbar halten, damit die Antwort relevant wirkt.'], ['Antwort', 'Mit einer verständlichen Schlussfolgerung beginnen und erst danach Details ergänzen.'], ['CTA', 'Eine klare nächste Handlung anbieten, sobald der Besucher bereit ist.']],
+      footer: 'Verwenden Sie für jede LINE-Antwort denselben Vorlagenrhythmus.',
+    },
+    spec: {
+      eyebrow: 'TECHNISCHE SPEZIFIKATION',
+      title: 'Regeln für ein wartbares Antwortsystem',
+      lead: 'Diese Seite macht aus der LINE-Wissensbasis einen operativen Standard. Klare Spezifikationen halten Vorlagen, Website-Seiten und FAQ-Inhalte aufeinander abgestimmt.',
+      rows: [['Zweck', 'Antwortregeln, Weiterleitungspunkte und Wartungsstandard als nutzbares System festhalten.'], ['Eingabeformat', 'Q / A als Grundlage verwenden; bei Bedarf Schlüsselwörter, Kontext und einen klaren CTA ergänzen.'], ['Antwortebenen', 'Verständliche, technische und visuelle Ebenen bereithalten, damit Antworten bei Bedarf erweitert werden können.'], ['Weiterleitung', 'Besucher zur Startseite, Reservierungsliste, Ressourcenseite oder zum nächsten wichtigen Bildschirm führen.'], ['Wartung', 'Zuerst die Spezifikation, dann die Vorlage und zuletzt den öffentlichen FAQ-Text aktualisieren.'], ['Ausweichfall', 'Bei unklarer Absicht eine sichere Rückfrage stellen und um ein genaueres Schlüsselwort bitten.']],
+      sections: [['Wartungsreihenfolge', 'Zuerst die Spezifikation, dann die Vorlagen und erst danach den öffentlich sichtbaren Text aktualisieren.'], ['Nutzungsprinzip', 'Jede Antwort soll zuerst Sicherheit geben, dann technische Klarheit schaffen und zuletzt zur Handlung führen.']],
+      footer: 'Dieselben drei Schnellressourcen im Footer beibehalten.',
+    },
+  },
+  es: { nav: [['Base de conocimiento','/line-kb'],['Árbol FAQ','/line-kb/formal-tree'],['Plantillas Flex','/line-kb/flex-template'],['Especificación técnica','/line-kb/spec'],['Expansión FAQ','/line-kb/expansion'],['Exportación backend','/line-kb/backend-export']], back: 'Volver a la base de conocimiento', open: 'ABRIR', formal: { eyebrow: 'ÁRBOL FAQ FORMAL', title: 'Una ruta clara de la pregunta a la acción', lead: 'Una estructura práctica de doce preguntas que da seguridad a nuevos visitantes y mantiene cada conversación en movimiento.', cards: [['01','Comience por lo básico','Explique qué es AI-Quant Lab, para quién es y dónde empezar.'],['02','Encuentre la rama correcta','Separe preguntas de marca, producto, técnica y reserva.'],['03','Mantenga visible el siguiente paso','Cada respuesta debe terminar con un enlace, botón o recurso.'],['04','Revise y mejore','Use preguntas reales para perfeccionar el árbol y responder con más consistencia.']], principlesTitle: 'Tres reglas para un árbol FAQ estable', principles: [['Inicio','Responda primero qué es para generar confianza.'],['Rama','Después explique cómo funciona.'],['Salida','Por último muestre qué hacer después.']], footer: 'Mantenga los mismos recursos rápidos al final de cada página.' }, flex: {
+      eyebrow: 'PLANTILLAS FLEX',
+      title: 'Diseños reutilizables para respuestas de LINE',
+      lead: 'Use plantillas breves, estándar, ampliadas y con botones para mantener respuestas legibles, coherentes y fáciles de seguir.',
+      cards: [['Respuesta breve', 'P: <pregunta del visitante>\nR: <una conclusión clara>\n\nÚsela en la primera respuesta y mantenga un ritmo de lectura ligero.'], ['Respuesta estándar', 'P: <pregunta del visitante>\nR: <respuesta en lenguaje claro>\nContexto: <explicación técnica>\n\nÚsela en la mayoría de conversaciones FAQ.'], ['Respuesta ampliada', 'P: <pregunta del visitante>\nR: <respuesta en lenguaje claro>\nTécnica: <arquitectura y detalle>\nHistoria: <contexto de marca>\nSiguiente paso: <CTA>'], ['Respuesta con botones', 'P: <pregunta del visitante>\nR: <respuesta en lenguaje claro>\n\nOfrezca botones para la guía de funciones, la historia de marca, la base de conocimiento o la reserva.']],
+      principlesTitle: 'Una respuesta fiable tiene tres capas',
+      principles: [['Pregunta', 'Mantenga visible la pregunta del visitante para que la respuesta resulte pertinente.'], ['Respuesta', 'Comience con una conclusión clara antes de añadir detalles.'], ['CTA', 'Ofrezca siempre una siguiente acción concreta cuando el visitante esté listo.']],
+      footer: 'Use el mismo ritmo de plantilla en todas las respuestas de LINE.',
+    },
+    spec: {
+      eyebrow: 'ESPECIFICACIÓN TÉCNICA',
+      title: 'Reglas para un sistema de respuestas mantenible',
+      lead: 'Esta página convierte la base de conocimiento de LINE en un estándar operativo. Las especificaciones claras mantienen alineadas las plantillas, las páginas web y el contenido FAQ.',
+      rows: [['Propósito', 'Documente las reglas de respuesta, los puntos de enrutamiento y el estándar de mantenimiento como un sistema utilizable.'], ['Formato de entrada', 'Use P / R como base y añada palabras clave, contexto de apoyo y un CTA claro cuando sea necesario.'], ['Capas de respuesta', 'Mantenga capas de lenguaje claro, técnica y de visión para ampliar la respuesta cuando haga falta.'], ['Enrutamiento', 'Guíe a los visitantes a la página de inicio, la lista de reservas, la página de recursos o la siguiente pantalla clave.'], ['Mantenimiento', 'Actualice primero la especificación, después la plantilla y finalmente el texto FAQ público.'], ['Alternativa', 'Cuando la intención no sea clara, use una pregunta segura y pida una palabra clave más específica.']],
+      sections: [['Orden de mantenimiento', 'Actualice la especificación, después las plantillas y solo entonces el texto visible al público.'], ['Principio de uso', 'Cada respuesta debe aportar tranquilidad primero, claridad técnica después y una acción al final.']],
+      footer: 'Mantenga los mismos tres recursos rápidos en el pie de página.',
+    },
+  },
+});
 const copy = (locale, type) => copies[locale]?.[type] || copies['zh-Hant'][type];
 const navCopy = (locale) => copies[locale]?.nav || copies['zh-Hant'].nav;
 

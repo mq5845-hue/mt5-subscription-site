@@ -53,6 +53,11 @@ const copy = {
   },
 };
 
+Object.assign(copy, {
+  ja: { sourceReady: 'ソースファイル', sourceMissing: 'ソースファイルが見つかりません', backModules: 'モジュール一覧へ戻る', home: 'ホームへ戻る', englishReference: '英語の実装リファレンス', top: 'コアコンテンツ', bottom: '実装メモ', missingTitle: 'モジュール内容はまだ利用できません', missingBody: '対応する Markdown ファイルを次の場所へ追加してください:', emptyTop: 'このモジュールの Markdown ソースはまだ追加されていません。', emptyBottom: '完全なモジュール内容を公開するには src/content/modules にソースファイルを追加してください。', footer: 'このページは完全なモジュールの読解および実装リファレンスを提供します。', sourceHint: 'ソースディレクトリ:', lines: '行' },
+  de: { sourceReady: 'Quelldatei', sourceMissing: 'Quelldatei nicht gefunden', backModules: 'Zurück zu Modulen', home: 'Zur Startseite', englishReference: 'Englische Implementierungsreferenz', top: 'Kerninhalt', bottom: 'Implementierungshinweise', missingTitle: 'Modulinhalt ist noch nicht verfügbar', missingBody: 'Fügen Sie die entsprechende Markdown-Datei hinzu unter:', emptyTop: 'Die Markdown-Quelle für dieses Modul wurde noch nicht hinzugefügt.', emptyBottom: 'Fügen Sie die Quelldatei unter src/content/modules hinzu, um den vollständigen Modulinhalt zu veröffentlichen.', footer: 'Diese Seite enthält die vollständige Lese- und Implementierungsreferenz des Moduls.', sourceHint: 'Quellverzeichnis:', lines: 'Zeilen' },
+  es: { sourceReady: 'Archivo fuente', sourceMissing: 'No se encontró el archivo fuente', backModules: 'Volver a módulos', home: 'Volver al inicio', englishReference: 'Referencia de implementación en inglés', top: 'Contenido principal', bottom: 'Notas de implementación', missingTitle: 'El contenido del módulo aún no está disponible', missingBody: 'Agregue el archivo Markdown correspondiente en:', emptyTop: 'Aún no se ha agregado la fuente Markdown de este módulo.', emptyBottom: 'Agregue el archivo fuente en src/content/modules para publicar el contenido completo del módulo.', footer: 'Esta página presenta la referencia completa de lectura e implementación del módulo.', sourceHint: 'Directorio de origen:', lines: 'líneas' },
+});
 function humanizeTitle(title) {
   return title.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2');
 }
