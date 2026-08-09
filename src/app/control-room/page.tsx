@@ -48,8 +48,16 @@ export default function ControlRoomDashboard() {
     en: 'Our system is a capsule-core Docker Compose deployment that is 100% offline. It meets ISO 27001 A.8.22 network-boundary physical-isolation requirements, and its core encryption reaches FIPS 140-3 military-grade protection. This enterprise private cloud aligns with global financial DORA and SOC 2 privacy-compliance frameworks.',
     'zh-Hant': '\u300c\u6211\u5011\u7684\u7cfb\u7d71\u662f\u81a0\u56ca\u8259\u6838\u5fc3Docker compose100% \u96e2\u7dda\u5e03\u7f72\uff0c\u5b8c\u5168\u7b26\u5408 ISO 27001 A.8.22 \u6700\u56b4\u683c\u7684\u7db2\u8def\u908a\u754c\u5be6\u9ad4\u9694\u96e2\u6a19\u6e96\uff0c\u6838\u5fc3\u52a0\u5bc6\u6a21\u7d44\u66f4\u9054\u5230 FIPS 140-3 \u8ecd\u898f\u7d1a\u9632\u8b77\u3002\u9019\u4e0d\u662f\u4e00\u500b\u5c01\u9589\u7684\u967d\u6625\u7cfb\u7d71\uff0c\u800c\u662f\u5b8c\u5168\u7b26\u5408\u5168\u7403\u91d1\u878d DORA \u6cd5\u6848\u8207 SOC 2 \u96b1\u79c1\u5408\u898f\u67b6\u69cb\u7684\u9802\u7d1a\u4f01\u696d\u79c1\u6709\u96f2\u3002\u300d',
     'zh-Hans': '\u300c\u6211\u4eec\u7684\u7cfb\u7edf\u662f\u80f6\u56ca\u8231\u6838\u5fc3Docker compose100% \u79bb\u7ebf\u90e8\u7f72\uff0c\u5b8c\u5168\u7b26\u5408 ISO 27001 A.8.22 \u6700\u4e25\u683c\u7684\u7f51\u7edc\u8fb9\u754c\u5b9e\u4f53\u9694\u79bb\u6807\u51c6\uff0c\u6838\u5fc3\u52a0\u5bc6\u6a21\u7ec4\u66f4\u8fbe\u5230 FIPS 140-3 \u519b\u89c4\u7ea7\u9632\u62a4\u3002\u8fd9\u4e0d\u662f\u4e00\u4e2a\u5c01\u95ed\u7684\u7b80\u964b\u7cfb\u7edf\uff0c\u800c\u662f\u5b8c\u5168\u7b26\u5408\u5168\u7403\u91d1\u878d DORA \u6cd5\u6848\u4e0e SOC 2 \u9690\u79c1\u5408\u89c4\u67b6\u6784\u7684\u9876\u7ea7\u4f01\u4e1a\u79c1\u6709\u4e91\u3002\u300d',
-  })[locale] || '';  const institutionalNotices = { en: 'Web version “AI Refactoring Engine” (Institutional Edition) usage notice: This page runs a front-end demonstration and simulation workflow that produces sample MQL5 output and logs. It is not connected to a real AI model API, MetaEditor compilation/debugging, or MT5 backtesting/optimization service. The interface is fully operable, but it is not an actual AI code-conversion service. You can download the “(Institutional Edition) Docker AI MCP Server — 100% offline, secure and private personal / organization / enterprise private cloud” edition. Visitors (non-members) may trial the AI Refactoring Engine with their own valid AI LLM & API keys, up to five examples per day (a maximum of five MQL4/MQL5 source-code pastes).', 'zh-Hant': '\u7db2\u9801\u7248\u300cAI\u91cd\u69cb\u5f15\u64ce\u300d(\u6cd5\u4eba\u6a5f\u69cb\u7248)\u4f7f\u7528\u8aaa\u660e\uff1a\u672c\u7db2\u9801\u7684\u300cAI\u91cd\u69cb\u5f15\u64ce\u300d\uff0c\u5176\u904b\u884c\u4efb\u52d9\u4e4b\u6d41\u7a0b\uff0c\u662f\u524d\u7aef\u5c55\u793a\uff0f\u6a21\u64ec\u6d41\u7a0b\uff0c\u6703\u7522\u751f\u7bc4\u4f8b MQL5 \u8f38\u51fa\u8207\u65e5\u8a8c\uff1b\u5c1a\u672a\u9023\u63a5\u771f\u6b63\u7684AI\u6a21\u578bAPI\u3001MetaEditor\u7de8\u8b6f(\u9664\u932f)\u6216MT5\u56de\u6e2c(\u512a\u5316)\u7b49\u670d\u52d9\u3002\u56e0\u6b64\u4ecb\u9762\u529f\u80fd\u5b8c\u6574\u53ef\u64cd\u4f5c\uff0c\u4f46\u5c1a\u4e0d\u662f\u5be6\u969bAI\u8f49\u78bc\u670d\u52d9\u3002\u6b61\u8fce\u4e0b\u8f09\u300c(\u6cd5\u4eba\u6a5f\u69cb\u7248) Docker AI MCP\u4f3a\u670d\u5650-\u96e2\u7dda\u8cc7\u5b89100%\u79c1\u5bc6_\u500b\u4eba/\u7d44\u7e54/\u4f01\u696d\u79c1\u6709\u96f2\u300d\u7248\u672c\u3002\u672c\u7db2\u9801\u4e4b\u8a2a\u554f\u8005(\u975e\u6703\u54e1)\uff0c\u5f97\u8a66\u884c\u4f7f\u7528\u300cAI\u91cd\u69cb\u5f15\u64ce\u300d\u904b\u884c\u8f49\u78bc\u4efb\u52d9\uff0c\u8a2a\u554f\u8005\u52fe\u9078\u586b\u5165\u6240\u5c6c\u7684\u771f\u5be6AI LLM & API keys\uff0c\u6bcf\u65e5\u8a66\u7528\u4e0a\u9650\u70ba5\u5247\u5be6\u4f8b(\u8cbc\u4e0aMQL4/5\u6e90\u78bc\u4ee55\u6b21\u70ba\u9650)\u3002', 'zh-Hans': '\u7f51\u9875\u7248\u300cAI\u91cd\u6784\u5f15\u64ce\u300d(\u6cd5\u4eba\u673a\u6784\u7248)\u4f7f\u7528\u8bf4\u660e\uff1a\u672c\u7f51\u9875\u7684\u300cAI\u91cd\u6784\u5f15\u64ce\u300d\u8fd0\u884c\u4efb\u52a1\u6d41\u7a0b\u4e3a\u524d\u7aef\u5c55\u793a\uff0f\u6a21\u62df\u6d41\u7a0b\uff0c\u4f1a\u4ea7\u751f\u793a\u4f8b MQL5 \u8f93\u51fa\u4e0e\u65e5\u5fd7\uff1b\u5c1a\u672a\u8fde\u63a5\u771f\u6b63\u7684AI\u6a21\u578bAPI\u3001MetaEditor\u7f16\u8bd1(\u9664\u9519)\u6216MT5\u56de\u6d4b(\u4f18\u5316)\u7b49\u670d\u52a1\u3002\u56e0\u6b64\u754c\u9762\u529f\u80fd\u5b8c\u6574\u53ef\u64cd\u4f5c\uff0c\u4f46\u5c1a\u4e0d\u662f\u5b9e\u9645AI\u8f6c\u7801\u670d\u52a1\u3002\u6b22\u8fce\u4e0b\u8f7d\u300c(\u6cd5\u4eba\u673a\u6784\u7248) Docker AI MCP\u670d\u52a1\u5668-\u79bb\u7ebf\u8d44\u5b89100%\u79c1\u5bc6_\u4e2a\u4eba/\u7ec4\u7ec7/\u4f01\u4e1a\u79c1\u6709\u4e91\u300d\u7248\u672c\u3002\u672c\u7f51\u9875\u8bbf\u95ee\u8005(\u975e\u4f1a\u5458)\u53ef\u8bd5\u7528\u300cAI\u91cd\u6784\u5f15\u64ce\u300d\u8fd0\u884c\u8f6c\u7801\u4efb\u52a1\uff1b\u8bbf\u95ee\u8005\u52fe\u9009\u5e76\u586b\u5165\u6240\u5c5e\u7684\u771f\u5b9eAI LLM & API keys\uff0c\u6bcf\u65e5\u8bd5\u7528\u4e0a\u9650\u4e3a5\u5219\u5b9e\u4f8b(\u8d34\u4e0aMQL4/5\u6e90\u7801\u4ee55\u6b21\u4e3a\u9650)\u3002' };
-  // 蝟餌絞?典????: NOMINAL | WARNING | CRISIS | HALT
+  })[locale] || '';
+
+  const institutionalNotices = {
+  en: 'Institutional Edition notice: this page is an interactive front-end demonstration. It can display sample MQL5 output and logs, but it is not connected to a live AI model API, MetaEditor compilation, or MT5 backtesting and optimization service. Visitors may try up to five sample source-code conversions per day with their own valid AI LLM and API credentials.',
+  'zh-Hant': '法人機構版說明：本頁為可互動的前端展示，會呈現範例 MQL5 輸出與日誌；目前未連接實際 AI 模型 API、MetaEditor 編譯或 MT5 回測與最佳化服務。訪客可使用自己的有效 AI LLM 與 API 憑證，每日試用最多五次範例原始碼轉換。',
+  'zh-Hans': '法人机构版说明：本页为可交互的前端展示，会呈现示例 MQL5 输出与日志；目前未连接实际 AI 模型 API、MetaEditor 编译或 MT5 回测与优化服务。访客可使用自己的有效 AI LLM 与 API 凭证，每日试用最多五次示例源代码转换。',
+  ja: '法人向けエディションのお知らせ：このページは対話型フロントエンドのデモです。サンプルの MQL5 出力とログを表示しますが、実際の AI モデル API、MetaEditor のコンパイル、MT5 のバックテストや最適化サービスには接続していません。有効な AI LLM と API 認証情報を利用して、サンプルソースコード変換を 1 日最大 5 回試せます。',
+  de: 'Hinweis zur Institutional Edition: Diese Seite ist eine interaktive Frontend-Demonstration. Sie zeigt beispielhafte MQL5-Ausgaben und Protokolle, ist jedoch nicht mit einer echten KI-Modell-API, der MetaEditor-Kompilierung oder MT5-Backtests und -Optimierungen verbunden. Mit eigenen gültigen AI-LLM- und API-Zugangsdaten sind bis zu fünf Beispiel-Quellcodekonvertierungen pro Tag möglich.',
+  es: 'Aviso de la edición institucional: esta página es una demostración interactiva de interfaz. Puede mostrar resultados y registros de ejemplo de MQL5, pero no está conectada a una API real de IA, a la compilación de MetaEditor ni a servicios de pruebas retrospectivas u optimización de MT5. Con credenciales válidas propias de AI LLM y API, se pueden probar hasta cinco conversiones de código fuente de ejemplo al día.',
+};
   const [systemState, setSystemState] = useState<'NOMINAL' | 'WARNING' | 'CRISIS' | 'HALT'>('NOMINAL');
   const [volData, setVolData] = useState(generateInitialVolData());
   const [accounts, setAccounts] = useState(initialAccounts);
@@ -61,7 +69,6 @@ export default function ControlRoomDashboard() {
     if (systemState === 'HALT') return;
 
     const interval = setInterval(() => {
-      // ???湔瘜Ｗ???銵?
       setVolData(prev => {
         const next = [...prev.slice(1)];
         const lastHour = parseInt(prev[prev.length - 1].time.split(':')[0]);
@@ -80,7 +87,6 @@ export default function ControlRoomDashboard() {
 
       setAccounts(prev => prev.map(acc => {
         if (acc.id === 'Acc_Prop4' && systemState === 'NOMINAL') {
-          // ?冽?霈??董?園脣 WARNING 閫貊憭批輒閬死??霈?
           return { ...acc, latency: 3.5 + Math.random() * 2, spread: 0.6 + Math.random() * 0.4 };
         }
         return {
@@ -94,7 +100,6 @@ export default function ControlRoomDashboard() {
     return () => clearInterval(interval);
   }, [systemState]);
 
-  // 蝺交頝臬 (Circuit Breaker) 閫貊蝔?
   const triggerGlobalHalt = () => {
     setSystemState('HALT');
     setShowApproval(false);
@@ -113,7 +118,6 @@ export default function ControlRoomDashboard() {
         <span className="inline-flex rounded-xl bg-cyan-500 px-4 py-1.5 text-sm font-semibold text-slate-950 shadow-[0_0_18px_rgba(34,211,238,0.5),0_0_36px_rgba(34,211,238,0.25)]">{institutionalEdition.label}</span>
         <p className="mt-2 text-xs font-medium tracking-wide text-cyan-100/90">{institutionalEdition.detail}</p>
       </div>
-      {/* HEADER SECTION (頠?蝝銵?撅斤???) */}
       <header className="flex flex-wrap justify-between items-center border border-slate-800 bg-[#0F1524] p-3 rounded-t-lg shadow-2xl mb-4">
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
@@ -137,10 +141,8 @@ export default function ControlRoomDashboard() {
         </div>
       </header>
 
-      {/* CORE CONTROL QUADRANTS (?詨?鈭斗??啗?鞊⊿?) */}
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-4">
         
-        {/* 鞊⊿? A嚗憓??亥?????? (Left Column - 4 Cols) */}
         <div className="xl:col-span-4 space-y-4">
           <div className="border border-slate-800 bg-[#0F1524] p-4 rounded-lg shadow-xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-1 h-full bg-cyan-500" />
@@ -148,7 +150,6 @@ export default function ControlRoomDashboard() {
               <Cpu className="w-4 h-4 text-cyan-400" /> [M2] MARKET REGIME SENSING UNIT
             </h2>
             
-            {/* HMM ???憿 */}
             <div className="space-y-3 mb-4">
               <div className="text-xs text-slate-400 flex justify-between mb-1">
                 <span>HMM State 3: High Volatility Trend</span>
@@ -183,7 +184,6 @@ export default function ControlRoomDashboard() {
             </div>
           </div>
 
-          {/* 撖行????耦 (GARCH / Vol ?脩?) */}
           <div className="border border-slate-800 bg-[#0F1524] p-4 rounded-lg shadow-xl">
             <h2 className="text-xs font-bold text-slate-400 tracking-wider mb-3 flex items-center gap-2">
               <Activity className="w-4 h-4 text-emerald-400" /> VOLATILITY DYNAMICS & STREAMING INFERENCE
@@ -202,7 +202,6 @@ export default function ControlRoomDashboard() {
           </div>
         </div>
 
-        {/* 鞊⊿? B嚗ULTI-AGENT 颲航??犖璈祟?寞? (Center Column - 5 Cols) */}
         <div className="xl:col-span-5 space-y-4">
           <div className="border border-slate-800 bg-[#0F1524] p-4 rounded-lg shadow-xl relative min-h-[460px] flex flex-col justify-between">
             <div className="absolute top-0 left-0 w-1 h-full bg-violet-500" />
@@ -211,23 +210,21 @@ export default function ControlRoomDashboard() {
                 <Shield className="w-4 h-4 text-violet-400" /> [M3] LANGGRAPH INTERRUPT & ORCHESTRATION ENGINE
               </h2>
               
-              {/* 憭?賡????閬箏? */}
               <div className="grid grid-cols-3 gap-2 mb-4 text-center">
                 <div className="p-2 bg-slate-950 rounded border border-emerald-500/20 text-xs">
-                  <div className="text-emerald-400 font-bold">??AGENT A</div>
+                  <div className="text-emerald-400 font-bold">AGENT A</div>
                   <span className="text-[10px] text-slate-500">Macro Analyst</span>
                 </div>
                 <div className="p-2 bg-slate-950 rounded border border-emerald-500/20 text-xs">
-                  <div className="text-emerald-400 font-bold">??AGENT B</div>
+                  <div className="text-emerald-400 font-bold">AGENT B</div>
                   <span className="text-[10px] text-slate-500">Structure Matrix</span>
                 </div>
                 <div className="p-2 bg-slate-950 rounded border border-violet-500 animate-pulse text-xs">
-                  <div className="text-violet-400 font-bold">??AGENT C</div>
+                  <div className="text-violet-400 font-bold">AGENT C</div>
                   <span className="text-[10px] text-slate-500">Portfolio Allocator</span>
                 </div>
               </div>
 
-              {/* 瘙箇?蝣唳??琿???*/}
               <div className="h-44 flex justify-center items-center my-2">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart cx="50%" cy="50%" outerRadius="80%" data={initialRadarData}>
@@ -239,7 +236,6 @@ export default function ControlRoomDashboard() {
               </div>
             </div>
 
-            {/* 鈭箸???撖拇撌乩?瘚??*/}
             {showApproval ? (
               <div className="bg-slate-950 p-3 rounded-lg border border-violet-500/40 shadow-inner animate-fade-in">
                 <div className="flex items-center gap-2 text-xs font-bold text-violet-400 mb-1">
@@ -273,7 +269,6 @@ export default function ControlRoomDashboard() {
           </div>
         </div>
 
-        {/* 鞊⊿? C嚗?撣單?瑁??拚??撅日??嗆??亙熒摨?(Right Column - 3 Cols) */}
         <div className="xl:col-span-3 space-y-4">
           <div className="border border-slate-800 bg-[#0F1524] p-4 rounded-lg shadow-xl relative overflow-hidden h-full flex flex-col justify-between min-h-[460px]">
             <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500" />
@@ -319,7 +314,6 @@ export default function ControlRoomDashboard() {
 
       </div>
 
-      {/* EMERGENCY OVERRIDE OVERLAY / THE BIG RED BUTTON (?芸予蝝扔?蝳衣?隞? */}
       <footer className="mt-4 border border-red-950 bg-gradient-to-r from-red-950/20 via-[#0F1524] to-red-950/20 p-4 rounded-lg shadow-xl flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="flex items-center space-x-3">
           <ShieldAlert className={`w-8 h-8 ${systemState === 'HALT' ? 'text-amber-500' : 'text-red-500 animate-pulse'}`} />
@@ -330,7 +324,6 @@ export default function ControlRoomDashboard() {
         </div>
 
         <div className="flex items-center space-x-3 w-full md:w-auto">
-          {/* 鈭??脰炊閫賊? */}
           <label className="flex items-center space-x-2 text-xs text-slate-400 bg-slate-950 p-2 rounded border border-slate-800 cursor-pointer select-none">
             <input 
               type="checkbox" 
