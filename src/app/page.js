@@ -1143,7 +1143,7 @@ function FooterRefactorMenu({ locale }) {
   const refactorItem = getLocalizedNavItems(locale)[0];
 
   return (
-    <details className="group relative">
+    <details className="group relative z-[1200]">
       <summary className="flex cursor-pointer list-none items-center gap-1.5 text-sm text-slate-500 transition hover:text-cyan-300 [&::-webkit-details-marker]:hidden">
         <span>{refactorItem.label}</span>
         <MenuDots />
@@ -2003,7 +2003,7 @@ export default function Home({ locale = 'en' }) {
       </div>
       </div>
       {/* Footer */}
-      <footer className="relative z-10 mt-12 overflow-hidden border-t border-slate-900 bg-slate-950/95 backdrop-blur-sm">
+      <footer className="relative z-10 mt-12 overflow-visible border-t border-slate-900 bg-slate-950/95 backdrop-blur-sm">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_32%),radial-gradient(circle_at_50%_80%,rgba(59,130,246,0.08),transparent_34%)]"
