@@ -7,15 +7,15 @@
 
 ## 遷移後的本機啟動
 
-此 Google Drive 工作樹刻意不含 
-ode_modules、.next 與 .env.local。
+此 Google Drive 工作樹刻意不含 `node_modules`、`.next` 與 `.env.local`。
 
-`ash
+```bash
 npm ci
 npm run dev
-`
+```
 
-請用 VS Code 開啟此資料夾（code .），再以瀏覽器開啟 http://localhost:3000。應用程式需要環境變數時，請從安全的本機密鑰保存處重建 .env.local；不可提交 Git，也不可同步至 Google Drive。
+請用 VS Code 開啟此資料夾（`code .`），再以瀏覽器開啟 `http://localhost:3000`。應用程式需要環境變數時，請從安全的本機密鑰保存處重建 `.env.local`；不可提交 Git，也不可同步至 Google Drive。
+
 ## Next action
 
 檢視目前未提交的程式碼與新增素材，確認它們屬於同一項功能，完成測試後再建立一次清楚的 Git 提交。

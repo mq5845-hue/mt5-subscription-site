@@ -23,19 +23,18 @@ Deliver a production-ready website for MT5 services, including the subscription 
 
 ## Local development after migration
 
-This Google Drive working tree intentionally excludes 
-ode_modules, .next, and .env.local.
+This Google Drive working tree intentionally excludes `node_modules`, `.next`, and `.env.local`.
 
-`ash
+```bash
 npm ci
 npm run dev
-`
+```
 
-Open this folder in VS Code (code .) and browse to http://localhost:3000. Recreate .env.local from your secure local secret store when the app needs environment variables; never commit it or sync it to Google Drive.
+Open this folder in VS Code (`code .`) and browse to `http://localhost:3000`. Recreate `.env.local` from your secure local secret store when the app needs environment variables; never commit it or sync it to Google Drive.
+
 ## Done when
 
 - The website is deployed and accessible.
 - The subscription flow works end to end.
 - Essential operating instructions are recorded.
-
 
